@@ -1,4 +1,4 @@
-# Meesterproef @cmda-minor-web 1920
+# Meesterproef @cmda-minor-web 2021
 
 In de Meesterproef ga je toepassen wat je in de Minor Web Development hebt geleerd.
 Voor de Meesterproef krijg je een opdracht van een echte opdrachtgever.
