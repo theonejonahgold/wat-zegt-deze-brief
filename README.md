@@ -21,72 +21,73 @@ Je gaat leren hoe je de geleerde kennis en skills kan gebruiken om een oplossing
 
 
 ## Werkwijze
+In week 0 geef je je voorkeuren aan voor een eindopdracht en wordt je ingedeeld in een groepje van maximaal drie studenten. 
+
+<mark>
+Zodra je weet aan welke opdracht je gaat werken, neem je contact op met de opdrachtgever om een afspraak te maken over de kickoff van maandag  17 mei, doe dit gezamenlijk als groepje!!
+</mark>
 
 In de eerste week krijg je een briefing van de opdrachtgever en schrijf je een [debriefing](Debriefing.md).
 Dat is de opdracht en de doelstellingen in eigen woorden beschreven.
-Daarna ga je iedere week een proof-of-concept bespreken met je opdrachtgever.
+Daarna ga je iedere week een proof-of-concept (een iteratie op het prototype) bespreken met je opdrachtgever.
 In week 5 presenteer je het eindresultaat.
 Hiervoor maak je een passende presentatie.
 
 Elke week zijn er coachingsmomenten gepland.
-Coaches voor de Meesterproef zijn: Joost Faber, Laurens Aarnoudse, Janno Kapritsias, Vasilis van Gemert en Koop Reynders.
+Coaches voor de Meesterproef zijn: Justus Sturkenboom, Sanne 't Hooft, Joost Faber, Vasilis van Gemert en Koop Reynders.
 
-1. Maandag - Standup & checkup met je coach.
-2. Woensdag - Codereview met Joost, Laurens en Janno.
-3. Donderdag - Designreview met Vasilis en Koop.
-4. Vrijdag - Testen met de opdrachtgever.
+1. Maandag - standup & checkup met je coach.
+2. Woensdag - workshops of design/code reviews.
+3. Donderdag - workshops of design/code reviews.
+4. Vrijdag - testen met de opdrachtgever.
 
 
 ## Programma
 
 ### Meesterproef - Week 0 (11 mei)
-Deze week worden de projecten gepresenteerd en kun je een project kiezen.
+Deze week worden de projecten gepresenteerd en kun je twee voorkeuren voor projecten aangeven.
 
-
-- [Presentatie slides](https://docs.google.com/presentation/d/1cMSx0X2GEiu5WfBdRT2i9Jly3MxVHs0V-USg9hH4p2M/edit?usp=sharing)  
-- [Planning](https://docs.google.com/spreadsheets/d/1Oy8f5TSDYUA_qSwfTtYQTGjkNMUM0wAZDqDPHqgRpi4/edit?usp=sharing)
-
-
-
-### Meesterproef - Week 1 (18 - 22 mei)
-Deze week heb je je eerste afspraak met je opdrachtgever.
+### Meesterproef - Week 1 (17 - 21 mei)
+Deze week heb je je eerste afspraak met je opdrachtgever, de kickoff.
 Schrijf een [debriefing](Debriefing.md) van de opdracht en check deze met de opdrachtgever en je coach.
 
-1. Maandag is de eerste afspraak met de opdrachtgever en heb je een standup en checkup met je coach.
+1. Maandag is kickoff met de opdrachtgever en heb je een standup en checkup met je coach.
 2. Dinsdag stuur je een debriefing.
-3. Donderdag en vrijdag is het Hemelvaart. Geen les.
-
-
+3. Woensdag is er ruimte voor workshops en code/design reviews.
+4. Donderdag is er ruimte voor workshops en code/design reviews.
+4. Vrijdag presenteer je je 1e iteratie van het prototype aan de opdrachtgever.
 
 
 ### Meesterproef - Week 2 (25 - 29 mei)
-Deze week ga je twee keer testen bij de opdrachtgever.
-Maandag en vrijdag ga je de opdrachtgever laten zien wat je hebt gemaakt.
+De derde week ga je weer testen bij de opdrachtgever. Aan het eind van de week laat je de 2e iteratie van het protoype zien.
 
-1. Maandag heb je een standup en checkup met je coach.
-2. Woensdag is de eerste codereviews.
-3. Donderdag is er een designreview.
-4. Vrijdag is er een Q&A over de verwachtingen, criteria, leerdoelen en beoordeling
-
-
+1. Maandag is het 2e pinksterdag.
+2. Dinsdag heb je een standup en checkup met je coach
+3. Woensdag is er ruimte voor workshops en code/design reviews.
+4. Donderdag is er ruimte voor workshops en code/design reviews.
+5. Vrijdag presenteer je je 2e iteratie van het prototype aan de opdrachtgever en is er een Q&A over de verwachtingen, criteria, leerdoelen en beoordeling.
 
 
-### Meesterproef - Week 3 (1 - 5 juni)
-De derde week ga je weer testen bij de opdrachtgever. Aan het eind van de week laat je de 3e sprint zien.
 
 
-1. Maandag is het tweede pinksterdag. Geen les. Wanneer ga je de 3e sprint laten zien aan je klant?
-2. Woensdag is er een codereview.
-3. Donderdag is er een designreview.
+### Meesterproef - Week 3 (31 mei - 4 juni)
+De derde week ga je weer testen bij de opdrachtgever. Aan het eind van de week laat je de 3e iteratie van het protoype zien.
+
+
+1. Maandag heb je een standup en checkup met je coach
+2. Woensdag is er ruimte voor workshops en code/design reviews.
+3. Donderdag is er ruimte voor workshops en code/design reviews.
+4. Vrijdag presenteer je je 3e iteratie van het prototype aan de opdrachtgever.
 
 
 
 ### Meesterproef - Week 4 (8 - 12 juni)
-Deze week ga je weer testen bij de opdrachtgever. Aan het eind van de week laat je de 4e sprint zien.
+Deze week ga je weer testen bij de opdrachtgever. Aan het eind van de week laat je de 4e iteratie van het protoype zien.
 
 1. Maandag heb je een standup en checkup met je coach.
-2. Woensdag is er een codereview.
-3. Donderdag is er een designreview.
+2. Woensdag is er ruimte voor workshops en code/design reviews.
+3. Donderdag is er ruimte voor workshops en code/design reviews.
+4. Vrijdag presenteer je je 4e iteratie van het prototype aan de opdrachtgever.
 
 
 
@@ -94,10 +95,8 @@ Deze week ga je weer testen bij de opdrachtgever. Aan het eind van de week laat 
 Dit is de laatste week van de Meesterproef. Donderdag laat je de je het final prototype zien aan je opdrachtgever. Vrijdag is de EXPO, dan kun je je werk laten zien aan collega's en wordt je werk beoordeeld.
 
 1. Maandag heb je een standup en checkup met je coach.
-2. Donderdag final prototype bij de opdrachtgever.
-3. Vrijdag EXPO. Presentatie en beoordeling van de projecten.
-
-
+2. Donderdag presenteer je het final prototype bij de opdrachtgever.
+3. Vrijdag is de EXPO. Presentatie en beoordeling van de projecten.
 
 
 
@@ -105,12 +104,6 @@ Dit is de laatste week van de Meesterproef. Donderdag laat je de je het final pr
 
 Met de Meesterproef laat je zien wat je hebt geleerd tijdens de minor.
 Studenten die de vakken hebben gehaald kunnen aan de Meesterproef beginnen.
-
-De Meesterproef bestaat uit 3 projectweken en een eindproject van 5 weken.
-De 3 projectweken,
-[PW1](https://github.com/cmda-minor-web/project-1-1920),
-[PW2](https://github.com/cmda-minor-web/project-2-1920) en
-[PW3](https://github.com/cmda-minor-web/project-3-1920) tellen mee als AVV.
 
 Het eindproject wordt beoordeeld op een Design rationale, een Product biografie en een reflectie op het eigen niveau.
 Én of de klant blij is met het gemaakte project.
