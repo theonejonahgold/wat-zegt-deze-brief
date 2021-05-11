@@ -23,9 +23,9 @@ Je gaat leren hoe je de geleerde kennis en skills kan gebruiken om een oplossing
 ## Werkwijze
 In week 0 geef je je voorkeuren aan voor een eindopdracht en wordt je ingedeeld in een groepje van maximaal drie studenten. 
 
-<mark>
+```
 Zodra je weet aan welke opdracht je gaat werken, neem je contact op met de opdrachtgever om een afspraak te maken over de kickoff van maandag  17 mei, doe dit gezamenlijk als groepje!!
-</mark>
+```
 
 In de eerste week krijg je een briefing van de opdrachtgever en schrijf je een [debriefing](Debriefing.md).
 Dat is de opdracht en de doelstellingen in eigen woorden beschreven.
