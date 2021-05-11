@@ -13,7 +13,7 @@ Je gaat leren hoe je de geleerde kennis en skills kan gebruiken om een oplossing
 |---|---|---|---|---|---|
 | [Week 0](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-0-11-mei) |  | Projecten kiezen | Contact opnemen met opdrachtgever  |   |   |
 | [Week 1](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-1-17---21-mei) | Kickoff opdrachtgever, standup & checkup met coach| [Debriefing](Debriefing.md) | Workshops & Reviews | Workshops & Reviews |  Iteratie 1 presenteren aan opdrachtgever |
-| [Week 2](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-2-25---29-mei) | Standup & checkup met coach |   | Workshops & Reviews | Workshops & Reviews | Iteratie 2 presenteren aan opdrachtgever + Meesterproef Q&A |
+| [Week 2](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-2-24---28-mei) | Standup & checkup met coach |   | Workshops & Reviews | Workshops & Reviews | Iteratie 2 presenteren aan opdrachtgever + Meesterproef Q&A |
 | [Week 3](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-3-31-mei---4-juni) | <del>Pinksteren</del> | Standup & checkup met coach   | Workshops & Reviews | Workshops & Reviews |  Iteratie 3 presenteren aan opdrachtgever |
 | [Week 4](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-4-8---12-juni) | Standup & checkup met coach |   | Workshops & Reviews | Workshops & Reviews |  Iteratie 4 presenteren aan opdrachtgever |
 | [Week 5](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-5-15---19-juni) | Standup & checkup met coach |   |  | Final prototype  | EXPO |
@@ -58,7 +58,7 @@ Schrijf een [debriefing](Debriefing.md) van de opdracht en check deze met de opd
 4. Vrijdag presenteer je je 1e iteratie van het prototype aan de opdrachtgever.
 
 
-### Meesterproef - Week 2 (25 - 29 mei)
+### Meesterproef - Week 2 (24 - 28 mei)
 De derde week ga je weer testen bij de opdrachtgever. Aan het eind van de week laat je de 2e iteratie van het protoype zien.
 
 1. Maandag is het 2e pinksterdag.
@@ -66,8 +66,6 @@ De derde week ga je weer testen bij de opdrachtgever. Aan het eind van de week l
 3. Woensdag is er ruimte voor workshops en code/design reviews.
 4. Donderdag is er ruimte voor workshops en code/design reviews.
 5. Vrijdag presenteer je je 2e iteratie van het prototype aan de opdrachtgever en is er een Q&A over de verwachtingen, criteria, leerdoelen en beoordeling.
-
-
 
 
 ### Meesterproef - Week 3 (31 mei - 4 juni)
