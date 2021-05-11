@@ -13,10 +13,10 @@ Je gaat leren hoe je de geleerde kennis en skills kan gebruiken om een oplossing
 |---|---|---|---|---|---|
 | [Week 0](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-0-11-mei) |  | Projecten kiezen | Contact opnemen met opdrachtgever  |   |   |
 | [Week 1](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-1-17---21-mei) | Kickoff opdrachtgever | [Debriefing](Debriefing.md) | Workshops & Reviews | Workshops & Reviews |  Iteratie 1 presenteren aan opdrachtgever |
-| [Week 2](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-2-25---29-mei) | Sprint 1 + standup & checkup |   | Workshops & Reviews | Workshops & Reviews | Iteratie 2 presenteren aan opdrachtgever + Meesterproef Q&A |
-| [Week 3](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-3-31-mei---4-juni) | <del>Pinksteren</del> |   | Workshops & Reviews | Workshops & Reviews |  Iteratie 3 presenteren aan opdrachtgever |
-| [Week 4](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-4-8---12-juni) | Standup & checkup |   | Workshops & Reviews | Workshops & Reviews |  Iteratie 4 presenteren aan opdrachtgever |
-| [Week 5](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-5-15---19-juni) | Standup & checkup |   |  | Final prototype  | EXPO |
+| [Week 2](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-2-25---29-mei) | Standup & checkup met coach |   | Workshops & Reviews | Workshops & Reviews | Iteratie 2 presenteren aan opdrachtgever + Meesterproef Q&A |
+| [Week 3](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-3-31-mei---4-juni) | <del>Pinksteren</del> | Standup & checkup met coach   | Workshops & Reviews | Workshops & Reviews |  Iteratie 3 presenteren aan opdrachtgever |
+| [Week 4](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-4-8---12-juni) | Standup & checkup met coach |   | Workshops & Reviews | Workshops & Reviews |  Iteratie 4 presenteren aan opdrachtgever |
+| [Week 5](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-5-15---19-juni) | Standup & checkup met coach |   |  | Final prototype  | EXPO |
 
 
 
