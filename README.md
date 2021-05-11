@@ -21,7 +21,7 @@ Je gaat leren hoe je de geleerde kennis en skills kan gebruiken om een oplossing
 
 
 ## Werkwijze
-In week 0 kies je een project.
+In week 0 kies je een project.  
 In de eerste week krijg je een briefing van de opdrachtgever en schrijf je een [debriefing](Debriefing.md).
 Dat is de opdracht en de doelstellingen in eigen woorden beschreven.
 Daarna ga je iedere week een proof-of-concept (een iteratie op het prototype) bespreken met je opdrachtgever.
