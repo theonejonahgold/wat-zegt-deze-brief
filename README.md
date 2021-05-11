@@ -11,7 +11,7 @@ Je gaat leren hoe je de geleerde kennis en skills kan gebruiken om een oplossing
 
 | Planning | Maandag | Dinsdag | Woensdag | Donderdag | Vrijdag |
 |---|---|---|---|---|---|
-| <a href=>Week 0</a> | Projecten kiezen | Contact opnemen met opdrachtgever |   |   |   |
+| [https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-0-11-mei](Week 0) |  | Projecten kiezen & Contact opnemen met opdrachtgever |   |   |   |
 | <a href=>Week 1</a> | Kickoff opdrachtgever | [Debriefing](Debriefing.md) | Workshops & Reviews | Workshops & Reviews |  Iteratie 1 presenteren aan opdrachtgever |
 | <a href=>Week 2</a> | Sprint 1 + standup & checkup |   | Workshops & Reviews | Workshops & Reviews | Iteratie 2 presenteren aan opdrachtgever + Meesterproef Q&A |
 | <a href=>Week 3</a> | <del>Pinksteren</del> |   | Workshops & Reviews | Workshops & Reviews |  Iteratie 3 presenteren aan opdrachtgever |
