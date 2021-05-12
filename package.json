@@ -1,0 +1,18 @@
+{
+  "name": "wzdb",
+  "description": "",
+  "private": true,
+  "workspaces": [
+    "back-end",
+    "front-end"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theonejonahgold/wat-zegt-deze-brief"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theonejonahgold/wat-zegt-deze-brief/issues"
+  },
+  "homepage": "https://github.com/theonejonahgold/wat-zegt-deze-brief#readme"
+}
