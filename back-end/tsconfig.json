@@ -1,0 +1,33 @@
+{
+	"compilerOptions": {
+		"target": "es2019",
+		"module": "es2020",
+		"allowJs": true,
+		"sourceMap": true,
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"isolatedModules": true,
+		"strict": true,
+		"noImplicitAny": true,
+		"alwaysStrict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"importHelpers": true,
+		"baseUrl": ".",
+		"paths": {
+			"$types/*": [
+				"src/types/*"
+			]
+		},
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": [
+		"./src/**/*.d.ts",
+		"./src/**/*.ts",
+	],
+	"exclude": [
+		"node_modules"
+	]
+}
