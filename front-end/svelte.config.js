@@ -1,3 +1,4 @@
+import node from '@sveltejs/adapter-node'
 import preprocess from 'svelte-preprocess'
 import autoprefixer from 'autoprefixer'
 import vhFix from 'postcss-100vh-fix'
@@ -16,6 +17,7 @@ const config = {
 	}),
 	kit: {
 		target: '#svelte',
+		adapter: node(),
 	},
 }
 
