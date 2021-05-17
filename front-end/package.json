@@ -2,8 +2,6 @@
 	"name": "@wzdb/front-end",
 	"version": "1.0.0",
 	"scripts": {
-		"install": "cd .. && npm install",
-		"postinstall": "rm package-lock.json && rm -rf node_modules",
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",
