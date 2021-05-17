@@ -21,7 +21,7 @@ The research and design of the application has already been delivered by our cli
 </details>
 
 <details>
-<summary>Stakeholder definitions</summary>'
+<summary>Stakeholder definitions</summary>
 
 **Client**:
 
