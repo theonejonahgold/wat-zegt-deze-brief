@@ -125,3 +125,32 @@ For us, the developers, it is important that we deliver an working application t
 - Chat feature _If unfinished_
 - Present final iteration
 - Expo
+
+## Deliverables
+
+### Prototype (and a happy customer)
+
+A working prototype which started from the concept and designs from the client, but has been iterated on to create a unique product which will be of great value to the customers who use it.
+
+### Design rationale
+
+A rationale, by the entire team, consiting the following:
+
+- Debriefing
+- Problem definition
+- The final solution
+- Code explanation
+
+### Product biography
+
+A product biography, by all individuals part of the team, consisting the following:
+
+- A weekly log of the work that's been done and the process
+- Sketches, tests, code examples and inspiration
+
+### A reflection
+
+A personal reflection, from your perspective and level of expertise, containing the following:
+
+- Which subjects came in handy, and why, by looking back at their rubrics.
+- Possible points of improvement on technique, interaction and/or other aspects of the design process.
