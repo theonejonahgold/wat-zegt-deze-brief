@@ -7,6 +7,7 @@
   - [Client Description](#client-description)
   - [Description of assignment](#description-of-assignment)
   - [Stakeholder definition](#stakeholder-definition)
+  - [Project planning](#project-planning)
 
 # Debriefing
 
@@ -73,3 +74,53 @@ For the volunteers it is important that the application provides the following a
 ### Us (the developers)
 
 For us, the developers, it is important that we deliver an working application that fulfills the client's and the users needs. To achieve this it is important that we will be making a schedule that we will follow to provide a prototype every week for the client to see and discuss our current progress.
+
+## Plan of action
+
+### Parts that require researching
+
+- OCR and redaction for scanned documents
+- Notifications in web apps
+
+### Project planning
+
+#### Sprint 0 (17 - 21 May)
+
+- Kickoff
+- Write debriefing
+- Think up User Scenarios/Job Stories
+- Common reusable atomic components
+- Onboarding/Login feature
+- Present iteration 1
+- Retrospective and planning (Product biography)
+
+#### Sprint 1 (24 - 28 May)
+
+- Process feedback
+- Overview screens
+- Scanning feature
+- Present iteration 2
+- Retrospective and planning (Product biography)
+
+#### Sprint 2 (31 May - 4 June)
+
+- Process feedback
+- Scanning feature _If unfinished_
+- Response feature
+- Present iteration 3
+- Retrospective and planning (Product biography)
+
+#### Sprint 3 (8 - 12 June)
+
+- Process feedback
+- Response feature _If unfinished_
+- Chat feature
+- Present iteration 4
+- Retrospective and planning (Product biography)
+
+#### Sprint 4 (15 - 19 June)
+
+- Process feedback
+- Chat feature _If unfinished_
+- Present final iteration
+- Expo
