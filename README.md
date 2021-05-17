@@ -80,6 +80,7 @@ For us, the developers, it is important that we deliver an working application t
 ### Parts that require researching
 
 - OCR and redaction for scanned documents
+- Dictaphone on the web
 - Notifications in web apps
 
 ### Project planning
