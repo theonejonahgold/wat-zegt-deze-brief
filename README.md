@@ -126,6 +126,10 @@ For us, the developers, it is important that we deliver an working application t
 - Present final iteration
 - Expo
 
+## Task delegation
+
+**TODO**: Write task delegation
+
 ## Deliverables
 
 ### Prototype (and a happy customer)
