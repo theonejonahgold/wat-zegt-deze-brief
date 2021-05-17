@@ -1,6 +1,12 @@
 # Debriefing
 
-## Main Design Challenge
+## Problem statement and design challenge
+
+Low-literate NT2 people in The Netherlands have a hard time dealing with formal letters they don't but want to understand. It's very difficult for them to assess if the letters require immediate action. They usually have to ask help from community centers, neighbors or family, which may take more time than necessary. Another factor is that more than enough people inside this demographic are ashamed of being low-literate, which makes opening up about it and asking for help difficult.
+
+So the solution to this problem should be fast and anonymous, so that users don't feel uncomfortable asking for help. This is how we formulate the design challenge from the problem statement:
+
+> How can we develop a mobile application where low-literate NT2 citizens get explanations for letters they don't understand?
 
 <details>
 <summary>Client Description</summary>
