@@ -1,8 +1,6 @@
 name: Manage sprint
 
 on:
-  issues:
-    types: [milestoned]
   schedule:
     - cron: '0 6 * * *'
 
