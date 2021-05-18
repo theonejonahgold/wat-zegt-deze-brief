@@ -91,44 +91,86 @@ For us, the developers, it is important that we deliver an working application t
 - Write debriefing
 - Think up User Scenarios/Job Stories
 - Common reusable atomic components
-- Onboarding/Login feature
+- Onboarding
+- User accounts
+- Letter
+  - Photo
+  - Sender
+  - Upload date
+  - Amount of pages
+  - Page editing
+  - Urgency (based on date, maybe on amount of reminders)
+  - Resolved
 - Present iteration 1
 - Retrospective and planning (Product biography)
 
 #### Sprint 1 (24 - 28 May)
 
 - Process feedback
-- Overview screens
-- Scanning feature
+- Volunteer features
+  - Review pages
+  - Respond to letters
+  - Filters and sorting
+- Chat feature
+  - Automated text responses
+  - Voice messages
 - Present iteration 2
 - Retrospective and planning (Product biography)
 
 #### Sprint 2 (31 May - 4 June)
 
 - Process feedback
-- Scanning feature _If unfinished_
-- Response feature
+- Finish all features
 - Present iteration 3
 - Retrospective and planning (Product biography)
 
 #### Sprint 3 (8 - 12 June)
 
 - Process feedback
-- Response feature _If unfinished_
-- Chat feature
+- Enhance features
 - Present iteration 4
 - Retrospective and planning (Product biography)
 
 #### Sprint 4 (15 - 19 June)
 
 - Process feedback
-- Chat feature _If unfinished_
+- Enhance features
 - Present final iteration
 - Expo
 
 ## Task delegation
 
-**TODO**: Write task delegation
+### Tasks
+
+- Project management & setup
+- Documentation
+- Front-end
+  - Creative
+  - Interaction
+  - Technical
+  - Support
+- Back-end
+  - Data flow
+  - Authentication
+  - Real-time
+  - Support
+
+### Jonah Meijers
+
+- Project management & setup
+- Front-end: Interaction & Creative
+- Back-end: Authentication
+
+### Victor Boucher
+
+- Front-end: Technical & Interaction
+- Back-end: Data flow & Support
+
+### Ben Langenberg
+
+- Documentation
+- Front-end: Technical & Creative
+- Back-end: Real-time & Support
 
 ## Deliverables
 
@@ -138,12 +180,12 @@ A working prototype which started from the concept and designs from the client, 
 
 ### Design rationale
 
-A rationale, by the entire team, consiting the following:
+A rationale, by the entire team, consisting the following:
 
 - Debriefing
 - Problem definition
 - The final solution
-- Code explanation
+- Code explanations
 
 ### Product biography
 
