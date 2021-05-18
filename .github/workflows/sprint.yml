@@ -2,14 +2,14 @@ name: Manage sprint
 
 on:
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: '0 6 * * *'
 
 jobs:
   start-sprint:
     runs-on: ubuntu-latest
     steps:
       - name: 'Start sprint'
-        run: theonejonahgold/milestone-sprint@v1
+        uses: theonejonahgold/milestone-sprint@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           project_name: Project
