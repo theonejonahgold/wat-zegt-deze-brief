@@ -1,11 +1,15 @@
 <script>
 	import Input from '$atoms/Input.svelte'
 
-	export let placeholder: string
-	export let type: string = 'text'
+	type inputTypes = 'text' | 'email' | 'number' | 'tel' | 'range'
+
+	export let value = ''
+	export let type: inputTypes = 'text'
+	export let name = ''
 </script>
 
+<!-- svelte-ignore a11y-label-has-associated-control -->
 <label>
 	<slot />
-	<Input on:change {placeholder} {type} />
+	<Input on:valueChange {value} {name} {type} {...$$restProps} />
 </label>
