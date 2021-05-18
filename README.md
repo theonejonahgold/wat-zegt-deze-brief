@@ -8,6 +8,9 @@
   - [Description of assignment](#description-of-assignment)
   - [Stakeholder definition](#stakeholder-definition)
   - [Project planning](#project-planning)
+  - [Task delegation](#task-delegation)
+  - [Deliverables](#deliverables)
+- [User scenarios](#user-scenarios)
 
 # Debriefing
 
