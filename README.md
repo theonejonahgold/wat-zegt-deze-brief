@@ -1,147 +1,202 @@
-# Meesterproef @cmda-minor-web 2021
+# Wat zegt deze brief
 
-In de Meesterproef ga je toepassen wat je in de Minor Web Development hebt geleerd.
-Voor de Meesterproef krijg je een opdracht van een echte opdrachtgever.
-Je gaat leren hoe je de geleerde kennis en skills kan gebruiken om een oplossing voor een probleem te ontwerpen. Testen, maken, evalueren, testen, maken ...
+# Index
 
-<!-- Je kan kiezen uit verschillende projecten. Hier ga je 5 weken aan werken.  Voor de Meesterproef geef je met een eerste, tweede keuze en derde keuze aan welk project je graag wil doen. Daarna wordt door de coaches een indeling gemaakt. -->
+- [Debriefing](#debriefing)
+  - [Problem Statement and Design Challenge](#problem-statement-and-design-challenge)
+  - [Client Description](#client-description)
+  - [Description of assignment](#description-of-assignment)
+  - [Stakeholder definition](#stakeholder-definition)
+  - [Project planning](#project-planning)
 
-## Planning
+# Debriefing
 
-| Planning                                                                                                                  | Maandag                                            | Dinsdag                     | Woensdag                          | Donderdag           | Vrijdag                                                     |
-| ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | --------------------------- | --------------------------------- | ------------------- | ----------------------------------------------------------- |
-| [Week 0](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-0-11-mei)          |                                                    | Projecten kiezen            | Contact opnemen met opdrachtgever |                     |                                                             |
-| [Week 1](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-1-17---21-mei)     | Kickoff opdrachtgever, standup & checkup met coach | [Debriefing](Debriefing.md) | Workshops & Reviews               | Workshops & Reviews | Iteratie 1 presenteren aan opdrachtgever                    |
-| [Week 2](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-2-24---28-mei)     | Standup & checkup met coach                        |                             | Workshops & Reviews               | Workshops & Reviews | Iteratie 2 presenteren aan opdrachtgever + Meesterproef Q&A |
-| [Week 3](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-3-31-mei---4-juni) | <del>Pinksteren</del>                              | Standup & checkup met coach | Workshops & Reviews               | Workshops & Reviews | Iteratie 3 presenteren aan opdrachtgever                    |
-| [Week 4](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-4-8---12-juni)     | Standup & checkup met coach                        |                             | Workshops & Reviews               | Workshops & Reviews | Iteratie 4 presenteren aan opdrachtgever                    |
-| [Week 5](https://github.com/cmda-minor-web/meesterproef-2021/blob/master/README.md#meesterproef---week-5-15---19-juni)    | Standup & checkup met coach                        |                             |                                   | Final prototype     | EXPO                                                        |
+## Problem Statement and Design Challenge
 
-## Werkwijze
+Low-literate NT2 people in The Netherlands have a hard time dealing with formal letters they don't but want to understand. It's very difficult for them to assess if the letters require immediate action. They usually have to ask help from community centers, neighbors or family, which may take more time than necessary. Another factor is that more than enough people inside this demographic are ashamed of being low-literate, which makes opening up about it and asking for help difficult.
 
-In week 0 kies je een project.
-In de eerste week krijg je een briefing van de opdrachtgever en schrijf je een [debriefing](Debriefing.md).
-Dat is de opdracht en de doelstellingen in eigen woorden beschreven.
-Daarna ga je iedere week een proof-of-concept (een iteratie op het prototype) bespreken met je opdrachtgever.
-In week 5 presenteer je het eindresultaat.
-Hiervoor maak je een passende presentatie.
+So the solution to this problem should be fast and anonymous, so that users don't feel uncomfortable asking for help. This is how we formulate the design challenge from the problem statement:
 
-Elke week zijn er coachingsmomenten gepland.
-Coaches voor de Meesterproef zijn: Justus Sturkenboom, Sanne 't Hooft, Joost Faber, Vasilis van Gemert en Koop Reynders.
+> How can we develop a mobile application where low-literate NT2 citizens get explanations for letters they don't understand?
 
-1. Maandag - standup & checkup met je coach.
-2. Woensdag - workshops of design/code reviews.
-3. Donderdag - workshops of design/code reviews.
-4. Vrijdag - testen met de opdrachtgever.
+## Client Description
 
-## Programma
+Our client for this project is Tessa De Goede, alumnus of Communication & Multimediadesign. For her graduation project Tessa came up with the idea to create a application for functional illiterate people.
+The current problem for this target audience is that they don't speak and write the dutch language well and have problems with understanding letters they receive from organisations and bodies. Currently these people are dependent on their neighbours, family or community centers to explain the letters to them. The steps a functinal illiterate person has to take to get the letters explained to them are currently cumbersome and time consuming.
 
-### Meesterproef - Week 0 (11 mei)
+The Wat Zegt Deze Brief application wants to resolve this problem by providing a platform where functional illiterate people can submit the letters they receive from organisaties and bodies.
+Volunteers will be active on the platform and translate/explain these letters to these people so they know which steps they have to take next. Thus eliminating the time consuming process of finding a person that can help them explain the letter.
 
-Deze week worden de projecten gepresenteerd en geef je twee voorkeuren aan voor een eindopdracht en wordt je ingedeeld in een groepje van maximaal drie studenten.
+## Description of assignment
 
-👇
+The research and design of the application has already been delivered by our client. Our job is to create a web-application for this concept. For this project we will be working with the Scrum methodology, this is an agile development methodology where we, the developers, will working in an iterative process. We will be working in sprints of 1 week to develop the functionalities of the application and present the prototype to our client at the end of the week. This helps us generate value for our client by working in an effective way with clear communication between the client and us (the developers).
 
-> Zodra je weet aan welke opdracht je gaat werken, neem je contact op met de opdrachtgever om een afspraak te maken over de kickoff van maandag 17 mei, doe dit gezamenlijk als groepje!!
+## Stakeholder definitions
 
-☝️
+### Client
 
-### Meesterproef - Week 1 (17 - 21 mei)
+For the client it is important that we develop a working application that has the following core functionalities:
 
-Deze week heb je je eerste afspraak met je opdrachtgever, de kickoff.
-Schrijf een [debriefing](Debriefing.md) van de opdracht en check deze met de opdrachtgever en je coach.
+- Users need to be able to chat with each other in voice memos through a chat functionality
+- Users need to be able to take pictures and submit them
+- Users need to be able to provide a spoken explanation with the use of the dictaphone functionality
 
-1. Maandag is kickoff met de opdrachtgever en heb je een standup en checkup met je coach.
-2. Dinsdag stuur je een debriefing.
-3. Woensdag is er ruimte voor workshops en code/design reviews.
-4. Donderdag is er ruimte voor workshops en code/design reviews.
-5. Vrijdag presenteer je je 1e iteratie van het prototype aan de opdrachtgever.
+For the client it is important that she has a clear idea of our progress during this project. To follow the progress of this project it is important to the client that we submit a prototype at the end of every week and discuss the current progress.
 
-### Meesterproef - Week 2 (24 - 28 mei)
+### CMD
 
-De derde week ga je weer testen bij de opdrachtgever. Aan het eind van de week laat je de 2e iteratie van het protoype zien.
+This project has been made available to us by the the course Communication & Multimediadesign of the Hogeschool van Amsterdam. For this project we are assigned to a coach (Vasilis van Gemert) that will coach us during the process of this project. Every week we will be meeting with our coach to discuss the current progress of the project and receive feedback and guidance. To be graded at the end of the project we will have to provide the following deliverables:
 
-1. Maandag is het 2e pinksterdag.
-2. Dinsdag heb je een standup en checkup met je coach
-3. Woensdag is er ruimte voor workshops en code/design reviews.
-4. Donderdag is er ruimte voor workshops en code/design reviews.
-5. Vrijdag presenteer je je 2e iteratie van het prototype aan de opdrachtgever en is er een Q&A over de verwachtingen, criteria, leerdoelen en beoordeling.
+- Design Rationale
+- Product Biography
+- Individual reflection on the project
+- A happy customers
 
-### Meesterproef - Week 3 (31 mei - 4 juni)
+Based on these 4 deliverables we will be graded.
 
-De derde week ga je weer testen bij de opdrachtgever. Aan het eind van de week laat je de 3e iteratie van het protoype zien.
+### Target audience
 
-1. Maandag heb je een standup en checkup met je coach
-2. Woensdag is er ruimte voor workshops en code/design reviews.
-3. Donderdag is er ruimte voor workshops en code/design reviews.
-4. Vrijdag presenteer je je 3e iteratie van het prototype aan de opdrachtgever.
+The target audience consists of two groups. The functional illiterate people and the volunteers that will help them explaining the letters. It is important to the target audience that an application is provided that fullfills their needs. For the functional illiterate people it is important that the application has the following aspects:
 
-### Meesterproef - Week 4 (8 - 12 juni)
+- Interface of the application doesn't have to much text
+- The application should persist the language level A2
+- Text in the application should be provided with an image to make it more clear
+- The application should give a spoken explanation of the submitted letters
+- The application should take away the shame they experience when they ask for help
+- The application should be able to provide explanation in the mother tongue of the user
 
-Deze week ga je weer testen bij de opdrachtgever. Aan het eind van de week laat je de 4e iteratie van het protoype zien.
+For the volunteers it is important that the application provides the following aspects:
 
-1. Maandag heb je een standup en checkup met je coach.
-2. Woensdag is er ruimte voor workshops en code/design reviews.
-3. Donderdag is er ruimte voor workshops en code/design reviews.
-4. Vrijdag presenteer je je 4e iteratie van het prototype aan de opdrachtgever.
+- Volunteers need to be able to provide a spoken explanation for the letters
+- Volunteers should be ale to read the submitted letters of the users
+- Volunteers should be be able to choose for which submitted letters they want to provide an explanation
 
-### Meesterproef - Week 5 (15 - 19 juni)
+### Us (the developers)
 
-Dit is de laatste week van de Meesterproef. Donderdag laat je de je het final prototype zien aan je opdrachtgever. Vrijdag is de EXPO, dan kun je je werk laten zien aan collega's en wordt je werk beoordeeld.
+For us, the developers, it is important that we deliver an working application that fulfills the client's and the users needs. To achieve this it is important that we will be making a schedule that we will follow to provide a prototype every week for the client to see and discuss our current progress.
 
-1. Maandag heb je een standup en checkup met je coach.
-2. Donderdag presenteer je het final prototype bij de opdrachtgever.
-3. Vrijdag is de EXPO. Presentatie en beoordeling van de projecten.
+## Plan of action
 
-## Criteria en beoordeling
+### Parts that require researching
 
-Met de Meesterproef laat je zien wat je hebt geleerd tijdens de minor.
-Studenten die de vakken hebben gehaald kunnen aan de Meesterproef beginnen.
+- OCR and redaction for scanned documents
+- Dictaphone on the web
+- Notifications in web apps
 
-Het eindproject wordt beoordeeld op een Design rationale, een Product biografie en een reflectie op het eigen niveau.
-Én of de klant blij is met het gemaakte project.
+### Project planning
 
-### Design Rationale
+#### Sprint 0 (17 - 21 May)
 
-In de Design Rationale schrijf je de [debriefing](Debriefing.md), de probleem-definitie, toon je de oplossing en schrijf je een uitleg van de code. De Design Rationale is een verantwoording van je ontwerp. Als je in een team werkt kun je de Design Rationale als team schrijven. (TIP: Doe dit dan in de project repo)
+- Kickoff
+- Write debriefing
+- Think up User Scenarios/Job Stories
+- Common reusable atomic components
+- Onboarding
+- User accounts
+- Letter
+  - Photo
+  - Sender
+  - Upload date
+  - Amount of pages
+  - Page editing
+  - Urgency (based on date, maybe on amount of reminders)
+  - Resolved
+- Present iteration 1
+- Retrospective and planning (Product biography)
 
-### Product Biografie
+#### Sprint 1 (24 - 28 May)
 
-In de Product Biografie hou je per week bij wat je allemaal hebt gedaan.
-Je schrijft over het proces, de iteraties, de werkwijze en de planning.
-Ook schetsen, testen, voorbeeld code en inspiratie zijn deel van de Product Biografie.
-De Product Biografie is individueel, ook als je in een team werkt.
+- Process feedback
+- Volunteer features
+  - Review pages
+  - Respond to letters
+  - Filters and sorting
+- Chat feature
+  - Automated text responses
+  - Voice messages
+- Present iteration 2
+- Retrospective and planning (Product biography)
 
-### Reflectie op eigen niveau
+#### Sprint 2 (31 May - 4 June)
 
-Aan het eind van het project reflecteer je systematisch op je werk en het proces.
-Aan de hand van de vak-rubrics schrijf je welke vakken wel of niet aan bod zijn gekomen en waarom.
-Zo krijg je een goed beeld van je eigen niveau, mogelijke aandachtspunten in techniek, interactie en/of aspecten van het design-proces waar je je nog op kan verbeteren.
+- Process feedback
+- Finish all features
+- Present iteration 3
+- Retrospective and planning (Product biography)
 
-### Een blije klant
+#### Sprint 3 (8 - 12 June)
 
-Voor de klant werk je aan een bestaand product of maak je een (werkend) prototype. Gericht op een bepaalde gebruikersgroep, geschikt voor verschillende apparaten, met echte data, én een goede UX. (Jeweettoch)
-Een blije klant is een goede klant.
-Soms ontkom je er niet aan dat je een beetje eigenwijs moet doen.
-Dan doe je juist niet wat de klant wil en probeer je de opdrachtgever te overtuigen met een proof-of-concept.
-En soms kan het voorkomen dat het proces niet helemaal soepel loopt.
-Dat hoort erbij en daar leer je van.
-Aan het eind van het project vragen we de klant feedback op het geleverde werk en het proces.
+- Process feedback
+- Enhance features
+- Present iteration 4
+- Retrospective and planning (Product biography)
 
-<!-- Add a link to your live demo in Github Pages 🌐-->
+#### Sprint 4 (15 - 19 June)
 
-<!-- ☝️ replace this description with a description of your own work -->
+- Process feedback
+- Enhance features
+- Present final iteration
+- Expo
 
-<!-- replace the code in the /docs folder with your own, so you can showcase your work with GitHub Pages 🌍 -->
+## Task delegation
 
-<!-- Add a nice poster image here at the end of the week, showing off your shiny frontend 📸 -->
+### Tasks
 
-<!-- Maybe a table of contents here? 📚 -->
+- Project management & setup
+- Documentation
+- Front-end
+  - Creative
+  - Interaction
+  - Technical
+  - Support
+- Back-end
+  - Data flow
+  - Authentication
+  - Real-time
+  - Support
 
-<!-- How about a section that describes how to install this project? 🤓 -->
+### Jonah Meijers
 
-<!-- ...but how does one use this project? What are its features 🤔 -->
+- Project management & setup
+- Front-end: Interaction & Creative
+- Back-end: Authentication
 
-<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
+### Victor Boucher
 
-<!-- How about a license here? 📜 (or is it a licence?) 🤷 -->
+- Front-end: Technical & Interaction
+- Back-end: Data flow & Support
+
+### Ben Langenberg
+
+- Documentation
+- Front-end: Technical & Creative
+- Back-end: Real-time & Support
+
+## Deliverables
+
+### Prototype (and a happy customer)
+
+A working prototype which started from the concept and designs from the client, but has been iterated on to create a unique product which will be of great value to the customers who use it.
+
+### Design rationale
+
+A rationale, by the entire team, consisting the following:
+
+- Debriefing
+- Problem definition
+- The final solution
+- Code explanations
+
+### Product biography
+
+A product biography, by all individuals part of the team, consisting the following:
+
+- A weekly log of the work that's been done and the process
+- Sketches, tests, code examples and inspiration
+
+### A reflection
+
+A personal reflection, from your perspective and level of expertise, containing the following:
+
+- Which subjects came in handy, and why, by looking back at their rubrics.
+- Possible points of improvement on technique, interaction and/or other aspects of the design process.
