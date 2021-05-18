@@ -45,7 +45,7 @@ For the client it is important that she has a clear idea of our progress during 
 
 ### CMD
 
-This project has been made available to us by the the course Communication & Multimediadesign of the Hogeschool van Amsterdam. For this project we are assigned a coach (Vasilis van Gemert) that will coach us during the process of this project. Every week we will be meeting with our coach to discuss the current progress of the project and receive feedback and guidance. To be graded at the end of the project we will have to provide the following deliverables:
+This project has been made available to us by the the course Communication & Multimediadesign of the Hogeschool van Amsterdam. For this project we are assigned to a coach (Vasilis van Gemert) that will coach us during the process of this project. Every week we will be meeting with our coach to discuss the current progress of the project and receive feedback and guidance. To be graded at the end of the project we will have to provide the following deliverables:
 
 - Design Rationale
 - Product Biography
@@ -56,7 +56,7 @@ Based on these 4 deliverables we will be graded.
 
 ### Target audience
 
-The target audience consists of two groups. The functional illiterate minorities and the volunteers that will help them explaining the letters. It is important to the target audience that an application is provided that fullfills their needs. For the functional illiterate minorities it is important that the application has the following aspects:
+The target audience consists of two groups. The functional illiterate people and the volunteers that will help them explaining the letters. It is important to the target audience that an application is provided that fullfills their needs. For the functional illiterate people it is important that the application has the following aspects:
 
 - Interface of the application doesn't have to much text
 - The application should persist the language level A2
@@ -67,7 +67,7 @@ The target audience consists of two groups. The functional illiterate minorities
 
 For the volunteers it is important that the application provides the following aspects:
 
-- Volunteers need to able provide a spoken explanation for the letters
+- Volunteers need to be able to provide a spoken explanation for the letters
 - Volunteers should be ale to read the submitted letters of the users
 - Volunteers should be be able to choose for which submitted letters they want to provide an explanation
 
