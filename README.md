@@ -8,6 +8,9 @@
   - [Description of assignment](#description-of-assignment)
   - [Stakeholder definition](#stakeholder-definition)
   - [Project planning](#project-planning)
+  - [Task delegation](#task-delegation)
+  - [Deliverables](#deliverables)
+- [User scenarios](#user-scenarios)
 
 # Debriefing
 
@@ -200,3 +203,66 @@ A personal reflection, from your perspective and level of expertise, containing 
 
 - Which subjects came in handy, and why, by looking back at their rubrics.
 - Possible points of improvement on technique, interaction and/or other aspects of the design process.
+
+# User scenarios
+
+## Volunteers
+
+### Background
+
+Volunteers are people who are intrinsically motivated to help others where and when they can. The volunteers using this app have enough knowledge of the Dutch language to help people who are low-literate in explaining more formal Dutch. General knowledge of what formal letters a person might receive is also important.
+
+### Motivations
+
+They want to help explain difficult letters to people who are low-literate or have a hard time understanding formal letters. Generally speaking they want to help society.
+
+### Tasks
+
+- Receive letters from people who want explanations for them.
+- See clearly what the letter says.
+- Tell the recipient what the letter means through voice, and if action should be taken.
+
+### Context of use
+
+#### Environment
+
+- At a place and time without much environmental noise.
+- When they receive a new letter to explain.
+
+#### Challenges
+
+- The environment must not be noisy, for the volunteer to be understood clearly.
+- The volunteer must have enough time to read, understand and explain the letter in easy-to-understand Dutch.
+- The internet connection must be sufficient to send over the voice messages.
+
+## Low-literate
+
+### Background
+
+Low-literate people have a difficult time reading and understanding formal Dutch. This means that letters from senders that use formal Dutch are hard to understand, like government letters. A lot of low-literate people are quite ashamed of this, which makes seeking help difficult. These people also need help with understanding how to use certain products, as they may not use them the same way as literate Dutch people do.
+
+### Motivations
+
+Low-literate people want their formal letters explained, so they know if action needs to be taken or not. This needs to happen anonymously by default, to prevent shaming.
+
+### Tasks
+
+- Upload a letter.
+- Redact personal information.
+- Receive and listen to explanations.
+- Ask for further explanation if wanted.
+- Take action on the letter if it's required.
+- Thank the volunteer for their help.
+
+### Context of use
+
+#### Environment
+
+- At home, where they receive their letters.
+- With their phones, so they can photograph their letters.
+
+#### Challenges
+
+- General knowledge of technology.
+- A phone with good camera quality for good legibility.
+- A well-lit environment to take clear pictures.
