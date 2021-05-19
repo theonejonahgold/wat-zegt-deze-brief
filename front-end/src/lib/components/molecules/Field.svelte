@@ -1,5 +1,5 @@
 <script>
-	import Input from '$atoms/Input.svelte'
+	import { Input } from '$atoms'
 
 	type inputTypes = 'text' | 'email' | 'number' | 'tel' | 'range'
 

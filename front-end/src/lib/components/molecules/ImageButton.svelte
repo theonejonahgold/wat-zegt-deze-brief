@@ -1,7 +1,5 @@
 <script>
-	import Button from '$atoms/Button.svelte'
-	import Image from '$atoms/Image.svelte'
-	import SpokenText from '$atoms/SpokenText.svelte'
+	import { Button, Image, SpokenText } from '$atoms'
 
 	export let src: string
 	export let alt: string

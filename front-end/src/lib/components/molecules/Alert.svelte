@@ -1,8 +1,5 @@
 <script>
-	import Button from '$atoms/Button.svelte'
-	import Image from '$atoms/Image.svelte'
-	import SpokenText from '$atoms/SpokenText.svelte'
-	import Help from '$atoms/Help.svelte'
+	import { Button, Image, SpokenText, Help } from '$atoms'
 
 	export let audioFile: HTMLAudioElement
 	export let src: string

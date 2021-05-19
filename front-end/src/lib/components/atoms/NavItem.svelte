@@ -1,5 +1,5 @@
 <script>
-	import Icon from '$atoms/NavItem.svelte'
+	import { Icon } from '$atoms'
 
 	export let route: string = '#'
 </script>
