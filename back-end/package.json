@@ -9,7 +9,7 @@
 		"predev": "npm run generate-types",
 		"dev": "concurrently 'npm:watch-ts' 'npm:watch-dist'",
 		"watch-ts": "tsc --w",
-		"watch-dist": "nodemon -r tsconfig-paths/register -w dist --delay 0.2 dist"
+		"watch-dist": "nodemon -r tsconfig-paths/register -r dotenv/config -w dist --delay 0.2 dist"
 	},
 	"license": "MIT",
 	"dependencies": {
