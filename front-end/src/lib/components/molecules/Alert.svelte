@@ -1,8 +1,8 @@
 <script>
 	import { createEventDispatcher } from 'svelte'
-	import { Button, Image, SpokenText, Help } from '$atoms'
+	import { Button, Image, Help } from '$atoms'
+	import { webSpeech } from '$actions'
 
-	export let audioFile: HTMLAudioElement
 	export let src: string
 	export let alt: string
 
@@ -16,10 +16,9 @@
 	}
 </script>
 
-<!-- TODO: how to properly handle multiple on:clicks? -->
 <div>
 	<Help on:click />
-	<SpokenText {audioFile} />
+	<p use:webSpeech><slot /></p>
 	<Image {src} {alt} />
 	<Button on:click={buttonClickHandler}>Oke</Button>
 </div>

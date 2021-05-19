@@ -1,14 +1,17 @@
 <script>
-	import { Button, Image, SpokenText } from '$atoms'
+	import { Image } from '$atoms'
+	import { webSpeech } from '$actions'
 
 	export let src: string
 	export let alt: string
-	export let audioFile: HTMLAudioElement
+	export let name: string
+	export let value: string
 </script>
 
-<Button on:click>
+<label>
 	<Image {src} {alt} />
-</Button>
-<SpokenText {audioFile}>
+	<input {name} {value} type="radio" />
+</label>
+<p use:webSpeech>
 	<slot />
-</SpokenText>
+</p>

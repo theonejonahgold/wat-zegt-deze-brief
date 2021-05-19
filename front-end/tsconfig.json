@@ -19,6 +19,7 @@
 			"$molecules": ["src/lib/components/molecules"],
 			"$organisms": ["src/lib/components/organisms"],
 			"$icons": ["src/lib/icons"],
+			"$actions": ["src/lib/actions"],
 			"$types": ["src/types"]
 		}
 	},
