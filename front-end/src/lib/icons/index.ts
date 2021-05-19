@@ -1,3 +1,5 @@
 export { default as ChatIcon } from './ChatIcon.svelte'
 export { default as LetterIcon } from './LetterIcon.svelte'
 export { default as ProfileIcon } from './ProfileIcon.svelte'
+export { default as IndexIcon } from './IndexIcon.svelte'
+export { default as Oval } from './Oval.svelte'
