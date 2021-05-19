@@ -1,23 +1,31 @@
 {
 	"compilerOptions": {
-		"target": "es2019",
-		"module": "es2020",
+		"module": "es2015",
+		"target": "es2015",
 		"moduleResolution": "node",
 		"allowJs": true,
 		"sourceMap": true,
-		"outDir": "./dist",
-		"rootDir": "./src",
-		"isolatedModules": true,
+		"outDir": "dist",
+		"rootDir": "src",
 		"strict": true,
 		"noImplicitAny": true,
 		"alwaysStrict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"importHelpers": true,
-		"baseUrl": ".",
+		"baseUrl": "src",
 		"paths": {
+			"$config/*": [
+				"config/*"
+			],
+			"$utils": [
+				"utils"
+			],
+			"$router": [
+				"router"
+			],
 			"$types/*": [
-				"src/types/*"
+				"types/*"
 			]
 		},
 		"esModuleInterop": true,
@@ -25,8 +33,8 @@
 		"forceConsistentCasingInFileNames": true
 	},
 	"include": [
-		"./src/**/*.d.ts",
-		"./src/**/*.ts",
+		"src/**/*.d.ts",
+		"src/**/*.ts",
 	],
 	"exclude": [
 		"node_modules"

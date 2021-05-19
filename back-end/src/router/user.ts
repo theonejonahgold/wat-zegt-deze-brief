@@ -1,6 +1,6 @@
-import { definitions } from '$types/supabase'
 import { Router } from 'express'
-import { getSupabaseClient } from '../supabase/index.js'
+import { getSupabaseClient } from '$config/supabase'
+import { definitions } from '$types/supabase'
 
 const client = getSupabaseClient()
 
