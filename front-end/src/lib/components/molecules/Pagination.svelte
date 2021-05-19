@@ -13,16 +13,25 @@
 	div {
 		width: 100%;
 		height: 1em;
+		border-radius: 2em;
 		display: flex;
-		background: rgb(123, 123, 255);
+		background: #d8d8d8;
 
 		span {
 			display: inline-block;
 			height: 1em;
 			width: 100%;
 
+			&:first-of-type {
+				border-radius: 2em 0 0 2em;
+			}
+
+			&:last-of-type {
+				border-radius: 0 2em 2em 0;
+			}
+
 			&.active {
-				background: blue;
+				background: #8ca3ff;
 			}
 		}
 	}

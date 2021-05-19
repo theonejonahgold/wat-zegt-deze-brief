@@ -20,27 +20,40 @@
 
 <script>
 	import type { OnboardingContent } from '$types'
+	import { textToSpeech } from '$actions'
+	import { Button, Image, Back, Help } from '$atoms'
 	import { Pagination } from '$molecules'
-	import { setContext } from 'svelte'
-	import { writable } from 'svelte/store'
-	import { Button, Image } from '$atoms'
 
 	export let step: number
 	export let content: OnboardingContent
 	export let amount: number
 	export let path: string
-
-	const paginationStore = writable({ amount: 0 })
-	setContext('pagination', paginationStore)
 </script>
+
+<style>
+	.top-container {
+		display: flex;
+	}
+
+	.content-container {
+		text-align: center;
+	}
+</style>
 
 {#if !content}
 	<slot />
 {:else}
-	<Pagination selected={+step} {amount} />
-	<p>{content.text}</p>
-	<Image src={content.image} alt={content.text} />
-	{#if !(step >= amount)}
-		<Button type="anchor" href="{path}?step={+step + 1}">Volgende</Button>
-	{/if}
+	<div class="top-container">
+		<Back href={step === 1 ? '/onboarding' : `${path}?step=${+step - 1}`} />
+		<Pagination selected={+step} {amount} />
+		<Help />
+	</div>
+	<div class="content-container">
+		<!-- TODO: Fix same spoken message after going to next item -->
+		<p use:textToSpeech>{content.text}</p>
+		<Image src={content.image} alt={content.text} />
+		{#if !(step >= amount)}
+			<Button type="anchor" href="{path}?step={+step + 1}">Volgende</Button>
+		{/if}
+	</div>
 {/if}
