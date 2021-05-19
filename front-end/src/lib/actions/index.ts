@@ -1,1 +1,1 @@
-export * from './webSpeech'
+export * from './textToSpeech'

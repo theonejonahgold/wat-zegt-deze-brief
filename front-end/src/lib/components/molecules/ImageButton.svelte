@@ -1,6 +1,6 @@
 <script>
 	import { Image } from '$atoms'
-	import { webSpeech } from '$actions'
+	import { textToSpeech } from '$actions'
 
 	export let src: string
 	export let alt: string
@@ -12,6 +12,6 @@
 	<Image {src} {alt} />
 	<input {name} {value} type="radio" />
 </label>
-<p use:webSpeech>
+<p use:textToSpeech>
 	<slot />
 </p>

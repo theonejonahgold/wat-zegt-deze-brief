@@ -15,7 +15,7 @@ const userContent: OnboardingContent[] = [
 		image: '/images/onboarding-user-3.png',
 	},
 	{
-		text: 'De vrijwilligers zijn Nederlands, maar het zou kunenn dat iemand meerdere talen spreekt',
+		text: 'De vrijwilligers zijn Nederlands, maar het zou kunnen dat iemand meerdere talen spreekt',
 		image: '/images/onboarding-user-4.png',
 	},
 	{

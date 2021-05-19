@@ -1,6 +1,6 @@
 import { browser } from '$app/env'
 
-export const webSpeech = (node: HTMLElement) => {
+export const textToSpeech = (node: HTMLElement) => {
 	if (!browser) return
 	const content = document.querySelector('template').content.cloneNode(true) as HTMLElement
 	const button = content.querySelector('button')
