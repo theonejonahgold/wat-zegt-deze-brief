@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"prepare": "husky install",
-		"format": "prettier --write ."
+		"lint": "prettier --check --plugin-search-dir=. .",
+		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"workspaces": [
 		"back-end",
@@ -25,9 +26,10 @@
 		"husky": "^6.0.0",
 		"lint-staged": "^11.0.0",
 		"postinstall-postinstall": "^2.1.0",
-		"prettier": "^2.3.0"
+		"prettier": "^2.3.0",
+		"prettier-plugin-svelte": "^2.2.0"
 	},
 	"lint-staged": {
-		"*.{js,css,md,svelte}": "prettier --write"
+		"*.{js,css,md,svelte}": "prettier --plugin-search-dir=. --write"
 	}
 }
