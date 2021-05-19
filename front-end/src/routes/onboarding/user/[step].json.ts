@@ -4,28 +4,23 @@ import type { OnboardingContent } from '$types'
 const userContent: OnboardingContent[] = [
 	{
 		text: 'Je maakt een foto van je brief',
-		audio: null,
-		image: null,
+		image: '/images/onboarding-user-1.png',
 	},
 	{
 		text: 'Een vrijwilliger van de app leest je brief',
-		audio: null,
-		image: null,
+		image: '/images/onboarding-user-2.png',
 	},
 	{
 		text: 'De vrijwilliger vertelt via een spraakmemo wat er in je brief staat',
-		audio: null,
-		image: null,
+		image: '/images/onboarding-user-3.png',
 	},
 	{
 		text: 'De vrijwilligers zijn Nederlands, maar het zou kunenn dat iemand meerdere talen spreekt',
-		audio: null,
-		image: null,
+		image: '/images/onboarding-user-4.png',
 	},
 	{
 		text: 'Wil je doorgeven wat jouw moedertaal is, zodat je hier misschien uitleg in kan krijgen?',
-		audio: null,
-		image: null,
+		image: '/images/onboarding-user-5.png',
 	},
 ]
 

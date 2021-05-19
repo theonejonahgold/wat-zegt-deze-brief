@@ -4,23 +4,19 @@ import type { OnboardingContent } from '$types'
 const volunteerContent: OnboardingContent[] = [
 	{
 		text: 'Helaas zijn er veel mensen die niet begrijpen wat er in hun brief staat.',
-		audio: null,
-		image: null,
+		image: '/images/onboarding-volunteer-1.png',
 	},
 	{
 		text: 'Zoek een brief die jij wilt uitleggen. Let hierbij vooral op de datum, hoelang wacht een persoon al op uitleg?',
-		audio: null,
-		image: null,
+		image: '/images/onboarding-volunteer-2.png',
 	},
 	{
 		text: 'Lees de brief door en leg vervolgens via een spraakmemo uit waar deze over gaat. Geef aan of er wel of geen actie nodig is en benoem dit.',
-		audio: null,
-		image: null,
+		image: '/images/onboarding-volunteer-3.png',
 	},
 	{
 		text: 'De persoon van wie de brief is krijgt jouw uitleg te zien en te horen en kan hierna nog vragen aan je stellen.',
-		audio: null,
-		image: null,
+		image: '/images/onboarding-volunteer-4.png',
 	},
 ]
 

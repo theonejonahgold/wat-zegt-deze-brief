@@ -23,6 +23,7 @@
 	import { Pagination } from '$molecules'
 	import { setContext } from 'svelte'
 	import { writable } from 'svelte/store'
+	import { Button, Image } from '$atoms'
 
 	export let step: number
 	export let content: OnboardingContent
@@ -38,7 +39,8 @@
 {:else}
 	<Pagination selected={+step} {amount} />
 	<p>{content.text}</p>
+	<Image src={content.image} alt={content.text} />
 	{#if !(step >= amount)}
-		<a href="{path}?step={+step + 1}">test</a>
+		<Button type="anchor" href="{path}?step={+step + 1}">Volgende</Button>
 	{/if}
 {/if}
