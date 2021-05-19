@@ -2,7 +2,7 @@ name: Manage sprint
 
 on:
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: '0 6 * * 1-5'
 
 jobs:
   start-sprint:
