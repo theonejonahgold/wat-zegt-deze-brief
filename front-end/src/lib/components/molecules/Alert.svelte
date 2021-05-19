@@ -9,8 +9,9 @@
 	export let alt: string
 </script>
 
+<!-- TODO: how to properly handle multiple on:clicks? -->
 <div>
-	<Help />
+	<Help on:click />
 	<SpokenText {audioFile} />
 	<Image {src} {alt} />
 	<Button on:click>Oke</Button>
