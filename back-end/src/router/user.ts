@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { frontEndOrigin } from '$config/env'
 import { getSupabaseClient } from '$config/supabase'
 import { definitions } from '$types/supabase'
 
@@ -18,9 +19,11 @@ const userRouter = Router().post('/register', (req, res) => {
 				.from<definitions['users']>('users')
 				.update({ role })
 				.eq('id', user!.id)
-				.then(({ data }) => {
+				.then(({ error }) => {
 					if (error) throw error
-					res.status(200).send({ data })
+					return req.headers.accept !== 'application/json'
+						? res.status(303).redirect(`${frontEndOrigin}/onboarding/${role}/success`)
+						: res.status(200).send({ email })
 				})
 		})
 		.catch(error => res.status(400).send(error.message))
