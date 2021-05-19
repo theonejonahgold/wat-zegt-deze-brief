@@ -13,11 +13,12 @@
 	"license": "MIT",
 	"dependencies": {
 		"@supabase/supabase-js": "^1.11.13",
-		"dotenv": "^9.0.2",
+		"cors": "^2.8.5",
 		"express": "^4.17.1",
 		"tslib": "^2.0.0"
 	},
 	"devDependencies": {
+		"@types/cors": "^2.8.10",
 		"@types/express": "^4.17.11",
 		"@vercel/ncc": "^0.28.5",
 		"concurrently": "^6.1.0",
