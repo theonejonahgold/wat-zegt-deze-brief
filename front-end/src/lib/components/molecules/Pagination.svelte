@@ -4,9 +4,8 @@
 
 	export let selected: number
 	export let amount: number
-	export let items: Array<any>
 
-	const steps = Array(items ? items.length : amount)
+	const steps = Array(amount)
 </script>
 
 <style lang="scss">
