@@ -25,15 +25,16 @@
 	export let amount: number
 	export let path: string
 
+	let hrefs: InstructionsHrefs
 	$: hrefs = {
 		previous: step === 1 ? '/dashboard' : `${path}?step=${+step - 1}`,
 		next: `${path}?step=${+step + 1}`,
 		finish: '/dashboard',
-	} as InstructionsHrefs
+	}
 </script>
 
 {#if !content}
 	<slot />
 {:else}
-	<Instructions {hrefs} {step} {content} {amount} {path} />
+	<Instructions {hrefs} {step} {content} {amount} />
 {/if}

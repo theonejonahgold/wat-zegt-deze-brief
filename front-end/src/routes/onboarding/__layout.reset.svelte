@@ -28,11 +28,12 @@
 	export let amount: number
 	export let path: string
 
+	let hrefs: InstructionsHrefs
 	$: hrefs = {
 		previous: step === 1 ? '/onboarding' : `${path}?step=${+step - 1}`,
 		next: `${path}?step=${+step + 1}`,
 		finish: `${path}/register`,
-	} as InstructionsHrefs
+	}
 </script>
 
 {#if !content}
