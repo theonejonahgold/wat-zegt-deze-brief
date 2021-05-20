@@ -11,6 +11,7 @@ const tsConfig = require('./tsconfig.json')
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: preprocess({
+		markupTagName: 'markup',
 		postcss: {
 			plugins: [autoprefixer(), vhFix(), cssnano()],
 		},

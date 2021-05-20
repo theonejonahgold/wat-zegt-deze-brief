@@ -1,15 +1,24 @@
 <script>
-	import { Button, Image, SpokenText, Help } from '$atoms'
+	import { createEventDispatcher } from 'svelte'
+	import { Button, Image, Help } from '$atoms'
+	import { textToSpeech } from '$actions'
 
-	export let audioFile: HTMLAudioElement
 	export let src: string
 	export let alt: string
+
+	const dispatch =
+		createEventDispatcher<{
+			close: null | undefined
+		}>()
+
+	function buttonClickHandler() {
+		dispatch('close')
+	}
 </script>
 
-<!-- TODO: how to properly handle multiple on:clicks? -->
 <div>
 	<Help on:click />
-	<SpokenText {audioFile} />
+	<p use:textToSpeech><slot /></p>
 	<Image {src} {alt} />
-	<Button on:click>Oke</Button>
+	<Button on:click={buttonClickHandler}>Oke</Button>
 </div>
