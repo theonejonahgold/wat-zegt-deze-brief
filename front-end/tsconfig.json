@@ -29,6 +29,9 @@
 			"$organisms": [
 				"src/lib/components/organisms"
 			],
+			"$templates": [
+				"src/lib/components/templates"
+			],
 			"$icons": [
 				"src/lib/icons"
 			],
@@ -40,8 +43,16 @@
 			],
 			"$types": [
 				"src/lib/types"
+			],
+			"$config/*": [
+				"src/lib/config/*"
 			]
 		}
 	},
-	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]
+	"include": [
+		"src/**/*.d.ts",
+		"src/**/*.js",
+		"src/**/*.ts",
+		"src/**/*.svelte"
+	]
 }

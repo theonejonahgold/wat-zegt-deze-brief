@@ -1,25 +1,33 @@
 <script>
 	export let href: string = ''
+	export let bottom = false
 </script>
 
-<style>
+<style lang="scss">
 	button,
 	a {
 		display: block;
-		border-radius: 2rem;
-		color: white;
-		padding: 1rem 0;
+		border-radius: var(--space-l);
+		color: var(--secondary);
+		padding: var(--space-m) 0;
 		text-align: center;
-		font-size: 1.25em;
+		font-size: var(--font-m);
 		text-decoration: none;
 		width: 100%;
 		border: none;
-		background: linear-gradient(to right, #80b6fe, #978fff);
+		background: var(--gradient-to-right);
+
+		&.bottom {
+			position: absolute;
+			bottom: var(--space-m);
+			left: var(--space-m);
+			width: calc(100% - (var(--space-m) * 2));
+		}
 	}
 </style>
 
 {#if !href}
-	<button on:click><slot /></button>
+	<button class:bottom on:click><slot /></button>
 {:else}
-	<a on:click {href}><slot /></a>
+	<a class:bottom on:click {href}><slot /></a>
 {/if}
