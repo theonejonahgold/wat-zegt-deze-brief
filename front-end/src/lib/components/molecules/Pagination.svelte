@@ -15,7 +15,7 @@
 		height: 1em;
 		border-radius: 2em;
 		display: flex;
-		background: #d8d8d8;
+		background: var(--muted);
 
 		span {
 			display: inline-block;
@@ -32,7 +32,7 @@
 			}
 
 			&.active {
-				background: #8ca3ff;
+				background: var(--light);
 			}
 		}
 	}

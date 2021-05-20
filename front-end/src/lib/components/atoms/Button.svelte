@@ -6,15 +6,15 @@
 	button,
 	a {
 		display: block;
-		border-radius: 2rem;
-		color: white;
-		padding: 1rem 0;
+		border-radius: var(--space-l);
+		color: var(--secondary);
+		padding: var(--space-m) 0;
 		text-align: center;
-		font-size: 1.25em;
+		font-size: var(--font-m);
 		text-decoration: none;
 		width: 100%;
 		border: none;
-		background: linear-gradient(to right, #80b6fe, #978fff);
+		background: var(--gradient-to-right);
 	}
 </style>
 

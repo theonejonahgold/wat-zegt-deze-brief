@@ -6,10 +6,9 @@
 	a {
 		text-decoration: none;
 		line-height: 0.5;
-		color: #978fff;
-		font-size: 2em;
+		color: var(--dark);
+		font-size: var(--font-l);
 		font-weight: 700;
-		margin-right: 1rem;
 	}
 </style>
 
