@@ -1,5 +1,5 @@
 <script>
-	import { Title, Icon, Button, SpokenText, Section } from '$atoms'
+	import { Title, Icon, Button, SpokenText, Main } from '$atoms'
 	import { IndexIcon, Oval } from '$icons'
 
 	let content = [
@@ -16,9 +16,9 @@
 </svelte:head>
 
 <Oval />
-<Section>
+<Main>
 	<Title>{content[0].text}</Title>
 	<!-- <SpokenText {audioFile}>{content[1].text}</SpokenText> -->
 	<Icon><IndexIcon /></Icon>
-	<Button>{content[2].text}</Button>
-</Section>
+	<a href="userRole"><Button>{content[2].text}</Button></a>
+</Main>
