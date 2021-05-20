@@ -1,7 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte'
 
-	type inputTypes = 'text' | 'email' | 'number' | 'tel' | 'range'
+	type inputTypes = 'text' | 'email' | 'number' | 'tel' | 'range' | 'radio'
 	type inputEvent = Event & { currentTarget: EventTarget & HTMLInputElement }
 
 	export let value = ''
