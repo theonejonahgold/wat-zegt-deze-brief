@@ -21,6 +21,7 @@
 			display: inline-block;
 			height: 1em;
 			width: 100%;
+			transition: border-radius 0.2s ease-in-out;
 
 			&:first-of-type {
 				border-radius: 2em 0 0 2em;
