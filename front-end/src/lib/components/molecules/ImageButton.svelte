@@ -1,5 +1,5 @@
 <script>
-	import { Image, Input } from '$atoms'
+	import { Icon, Image, Input } from '$atoms'
 
 	export let src: string
 	export let alt: string
@@ -34,11 +34,23 @@
 
 {#if href}
 	<a {href}>
-		<Image {src} {alt} />
+		{#if src}
+			<Image {src} {alt} />
+		{:else}
+			<Icon>
+				<slot aria-label={alt} />
+			</Icon>
+		{/if}
 	</a>
 {:else}
 	<Input {value} {name} {id} type="radio" />
 	<label for={id}>
-		<Image {src} {alt} />
+		{#if src}
+			<Image {src} {alt} />
+		{:else}
+			<Icon>
+				<slot aria-label={alt} />
+			</Icon>
+		{/if}
 	</label>
 {/if}
