@@ -24,4 +24,4 @@
 	}
 </script>
 
-<input on:input={inputHandler} {value} {name} {type} {...$$restProps} />
+<input on:input={inputHandler} {value} {name} {type} {...$$restProps} required />
