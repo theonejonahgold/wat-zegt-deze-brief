@@ -1,9 +1,8 @@
 <style>
 	svg {
-		position: absolute;
+		position: fixed;
 		top: -15.625rem;
 		left: 7.25rem;
-		z-index: 1;
 	}
 </style>
 
