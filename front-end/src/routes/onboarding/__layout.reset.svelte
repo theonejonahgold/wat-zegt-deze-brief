@@ -20,7 +20,6 @@
 </script>
 
 <script>
-	import '../../app.scss'
 	import type { OnboardingContent } from '$types'
 	import { textToSpeech } from '$actions'
 	import { Button, Image, Back, Help } from '$atoms'
@@ -33,11 +32,22 @@
 </script>
 
 <style>
-	.top-container {
+	header {
 		display: flex;
+		align-items: center;
+		margin-bottom: var(--space-m);
+
+		> :global {
+			:first-child {
+				margin-right: var(--space-s);
+			}
+			:last-child {
+				margin-left: var(--space-s);
+			}
+		}
 	}
 
-	.content-container {
+	main {
 		text-align: center;
 	}
 </style>
@@ -45,19 +55,19 @@
 {#if !content}
 	<slot />
 {:else}
-	<div class="top-container">
+	<header>
 		<Back href={step === 1 ? '/onboarding' : `${path}?step=${+step - 1}`} />
 		<Pagination selected={+step} {amount} />
 		<Help />
-	</div>
-	<div class="content-container">
+	</header>
+	<main>
 		<!-- TODO: Fix same spoken message after going to next item -->
 		<p use:textToSpeech={content.text}>{content.text}</p>
 		<Image src={content.image} alt={content.text} />
 		{#if step < amount}
-			<Button href="{path}?step={+step + 1}">Volgende</Button>
+			<Button bottom href="{path}?step={+step + 1}">Volgende</Button>
 		{:else if step === amount}
-			<Button href="{path}/register">Begrepen!</Button>
+			<Button bottom href="{path}/register">Begrepen!</Button>
 		{/if}
-	</div>
+	</main>
 {/if}
