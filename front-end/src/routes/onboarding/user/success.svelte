@@ -15,8 +15,9 @@
 </script>
 
 <script>
+	import { Success } from '$templates'
+
 	export let email: string
 </script>
 
-<h1>Bevestig je e-mailadres</h1>
-<p>Je hebt een e-mail van ons gekregen op {email}</p>
+<Success {email} />

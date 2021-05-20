@@ -11,7 +11,6 @@ const tsConfig = require('./tsconfig.json')
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: preprocess({
-		markupTagName: 'markup',
 		postcss: {
 			plugins: [autoprefixer(), vhFix(), cssnano()],
 		},
@@ -30,7 +29,7 @@ const config = {
 				alias: Object.entries(tsConfig.compilerOptions.paths).reduce(
 					(acc, [alias, path]) => ({
 						...acc,
-						[alias]: resolve(import.meta.url, `/${path}`),
+						[alias.replace('/*', '')]: resolve(import.meta.url, `/${path[0].replace('/*', '')}`),
 					}),
 					{}
 				),

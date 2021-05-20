@@ -27,14 +27,33 @@
 	export let content: InstructionsContent
 	export let amount: number
 	export let path: string
-
 	let hrefs: InstructionsHrefs
 	$: hrefs = {
 		previous: step === 1 ? '/onboarding' : `${path}?step=${+step - 1}`,
 		next: `${path}?step=${+step + 1}`,
 		finish: `${path}/register`,
-	}
 </script>
+<!-- TODO: Move styling to Instructions template -->
+<style>
+	header {
+		display: flex;
+		align-items: center;
+		margin-bottom: var(--space-m);
+
+		> :global {
+			:first-child {
+				margin-right: var(--space-s);
+			}
+			:last-child {
+				margin-left: var(--space-s);
+			}
+		}
+	}
+
+	main {
+		text-align: center;
+	}
+</style>
 
 {#if !content}
 	<slot />
