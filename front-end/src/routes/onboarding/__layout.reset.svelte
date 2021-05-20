@@ -21,8 +21,7 @@
 
 <script>
 	import type { OnboardingContent } from '$types'
-	import { textToSpeech } from '$actions'
-	import { Button, Image, Back, Help } from '$atoms'
+	import { Button, Image, Back, Help, SpokenText } from '$atoms'
 	import { Pagination } from '$molecules'
 
 	export let step: number
@@ -61,8 +60,7 @@
 		<Help />
 	</header>
 	<main>
-		<!-- TODO: Fix same spoken message after going to next item -->
-		<p use:textToSpeech={content.text}>{content.text}</p>
+		<SpokenText text={content.text} />
 		<Image src={content.image} alt={content.text} />
 		{#if step < amount}
 			<Button bottom href="{path}?step={+step + 1}">Volgende</Button>
