@@ -1,15 +1,15 @@
 <script>
 	import { Input } from '$atoms'
+	import type { InputType } from '$types'
 
-	type inputTypes = 'text' | 'email' | 'number' | 'tel' | 'range'
-
-	export let value = ''
-	export let type: inputTypes = 'text'
+	export let initialValue = ''
+	export let type: InputType = 'text'
 	export let name = ''
+	export let id = name
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
-<label>
+<label for={id}>
 	<slot />
-	<Input on:valueChange {value} {name} {type} {...$$restProps} />
+	<Input value={initialValue} {name} {type} {...$$restProps} />
 </label>

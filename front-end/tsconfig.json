@@ -3,7 +3,9 @@
 		"moduleResolution": "node",
 		"module": "es2020",
 		"lib": [
-			"es2020"
+			"es2020",
+			"dom.iterable",
+			"DOM"
 		],
 		"target": "es2019",
 		"importsNotUsedAsValues": "error",
@@ -13,6 +15,7 @@
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
+		"downlevelIteration": true,
 		"baseUrl": ".",
 		"allowJs": true,
 		"checkJs": true,
@@ -28,6 +31,15 @@
 			],
 			"$icons": [
 				"src/lib/icons"
+			],
+			"$actions": [
+				"src/lib/actions"
+			],
+			"$utils": [
+				"src/lib/utils"
+			],
+			"$types": [
+				"src/lib/types"
 			]
 		}
 	},
