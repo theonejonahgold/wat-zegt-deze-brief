@@ -1,7 +1,7 @@
 <script>
 	import { Back, Help, Button, Main } from '$atoms'
 	import { ImageButton } from '$molecules'
-	import { VolunteerIcon, ClientIcon } from '$icons'
+	import { VolunteerIcon, UserIcon } from '$icons'
 
 	let users = [
 		{
@@ -12,6 +12,12 @@
 		},
 		{ value: 'client', alt: 'A client', name: 'selection', id: 'client' },
 	]
+
+	let disabled: boolean = true
+
+	function toggleButton() {
+		disabled != disabled
+	}
 </script>
 
 <style lang="scss">
@@ -38,9 +44,9 @@
 			{#if user.value === 'volunteer'}
 				<VolunteerIcon />
 			{:else}
-				<ClientIcon />
+				<UserIcon />
 			{/if}
 		</ImageButton>
 	{/each}
-	<Button>Volgende</Button>
+	<Button {disabled}>Volgende</Button>
 </Main>
