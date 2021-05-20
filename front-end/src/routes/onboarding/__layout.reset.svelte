@@ -50,7 +50,7 @@
 	</div>
 	<div class="content-container">
 		<!-- TODO: Fix same spoken message after going to next item -->
-		<p use:textToSpeech>{content.text}</p>
+		<p use:textToSpeech={content.text}>{content.text}</p>
 		<Image src={content.image} alt={content.text} />
 		{#if !(step >= amount)}
 			<Button type="anchor" href="{path}?step={+step + 1}">Volgende</Button>
