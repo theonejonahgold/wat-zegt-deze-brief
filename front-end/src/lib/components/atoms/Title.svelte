@@ -7,7 +7,7 @@
 	}
 
 	h1 {
-		margin: 0.625rem 2.125rem 1rem 2.125rem;
+		justify-self: start;
 		font-family: var(--font);
 		font-size: var(--title-size);
 		letter-spacing: var(--letter-spacing);
