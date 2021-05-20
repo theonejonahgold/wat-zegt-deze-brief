@@ -22,7 +22,9 @@ const userRouter = Router().post('/register', (req, res) => {
 				.then(({ error }) => {
 					if (error) throw error
 					return req.headers.accept !== 'application/json'
-						? res.status(303).redirect(`${frontEndOrigin}/onboarding/${role}/success`)
+						? res
+								.status(303)
+								.redirect(`${frontEndOrigin}/onboarding/${role}/success?email=${email}`)
 						: res.status(200).send({ email })
 				})
 		})
