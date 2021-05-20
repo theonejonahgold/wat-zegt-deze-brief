@@ -2,4 +2,6 @@
 	import { Button } from '$atoms'
 </script>
 
-<Button href="/dashboard/letter">Letter instructions</Button>
+<!-- TODO: Replace with ImageButtons -->
+<Button href="/dashboard/letter">Foto maken van je brief</Button>
+<Button href="/dashboard/explanation">Uitleg</Button>
