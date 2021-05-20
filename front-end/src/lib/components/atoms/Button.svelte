@@ -1,5 +1,5 @@
 <script>
-	export let type: 'button' | 'anchor' = 'button'
+	export let href: string = ''
 </script>
 
 <style>
@@ -18,9 +18,8 @@
 	}
 </style>
 
-{#if type === 'button'}
+{#if !href}
 	<button on:click><slot /></button>
 {:else}
-	<!-- svelte-ignore a11y-missing-attribute -->
-	<a on:click {...$$restProps}><slot /></a>
+	<a on:click {href}><slot /></a>
 {/if}
