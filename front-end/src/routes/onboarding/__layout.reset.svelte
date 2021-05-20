@@ -3,6 +3,7 @@
 
 	export const load: Load = async ({ page, fetch }) => {
 		if (page.path === '/onboarding') return {}
+		if (!page.path.endsWith('/user') && !page.path.endsWith('/volunteer')) return {}
 
 		const step = +page.query.get('step') || 1
 		const res = await fetch(`${page.path}/${step}.json`)
