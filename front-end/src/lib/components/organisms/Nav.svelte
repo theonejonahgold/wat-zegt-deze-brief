@@ -8,8 +8,6 @@
 <style>
 	nav {
 		background-color: #ffffff;
-		-webkit-box-shadow: 0px -1px 3px 0px rgba(5, 1, 1, 0.05);
-		-moz-box-shadow: 0px -1px 3px 0px rgba(50, 50, 50, 0.05);
 		box-shadow: 0px -1px 3px 0px rgba(50, 50, 50, 0.05);
 		width: 100vw;
 	}
