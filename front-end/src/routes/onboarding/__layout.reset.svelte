@@ -20,6 +20,7 @@
 </script>
 
 <script>
+	import '../../app.scss'
 	import type { OnboardingContent } from '$types'
 	import { textToSpeech } from '$actions'
 	import { Button, Image, Back, Help } from '$atoms'
