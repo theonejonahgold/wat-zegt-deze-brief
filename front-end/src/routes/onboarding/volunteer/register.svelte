@@ -23,7 +23,7 @@
 		{
 			name: 'role',
 			type: 'hidden',
-			initialValue: 'user',
+			initialValue: 'volunteer',
 		},
 	]}
 	method="POST"
