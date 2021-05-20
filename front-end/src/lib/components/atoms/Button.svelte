@@ -1,8 +1,9 @@
 <script>
 	export let href: string = ''
+	export let bottom = false
 </script>
 
-<style>
+<style lang="scss">
 	button,
 	a {
 		display: block;
@@ -15,11 +16,18 @@
 		width: 100%;
 		border: none;
 		background: var(--gradient-to-right);
+
+		&.bottom {
+			position: absolute;
+			bottom: var(--space-m);
+			left: var(--space-m);
+			width: calc(100% - (var(--space-m) * 2));
+		}
 	}
 </style>
 
 {#if !href}
-	<button on:click><slot /></button>
+	<button class:bottom on:click><slot /></button>
 {:else}
-	<a on:click {href}><slot /></a>
+	<a class:bottom on:click {href}><slot /></a>
 {/if}

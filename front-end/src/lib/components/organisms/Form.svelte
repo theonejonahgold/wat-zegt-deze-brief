@@ -17,6 +17,14 @@
 		}>()
 </script>
 
+<style lang="scss">
+	form :global {
+		label + label {
+			margin-top: var(--space-m);
+		}
+	}
+</style>
+
 <form
 	enctype="application/x-www-form-urlencoded"
 	use:formEnhancer={{
@@ -36,5 +44,5 @@
 			</Field>
 		{/if}
 	{/each}
-	<Button><slot name="submit">Verzenden</slot></Button>
+	<Button bottom><slot name="submit">Verzenden</slot></Button>
 </form>
