@@ -1,4 +1,6 @@
 <script>
+	import { AnchorIcon } from '$icons'
+
 	export let href: string
 </script>
 
@@ -12,4 +14,4 @@
 	}
 </style>
 
-<a {href}>&lt;</a>
+<a {href}><AnchorIcon /></a>
