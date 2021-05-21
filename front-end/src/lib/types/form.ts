@@ -3,6 +3,7 @@ type NormalFieldType = 'text' | 'password' | 'email' | 'number' | 'radio'
 interface BasicFormField {
 	name: string
 	initialValue?: string
+	required?: boolean
 	type: InputType
 }
 

@@ -6,7 +6,7 @@ import { definitions } from '$types/supabase'
 const client = getSupabaseClient()
 
 const userRouter = Router().post('/register', (req, res) => {
-	const { email, password, role } = req.body
+	const { email, password, role, name } = req.body
 	if (!role) return res.status(400).send('No user role was provided.')
 	client.auth
 		.signUp({
@@ -17,7 +17,7 @@ const userRouter = Router().post('/register', (req, res) => {
 			if (error) throw error
 			client
 				.from<definitions['users']>('users')
-				.update({ role })
+				.update({ role, name: name ?? '' })
 				.eq('id', user!.id)
 				.then(({ error }) => {
 					if (error) throw error
