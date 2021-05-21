@@ -1,5 +1,7 @@
 <script>
 	import { SpokenText } from '$atoms'
+
+	export let message: string = ''
 </script>
 
 <style>
@@ -12,7 +14,5 @@
 	<h1>Bijna klaar!</h1>
 </header>
 <main>
-	<SpokenText
-		text="We hebben je een e-mail gestuurd. Op deze, klik daar op de link en je kan gelijk van start!"
-	/>
+	<SpokenText text={message} />
 </main>
