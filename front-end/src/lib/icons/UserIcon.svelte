@@ -1,8 +1,6 @@
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
-	width="174"
-	height="162"
 	viewBox="0 0 174 162"
 >
 	<defs>

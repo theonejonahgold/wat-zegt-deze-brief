@@ -1,9 +1,4 @@
-<svg
-	xmlns="http://www.w3.org/2000/svg"
-	width="88.833"
-	height="125.833"
-	viewBox="0 0 88.833 125.833"
->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88.833 125.833">
 	<g id="Group_39" data-name="Group 39" transform="translate(7475.501 1596.54)">
 		<g id="head_No_Hair_1" data-name="head/No Hair 1" transform="translate(-7448.278 -1596.54)">
 			<path
