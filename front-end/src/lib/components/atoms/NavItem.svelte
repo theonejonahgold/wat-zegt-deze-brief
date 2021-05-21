@@ -1,5 +1,5 @@
 <script>
-	import { Icon } from '$atoms'
+	import Icon from './Icon.svelte'
 
 	export let route: string = '#'
 </script>

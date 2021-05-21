@@ -12,6 +12,250 @@ export interface paths {
       };
     };
   };
+  "/roles": {
+    get: {
+      parameters: {
+        query: {
+          /** Slug for role */
+          id?: parameters["rowFilter.roles.id"];
+          /** Name of the role */
+          name?: parameters["rowFilter.roles.name"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["roles"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** roles */
+          roles?: definitions["roles"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          /** Slug for role */
+          id?: parameters["rowFilter.roles.id"];
+          /** Name of the role */
+          name?: parameters["rowFilter.roles.name"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          /** Slug for role */
+          id?: parameters["rowFilter.roles.id"];
+          /** Name of the role */
+          name?: parameters["rowFilter.roles.name"];
+        };
+        body: {
+          /** roles */
+          roles?: definitions["roles"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/users": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.users.id"];
+          /** Role of user */
+          role?: parameters["rowFilter.users.role"];
+          /** Optional name of user */
+          name?: parameters["rowFilter.users.name"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["users"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** users */
+          users?: definitions["users"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.users.id"];
+          /** Role of user */
+          role?: parameters["rowFilter.users.role"];
+          /** Optional name of user */
+          name?: parameters["rowFilter.users.name"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.users.id"];
+          /** Role of user */
+          role?: parameters["rowFilter.users.role"];
+          /** Optional name of user */
+          name?: parameters["rowFilter.users.name"];
+        };
+        body: {
+          /** users */
+          users?: definitions["users"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/rpc/handle_new_user": {
+    post: {
+      parameters: {
+        body: {
+          args: { [key: string]: any };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+}
+
+export interface definitions {
+  /** All possible user roles */
+  roles: {
+    /**
+     * Slug for role
+     *
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+    /** Name of the role */
+    name: string;
+  };
+  /** Public users database */
+  users: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+    /**
+     * Role of user
+     *
+     * Note:
+     * This is a Foreign Key to `roles.id`.<fk table='roles' column='id'/>
+     */
+    role: string;
+    /** Optional name of user */
+    name?: string;
+  };
 }
 
 export interface parameters {
@@ -35,6 +279,19 @@ export interface parameters {
   offset: string;
   /** Limiting and Pagination */
   limit: string;
+  /** roles */
+  "body.roles": definitions["roles"];
+  /** Slug for role */
+  "rowFilter.roles.id": string;
+  /** Name of the role */
+  "rowFilter.roles.name": string;
+  /** users */
+  "body.users": definitions["users"];
+  "rowFilter.users.id": string;
+  /** Role of user */
+  "rowFilter.users.role": string;
+  /** Optional name of user */
+  "rowFilter.users.name": string;
 }
 
 export interface operations {}

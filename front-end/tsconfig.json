@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"moduleResolution": "node",
 		"module": "es2020",
-		"lib": ["es2020"],
+		"lib": ["es2020", "dom.iterable", "DOM"],
 		"target": "es2019",
 		"importsNotUsedAsValues": "error",
 		"isolatedModules": true,
@@ -11,6 +11,7 @@
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
+		"downlevelIteration": true,
 		"baseUrl": ".",
 		"allowJs": true,
 		"checkJs": true,
@@ -18,7 +19,11 @@
 			"$atoms": ["src/lib/components/atoms"],
 			"$molecules": ["src/lib/components/molecules"],
 			"$organisms": ["src/lib/components/organisms"],
-			"$icons": ["src/lib/icons"]
+			"$templates": ["src/lib/components/templates"],
+			"$icons": ["src/lib/icons"],
+			"$actions": ["src/lib/actions"],
+			"$utils": ["src/lib/utils"],
+			"$types": ["src/lib/types"]
 		}
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]

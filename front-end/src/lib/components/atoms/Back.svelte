@@ -7,9 +7,10 @@
 <style>
 	a {
 		text-decoration: none;
-		color: #9593fc;
-		font-weight: 900;
-		font-size: 20px;
+		line-height: 0.5;
+		color: var(--dark);
+		font-size: var(--font-l);
+		font-weight: 700;
 	}
 </style>
 

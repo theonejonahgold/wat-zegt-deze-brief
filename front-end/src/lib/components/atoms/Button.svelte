@@ -1,39 +1,33 @@
 <script>
-	export let type: 'button' | 'anchor' = 'button'
+	export let href: string = ''
+	export let bottom = false
 </script>
 
-<style>
-	:global(:root) {
-		--font-button: 'Avenir medium';
-		--button-size: 1.125rem;
-		--text-color: #ffffff;
-		--button-background: linear-gradient(to right, #80b6fe, #978fff);
-		--button-shadow: drop-shadow(0px 3px 8px #0000002a);
-		--button-border-radius: 30px;
-		--letter-spacing: 0.3px;
-		--button-width: 16.375rem;
-		--button-height: 3.313rem;
-	}
-
-	button {
-		display: inline-block;
-		cursor: pointer;
-		color: var(--text-color);
-		font-size: var(--button-size);
-		margin: 0;
-		height: var(--button-height);
-		width: var(--button-width);
-		background: var(--button-background);
-		filter: var(--button-shadow);
+<style lang="scss">
+	button,
+	a {
+		display: block;
+		border-radius: var(--space-l);
+		color: var(--secondary);
+		padding: var(--space-m) 0;
+		text-align: center;
+		font-size: var(--font-m);
+		text-decoration: none;
+		width: 100%;
 		border: none;
-		border-radius: var(--button-border-radius);
-		letter-spacing: var(--letter-spacing);
+		background: var(--gradient-to-right);
+
+		&.bottom {
+			position: absolute;
+			bottom: var(--space-m);
+			left: var(--space-m);
+			width: calc(100% - (var(--space-m) * 2));
+		}
 	}
 </style>
 
-{#if type === 'button'}
-	<button on:click><slot /></button>
+{#if !href}
+	<button class:bottom on:click><slot /></button>
 {:else}
-	<!-- svelte-ignore a11y-missing-attribute -->
-	<a on:click {...$$restProps}><slot /></a>
+	<a class:bottom on:click {href}><slot /></a>
 {/if}
