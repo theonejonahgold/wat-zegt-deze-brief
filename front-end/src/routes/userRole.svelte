@@ -10,14 +10,8 @@
 			name: 'selection',
 			id: 'volunteer',
 		},
-		{ value: 'client', alt: 'A client', name: 'selection', id: 'client' },
+		{ value: 'user', alt: 'A user', name: 'selection', id: 'user' },
 	]
-
-	let disabled: boolean = true
-
-	function toggleButton() {
-		disabled != disabled
-	}
 </script>
 
 <style lang="scss">
@@ -48,5 +42,5 @@
 			{/if}
 		</ImageButton>
 	{/each}
-	<Button {disabled}>Volgende</Button>
+	<Button>Volgende</Button>
 </Main>
