@@ -1,35 +1,41 @@
 <script>
-	import { onDestroy, onMount } from 'svelte'
+	import { onMount } from 'svelte'
+	import { textToSpeech } from '$utils'
+	import { Icon } from '$atoms'
+	import { AudioIcon } from '$icons'
 
-	export let audioFile: HTMLAudioElement
+	export let text = ''
 
-	let isPlaying: boolean
+	let playing = false
+	let js = false
 
-	onMount(() => {
-		audioFile.addEventListener('play', updatePlayingState)
-		audioFile.addEventListener('pause', updatePlayingState)
-		audioFile.addEventListener('ended', updatePlayingState)
-	})
+	onMount(() => (js = true))
 
-	onDestroy(() => {
-		audioFile.removeEventListener('play', updatePlayingState)
-		audioFile.removeEventListener('pause', updatePlayingState)
-		audioFile.removeEventListener('ended', updatePlayingState)
-	})
-
-	const updatePlayingState = (e: Event) => (isPlaying = e.type === 'play')
-
-	const handlePlayback = () => {
-		if (!isPlaying) return audioFile.play()
-		audioFile.pause()
-		audioFile.currentTime = 0
+	const handleClick = () => {
+		if (playing) return
+		playing = true
+		textToSpeech(text, () => {
+			playing = false
+		})
 	}
 </script>
 
-<p>
-	<slot />
-	<button on:click={handlePlayback}>
-		<!-- svelte-ignore a11y-missing-attribute -->
-		<img src={isPlaying ? '' : ''} aria-hidden="true" />
-	</button>
-</p>
+<style>
+	button {
+		border: none;
+		cursor: pointer;
+	}
+</style>
+
+{#if !js}
+	<p>{text}</p>
+{:else}
+	<p>
+		{text}
+		<button on:click={handleClick}>
+			<Icon color="black">
+				<AudioIcon {playing} />
+			</Icon>
+		</button>
+	</p>
+{/if}

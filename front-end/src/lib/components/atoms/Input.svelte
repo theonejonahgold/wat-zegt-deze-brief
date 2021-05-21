@@ -1,27 +1,19 @@
 <script>
-	import { createEventDispatcher } from 'svelte'
-
-	type inputTypes = 'text' | 'email' | 'number' | 'tel' | 'range' | 'radio'
-	type inputEvent = Event & { currentTarget: EventTarget & HTMLInputElement }
+	import type { InputType } from '$types'
 
 	export let value = ''
-	export let type: inputTypes = 'text'
+	export let type: InputType = 'text'
 	export let name = ''
-
-	const dispatch =
-		createEventDispatcher<{
-			valueChange: {
-				name: string
-				value: string
-			}
-		}>()
-
-	const inputHandler = (e: inputEvent) => {
-		dispatch('valueChange', {
-			name,
-			value: e.currentTarget.value,
-		})
-	}
 </script>
 
-<input on:input={inputHandler} {value} {name} {type} {...$$restProps} required />
+<style>
+	input {
+		border: 0;
+		font-size: var(--font-m);
+		border-radius: var(--border-radius);
+		border: 1px solid var(--light);
+		padding: var(--space-s);
+	}
+</style>
+
+<input {value} {name} {type} {...$$restProps} />

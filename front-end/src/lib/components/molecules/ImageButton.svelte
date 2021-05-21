@@ -1,5 +1,5 @@
 <script>
-	import { Icon, Image, Input } from '$atoms'
+	import { Icon, Image, Input, SpokenText } from '$atoms'
 
 	export let src: string
 	export let alt: string
@@ -7,6 +7,7 @@
 	export let name: string
 	export let href: string = ''
 	export let id: string
+  export let text = ''
 </script>
 
 <style>
@@ -42,6 +43,7 @@
 			</Icon>
 		{/if}
 	</a>
+  <SpokenText {text} />
 {:else}
 	<Input {value} {name} {id} type="radio" />
 	<label for={id}>
@@ -53,4 +55,5 @@
 			</Icon>
 		{/if}
 	</label>
+  <SpokenText {text} />
 {/if}

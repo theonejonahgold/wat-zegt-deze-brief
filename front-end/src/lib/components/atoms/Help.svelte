@@ -1,15 +1,20 @@
 <style>
 	button {
-		background: none;
-		border: 3px solid #9593fc;
+		appearance: none;
+		display: block;
+		background: var(--secondary);
+		font-family: var(--font-family);
+		color: var(--dark);
+		width: var(--space-l);
+		height: var(--space-l);
+		line-height: 1em;
+		text-align: center;
+		font-size: var(--font-m);
+		padding: 0;
+		font-weight: 700;
+		border: 1px solid var(--dark);
 		border-radius: 50%;
-		width: 2rem;
-		height: 2rem;
-		color: #9593fc;
-		font-weight: 800;
-		font-size: 20px;
-		cursor: pointer;
 	}
 </style>
 
-<button on:click aria-label="Leg dit scherm uit">?</button>
+<button aria-label="Leg dit scherm uit">?</button>

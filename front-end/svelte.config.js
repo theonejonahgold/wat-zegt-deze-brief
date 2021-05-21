@@ -24,11 +24,12 @@ const config = {
 		adapter: node(),
 		vite: config => ({
 			...config,
+			mode: process.env.NODE_ENV || 'development',
 			resolve: {
 				alias: Object.entries(tsConfig.compilerOptions.paths).reduce(
 					(acc, [alias, path]) => ({
 						...acc,
-						[alias]: resolve(import.meta.url, `/${path}`),
+						[alias.replace('/*', '')]: resolve(import.meta.url, `/${path[0].replace('/*', '')}`),
 					}),
 					{}
 				),

@@ -7,13 +7,12 @@
 
 <style>
 	nav {
-		background-color: #ffffff;
+		background-color: var(--secondary);
 		box-shadow: 0px -1px 3px 0px rgba(50, 50, 50, 0.05);
 		width: 100vw;
 	}
 
 	ul {
-		margin: 0;
 		padding: 0;
 		display: flex;
 		justify-content: space-around;
@@ -22,7 +21,7 @@
 	}
 
 	li {
-		padding: 12px 0 5px 0;
+		padding: var(--space-s) 0;
 		text-align: center;
 	}
 </style>
