@@ -33,7 +33,7 @@
 				required: true,
 			},
 			{
-				label: 'Naam (hoeft niet)',
+				label: 'Je voornaam (mag je leeg laten)',
 				name: 'name',
 				type: 'text',
 			},
