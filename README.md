@@ -2,6 +2,8 @@
 
 # Index
 
+- [Week[0]](#week[0])
+  - [Feedback session](#feedback-session)
 - [Debriefing](#debriefing)
   - [Problem Statement and Design Challenge](#problem-statement-and-design-challenge)
   - [Client Description](#client-description)
@@ -11,6 +13,76 @@
   - [Task delegation](#task-delegation)
   - [Deliverables](#deliverables)
 - [User scenarios](#user-scenarios)
+
+# Week[0]
+
+## Feedback session
+
+### Feedback from Tessa
+
+- Selecting language on speech not viable
+  - Dialects and accents
+  - Not really necessary for volunteers
+  - Divide languages by country of origin with country flags as visual aid
+  - Search for spoken languages
+    - Autocomplete
+    - Add multiple languages
+    - Show country of origin with country flag
+- Language is a recommendation, not a rule
+  - Most volunteers will speak mostly/only Dutch anyway
+- Amount of pages to photograph is indeed unnecessary
+- Supplying the sender of the letter is a good idea
+  - Should be optional
+  - Might help with noticing urgency and quality of explanation
+- Volunteers should filter letters they receive on preferred languages
+  - Should not set them on their profile
+
+### Action points
+
+- Users
+  - Language selection
+    - Select languages by country
+    - Search for spoken languages
+  - Letter sending
+    - Ask if all pages have been photographed or if there are more
+    - Optionally add the sender of the letter
+
+## Retrospective
+
+### What went well
+
+- Collaboration went well
+- Setup of workflow
+- Task delegation
+
+### What could have gone better
+
+- Pushing of opinions
+- Stop trying to fix something after a certain point
+- Good enough is perfect
+- Estimating scope (too ambitious)
+- Defining scope
+- Seperation of issues and focus
+- Task updates
+- Eliminating distractions
+- Defining tasks/job stories
+
+### What we take with us
+
+- Test with the target audiences
+- Change job stories to descriptive issues
+- Make issues more easily self-contained
+- Create issues when you hit a road block on another
+  - Related issues
+- Update issues when you're working on them
+- Define a more conscise scope
+- Set roadblocks for overworking
+  - Breaks
+  - Stopping on time
+  - Work schedule: Stand-up & wrap-up
+- Keep up task delegation
+- Improve workflow
+- Keep asking for help
 
 # Debriefing
 
