@@ -2,7 +2,7 @@
 
 # Index
 
-- [Week[0]](#week[0])
+- [Week[0]](#week0)
   - [Feedback session](#feedback-session)
 - [Debriefing](#debriefing)
   - [Problem Statement and Design Challenge](#problem-statement-and-design-challenge)
