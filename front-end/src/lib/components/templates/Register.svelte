@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation'
 	import { API_URL } from '$config/env'
 	import { Form } from '$organisms'
 
@@ -15,7 +16,7 @@
 	<h2>Registreren</h2>
 	<Form
 		action="{API_URL}/{role}/register"
-		on:success={e => console.log(e.detail)}
+		on:success={e => goto(`/onboarding/${role}/success`)}
 		fields={[
 			{
 				label: 'E-mailadres',
