@@ -1,7 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte'
-	import { Button, Image, Help } from '$atoms'
-	import { textToSpeech } from '$actions'
+	import { Button, Image, Help, SpokenText } from '$atoms'
 
 	export let src: string
 	export let alt: string
@@ -18,7 +17,7 @@
 
 <div>
 	<Help on:click />
-	<p use:textToSpeech><slot /></p>
+	<SpokenText text="" />
 	<Image {src} {alt} />
 	<Button on:click={buttonClickHandler}>Oke</Button>
 </div>

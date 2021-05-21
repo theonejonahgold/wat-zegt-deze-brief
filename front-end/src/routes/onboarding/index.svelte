@@ -7,5 +7,5 @@
 <a href="/onboarding/user">User</a>
 <a href="/onboarding/volunteer">Volunteer</a>
 
-<ImageButton name="option" value="user">Ik heb hulp nodig met een brief</ImageButton>
-<ImageButton name="option" value="volunteer">Hulp geven</ImageButton>
+<ImageButton name="option" value="user" text="Ik heb hulp nodig met een brief" />
+<ImageButton name="option" value="volunteer" text="Hulp geven" />
