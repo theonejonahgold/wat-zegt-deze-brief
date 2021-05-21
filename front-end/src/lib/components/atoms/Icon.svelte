@@ -8,6 +8,8 @@
 
 		:global(svg) {
 			fill: var(--color, currentColor);
+			width: 100%;
+			height: 100%;
 		}
 	}
 </style>

@@ -22,8 +22,14 @@
 
 <style>
 	button {
+		line-height: 1;
 		border: none;
 		cursor: pointer;
+		background: none;
+		height: var(--space-m);
+		width: var(--space-m);
+		padding: 0;
+		margin-left: var(--space-xs);
 	}
 </style>
 
@@ -32,7 +38,7 @@
 {:else}
 	<p>
 		{text}
-		<button on:click={handleClick}>
+		<button type="button" on:click={handleClick}>
 			<Icon color="black">
 				<AudioIcon {playing} />
 			</Icon>

@@ -11,6 +11,8 @@
 		color: var(--dark);
 		font-size: var(--font-l);
 		font-weight: 700;
+		width: 1em;
+		height: 1em;
 	}
 </style>
 

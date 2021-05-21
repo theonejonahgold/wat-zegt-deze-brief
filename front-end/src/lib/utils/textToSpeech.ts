@@ -2,6 +2,7 @@ import { browser } from '$app/env'
 
 export const textToSpeech = (text: string, handleStop: () => void) => {
 	if (!browser) return
+
 	const utterance = new SpeechSynthesisUtterance(text)
 
 	utterance.addEventListener('error', handleStop)
