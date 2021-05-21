@@ -2,9 +2,6 @@
 	import type { Load } from '@sveltejs/kit'
 
 	export const load: Load = async ({ page, fetch }) => {
-		if (page.path === '/onboarding') return {}
-		if (!page.path.endsWith('/user') && !page.path.endsWith('/volunteer')) return {}
-
 		const step = +page.query.get('step') || 1
 		const res = await fetch(`${page.path}/${step}.json`)
 		const data: { content: InstructionsContent; amount: number } = await res.json()
@@ -27,16 +24,17 @@
 	export let content: InstructionsContent
 	export let amount: number
 	export let path: string
+
 	let hrefs: InstructionsHrefs
 	$: hrefs = {
-		previous: step === 1 ? '/onboarding' : `${path}?step=${+step - 1}`,
+		previous: step === 1 ? '/dashboard' : `${path}?step=${+step - 1}`,
 		next: `${path}?step=${+step + 1}`,
-		finish: `${path}/register`,
+		finish: '/dashboard',
 	}
 </script>
 
 {#if !content}
 	<slot />
 {:else}
-	<Instructions {hrefs} {step} {content} {amount} {path} />
+	<Instructions {hrefs} {step} {content} {amount} />
 {/if}
