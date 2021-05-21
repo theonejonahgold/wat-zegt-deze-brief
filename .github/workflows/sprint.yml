@@ -1,0 +1,17 @@
+name: Manage sprint
+
+on:
+  push:
+    branches: dev
+  schedule:
+    - cron: '0 6 * * 1-5'
+
+jobs:
+  start-sprint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Start sprint'
+        uses: theonejonahgold/milestone-sprint@v1.0.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          project_name: Project
