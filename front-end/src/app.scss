@@ -45,8 +45,10 @@
 	line-height: 1.5;
 }
 
+html,
 body,
 #svelte {
+	height: 100%;
 	min-height: 100vh;
 }
 
