@@ -1,7 +1,7 @@
 ---
 name: Feature
 about: General feature template
-title: "[FEATURE]"
+title: "[FEATURE]: "
 labels: enhancement
 assignees: ''
 
