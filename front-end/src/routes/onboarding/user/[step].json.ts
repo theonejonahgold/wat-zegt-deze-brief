@@ -1,7 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit'
-import type { OnboardingContent } from '$types'
+import type { InstructionsContent } from '$types'
 
-const userContent: OnboardingContent[] = [
+const userContent: InstructionsContent[] = [
 	{
 		text: 'Je maakt een foto van je brief',
 		image: '/images/onboarding-user-1.png',

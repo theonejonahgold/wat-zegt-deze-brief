@@ -2,11 +2,7 @@
 	"compilerOptions": {
 		"moduleResolution": "node",
 		"module": "es2020",
-		"lib": [
-			"es2020",
-			"dom.iterable",
-			"DOM"
-		],
+		"lib": ["es2020", "dom.iterable", "DOM"],
 		"target": "es2019",
 		"importsNotUsedAsValues": "error",
 		"isolatedModules": true,
@@ -20,33 +16,14 @@
 		"allowJs": true,
 		"checkJs": true,
 		"paths": {
-			"$atoms": [
-				"src/lib/components/atoms"
-			],
-			"$molecules": [
-				"src/lib/components/molecules"
-			],
-			"$organisms": [
-				"src/lib/components/organisms"
-			],
-			"$templates": [
-				"src/lib/components/templates"
-			],
-			"$icons": [
-				"src/lib/icons"
-			],
-			"$actions": [
-				"src/lib/actions"
-			],
-			"$utils": [
-				"src/lib/utils"
-			],
-			"$types": [
-				"src/lib/types"
-			],
-			"$config/*": [
-				"src/lib/config/*"
-			]
+			"$atoms": ["src/lib/components/atoms"],
+			"$molecules": ["src/lib/components/molecules"],
+			"$organisms": ["src/lib/components/organisms"],
+			"$templates": ["src/lib/components/templates"],
+			"$icons": ["src/lib/icons"],
+			"$actions": ["src/lib/actions"],
+			"$utils": ["src/lib/utils"],
+			"$types": ["src/lib/types"]
 		}
 	},
 	"include": [
