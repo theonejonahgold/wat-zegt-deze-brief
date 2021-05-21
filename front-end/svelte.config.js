@@ -12,7 +12,7 @@ const tsConfig = require('./tsconfig.json')
 const config = {
 	preprocess: preprocess({
 		postcss: {
-			plugins: [autoprefixer(), vhFix(), cssnano()],
+			plugins: [vhFix(), autoprefixer(), cssnano()],
 		},
 		defaults: {
 			script: 'typescript',
