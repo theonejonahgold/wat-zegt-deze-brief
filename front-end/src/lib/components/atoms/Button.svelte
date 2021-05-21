@@ -11,24 +11,23 @@
 		--button-shadow: drop-shadow(0px 3px 8px #0000002a);
 		--button-border-radius: 30px;
 		--letter-spacing: 0.3px;
-		--button-width: 18.375rem;
+		--button-width: 16.375rem;
 		--button-height: 3.313rem;
 	}
 
 	button {
-		display: block;
+		display: inline-block;
 		cursor: pointer;
 		color: var(--text-color);
 		font-size: var(--button-size);
-		margin: auto;
-		padding: 0;
+		margin: 0;
+		height: var(--button-height);
+		width: var(--button-width);
 		background: var(--button-background);
 		filter: var(--button-shadow);
 		border: none;
 		border-radius: var(--button-border-radius);
 		letter-spacing: var(--letter-spacing);
-		width: var(--button-width);
-		height: var(--button-height);
 	}
 </style>
 
