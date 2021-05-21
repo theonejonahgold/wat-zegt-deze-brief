@@ -23,12 +23,19 @@
 				type: 'email',
 				autofocus: true,
 				placeholder: 'voorbeeld@wat-zegt-deze-brief.nl',
+				required: true,
 			},
 			{
 				label: 'Wachtwoord',
 				name: 'password',
 				type: 'password',
 				placeholder: '**********',
+				required: true,
+			},
+			{
+				label: 'Naam (hoeft niet)',
+				name: 'name',
+				type: 'text',
 			},
 			{
 				name: 'role',
