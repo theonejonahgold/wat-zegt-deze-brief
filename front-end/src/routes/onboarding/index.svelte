@@ -2,25 +2,18 @@
 	import { Back, Help, SpokenText } from '$atoms'
 	import { ImageButton } from '$molecules'
 	import { VolunteerIcon, UserIcon } from '$icons'
+	import { Header } from '$templates'
 </script>
-
-<style lang="scss">
-	header {
-		display: flex;
-		justify-content: space-between;
-		margin: 0;
-	}
-</style>
 
 <svelte:head>
 	<title>Role</title>
 </svelte:head>
 
-<header>
-	<Back href="/" />
-	<SpokenText text="Waar kom je voor?" />
-	<Help />
-</header>
+<Header>
+	<Back slot="left" href="/" />
+	<SpokenText slot="middle" --align="center" text="Waar kom je voor?" />
+	<Help slot="right" />
+</Header>
 
 <main>
 	<ImageButton alt="A user" text="Ik heb hulp nodig met een brief" href="/onboarding/user">

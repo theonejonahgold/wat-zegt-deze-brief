@@ -1,46 +1,54 @@
 <script>
 	import { Help, SpokenText } from '$atoms'
 	import { ImageButton } from '$molecules'
-	import { VolunteerIcon, UserIcon } from '$icons'
+	import { LetterCard } from '$organisms'
+	import { UserIcon } from '$icons'
+	import { Header } from '$templates'
+	import type { Letter } from '$types'
+
+	const letters: Letter[] = [
+		{
+			id: 1,
+			time: 1619956234,
+			explained: false,
+			src: 'image',
+			alt: 'alt',
+		},
+		{
+			id: 2,
+			time: 1621511434,
+			explained: true,
+			src: 'image',
+			alt: 'alt',
+			name: 'Victor',
+		},
+		{
+			id: 3,
+			time: 1621864444,
+			explained: true,
+			src: 'image',
+			alt: 'alt',
+		},
+	]
+
+	const sortedLetters = letters.sort((a, b) => b.time - a.time)
 </script>
 
-<style lang="scss">
-	header {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		align-items: center;
-		margin: 0;
-
-		> :global {
-			:first-child {
-				justify-self: start;
-			}
-
-			:nth-child(2):not(:last-child),
-			:nth-last-child(2):first-child {
-				grid-column: 2;
-				justify-self: center;
-			}
-
-			:last-child {
-				justify-self: end;
-			}
-		}
-	}
-</style>
-
 <svelte:head>
-	<title>Role</title>
+	<title>Dashboard</title>
 </svelte:head>
 
-<header>
-	<SpokenText text="Home" />
-	<Help />
-</header>
+<Header>
+	<SpokenText --align="center" slot="middle" text="Home" />
+	<Help slot="right" />
+</Header>
 
 <main>
 	<ImageButton href="/dashboard/letter" text="Foto maken van je brief">
 		<UserIcon />
 	</ImageButton>
-	<ImageButton href="/dashboard/explanation" text="Uitleg"><VolunteerIcon /></ImageButton>
+	<h2>Brieven</h2>
+	{#each sortedLetters as letter}
+		<LetterCard {letter} />
+	{/each}
 </main>
