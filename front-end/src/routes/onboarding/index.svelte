@@ -1,24 +1,7 @@
 <script>
-	import { Back, Help, Button, SpokenText } from '$atoms'
+	import { Back, Help, SpokenText } from '$atoms'
 	import { ImageButton } from '$molecules'
 	import { VolunteerIcon, UserIcon } from '$icons'
-
-	let users = [
-		{
-			value: 'user',
-			alt: 'A user',
-			name: 'selection',
-			id: 'user',
-			text: 'Ik heb hulp nodig met een brief',
-		},
-		{
-			value: 'volunteer',
-			alt: 'A volunteer',
-			name: 'selection',
-			id: 'volunteer',
-			text: 'Hulp geven',
-		},
-	]
 </script>
 
 <style lang="scss">
@@ -26,22 +9,6 @@
 		display: flex;
 		justify-content: space-between;
 		margin: 0;
-	}
-
-	form {
-		display: block;
-		min-height: 100%;
-		width: 100%;
-
-		:global {
-			label ~ label {
-				margin-top: var(--space-m);
-			}
-
-			> button {
-				margin-top: var(--space-m);
-			}
-		}
 	}
 </style>
 
@@ -56,16 +23,10 @@
 </header>
 
 <main>
-	<form action="/onboarding/user" method="GET">
-		{#each users as user}
-			<ImageButton {...user}>
-				{#if user.value === 'volunteer'}
-					<VolunteerIcon />
-				{:else}
-					<UserIcon />
-				{/if}
-			</ImageButton>
-		{/each}
-		<Button bottom>Volgende</Button>
-	</form>
+	<ImageButton alt="A user" text="Ik heb hulp nodig met een brief" href="/onboarding/user">
+		<VolunteerIcon />
+	</ImageButton>
+	<ImageButton alt="A volunteer" text="Hulp geven" href="/onboarding/volunteer">
+		<UserIcon />
+	</ImageButton>
 </main>
