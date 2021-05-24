@@ -2,6 +2,7 @@
 	import type { InstructionsContent, InstructionsHrefs } from '$types'
 	import { Button, Image, Back, Help, SpokenText } from '$atoms'
 	import { Pagination } from '$molecules'
+	import Header from './Header.svelte'
 
 	export let step: number
 	export let content: InstructionsContent
@@ -10,24 +11,6 @@
 </script>
 
 <style>
-	header {
-		display: flex;
-		align-items: center;
-		margin-bottom: var(--space-m);
-
-		> :global {
-			:first-child {
-				flex-shrink: 0;
-				margin-right: var(--space-s);
-			}
-
-			:last-child {
-				flex-shrink: 0;
-				margin-left: var(--space-s);
-			}
-		}
-	}
-
 	main {
 		text-align: center;
 
@@ -37,13 +20,13 @@
 	}
 </style>
 
-<header>
-	<Back href={hrefs.previous} />
-	<Pagination selected={+step} {amount} />
-	<Help />
-</header>
+<Header>
+	<Back slot="left" href={hrefs.previous} />
+	<Pagination slot="middle" selected={+step} {amount} />
+	<Help slot="right" />
+</Header>
 <main>
-	<SpokenText text={content.text} />
+	<SpokenText --align="center" text={content.text} />
 	<Image src={content.image} alt={content.text} />
 	{#if step < amount}
 		<Button href={hrefs.next}>Volgende</Button>
