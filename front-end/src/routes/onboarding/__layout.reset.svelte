@@ -20,6 +20,7 @@
 </script>
 
 <script>
+	import { Button } from '$atoms'
 	import { Instructions } from '$templates'
 	import type { InstructionsContent, InstructionsHrefs } from '$types'
 
@@ -39,4 +40,5 @@
 	<slot />
 {:else}
 	<Instructions {hrefs} {step} {content} {amount} {path} />
+	<Button href={hrefs.finish}>Sla uitleg over</Button>
 {/if}
