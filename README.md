@@ -2,8 +2,12 @@
 
 # Index
 
+- [Week[1]](#week1)
+  - [Coaching session](#coaching-session)
 - [Week[0]](#week0)
+  - [Coaching session](#coaching-session)
   - [Feedback session](#feedback-session)
+  - [Retrospective](#restrospective)
 - [Debriefing](#debriefing)
   - [Problem Statement and Design Challenge](#problem-statement-and-design-challenge)
   - [Client Description](#client-description)
@@ -14,7 +18,26 @@
   - [Deliverables](#deliverables)
 - [User scenarios](#user-scenarios)
 
+# Week[1]
+
+## Coaching session
+
+- Detecting languages through the OS. Suggest languages based of country of origin of OS language.
+- Don't use flags with languages.
+- Feedback Tessa about TTS vs Spoken Audio for spoken text paragraphs.
+- Margins between image buttons is confusing.
+- Images used with the buttons may be too stereotypical.
+- Some text content is unclear, may need some revising.
+- For testing: List of contacts from Tessa, classmates who know people, student groups, Refugee volunteering, DUO, Community houses, BIKO as points of contact for the target audiences.
+
 # Week[0]
+
+## Coaching session
+
+- Testing is important, make time for it.
+- Initial planning structure is very impressive, keep it up!
+- Don't spend too much time thinking about the tools you use, but spend that time thinking about the features you create.
+- Discussed learning goals were well-formulated, don't forget to write them down.
 
 ## Feedback session
 
