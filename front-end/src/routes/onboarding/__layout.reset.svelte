@@ -5,7 +5,8 @@
 		if (page.path === '/onboarding') return {}
 		if (!page.path.endsWith('/user') && !page.path.endsWith('/volunteer')) return {}
 
-		const step = +page.query.get('step') || 1
+		const step = +page.query.get('step')
+		if (!step) return {}
 		const res = await fetch(`${page.path}/${step}.json`)
 		const data: { content: InstructionsContent; amount: number } = await res.json()
 

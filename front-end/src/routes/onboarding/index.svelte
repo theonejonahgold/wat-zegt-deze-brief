@@ -16,7 +16,7 @@
 </Header>
 
 <main>
-	<ImageButton alt="A user" text="Ik heb hulp nodig met een brief" href="/onboarding/user">
+	<ImageButton alt="A user" text="Ik heb hulp nodig met een brief" href="/onboarding/user?step=1">
 		<VolunteerIcon />
 	</ImageButton>
 	<ImageButton alt="A volunteer" text="Hulp geven" href="/onboarding/volunteer">
