@@ -2,7 +2,7 @@
 name: Design bug
 about: Bug template for design bugs
 title: "[DESIGN BUG]: "
-labels: bug
+labels: bug, fe
 assignees: ''
 
 ---
