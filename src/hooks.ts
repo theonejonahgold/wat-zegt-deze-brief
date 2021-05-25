@@ -14,9 +14,13 @@ export const handle: Handle<Locals> = async ({ render, request }) => {
 			maxAge: 60 * 60 * 8,
 			path: '/',
 			sameSite: 'lax',
-			secure: !import.meta.env.DEV,
 		})
-
+	else if (cookies['sb:token'] && !session)
+		response.headers['Set-Cookie'] = cookie.serialize('sb:token', '', {
+			maxAge: 0,
+			path: '/',
+			sameSite: 'lax',
+		})
 	return response
 }
 
