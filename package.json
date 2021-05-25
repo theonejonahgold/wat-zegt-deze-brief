@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"prepare": "husky install",
-		"generate-types": "npx openapi-typescript https://bmghlnztrbppacnnjoev.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDkwMjQxNCwiZXhwIjoxOTM2NDc4NDE0fQ.Je1GyB1byGiA2fOqvEB09FAHcK5byAGvWr9xgDhG8SQ --output src/lib/types/supabase.ts",
+		"generate-types": "openapi-typescript https://bmghlnztrbppacnnjoev.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDkwMjQxNCwiZXhwIjoxOTM2NDc4NDE0fQ.Je1GyB1byGiA2fOqvEB09FAHcK5byAGvWr9xgDhG8SQ --output src/lib/types/supabase.ts",
 		"predev": "npm run generate-types",
 		"dev": "svelte-kit dev",
 		"prebuild": "npm run generate-types",
@@ -29,23 +29,24 @@
 		"svelte": "^3.38.2"
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^12.1.4",
+		"@commitlint/config-conventional": "^12.1.4",
 		"@supabase/supabase-js": "^1.11.15",
 		"@sveltejs/adapter-node": "next",
 		"@types/cookie": "^0.4.0",
 		"autoprefixer": "^10.2.5",
 		"cssnano": "^5.0.3",
+		"husky": "^6.0.0",
+		"lint-staged": "^11.0.0",
+		"openapi-typescript": "^3.2.4",
 		"postcss-100vh-fix": "^1.0.2",
+		"postinstall-postinstall": "^2.1.0",
+		"prettier": "^2.3.0",
+		"prettier-plugin-svelte": "^2.3.0",
 		"sass": "^1.32.13",
 		"svelte-preprocess": "^4.7.3",
 		"tslib": "^2.2.0",
-		"typescript": "^4.2.4",
-		"@commitlint/cli": "^12.1.4",
-		"@commitlint/config-conventional": "^12.1.4",
-		"husky": "^6.0.0",
-		"lint-staged": "^11.0.0",
-		"postinstall-postinstall": "^2.1.0",
-		"prettier": "^2.3.0",
-		"prettier-plugin-svelte": "^2.3.0"
+		"typescript": "^4.2.4"
 	},
 	"lint-staged": {
 		"*.{js,css,md,svelte}": "prettier --plugin-search-dir=. --write"
