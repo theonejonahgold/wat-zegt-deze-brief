@@ -14,7 +14,7 @@
 	<h2>Registreren</h2>
 	<Form
 		noEnhance
-		action="/auth/register"
+		action="/api/auth"
 		fields={[
 			{
 				label: 'E-mailadres',
