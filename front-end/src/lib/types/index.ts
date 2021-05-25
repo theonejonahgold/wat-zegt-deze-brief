@@ -2,10 +2,33 @@ export * from './content'
 export * from './form'
 
 export interface Letter {
-	id: number
-	time: number
-	explained: boolean
+	id: string
+	read: boolean
+	sender?: string
+	resolved: boolean
 	src: string
 	alt: string
-	name?: string
+	createdAt: number
+	explainer?: {
+		id: string
+		name?: string
+	}
+	chat: LetterChat
+}
+
+interface LetterChat {
+	id: string
+	participants: string[]
+	messages: ChatMessage[]
+}
+
+interface ChatMessage {
+	id: string
+	sender: {
+		id: string
+		name?: string
+	}
+	content: string
+	type: 'audio' | 'text'
+	date: number
 }

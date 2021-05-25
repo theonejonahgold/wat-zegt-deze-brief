@@ -8,47 +8,71 @@
 
 	const letters: Letter[] = [
 		{
-			id: 1,
-			time: 1619956234,
-			explained: false,
+			id: 'alksdjfklashdfkuahsdfiuas',
 			src: 'image',
 			alt: 'alt',
-		},
-		{
-			id: 2,
-			time: 1621511434,
-			explained: true,
-			src: 'image',
-			alt: 'alt',
-			name: 'Victor',
-		},
-		{
-			id: 3,
-			time: 1621864444,
-			explained: true,
-			src: 'image',
-			alt: 'alt',
+			resolved: false,
+			read: false,
+			sender: 'De Key',
+			createdAt: 1619956200,
+			explainer: {
+				id: 'alsdfhjalskdfaosfj',
+				name: 'Jonah',
+			},
+			chat: {
+				id: 'askldhfjlaksdfa',
+				participants: ['alsdfhjalskdfaosfj', 'alsdfjalkdfjas'],
+				messages: [
+					{
+						content: 'dingen',
+						type: 'text',
+						sender: {
+							id: 'alsdfhjalskdfaosfj',
+							name: 'Jonah',
+						},
+						id: 'ajsdhfhdgfidu',
+						date: 1619956234,
+					},
+				],
+			},
 		},
 	]
 
-	const sortedLetters = letters.sort((a, b) => b.time - a.time)
+	const sortedLetters = letters.sort((a, b) => b.chat.messages[0].date - a.chat.messages[0].date)
 </script>
+
+<style>
+	hr {
+		margin: var(--space-m) 0;
+	}
+	ul {
+		list-style: none;
+		padding: 0;
+		display: grid;
+		row-gap: var(--space-m);
+		margin-top: var(--space-xs);
+	}
+</style>
 
 <svelte:head>
 	<title>Dashboard</title>
 </svelte:head>
 
 <Header>
-	<SpokenText --align="center" slot="middle" text="Home" />
+	<SpokenText --align="center" slot="middle" text="Jouw brieven" />
 	<Help slot="right" />
 </Header>
-
 <main>
-	<ImageButton href="/dashboard/letter" text="Foto maken van je brief">
+	<ImageButton href="/dashboard/letter" text="Nieuwe brief opsturen">
 		<UserIcon />
 	</ImageButton>
-	<h2>Brieven</h2>
-	{#each sortedLetters as letter}
-		<LetterCard {letter} />
-	{/each}
+	<hr />
+	<section>
+		<SpokenText text="Brieven" --align="center" />
+		<ul>
+			{#each sortedLetters as letter}
+				<LetterCard {letter} />
+			{/each}
+		</ul>
+	</section>
 </main>

@@ -4,53 +4,107 @@
 	import type { Letter } from '$types'
 
 	export let letter: Letter
+
+	const time = letter.chat.messages.length ? letter.chat.messages[0].date : letter.createdAt
+
+	const chatMessage = letter.chat.messages[0]
 </script>
 
 <style lang="scss">
+	article {
+		position: relative;
+
+		&.unread:after {
+			content: '';
+			position: absolute;
+			top: calc(-0.6667 * var(--space-s));
+			right: calc(-0.6667 * var(--space-s));
+			width: var(--space-m);
+			height: var(--space-m);
+			background: var(--dark);
+			border-radius: 50%;
+		}
+	}
+
 	a {
 		text-decoration: none;
 		color: var(--primary);
-		display: flex;
-		margin: var(--space-m) 0;
-		padding: var(--space-s);
+		display: grid;
+		grid-template-columns: 2fr 3fr;
+		padding: var(--space-m);
+		gap: var(--space-s);
 		background-color: var(--secondary);
 		box-shadow: 0px 3px 4px var(--muted);
 		border-radius: 10px;
+		height: 10rem;
 
 		:global(img) {
 			object-fit: cover;
-			width: 6em;
-			height: 8em;
-			border-radius: 10px;
+			object-position: top;
+			height: 100%;
+			grid-column: 1;
+			border-radius: 5px;
 		}
 
 		div {
 			width: 100%;
-			margin-left: var(--space-s);
+			display: grid;
+			grid-template-rows: min-content auto;
+			gap: var(--space-s);
+
+			> header {
+				display: grid;
+				grid-template-rows: 1fr;
+				grid-template-columns: auto max-content;
+				column-gap: var(--space-s);
+			}
+
+			> p {
+				align-self: center;
+			}
 		}
 
-		h3 {
-			font-size: var(--font-s);
+		header {
+			p,
+			time {
+				font-size: var(--font-xs);
+			}
 		}
 
-		p:first-of-type {
+		time {
+			display: block;
 			text-align: right;
+			font-size: var(--font-xs);
+			color: var(--subtext);
+			grid-column: 2;
 		}
 	}
 </style>
 
-<a href="/letter/{letter.id}">
-	<Image src="/images/letter-4.png" alt={letter.alt} />
-	<div>
-		<p>{formatTimestamp(letter.time)}</p>
-		{#if letter.explained}
-			{#if letter.name}
-				<p>Je hebt uitleg ontvangen van {letter.name}.</p>
+<article class:unread={!letter.read}>
+	<a href="/letter/{letter.id}">
+		<Image src="/images/letter-4.png" alt={letter.alt} />
+		<div>
+			<header>
+				{#if letter.sender}
+					<p>Brief van {letter.sender}</p>
+				{:else}
+					<p>
+						Brief van {formatTimestamp(letter.createdAt)}
+					</p>
+				{/if}
+				<time datetime={new Date(time).toLocaleDateString('nl-NL')}>
+					{formatTimestamp(time)}
+				</time>
+			</header>
+			{#if !chatMessage}
+				<p>Je hebt nog geen uitleg ontvangen.</p>
 			{:else}
-				<p>Je hebt uitleg ontvangen van een anonieme gebruiker.</p>
+				<p>
+					{chatMessage.sender.name ? `${chatMessage.sender.name}:` : ''}
+					{chatMessage.type === 'audio' ? 'Spraakbericht' : chatMessage.content}
+				</p>
 			{/if}
-		{:else}
-			<p>Je hebt nog geen uitleg ontvangen voor deze brief.</p>
-		{/if}
-	</div>
-</a>
+		</div>
+	</a>
+</article>

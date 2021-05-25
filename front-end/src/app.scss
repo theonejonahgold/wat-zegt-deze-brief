@@ -10,12 +10,14 @@
 	--white: #fff;
 	--black: #000;
 	--grey: #d8d8d8;
+	--dark-grey: #989898;
 
 	--primary: var(--black);
 	--secondary: var(--white);
 	--dark: var(--purple);
 	--light: var(--blue);
 	--muted: var(--grey);
+	--subtext: var(--dark-grey);
 
 	--gradient-to-right: linear-gradient(to right, var(--light), var(--dark));
 	--gradient-to-left: linear-gradient(to left, var(--light), var(--dark));
