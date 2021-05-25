@@ -5,6 +5,7 @@
 - [Week[1]](#week1)
   - [Coaching session](#coaching-session)
 - [Week[0]](#week0)
+  - [Coaching session](#coaching-session)
   - [Feedback session](#feedback-session)
   - [Retrospective](#restrospective)
 - [Debriefing](#debriefing)
@@ -30,6 +31,13 @@
 - For testing: List of contacts from Tessa, classmates who know people, student groups, Refugee volunteering, DUO, Community houses, BIKO as points of contact for the target audiences.
 
 # Week[0]
+
+## Coaching session
+
+- Testing is important, make time for it.
+- Initial planning structure is very impressive, keep it up!
+- Don't spend too much time thinking about the tools you use, but spend that time thinking about the features you create.
+- Discussed learning goals were well-formulated, don't forget to write them down.
 
 ## Feedback session
 
