@@ -31,6 +31,10 @@
 		padding: 0;
 		margin-left: var(--space-xs);
 	}
+
+	p {
+		text-align: var(--align, initial);
+	}
 </style>
 
 {#if !js}

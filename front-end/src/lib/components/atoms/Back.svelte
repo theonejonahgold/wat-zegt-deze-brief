@@ -6,13 +6,17 @@
 
 <style>
 	a {
-		text-decoration: none;
-		line-height: 0.5;
-		color: var(--dark);
-		font-size: var(--font-l);
-		font-weight: 700;
-		width: 1em;
-		height: 1em;
+		display: block;
+		width: var(--space-l);
+		height: var(--space-l);
+
+		:global {
+			svg,
+			image {
+				height: 100%;
+				width: 100%;
+			}
+		}
 	}
 </style>
 
