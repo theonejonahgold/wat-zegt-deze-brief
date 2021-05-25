@@ -2,8 +2,11 @@
 
 # Index
 
+- [Week[1]](#week1)
+  - [Coaching session](#coaching-session)
 - [Week[0]](#week0)
   - [Feedback session](#feedback-session)
+  - [Retrospective](#restrospective)
 - [Debriefing](#debriefing)
   - [Problem Statement and Design Challenge](#problem-statement-and-design-challenge)
   - [Client Description](#client-description)
