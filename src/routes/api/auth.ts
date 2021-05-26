@@ -1,4 +1,4 @@
-import { register } from '$db/user'
+import { login, register } from '$db/user'
 import type { Locals } from '$types'
 import type { RequestHandler } from '@sveltejs/kit'
 
@@ -10,14 +10,8 @@ export const post: RequestHandler<Locals, FormData> = async ({ body }) => {
 	const authType = body.get('auth-type') as 'register' | 'login'
 
 	try {
-		if (authType === 'register') {
-			if (!role)
-				return {
-					status: 400,
-					body: 'Please provide a user role',
-				}
-			await register({ email, password, role, name })
-		}
+		if (authType === 'register') await register({ email, password, role, name })
+		if (authType === 'login') await login({ email, password })
 	} catch (err) {
 		return {
 			status: 400,
