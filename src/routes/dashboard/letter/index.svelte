@@ -29,7 +29,7 @@
 	$: hrefs = {
 		previous: step === 1 ? '/dashboard' : `${path}?step=${+step - 1}`,
 		next: `${path}?step=${+step + 1}`,
-		finish: '/dashboard/letter/form',
+		finish: '/api/letter',
 	}
 </script>
 
