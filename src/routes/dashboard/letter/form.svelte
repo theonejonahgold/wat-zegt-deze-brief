@@ -1,5 +1,11 @@
 <script>
 	import { Form } from '$organisms'
+	import { ImagePreview } from '$molecules'
+	import { setContext } from 'svelte'
+	import { writable } from 'svelte/store'
+
+	const pageStore = writable('')
+	setContext('previews', pageStore)
 </script>
 
 <main>
@@ -9,11 +15,17 @@
 		action="/api/letter"
 		fields={[
 			{
+				label: 'Organisatie',
+				name: 'organisation',
+				type: 'text',
+				autofocus: true,
+				required: true,
+			},
+			{
 				label: 'Foto brief',
 				name: 'page',
 				type: 'file',
 				autofocus: true,
-				placeholder: 'Nuon',
 				required: true,
 			},
 		]}
@@ -21,4 +33,7 @@
 	>
 		<svelte:fragment slot="submit">Stuur foto</svelte:fragment>
 	</Form>
+	{#if $pageStore}
+		<ImagePreview src={$pageStore} alt="Page preview" />
+	{/if}
 </main>
