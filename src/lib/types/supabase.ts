@@ -531,49 +531,11 @@ export interface paths {
       };
     };
   };
-  "/rpc/is_user": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            user_id: string;
-          };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
   "/rpc/handle_new_user": {
     post: {
       parameters: {
         body: {
           args: { [key: string]: any };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
-  "/rpc/get_letters_for_user": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            user_id: string;
-          };
         };
         header: {
           /** Preference */
@@ -613,25 +575,6 @@ export interface paths {
           args: {
             user_id: string;
             u_role: string;
-          };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
-  "/rpc/get_role_for_user": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            user_id: string;
           };
         };
         header: {
