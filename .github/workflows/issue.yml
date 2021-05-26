@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: theonejonahgold/issue-branch@v1
+      - uses: theonejonahgold/issue-branch@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name_pattern: iss#{number}
