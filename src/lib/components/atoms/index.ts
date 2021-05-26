@@ -1,3 +1,4 @@
+export { default as ImageInput } from './ImageInput.svelte'
 export { default as Back } from './Back.svelte'
 export { default as Button } from './Button.svelte'
 export { default as Help } from './Help.svelte'
