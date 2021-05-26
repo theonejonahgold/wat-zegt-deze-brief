@@ -8,6 +8,7 @@ export const handle: Handle<Locals> = async ({ render, request }) => {
 	const cookies = cookie.parse(request.headers.cookie || '')
 	const response = await render(request)
 	const session = client.auth.session()
+	request.locals.session = session
 
 	if (!cookies['sb:token'] && session)
 		response.headers['Set-Cookie'] = cookie.serialize('sb:token', session.access_token, {
