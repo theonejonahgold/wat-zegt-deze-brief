@@ -23,8 +23,6 @@ export interface paths {
           sender?: parameters["rowFilter.letters.sender"];
           /** The time the letter was created at */
           createdAt?: parameters["rowFilter.letters.createdAt"];
-          /** The pages of the letter */
-          pages?: parameters["rowFilter.letters.pages"];
           /** The volunteer explaining */
           volunteer_id?: parameters["rowFilter.letters.volunteer_id"];
           messages?: parameters["rowFilter.letters.messages"];
@@ -88,8 +86,6 @@ export interface paths {
           sender?: parameters["rowFilter.letters.sender"];
           /** The time the letter was created at */
           createdAt?: parameters["rowFilter.letters.createdAt"];
-          /** The pages of the letter */
-          pages?: parameters["rowFilter.letters.pages"];
           /** The volunteer explaining */
           volunteer_id?: parameters["rowFilter.letters.volunteer_id"];
           messages?: parameters["rowFilter.letters.messages"];
@@ -117,8 +113,6 @@ export interface paths {
           sender?: parameters["rowFilter.letters.sender"];
           /** The time the letter was created at */
           createdAt?: parameters["rowFilter.letters.createdAt"];
-          /** The pages of the letter */
-          pages?: parameters["rowFilter.letters.pages"];
           /** The volunteer explaining */
           volunteer_id?: parameters["rowFilter.letters.volunteer_id"];
           messages?: parameters["rowFilter.letters.messages"];
@@ -342,99 +336,6 @@ export interface paths {
       };
     };
   };
-  "/pages": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.pages.id"];
-          /** The number of the page */
-          number?: parameters["rowFilter.pages.number"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["pages"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** pages */
-          pages?: definitions["pages"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.pages.id"];
-          /** The number of the page */
-          number?: parameters["rowFilter.pages.number"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.pages.id"];
-          /** The number of the page */
-          number?: parameters["rowFilter.pages.number"];
-        };
-        body: {
-          /** pages */
-          pages?: definitions["pages"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
   "/roles": {
     get: {
       parameters: {
@@ -537,7 +438,7 @@ export interface paths {
         query: {
           id?: parameters["rowFilter.users.id"];
           /** Role of user */
-          role?: parameters["rowFilter.users.role"];
+          user_role?: parameters["rowFilter.users.user_role"];
           /** Optional name of user */
           name?: parameters["rowFilter.users.name"];
           /** Filtering Columns */
@@ -592,7 +493,7 @@ export interface paths {
         query: {
           id?: parameters["rowFilter.users.id"];
           /** Role of user */
-          role?: parameters["rowFilter.users.role"];
+          user_role?: parameters["rowFilter.users.user_role"];
           /** Optional name of user */
           name?: parameters["rowFilter.users.name"];
         };
@@ -611,7 +512,7 @@ export interface paths {
         query: {
           id?: parameters["rowFilter.users.id"];
           /** Role of user */
-          role?: parameters["rowFilter.users.role"];
+          user_role?: parameters["rowFilter.users.user_role"];
           /** Optional name of user */
           name?: parameters["rowFilter.users.name"];
         };
@@ -647,12 +548,13 @@ export interface paths {
       };
     };
   };
-  "/rpc/get_letters_for_user": {
+  "/rpc/is_in_letter": {
     post: {
       parameters: {
         body: {
           args: {
-            user_id: string;
+            uid: string;
+            obj_name: string;
           };
         };
         header: {
@@ -666,12 +568,13 @@ export interface paths {
       };
     };
   };
-  "/rpc/get_role_for_user": {
+  "/rpc/is_role": {
     post: {
       parameters: {
         body: {
           args: {
             user_id: string;
+            u_role: string;
           };
         };
         header: {
@@ -701,8 +604,6 @@ export interface definitions {
     sender?: string;
     /** The time the letter was created at */
     createdAt?: string;
-    /** The pages of the letter */
-    pages?: string;
     /**
      * The volunteer explaining
      *
@@ -760,16 +661,6 @@ export interface definitions {
      */
     letter_id: string;
   };
-  /** Letter pages */
-  pages: {
-    /**
-     * Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: string;
-    /** The number of the page */
-    number: number;
-  };
   /** All possible user roles */
   roles: {
     /**
@@ -795,7 +686,7 @@ export interface definitions {
      * Note:
      * This is a Foreign Key to `roles.id`.<fk table='roles' column='id'/>
      */
-    role: string;
+    user_role: string;
     /** Optional name of user */
     name?: string;
   };
@@ -831,8 +722,6 @@ export interface parameters {
   "rowFilter.letters.sender": string;
   /** The time the letter was created at */
   "rowFilter.letters.createdAt": string;
-  /** The pages of the letter */
-  "rowFilter.letters.pages": string;
   /** The volunteer explaining */
   "rowFilter.letters.volunteer_id": string;
   "rowFilter.letters.messages": string;
@@ -854,11 +743,6 @@ export interface parameters {
   "rowFilter.messages.date": string;
   /** The ID of the letter this message belongs to */
   "rowFilter.messages.letter_id": string;
-  /** pages */
-  "body.pages": definitions["pages"];
-  "rowFilter.pages.id": string;
-  /** The number of the page */
-  "rowFilter.pages.number": string;
   /** roles */
   "body.roles": definitions["roles"];
   /** Slug for role */
@@ -869,7 +753,7 @@ export interface parameters {
   "body.users": definitions["users"];
   "rowFilter.users.id": string;
   /** Role of user */
-  "rowFilter.users.role": string;
+  "rowFilter.users.user_role": string;
   /** Optional name of user */
   "rowFilter.users.name": string;
 }

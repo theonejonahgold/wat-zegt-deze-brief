@@ -1,5 +1,5 @@
 <script>
-	import { LanguagePicker } from '$molecules'
+	import { LanguagePicker } from '$organisms'
 </script>
 
 <LanguagePicker />
