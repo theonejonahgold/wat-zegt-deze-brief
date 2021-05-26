@@ -2,7 +2,6 @@ export * from './content'
 export * from './form'
 export * from './locals'
 export * from './supabase'
-export * from './session'
 
 export interface Letter {
 	id: string
