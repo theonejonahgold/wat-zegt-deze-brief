@@ -12,6 +12,429 @@ export interface paths {
       };
     };
   };
+  "/letters": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.letters.id"];
+          /** Showing if a letter is resolved */
+          resolved?: parameters["rowFilter.letters.resolved"];
+          /** The sender of the letter, defined by the user */
+          sender?: parameters["rowFilter.letters.sender"];
+          /** The time the letter was created at */
+          createdAt?: parameters["rowFilter.letters.createdAt"];
+          /** The pages of the letter */
+          pages?: parameters["rowFilter.letters.pages"];
+          /** The volunteer explaining */
+          volunteer_id?: parameters["rowFilter.letters.volunteer_id"];
+          messages?: parameters["rowFilter.letters.messages"];
+          /** The user who received and uploaded the letter */
+          user_id?: parameters["rowFilter.letters.user_id"];
+          status?: parameters["rowFilter.letters.status"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["letters"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** letters */
+          letters?: definitions["letters"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.letters.id"];
+          /** Showing if a letter is resolved */
+          resolved?: parameters["rowFilter.letters.resolved"];
+          /** The sender of the letter, defined by the user */
+          sender?: parameters["rowFilter.letters.sender"];
+          /** The time the letter was created at */
+          createdAt?: parameters["rowFilter.letters.createdAt"];
+          /** The pages of the letter */
+          pages?: parameters["rowFilter.letters.pages"];
+          /** The volunteer explaining */
+          volunteer_id?: parameters["rowFilter.letters.volunteer_id"];
+          messages?: parameters["rowFilter.letters.messages"];
+          /** The user who received and uploaded the letter */
+          user_id?: parameters["rowFilter.letters.user_id"];
+          status?: parameters["rowFilter.letters.status"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.letters.id"];
+          /** Showing if a letter is resolved */
+          resolved?: parameters["rowFilter.letters.resolved"];
+          /** The sender of the letter, defined by the user */
+          sender?: parameters["rowFilter.letters.sender"];
+          /** The time the letter was created at */
+          createdAt?: parameters["rowFilter.letters.createdAt"];
+          /** The pages of the letter */
+          pages?: parameters["rowFilter.letters.pages"];
+          /** The volunteer explaining */
+          volunteer_id?: parameters["rowFilter.letters.volunteer_id"];
+          messages?: parameters["rowFilter.letters.messages"];
+          /** The user who received and uploaded the letter */
+          user_id?: parameters["rowFilter.letters.user_id"];
+          status?: parameters["rowFilter.letters.status"];
+        };
+        body: {
+          /** letters */
+          letters?: definitions["letters"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/message-types": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.message-types.id"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["message-types"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** message-types */
+          "message-types"?: definitions["message-types"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.message-types.id"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.message-types.id"];
+        };
+        body: {
+          /** message-types */
+          "message-types"?: definitions["message-types"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/messages": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.messages.id"];
+          /** The sender of the message */
+          sender_id?: parameters["rowFilter.messages.sender_id"];
+          /** The content of the message */
+          content?: parameters["rowFilter.messages.content"];
+          /** The type of message sent */
+          type?: parameters["rowFilter.messages.type"];
+          date?: parameters["rowFilter.messages.date"];
+          /** The ID of the letter this message belongs to */
+          letter_id?: parameters["rowFilter.messages.letter_id"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["messages"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** messages */
+          messages?: definitions["messages"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.messages.id"];
+          /** The sender of the message */
+          sender_id?: parameters["rowFilter.messages.sender_id"];
+          /** The content of the message */
+          content?: parameters["rowFilter.messages.content"];
+          /** The type of message sent */
+          type?: parameters["rowFilter.messages.type"];
+          date?: parameters["rowFilter.messages.date"];
+          /** The ID of the letter this message belongs to */
+          letter_id?: parameters["rowFilter.messages.letter_id"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.messages.id"];
+          /** The sender of the message */
+          sender_id?: parameters["rowFilter.messages.sender_id"];
+          /** The content of the message */
+          content?: parameters["rowFilter.messages.content"];
+          /** The type of message sent */
+          type?: parameters["rowFilter.messages.type"];
+          date?: parameters["rowFilter.messages.date"];
+          /** The ID of the letter this message belongs to */
+          letter_id?: parameters["rowFilter.messages.letter_id"];
+        };
+        body: {
+          /** messages */
+          messages?: definitions["messages"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/pages": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.pages.id"];
+          /** The number of the page */
+          number?: parameters["rowFilter.pages.number"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["pages"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** pages */
+          pages?: definitions["pages"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.pages.id"];
+          /** The number of the page */
+          number?: parameters["rowFilter.pages.number"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.pages.id"];
+          /** The number of the page */
+          number?: parameters["rowFilter.pages.number"];
+        };
+        body: {
+          /** pages */
+          pages?: definitions["pages"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/roles": {
     get: {
       parameters: {
@@ -224,9 +647,129 @@ export interface paths {
       };
     };
   };
+  "/rpc/get_letters_for_user": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            user_id: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
+  "/rpc/get_role_for_user": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            user_id: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
 }
 
 export interface definitions {
+  /** Letters sent in by users with the "user" role */
+  letters: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+    /** Showing if a letter is resolved */
+    resolved?: boolean;
+    /** The sender of the letter, defined by the user */
+    sender?: string;
+    /** The time the letter was created at */
+    createdAt?: string;
+    /** The pages of the letter */
+    pages?: string;
+    /**
+     * The volunteer explaining
+     *
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    volunteer_id?: string;
+    messages?: string;
+    /**
+     * The user who received and uploaded the letter
+     *
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    user_id: string;
+    status: string;
+  };
+  /** The possible types of messages */
+  "message-types": {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+  };
+  /** Chat messages for letters */
+  messages: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+    /**
+     * The sender of the message
+     *
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    sender_id?: string;
+    /** The content of the message */
+    content: string;
+    /**
+     * The type of message sent
+     *
+     * Note:
+     * This is a Foreign Key to `message-types.id`.<fk table='message-types' column='id'/>
+     */
+    type: string;
+    date: string;
+    /**
+     * The ID of the letter this message belongs to
+     *
+     * Note:
+     * This is a Foreign Key to `letters.id`.<fk table='letters' column='id'/>
+     */
+    letter_id: string;
+  };
+  /** Letter pages */
+  pages: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+    /** The number of the page */
+    number: number;
+  };
   /** All possible user roles */
   roles: {
     /**
@@ -279,6 +822,43 @@ export interface parameters {
   offset: string;
   /** Limiting and Pagination */
   limit: string;
+  /** letters */
+  "body.letters": definitions["letters"];
+  "rowFilter.letters.id": string;
+  /** Showing if a letter is resolved */
+  "rowFilter.letters.resolved": string;
+  /** The sender of the letter, defined by the user */
+  "rowFilter.letters.sender": string;
+  /** The time the letter was created at */
+  "rowFilter.letters.createdAt": string;
+  /** The pages of the letter */
+  "rowFilter.letters.pages": string;
+  /** The volunteer explaining */
+  "rowFilter.letters.volunteer_id": string;
+  "rowFilter.letters.messages": string;
+  /** The user who received and uploaded the letter */
+  "rowFilter.letters.user_id": string;
+  "rowFilter.letters.status": string;
+  /** message-types */
+  "body.message-types": definitions["message-types"];
+  "rowFilter.message-types.id": string;
+  /** messages */
+  "body.messages": definitions["messages"];
+  "rowFilter.messages.id": string;
+  /** The sender of the message */
+  "rowFilter.messages.sender_id": string;
+  /** The content of the message */
+  "rowFilter.messages.content": string;
+  /** The type of message sent */
+  "rowFilter.messages.type": string;
+  "rowFilter.messages.date": string;
+  /** The ID of the letter this message belongs to */
+  "rowFilter.messages.letter_id": string;
+  /** pages */
+  "body.pages": definitions["pages"];
+  "rowFilter.pages.id": string;
+  /** The number of the page */
+  "rowFilter.pages.number": string;
   /** roles */
   "body.roles": definitions["roles"];
   /** Slug for role */
