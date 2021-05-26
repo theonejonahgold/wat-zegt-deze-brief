@@ -27,7 +27,7 @@ export const post: RequestHandler<{}, FormData> = ({ body, query, headers }) => 
 	return {
 		status: 303,
 		headers: {
-			location: `/test?query=${searchQuery}`,
+			location: `/onboarding/user/languages?query=${searchQuery}`,
 			'Set-Cookie': langCookie,
 		},
 	}

@@ -39,7 +39,7 @@
 
 <form on:submit|preventDefault>
 	<label>
-		Kies je taal
+		Selecteer de talen die je spreekt:
 		<input name="query" bind:value={filterValue} type="search" />
 	</label>
 	<button>Zoeken</button>
