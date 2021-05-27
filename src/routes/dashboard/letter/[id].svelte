@@ -54,7 +54,9 @@
 <!-- TODO: Make form progressively enhanced -->
 <Header>
 	<SpokenText --align="center" slot="middle" text="Upload pagina's" />
-	<Help slot="right" />
+	<a href="/dashboard/letter?id={letterId}">
+		<Help slot="right" />
+	</a>
 </Header>
 <main>
 	<form on:submit|preventDefault={submitHandler} action="/api/letter/page" method="POST">
