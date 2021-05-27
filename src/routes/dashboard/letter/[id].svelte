@@ -7,10 +7,6 @@
 
 		const letterId = page.params.id
 
-		const { signedURL } = await client.storage
-			.from('pages')
-			.createSignedUrl(`${letterId}/1.jpeg`, 60)
-
 		if (res.body.length ? !res.body[0] : !res.body)
 			return {
 				status: 303,
@@ -20,7 +16,6 @@
 		return {
 			props: {
 				letterId,
-				image: signedURL,
 			},
 		}
 	}
@@ -29,24 +24,70 @@
 <script>
 	import type { Load } from '@sveltejs/kit'
 	import { client } from '$config/supabase'
-	import { Help, SpokenText, ImageInput, Button } from '$atoms'
+	import { Help, SpokenText, ImageInput } from '$atoms'
 	import { Header } from '$templates'
-	import { goto } from '$app/navigation'
+	import { Carousel, PageList } from '$organisms'
+	import { onMount } from 'svelte'
+	import { v4 as uuid } from 'uuid'
 
 	export let letterId: string
-	export let image: string
 
-	async function submitHandler(e: Event & { currentTarget: HTMLFormElement }) {
-		const data = new FormData(e.currentTarget)
-		const image = data.get('page') as File
-		if (!image) return goto('/dashboard')
+	let pages: string[] = []
+	let selectedPage = 0
 
-		await Promise.all([
-			client.storage.from('public').upload(`${letterId}/image.${image.type.split('/')[1]}`, image),
-			client.storage.from('pages').upload(`${letterId}/1.${image.type.split('/')[1]}`, image),
-		])
+	onMount(() => {
+		client.storage
+			.from('pages')
+			.list(`${letterId}`)
+			.then(({ data }) =>
+				Promise.all(
+					data.map(page => client.storage.from('pages').download(`${letterId}/${page.name}`))
+				)
+			)
+			.then(results =>
+				Promise.all(
+					results.map(
+						({ data }) =>
+							new Promise<string>(resolve => {
+								const reader = new FileReader()
+								reader.readAsDataURL(data)
+								reader.addEventListener('load', e => {
+									resolve(e.target.result as string)
+								})
+							})
+					)
+				)
+			)
+			.then(images => {
+				pages = images
+			})
+	})
 
-		goto('/dashboard')
+	function pageSelectedHandler(e: CustomEvent<number>) {
+		selectedPage = e.detail
+	}
+
+	async function changeHandler(e: Event & { currentTarget: HTMLInputElement }) {
+		const image = e.currentTarget.files[0]
+		if (!image) return
+
+		const id = uuid()
+		const mime = image.type.split('/')[1]
+		await client.storage.from('pages').upload(`${letterId}/${id}.${mime}`, image)
+
+		setTimeout(() => {
+			client.storage
+				.from('pages')
+				.download(`${letterId}/${id}.${mime}`)
+				.then(({ data }) => {
+					const reader = new FileReader()
+					reader.readAsDataURL(data)
+					reader.addEventListener('load', e => {
+						pages.unshift(e.target.result as string)
+						pages = pages
+					})
+				})
+		}, 500)
 	}
 </script>
 
@@ -61,6 +102,13 @@
 			}
 		}
 	}
+
+	footer {
+		box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.16);
+		padding-top: var(--space-m);
+		width: 100%;
+		overflow-x: scroll;
+	}
 </style>
 
 <!-- TODO: Make form progressively enhanced -->
@@ -69,15 +117,16 @@
 	<Help slot="right" />
 </Header>
 <main>
-	<form
-		enctype="multipart/form-data"
-		on:submit|preventDefault={submitHandler}
-		action="/api/letter/page"
-		method="POST"
-	>
-		<ImageInput name="page" />
-		<input type="hidden" name="letter-id" value={letterId} />
-		<Button bottom>Foto opslaan</Button>
-	</form>
+	{#if pages.length}
+		<Carousel />
+	{:else}
+		<ImageInput on:change={changeHandler} name="page" />
+	{/if}
 </main>
-<footer />
+<footer>
+	<PageList bind:selected={selectedPage} on:page-select={pageSelectedHandler} {pages}>
+		{#if pages.length}
+			<ImageInput on:change={changeHandler} />
+		{/if}
+	</PageList>
+</footer>
