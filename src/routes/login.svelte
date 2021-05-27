@@ -1,7 +1,11 @@
 <script>
+	import { goto } from '$app/navigation'
+
 	import { Help, SpokenText } from '$atoms'
+	import { client } from '$config/supabase'
 	import { Form } from '$organisms'
 	import { Header } from '$templates'
+	import type { Session } from '@supabase/supabase-js'
 </script>
 
 <Header>
@@ -10,9 +14,12 @@
 </Header>
 <main>
 	<Form
-		noEnhance
 		method="POST"
 		action="/api/auth"
+		on:success={async e => {
+			await client.auth.setSession(e.detail.data.session.refresh_token)
+			goto('/dashboard')
+		}}
 		fields={[
 			{
 				name: 'email',
