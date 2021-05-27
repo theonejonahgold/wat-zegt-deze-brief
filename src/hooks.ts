@@ -32,6 +32,7 @@ export const handle: Handle = async ({ request, render }) => {
 					request.body[fieldname] = val
 				})
 				.on('finish', () => {
+					request.body['files'] = files
 					resolve(request.body)
 				})
 				.on('error', err => {
