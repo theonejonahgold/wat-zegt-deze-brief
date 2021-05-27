@@ -5,13 +5,24 @@
 			letter_id: page.params.id,
 		})
 
+		const letterId = page.params.id
+
+		const {
+			data: { signedURL },
+		} = await client.storage.from('pages').createSignedUrl(`${letterId}/1.jpeg`, 60)
+
 		if (res.body.length ? !res.body[0] : !res.body)
 			return {
 				status: 303,
 				redirect: '/dashboard',
 			}
 
-		return {}
+		return {
+			props: {
+				letterId,
+				image: signedURL,
+			},
+		}
 	}
 </script>
 
@@ -21,13 +32,14 @@
 	import { Help, SpokenText, ImageInput, Button } from '$atoms'
 	import { Header } from '$templates'
 	import { goto } from '$app/navigation'
-	import { page } from '$app/stores'
 
-	let letterId = $page.params.id
+	export let letterId: string
+	export let image: string
 
 	async function submitHandler(e: Event & { currentTarget: HTMLFormElement }) {
 		const data = new FormData(e.currentTarget)
 		const image = data.get('page') as File
+		if (!image) return goto('/dashboard')
 
 		await Promise.all([
 			client.storage.from('public').upload(`${letterId}/image.${image.type.split('/')[1]}`, image),
@@ -57,13 +69,8 @@
 	<Help slot="right" />
 </Header>
 <main>
-	<form
-		enctype="multipart/form-data"
-		on:submit|preventDefault={submitHandler}
-		action="/api/letter/page"
-		method="POST"
-	>
-		<ImageInput name="page" />
+	<form on:submit|preventDefault={submitHandler} action="/api/letter/page" method="POST">
+		<ImageInput selectedImage={image} name="page" />
 		<input type="hidden" name="letter-id" value={letterId} />
 		<Button bottom>Foto opslaan</Button>
 	</form>

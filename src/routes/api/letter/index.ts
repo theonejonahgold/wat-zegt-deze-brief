@@ -15,8 +15,6 @@ export const get: RequestHandler<Locals> = async () => {
 	const res = await client.from<definitions['letters']>('letters').insert({
 		id: uuid(),
 		user_id: client.auth.session().user.id,
-		status: 'draft',
-		resolved: false,
 	})
 
 	if (res.status !== 201)
