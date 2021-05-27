@@ -23,7 +23,7 @@ export const post: RequestHandler<
 
 	const filePath = `${uuid()}.${body.files.page.mimetype.split('/')[1]}`
 
-	// Thanks from johnuss and his commet at https://github.com/supabase/supabase/discussions/1002#discussioncomment-560098 for this piece of code
+	// Thanks from joshnuss and his commet at https://github.com/supabase/supabase/discussions/1002#discussioncomment-560098 for this piece of code
 	// @ts-expect-error: Isn't typed, but does work
 	const path = `${client.storage.url}/object/pages/${body['letter-id']}/${filePath}`
 	// @ts-expect-error: Isn't typed, but does work
