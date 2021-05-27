@@ -1,5 +1,19 @@
 <script>
 	export let name: string
+	export let selectedImage: string
+
+	let loading = false
+
+	function changeHandler(e: Event & { currentTarget: HTMLInputElement }) {
+		const image = e.currentTarget.files[0]
+		const reader = new FileReader()
+		reader.readAsDataURL(image)
+		loading = true
+		reader.addEventListener('load', e => {
+			selectedImage = e.target.result as string
+			loading = false
+		})
+	}
 </script>
 
 <style lang="scss">

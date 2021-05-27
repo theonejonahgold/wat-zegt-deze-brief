@@ -15,7 +15,8 @@ export const post: RequestHandler<Locals, FormData> = async ({ body, headers }) 
 
 	try {
 		let session: Session
-		if (authType === 'register') session = await register({ email, password, role, name, languages })
+		if (authType === 'register')
+			session = await register({ email, password, role, name, languages })
 		if (authType === 'login') session = (await login({ email, password })).session
 		if (headers.accept === 'application/json')
 			return {
