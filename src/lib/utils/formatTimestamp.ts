@@ -1,11 +1,16 @@
-export const formatTimestamp = (timestamp: number) => {
-	const current = new Date()
-	const date = new Date(timestamp * 1000)
-	const time = date.toLocaleTimeString('nl-NL').slice(0, -3)
-	const day = date.toLocaleDateString('nl-NL', { weekday: 'long' })
+import { addMinutes, isYesterday, isToday, differenceInCalendarDays } from 'date-fns'
 
-	if (date.toDateString() === current.toDateString()) return time
-	if (date.getDate() === current.getDate() - 1) return 'gisteren'
-	if (current.getDate() - date.getDate() < 7) return day
-	return date.toLocaleDateString().slice(0, -5)
+export const formatTimestamp = (timestamp: string) => {
+	const timeInCurrentTimezone = addMinutes(new Date(timestamp), new Date().getTimezoneOffset() * -1)
+	console.log(timeInCurrentTimezone)
+	const currentDate = new Date()
+	console.log(currentDate)
+	const time = timeInCurrentTimezone.toLocaleTimeString('nl-NL').slice(0, -3)
+	console.log(time)
+	const day = timeInCurrentTimezone.toLocaleDateString('nl-NL', { weekday: 'long' })
+	console.log(day)
+	if (isToday(timeInCurrentTimezone)) return time
+	if (isYesterday(timeInCurrentTimezone)) return 'gisteren'
+	if (differenceInCalendarDays(timeInCurrentTimezone, currentDate) < 7) return day
+	return timeInCurrentTimezone.toLocaleDateString('nl-NL').slice(0, -5)
 }
