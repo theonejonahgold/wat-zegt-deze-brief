@@ -1,14 +1,58 @@
+<script context="module">
+	export const load: Load = async () => {
+		const { data } = await client.from<definitions['letters']>('letters').select(`
+			id,
+			resolved,
+			sender,
+			createdAt,
+			volunteer:volunteer_id ( name ),
+			status,
+			messages (
+				sender:sender_id ( name ),
+				content,
+				type,
+				date
+			)
+		`)
+		const letters = (
+			await Promise.all(
+				data.map(letter =>
+					client.storage
+						.from('public')
+						.createSignedUrl(`${letter.id}.png`, 40)
+						.then(({ signedURL }) => ({
+							...letter,
+							image: signedURL,
+						}))
+				)
+			)
+		).sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+		return {
+			props: {
+				letters,
+			},
+		}
+	}
+</script>
+
 <script>
 	import { Help, SpokenText } from '$atoms'
-	import { ImageButton } from '$molecules'
+	import { client } from '$config/supabase'
 	import { UserIcon } from '$icons'
+	import { ImageButton } from '$molecules'
+	import { LetterCard } from '$organisms'
 	import { Header } from '$templates'
+	import type { definitions } from '$types'
+	import type { Load } from '@sveltejs/kit'
+
+	export let letters: definitions['letters'][]
 </script>
 
 <style>
 	hr {
 		margin: var(--space-m) 0;
 	}
+
 	ul {
 		list-style: none;
 		padding: 0;
@@ -33,6 +77,12 @@
 	<hr />
 	<section>
 		<SpokenText text="Brieven" --align="center" />
-		<ul />
+		<ul>
+			{#each letters as letter}
+				<li>
+					<LetterCard {letter} />
+				</li>
+			{/each}
+		</ul>
 	</section>
 </main>

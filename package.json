@@ -26,6 +26,7 @@
 	"dependencies": {
 		"@sveltejs/kit": "next",
 		"cookie": "^0.4.1",
+		"date-fns": "^2.21.3",
 		"svelte": "^3.38.2",
 		"uuid": "^8.3.2"
 	},
