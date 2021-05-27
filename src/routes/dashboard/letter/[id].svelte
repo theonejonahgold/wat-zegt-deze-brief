@@ -7,9 +7,9 @@
 
 		const letterId = page.params.id
 
-		const {
-			data: { signedURL },
-		} = await client.storage.from('pages').createSignedUrl(`${letterId}/1.jpeg`, 60)
+		const { signedURL } = await client.storage
+			.from('pages')
+			.createSignedUrl(`${letterId}/1.jpeg`, 60)
 
 		if (res.body.length ? !res.body[0] : !res.body)
 			return {
@@ -75,3 +75,4 @@
 		<Button bottom>Foto opslaan</Button>
 	</form>
 </main>
+<footer />
