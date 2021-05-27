@@ -14,7 +14,7 @@
 	<SpokenText --align="center" slot="middle" text="Welkom" />
 </Header>
 
-<Flex --height="calc(100% - 3em)">
+<Flex>
 	<SpokenText
 		text="Hier volgt een kleine uitleg van de app, zodat je gelijk aan de slag kunt gaan."
 	/>

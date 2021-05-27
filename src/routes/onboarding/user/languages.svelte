@@ -1,7 +1,7 @@
 <script>
 	import { Button, SpokenText, Back, Help } from '$atoms'
 	import { LanguagePicker } from '$organisms'
-	import { Header } from '$templates'
+	import { Flex, Header } from '$templates'
 </script>
 
 <Header>
@@ -9,7 +9,7 @@
 	<SpokenText --align="center" slot="middle" text="Talen" />
 	<Help slot="right" />
 </Header>
-<main>
+<Flex>
 	<LanguagePicker />
 	<Button href="/onboarding/user/register">Verder</Button>
-</main>
+</Flex>

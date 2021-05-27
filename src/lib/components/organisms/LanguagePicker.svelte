@@ -28,9 +28,20 @@
 
 	let filterValue = $page.query.get('query')
 	$: filteredLanguages =
-		filterValue?.length > 1 &&
-		languages.filter(lang => lang.name.toLowerCase().includes(filterValue))
+		filterValue?.length > 1
+			? languages
+					.filter(
+						lang =>
+							lang.name.toLowerCase().includes(filterValue) ||
+							chosenLanguagesArray.includes(lang.code)
+					)
+					.sort(
+						(a, b) =>
+							+chosenLanguagesArray.includes(a.code) - +chosenLanguagesArray.includes(b.code)
+					)
+			: languages.filter(lang => chosenLanguagesArray.includes(lang.code))
 	let chosenLanguages = new Set<string>(!!langCookies ? langCookies.split(',') : [])
+	$: chosenLanguagesArray = [...chosenLanguages]
 
 	const submitHandler = async (e: Event & { currentTarget: HTMLFormElement }) => {
 		const res = await fetch(e.currentTarget.action, {
@@ -84,25 +95,27 @@
 	}
 </style>
 
-<form on:submit|preventDefault>
-	<label>
-		Selecteer de talen die je spreekt:
-		<input name="query" bind:value={filterValue} type="search" />
-	</label>
-	{#if !js}
-		<Button>Zoeken</Button>
-	{/if}
-</form>
+<div>
+	<form on:submit|preventDefault>
+		<label>
+			Selecteer de talen die je spreekt:
+			<input name="query" bind:value={filterValue} type="search" />
+		</label>
+		{#if !js}
+			<Button>Zoeken</Button>
+		{/if}
+	</form>
 
-{#if filteredLanguages}
-	{#each filteredLanguages as lang}
-		<form
-			method="POST"
-			on:submit|preventDefault={submitHandler}
-			action="/api/languages?query={$page.query.get('query')}"
-		>
-			<input type="hidden" name="code" value={lang.code} />
-			<button class={chosenLanguages.has(lang.code) ? 'selected' : ''}>{lang.name}</button>
-		</form>
-	{/each}
-{/if}
+	{#if filteredLanguages}
+		{#each filteredLanguages as lang}
+			<form
+				method="POST"
+				on:submit|preventDefault={submitHandler}
+				action="/api/languages?query={$page.query.get('query')}"
+			>
+				<input type="hidden" name="code" value={lang.code} />
+				<button class={chosenLanguages.has(lang.code) ? 'selected' : ''}>{lang.name}</button>
+			</form>
+		{/each}
+	{/if}
+</div>

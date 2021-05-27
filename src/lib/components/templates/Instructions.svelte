@@ -12,13 +12,13 @@
 </script>
 
 <style>
-	:global(main) {
-		text-align: center;
+	:global(img) {
+		width: auto;
+		height: 14em;
+	}
 
-		:global(img) {
-			width: auto;
-			height: 14em;
-		}
+	div {
+		width: 100%;
 	}
 </style>
 
@@ -27,14 +27,16 @@
 	<Pagination slot="middle" selected={+step} {amount} />
 	<Help slot="right" />
 </Header>
-<Flex --height="calc(100% - 3em)">
+<Flex --textAlign="center">
 	<SpokenText --align="center" text={content.text} />
 	<Image src={content.image} alt={content.text} />
 	{#if step < amount}
 		<Button href={hrefs.next.path}>{hrefs.next.text}</Button>
 	{:else if step === amount}
-		{#each hrefs.finish as href}
-			<Button href={href.path}>{href.text}</Button>
-		{/each}
+		<div>
+			{#each hrefs.finish as href}
+				<Button href={href.path}>{href.text}</Button>
+			{/each}
+		</div>
 	{/if}
 </Flex>
