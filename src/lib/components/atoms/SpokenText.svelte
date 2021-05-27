@@ -28,8 +28,7 @@
 		background: none;
 		height: var(--space-m);
 		width: var(--space-m);
-		padding: 0;
-		margin-left: var(--space-xs);
+		padding: 0.4em 0 0;
 	}
 
 	p {

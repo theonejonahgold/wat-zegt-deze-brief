@@ -31,8 +31,13 @@
 	let hrefs: InstructionsHrefs
 	$: hrefs = {
 		previous: step === 1 ? '/onboarding' : `${path}?step=${+step - 1}`,
-		next: `${path}?step=${+step + 1}`,
-		finish: `${path}/register`,
+		next: { path: `${path}?step=${+step + 1}`, text: 'Volgende' },
+		finish: path?.endsWith('/user')
+			? [
+					{ path: `${path}/register`, text: 'Nee' },
+					{ path: `${path}/languages`, text: 'Ja' },
+			  ]
+			: [{ path: `${path}/register`, text: 'Begrepen!' }],
 	}
 </script>
 
