@@ -1,11 +1,5 @@
 <script context="module">
 	export const load: Load = async ({ page }) => {
-		if (!client.auth.session())
-			return {
-				status: 303,
-				redirect: '/login',
-			}
-
 		const res = await client.rpc('is_in_letter', {
 			uid: client.auth.session().user.id,
 			letter_id: page.params.id,
@@ -17,11 +11,7 @@
 				redirect: '/dashboard',
 			}
 
-		return {
-			props: {
-				letterId: page.params.id,
-			},
-		}
+		return {}
 	}
 </script>
 
@@ -31,15 +21,16 @@
 	import { Help, SpokenText, ImageInput, Button } from '$atoms'
 	import { Header } from '$templates'
 	import { goto } from '$app/navigation'
+	import { page } from '$app/stores'
 
-	export let letterId: string
+	let letterId = $page.params.id
 
 	async function submitHandler(e: Event & { currentTarget: HTMLFormElement }) {
 		const data = new FormData(e.currentTarget)
 		const image = data.get('page') as File
 
 		await Promise.all([
-			client.storage.from('public').upload(`${letterId}.${image.type.split('/')[1]}`, image),
+			client.storage.from('public').upload(`${letterId}/image.${image.type.split('/')[1]}`, image),
 			client.storage.from('pages').upload(`${letterId}/1.${image.type.split('/')[1]}`, image),
 		])
 
