@@ -28,8 +28,8 @@
 	let hrefs: InstructionsHrefs
 	$: hrefs = {
 		previous: step === 1 ? '/dashboard' : `${path}?step=${+step - 1}`,
-		next: `${path}?step=${+step + 1}`,
-		finish: '/api/letter',
+		next: { path: `${path}?step=${+step + 1}`, text: 'Volgende' },
+		finish: [{ path: '/api/letter', text: 'Begrepen!' }],
 	}
 </script>
 

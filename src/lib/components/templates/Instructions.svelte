@@ -29,8 +29,10 @@
 	<SpokenText --align="center" text={content.text} />
 	<Image src={content.image} alt={content.text} />
 	{#if step < amount}
-		<Button href={hrefs.next}>Volgende</Button>
+		<Button href={hrefs.next.path}>{hrefs.next.text}</Button>
 	{:else if step === amount}
-		<Button href={hrefs.finish}>Begrepen!</Button>
+		{#each hrefs.finish as href}
+			<Button href={href.path}>{href.text}</Button>
+		{/each}
 	{/if}
 </main>

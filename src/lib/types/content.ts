@@ -5,6 +5,6 @@ export interface InstructionsContent {
 
 export interface InstructionsHrefs {
 	previous: string
-	next: string
-	finish: string
+	next: { path: string; text: string }
+	finish: { path: string; text: string }[]
 }
