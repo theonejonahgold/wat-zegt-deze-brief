@@ -9,5 +9,7 @@
 	<SpokenText --align="center" slot="middle" text="Talen" />
 	<Help slot="right" />
 </Header>
-<LanguagePicker />
-<Button href="/onboarding/user/register">Verder</Button>
+<main>
+	<LanguagePicker />
+	<Button href="/onboarding/user/register">Verder</Button>
+</main>
