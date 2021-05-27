@@ -1,7 +1,7 @@
 <script>
 	export let name: string
 
-	let selectedImage: string
+	export let selectedImage: string
 	let loading = false
 
 	function changeHandler(e: Event & { currentTarget: HTMLInputElement }) {
