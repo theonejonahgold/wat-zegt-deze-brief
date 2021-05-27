@@ -7,6 +7,12 @@ import busboy from 'busboy'
 export const handle: Handle = async ({ request, render }) => {
 	// Gigantic thank you from vonadz and his comment at https://github.com/sveltejs/kit/issues/70#issuecomment-830799681
 	if (request.path === '/api/letter/page') {
+		if (!client.auth.session())
+			return {
+				status: 403,
+				body: 'Not allowed',
+				headers: {},
+			}
 		const files = {}
 		await new Promise((resolve, reject) => {
 			const bb = new busboy({
