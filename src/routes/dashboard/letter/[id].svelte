@@ -2,22 +2,18 @@
 	export const load: Load = async ({ page }) => {
 		if (!client.auth.session())
 			return {
+				status: 303,
 				redirect: '/login',
 			}
-		const {
-			body: [isUser],
-		} = await client.rpc('is_role', {
-			user_id: client.auth.session().user.id,
-			u_role: 'user',
-		})
 
 		const res = await client.rpc('is_in_letter', {
 			uid: client.auth.session().user.id,
 			letter_id: page.params.id,
 		})
 
-		if (!res.body[0])
+		if (res.body.length ? !res.body[0] : !res.body)
 			return {
+				status: 303,
 				redirect: '/dashboard',
 			}
 
