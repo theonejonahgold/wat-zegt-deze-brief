@@ -116,7 +116,9 @@
 <Header>
 	<Back href="/dashboard" slot="left" />
 	<SpokenText --align="center" slot="middle" text="Upload pagina's" />
-	<Help slot="right" />
+	<a href="/dashboard/letter?id={letterId}">
+		<Help slot="right" />
+	</a>
 </Header>
 <main>
 	{#if pages.length}
