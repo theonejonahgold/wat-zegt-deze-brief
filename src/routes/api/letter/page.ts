@@ -40,13 +40,16 @@ export const post: RequestHandler<
 		body: formData,
 	})
 
-	console.log(res)
-	const data = await res.json()
-
-	console.log(data)
+	if (!res.ok)
+		return {
+			status: res.status,
+			body: await res.json(),
+		}
 
 	return {
-		status: 200,
-		body: data.data?.Key,
+		status: 303,
+		headers: {
+			location: `/dashboard/letter/${body['letter-id']}`,
+		},
 	}
 }
