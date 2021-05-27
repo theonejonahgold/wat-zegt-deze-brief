@@ -531,25 +531,6 @@ export interface paths {
       };
     };
   };
-  "/rpc/is_user": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            user_id: string;
-          };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
   "/rpc/handle_new_user": {
     post: {
       parameters: {
@@ -567,32 +548,13 @@ export interface paths {
       };
     };
   };
-  "/rpc/get_letters_for_user": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            user_id: string;
-          };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
   "/rpc/is_in_letter": {
     post: {
       parameters: {
         body: {
           args: {
+            letter_id: string;
             uid: string;
-            obj_name: string;
           };
         };
         header: {
@@ -613,25 +575,6 @@ export interface paths {
           args: {
             user_id: string;
             u_role: string;
-          };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
-  "/rpc/get_role_for_user": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            user_id: string;
           };
         };
         header: {
