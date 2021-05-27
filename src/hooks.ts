@@ -5,6 +5,7 @@ import cookie from 'cookie'
 
 export const handle: Handle<Locals> = async ({ render, request }) => {
 	const cookies = cookie.parse(request.headers.cookie || '')
+	request.locals.cookies = cookies
 	const response = await render(request)
 	const session = client.auth.session()
 
@@ -29,3 +30,8 @@ export const handle: Handle<Locals> = async ({ render, request }) => {
 	}
 	return response
 }
+
+export const getSession: GetSession<Locals, AppSession> = async request => ({
+	session: request.locals.session,
+	cookies: request.locals.cookies,
+})
