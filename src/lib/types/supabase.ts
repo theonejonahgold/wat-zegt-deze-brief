@@ -441,6 +441,7 @@ export interface paths {
           user_role?: parameters["rowFilter.users.user_role"];
           /** Optional name of user */
           name?: parameters["rowFilter.users.name"];
+          languages?: parameters["rowFilter.users.languages"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -496,6 +497,7 @@ export interface paths {
           user_role?: parameters["rowFilter.users.user_role"];
           /** Optional name of user */
           name?: parameters["rowFilter.users.name"];
+          languages?: parameters["rowFilter.users.languages"];
         };
         header: {
           /** Preference */
@@ -515,6 +517,7 @@ export interface paths {
           user_role?: parameters["rowFilter.users.user_role"];
           /** Optional name of user */
           name?: parameters["rowFilter.users.name"];
+          languages?: parameters["rowFilter.users.languages"];
         };
         body: {
           /** users */
@@ -689,6 +692,7 @@ export interface definitions {
     user_role: string;
     /** Optional name of user */
     name?: string;
+    languages?: string;
   };
 }
 
@@ -756,6 +760,7 @@ export interface parameters {
   "rowFilter.users.user_role": string;
   /** Optional name of user */
   "rowFilter.users.name": string;
+  "rowFilter.users.languages": string;
 }
 
 export interface operations {}
