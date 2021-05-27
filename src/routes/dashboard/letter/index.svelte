@@ -30,7 +30,12 @@
 
 	let hrefs: InstructionsHrefs
 	$: hrefs = {
-		previous: step === 1 ? '/dashboard' : `${path}?step=${+step - 1}`,
+		previous:
+			step === 1
+				? letterId
+					? `/dashboard/letter/${letterId}`
+					: '/dashboard'
+				: `${path}?step=${+step - 1}`,
 		next: { path: `${path}?step=${+step + 1}`, text: 'Volgende' },
 		finish: letterId
 			? [{ path: `/dashboard/letter/${letterId}`, text: 'Begrepen!' }]
