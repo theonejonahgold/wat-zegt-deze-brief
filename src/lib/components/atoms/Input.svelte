@@ -16,4 +16,4 @@
 	}
 </style>
 
-<input {value} {name} {type} {...$$restProps} />
+<input on:change {value} {name} {type} {...$$restProps} />

@@ -5,9 +5,9 @@
 
 	export let letter: Letter
 
-	const time = letter.chat.messages.length ? letter.chat.messages[0].date : letter.createdAt
+	const time = letter.messages.length ? letter.messages[0].date : letter.createdAt
 
-	const chatMessage = letter.chat.messages[0]
+	const chatMessage = letter.messages[0]
 </script>
 
 <style lang="scss">
@@ -41,6 +41,7 @@
 		:global(img) {
 			object-fit: cover;
 			object-position: top;
+			min-height: 0;
 			height: 100%;
 			grid-column: 1;
 			border-radius: 5px;
@@ -81,9 +82,9 @@
 	}
 </style>
 
-<article class:unread={!letter.read}>
-	<a href="/letter/{letter.id}">
-		<Image src="/images/letter-4.png" alt={letter.alt} />
+<article>
+	<a href="/dashboard/letter/{letter.id}">
+		<Image src={letter.image} />
 		<div>
 			<header>
 				{#if letter.sender}

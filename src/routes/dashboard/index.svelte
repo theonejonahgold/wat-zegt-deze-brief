@@ -1,50 +1,58 @@
+<script context="module">
+	export const load: Load = async () => {
+		const { data } = await client.from<definitions['letters']>('letters').select(`
+			id,
+			resolved,
+			sender,
+			createdAt,
+			volunteer:volunteer_id ( name ),
+			status,
+			messages (
+				sender:sender_id ( name ),
+				content,
+				type,
+				date
+			)
+		`)
+		const letters = (
+			await Promise.all(
+				data.map(letter =>
+					client.storage
+						.from('public')
+						.createSignedUrl(`${letter.id}.png`, 40)
+						.then(({ signedURL }) => ({
+							...letter,
+							image: signedURL,
+						}))
+				)
+			)
+		).sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+		return {
+			props: {
+				letters,
+			},
+		}
+	}
+</script>
+
 <script>
 	import { Help, SpokenText } from '$atoms'
+	import { client } from '$config/supabase'
+	import { UserIcon } from '$icons'
 	import { ImageButton } from '$molecules'
 	import { LetterCard } from '$organisms'
-	import { UserIcon } from '$icons'
 	import { Header } from '$templates'
-	import type { Letter } from '$types'
+	import type { definitions } from '$types'
+	import type { Load } from '@sveltejs/kit'
 
-	const letters: Letter[] = [
-		{
-			id: 'alksdjfklashdfkuahsdfiuas',
-			src: 'image',
-			alt: 'alt',
-			resolved: false,
-			read: false,
-			sender: 'De Key',
-			createdAt: 1619956200,
-			explainer: {
-				id: 'alsdfhjalskdfaosfj',
-				name: 'Jonah',
-			},
-			chat: {
-				id: 'askldhfjlaksdfa',
-				participants: ['alsdfhjalskdfaosfj', 'alsdfjalkdfjas'],
-				messages: [
-					{
-						content: 'dingen',
-						type: 'text',
-						sender: {
-							id: 'alsdfhjalskdfaosfj',
-							name: 'Jonah',
-						},
-						id: 'ajsdhfhdgfidu',
-						date: 1619956234,
-					},
-				],
-			},
-		},
-	]
-
-	const sortedLetters = letters.sort((a, b) => b.chat.messages[0].date - a.chat.messages[0].date)
+	export let letters: definitions['letters'][]
 </script>
 
 <style>
 	hr {
 		margin: var(--space-m) 0;
 	}
+
 	ul {
 		list-style: none;
 		padding: 0;
@@ -70,8 +78,10 @@
 	<section>
 		<SpokenText text="Brieven" --align="center" />
 		<ul>
-			{#each sortedLetters as letter}
-				<LetterCard {letter} />
+			{#each letters as letter}
+				<li>
+					<LetterCard {letter} />
+				</li>
 			{/each}
 		</ul>
 	</section>
