@@ -24,6 +24,7 @@
 	},
 	"homepage": "https://github.com/theonejonahgold/wat-zegt-deze-brief#readme",
 	"dependencies": {
+		"@supabase/supabase-js": "^1.11.17",
 		"@sveltejs/kit": "next",
 		"cookie": "^0.4.1",
 		"svelte": "^3.38.2",
@@ -32,7 +33,6 @@
 	"devDependencies": {
 		"@commitlint/cli": "^12.1.4",
 		"@commitlint/config-conventional": "^12.1.4",
-		"@supabase/supabase-js": "^1.11.15",
 		"@sveltejs/adapter-node": "next",
 		"@types/cookie": "^0.4.0",
 		"autoprefixer": "^10.2.5",
