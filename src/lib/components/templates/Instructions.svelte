@@ -12,10 +12,15 @@
 
 <style>
 	main {
-		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		height: calc(100% - 3em);
 
 		:global(img) {
-			margin: var(--space-l) 0;
+			width: auto;
+			height: 14em;
 		}
 	}
 </style>
