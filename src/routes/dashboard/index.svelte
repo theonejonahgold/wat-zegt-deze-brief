@@ -33,10 +33,11 @@
 	import { ImageButton } from '$molecules'
 	import { LetterCard } from '$organisms'
 	import { Header } from '$templates'
-	import type { definitions } from '$types'
+	import type { Letter } from '$types'
+
 	import type { Load } from '@sveltejs/kit'
 
-	export let letters: definitions['letters'][]
+	export let letters: Letter[]
 </script>
 
 <style>
@@ -69,7 +70,7 @@
 	<section>
 		<SpokenText text="Brieven" --align="center" />
 		<ul>
-			{#each letters as letter}
+			{#each letters as letter (letter.id)}
 				<li>
 					<LetterCard {letter} />
 				</li>
