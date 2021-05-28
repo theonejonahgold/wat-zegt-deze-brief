@@ -48,6 +48,11 @@
 		position: relative;
 		z-index: -1;
 		margin: var(--space-s);
+		width: 100%;
+
+		:global(img) {
+			width: 100%;
+		}
 	}
 </style>
 

@@ -602,7 +602,7 @@ export interface definitions {
      */
     id: string;
     /** Showing if a letter is resolved */
-    resolved?: boolean;
+    resolved: boolean;
     /** The sender of the letter, defined by the user */
     sender?: string;
     /** The time the letter was created at */

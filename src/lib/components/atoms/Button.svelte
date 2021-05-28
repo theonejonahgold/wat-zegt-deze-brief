@@ -10,6 +10,7 @@
 		border-radius: var(--space-l);
 		color: var(--secondary);
 		padding: var(--space-m) 0;
+		margin-top: var(--space-m);
 		text-align: center;
 		font-size: var(--font-m);
 		text-decoration: none;
