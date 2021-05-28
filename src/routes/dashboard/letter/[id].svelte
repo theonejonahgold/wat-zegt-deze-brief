@@ -105,7 +105,7 @@
 	}
 
 	footer {
-		box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.16);
+		box-shadow: var(--bs-up);
 		padding-top: var(--space-m);
 		width: 100%;
 		overflow-x: scroll;

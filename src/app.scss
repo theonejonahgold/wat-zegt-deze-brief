@@ -24,6 +24,10 @@
 	--gradient-to-top: linear-gradient(to top, var(--light), var(--dark));
 	--gradient-to-bottom: linear-gradient(to bottom, var(--light), var(--dark));
 
+	--bs-key-ambient-light: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
+		0 3px 5px -1px rgba(0, 0, 0, 0.2);
+	--bs-up: 0 -1px 3px rgba(0, 0, 0, 0.16);
+
 	--border-radius: 0.75rem;
 
 	--font-family: 'Poppins', sans-serif;
