@@ -118,7 +118,7 @@
 </Header>
 <main>
 	{#if pages.length}
-		<Carousel />
+		<Carousel {pages} bind:selected={selectedPage} />
 	{:else}
 		<ImageInput on:change={changeHandler} name="page" />
 	{/if}
