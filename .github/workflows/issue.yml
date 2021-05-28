@@ -2,7 +2,7 @@ name: Manage issue-coupled branches
 
 on:
   issues:
-    types: [opened]
+    types: [milestoned]
   push:
     branches-ignore:
       - dev
