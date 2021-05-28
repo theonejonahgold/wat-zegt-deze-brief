@@ -15,7 +15,7 @@
 	section {
 		display: flex;
 		align-items: center;
-		height: 32rem;
+		height: 100%;
 	}
 
 	button {
