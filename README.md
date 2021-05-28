@@ -31,6 +31,72 @@
 - Some text content is unclear, may need some revising.
 - For testing: List of contacts from Tessa, classmates who know people, student groups, Refugee volunteering, DUO, Community houses, BIKO as points of contact for the target audiences.
 
+## Feedback session
+
+### Feedback from Tessa
+
+- Help button on upload page needs to stay consistent with other pages, only explain the page that the user is on.
+- Skip button on onboarding after first time seeing it.
+- Wording of buttons on index page is confusing.
+- Add register page back button.
+- Change the design of the search languages page.
+  - Tessa will send examples.
+- Slow down TTS speed, prefer certain voices over others.
+- Always use page 1 as the thumbnail for a page.
+- Apply design onto app.
+
+### Action points
+
+- Undo help button action on upload pages screen.
+- Add skip button to add letter onboarding after going through it once.
+- Change text in buttons on index.
+- Change speech synthesis voice and playback speed (maybe pitch if necessary).
+- Redesign app according to XD design.
+  - Font weights.
+  - Margins.
+  - Paddings.
+  - Button sizing.
+  - Colors.
+  - Layout spacing and alignment.
+- Redesign select languages page with design patterns supplied by Tessa.
+
+## Retrospective
+
+### What went well
+
+- Finished everything we could and wanted to do this week.
+- Good task delegation and time management.
+- Good workflow for seperating issues and pull requests.
+- Focussing on what is important.
+- Communication went very well.
+- Actively giving feedback to each other.
+- Clear scope of what needed to be done.
+
+### What could have gone better
+
+- Attention to detail in terms of the design.
+- Lack of breaks.
+- Not submitting new issues from things you stumble upon.
+- Reassessing task delegation throughout the week.
+- Delegate more challenging issues evenly.
+- Too much guidance through from peer to peer on issues.
+- Make sure the design of new features has been looked over and fixed before feedback sessions.
+- Stopping on time.
+- Stop working on an issue if you're stuck.
+- Not trying to fix an issue if it becomes overbearing.
+
+### What we take with us
+
+- More focus on the visual side of features.
+- Distribute tasks more evenly.
+  - Have something to do the entire week/put just enough pressure on yourself to take action.
+- Task delegation.
+- Less guidance on issues, instead ask for help.
+- Delegate challenging tasks more evenly.
+- Clear day schedule.
+  - Enough breaks.
+- Step back when you can't seem to fix an issue.
+
 # Week[0]
 
 ## Coaching session
