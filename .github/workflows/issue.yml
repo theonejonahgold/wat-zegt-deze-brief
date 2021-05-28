@@ -1,0 +1,19 @@
+name: Manage issue-coupled branches
+
+on:
+  issues:
+    types: [milestoned]
+  push:
+    branches-ignore:
+      - dev
+      - main
+
+jobs:
+  run-action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: theonejonahgold/issue-branch@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name_pattern: iss#{number}

@@ -2,6 +2,12 @@
 
 # Index
 
+- [Week[1]](#week1)
+  - [Coaching session](#coaching-session)
+- [Week[0]](#week0)
+  - [Coaching session](#coaching-session)
+  - [Feedback session](#feedback-session)
+  - [Retrospective](#restrospective)
 - [Debriefing](#debriefing)
   - [Problem Statement and Design Challenge](#problem-statement-and-design-challenge)
   - [Client Description](#client-description)
@@ -11,6 +17,96 @@
   - [Task delegation](#task-delegation)
   - [Deliverables](#deliverables)
 - [User scenarios](#user-scenarios)
+- [Sources](#sources)
+
+# Week[1]
+
+## Coaching session
+
+- Detecting languages through the OS. Suggest languages based of country of origin of OS language.
+- Don't use flags with languages.
+- Feedback Tessa about TTS vs Spoken Audio for spoken text paragraphs.
+- Margins between image buttons is confusing.
+- Images used with the buttons may be too stereotypical.
+- Some text content is unclear, may need some revising.
+- For testing: List of contacts from Tessa, classmates who know people, student groups, Refugee volunteering, DUO, Community houses, BIKO as points of contact for the target audiences.
+
+# Week[0]
+
+## Coaching session
+
+- Testing is important, make time for it.
+- Initial planning structure is very impressive, keep it up!
+- Don't spend too much time thinking about the tools you use, but spend that time thinking about the features you create.
+- Discussed learning goals were well-formulated, don't forget to write them down.
+
+## Feedback session
+
+### Feedback from Tessa
+
+- Selecting language on speech not viable
+  - Dialects and accents
+  - Not really necessary for volunteers
+  - Divide languages by country of origin with country flags as visual aid
+  - Search for spoken languages
+    - Autocomplete
+    - Add multiple languages
+    - Show country of origin with country flag
+- Language is a recommendation, not a rule
+  - Most volunteers will speak mostly/only Dutch anyway
+- Amount of pages to photograph is indeed unnecessary
+- Supplying the sender of the letter is a good idea
+  - Should be optional
+  - Might help with noticing urgency and quality of explanation
+- Volunteers should filter letters they receive on preferred languages
+  - Should not set them on their profile
+
+### Action points
+
+- Users
+  - Language selection
+    - Select languages by country
+    - Search for spoken languages
+  - Letter sending
+    - Ask if all pages have been photographed or if there are more
+    - Optionally add the sender of the letter
+
+## Retrospective
+
+### What went well
+
+- Collaboration went well
+- Setup of workflow
+- Task delegation
+
+### What could have gone better
+
+- Pushing of opinions
+- Stop trying to fix something after a certain point
+- Good enough is perfect
+- Estimating scope (too ambitious)
+- Defining scope
+- Seperation of issues and focus
+- Task updates
+- Eliminating distractions
+- Defining tasks/job stories
+
+### What we take with us
+
+- Test with the target audiences
+- Change job stories to descriptive issues
+- Make issues more easily self-contained
+- Create issues when you hit a road block on another
+  - Related issues
+- Update issues when you're working on them
+- Define a more conscise scope
+- Set roadblocks for overworking
+  - Breaks
+  - Stopping on time
+  - Work schedule: Stand-up & wrap-up
+- Keep up task delegation
+- Improve workflow
+- Keep asking for help
 
 # Debriefing
 
@@ -266,3 +362,8 @@ Low-literate people want their formal letters explained, so they know if action 
 - General knowledge of technology.
 - A phone with good camera quality for good legibility.
 - A well-lit environment to take clear pictures.
+
+## Sources
+
+- [vonadz code for injecting `busboy` in the SvelteKit `handle` hook](https://github.com/sveltejs/kit/issues/70#issuecomment-830799681)
+- [joshnuss for showing how to send files to supabase via fetch](https://github.com/supabase/supabase/discussions/1002#discussioncomment-560098)

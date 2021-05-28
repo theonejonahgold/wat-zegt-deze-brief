@@ -1,0 +1,132 @@
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+:root {
+	--purple: #978fff;
+	--blue: #80b6fe;
+	--white: #fff;
+	--black: #000;
+	--grey: #d8d8d8;
+	--dark-grey: #989898;
+
+	--primary: var(--black);
+	--secondary: var(--white);
+	--dark: var(--purple);
+	--light: var(--blue);
+	--muted: var(--grey);
+	--subtext: var(--dark-grey);
+
+	--gradient-to-right: linear-gradient(to right, var(--light), var(--dark));
+	--gradient-to-left: linear-gradient(to left, var(--light), var(--dark));
+	--gradient-to-top: linear-gradient(to top, var(--light), var(--dark));
+	--gradient-to-bottom: linear-gradient(to bottom, var(--light), var(--dark));
+
+	--bs-key-ambient-light: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
+		0 3px 5px -1px rgba(0, 0, 0, 0.2);
+	--bs-up: 0 -1px 3px rgba(0, 0, 0, 0.16);
+
+	--border-radius: 0.75rem;
+
+	--font-family: 'Poppins', sans-serif;
+
+	--base: 1rem;
+
+	--font-xs: calc(var(--font-s) * 0.75);
+	--font-s: var(--base);
+	--font-m: calc(var(--font-s) * 1.5);
+	--font-l: calc(var(--font-s) * 2);
+	--font-xl: calc(var(--font-s) * 2.5);
+
+	--space-xs: calc(var(--space-m) / 4);
+	--space-s: calc(var(--space-m) / 2);
+	--space-m: var(--base);
+	--space-l: calc(var(--space-m) * 2);
+	--space-xl: calc(var(--space-m) * 4);
+
+	color: var(--primary);
+	font-family: var(--font-family);
+	line-height: 1.5;
+}
+
+html,
+body,
+#svelte {
+	height: 100%;
+	min-height: 100vh;
+}
+
+body {
+	margin: 0;
+}
+
+#svelte {
+	display: grid;
+	grid-template-rows: min-content auto min-content;
+}
+
+#svelte > {
+	header,
+	main,
+	footer {
+		padding: var(--space-m);
+	}
+
+	header,
+	main:first-child {
+		grid-row-start: 1;
+	}
+
+	main:nth-child(2) {
+		grid-row-start: 2;
+	}
+
+	main:first-child:nth-last-child(3) {
+		grid-row-end: 3;
+	}
+
+	main:nth-last-child(2) {
+		grid-row-end: 4;
+	}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	line-height: 1.125;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+	margin: 0;
+}
+
+h1,
+h2,
+h3 {
+	font-weight: bold;
+}
+
+h1 {
+	font-size: var(--font-xl);
+}
+
+h2 {
+	font-size: var(--font-l);
+}
+
+h3 {
+	font-size: var(--font-m);
+}
