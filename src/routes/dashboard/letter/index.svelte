@@ -36,7 +36,10 @@
 					? `/dashboard/letter/${letterId}`
 					: '/dashboard'
 				: `${path}?step=${+step - 1}`,
-		next: { path: `${path}?step=${+step + 1}`, text: 'Volgende' },
+		next: {
+			path: `${path}?step=${+step + 1}${letterId ? `&id=${letterId}` : ''}`,
+			text: 'Volgende',
+		},
 		finish: letterId
 			? [{ path: `/dashboard/letter/${letterId}`, text: 'Begrepen!' }]
 			: [{ path: '/api/letter', text: 'Begrepen!' }],
