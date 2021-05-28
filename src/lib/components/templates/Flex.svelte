@@ -4,7 +4,6 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
-		height: var(--height, calc(100% - 4em));
 		width: inherit;
 		padding: 0 var(--space-m) var(--space-m);
 		text-align: var(--textAlign, initial);

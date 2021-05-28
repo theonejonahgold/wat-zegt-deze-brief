@@ -1,5 +1,11 @@
+<script>
+	export let href: string = ''
+</script>
+
 <style>
-	button {
+	button,
+	a {
+		text-decoration: none;
 		appearance: none;
 		display: block;
 		background: var(--secondary);
@@ -15,6 +21,14 @@
 		border: 1px solid var(--dark);
 		border-radius: 50%;
 	}
+
+	a {
+		line-height: 1.3em;
+	}
 </style>
 
-<button aria-label="Leg dit scherm uit">?</button>
+{#if !href}
+	<button on:click aria-label="Leg dit scherm uit">?</button>
+{:else}
+	<a on:click {href} aria-label="Leg dit scherm uit">?</a>
+{/if}

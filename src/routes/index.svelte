@@ -8,7 +8,7 @@
 	<title>Home</title>
 </svelte:head>
 
-<Flex --height="100vh">
+<Flex>
 	<Oval />
 	<Title>Hallo!</Title>
 	<SpokenText text="Dit is de app die helpt met het uitleggen van brieven" />
