@@ -17,6 +17,7 @@
   - [Task delegation](#task-delegation)
   - [Deliverables](#deliverables)
 - [User scenarios](#user-scenarios)
+- [Sources](#sources)
 
 # Week[1]
 
@@ -361,3 +362,8 @@ Low-literate people want their formal letters explained, so they know if action 
 - General knowledge of technology.
 - A phone with good camera quality for good legibility.
 - A well-lit environment to take clear pictures.
+
+## Sources
+
+- [vonadz code for injecting `busboy` in the SvelteKit `handle` hook](https://github.com/sveltejs/kit/issues/70#issuecomment-830799681)
+- [joshnuss for showing how to send files to supabase via fetch](https://github.com/supabase/supabase/discussions/1002#discussioncomment-560098)

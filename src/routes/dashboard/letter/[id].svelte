@@ -57,7 +57,12 @@
 	<Help slot="right" />
 </Header>
 <main>
-	<form on:submit|preventDefault={submitHandler} action="/api/letter/page" method="POST">
+	<form
+		enctype="multipart/form-data"
+		on:submit|preventDefault={submitHandler}
+		action="/api/letter/page"
+		method="POST"
+	>
 		<ImageInput name="page" />
 		<input type="hidden" name="letter-id" value={letterId} />
 		<Button bottom>Foto opslaan</Button>
