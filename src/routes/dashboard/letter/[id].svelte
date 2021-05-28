@@ -24,7 +24,7 @@
 <script>
 	import type { Load } from '@sveltejs/kit'
 	import { client } from '$config/supabase'
-	import { Help, SpokenText, ImageInput } from '$atoms'
+	import { Help, SpokenText, ImageInput, Back } from '$atoms'
 	import { Header } from '$templates'
 	import { Carousel, PageList } from '$organisms'
 	import { onMount } from 'svelte'
@@ -85,6 +85,7 @@
 					reader.addEventListener('load', e => {
 						pages.unshift(e.target.result as string)
 						pages = pages
+						selectedPage = 0
 					})
 				})
 		}, 500)
@@ -113,6 +114,7 @@
 
 <!-- TODO: Make form progressively enhanced -->
 <Header>
+	<Back href="/dashboard" slot="left" />
 	<SpokenText --align="center" slot="middle" text="Upload pagina's" />
 	<Help slot="right" />
 </Header>
