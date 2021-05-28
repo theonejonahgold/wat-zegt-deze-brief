@@ -16,13 +16,14 @@
 		display: flex;
 		align-items: center;
 		height: 100%;
+		position: relative;
 	}
 
 	button {
 		border: none;
-		background-color: #e0e0e0;
+		background: none;
 		opacity: 0.8;
-		padding: 0.8rem;
+		padding: var(--space-s);
 		width: 3rem;
 		height: 3rem;
 		cursor: pointer;
@@ -32,15 +33,15 @@
 
 	#next {
 		transform: rotate(180deg);
-		right: 24px;
+		right: var(--space-s);
 	}
 
 	#previous {
-		left: 24px;
+		left: var(--space-s);
 	}
 
 	button:hover {
-		background-color: #bdbdbd;
+		background-color: var(--grey);
 	}
 
 	div {
