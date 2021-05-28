@@ -1,4 +1,6 @@
 <script>
+	import { goto } from '$app/navigation'
+	import { client } from '$config/supabase'
 	import { Form } from '$organisms'
 
 	export let role: 'user' | 'volunteer'
@@ -13,8 +15,11 @@
 <main>
 	<h2>Registreren</h2>
 	<Form
-		noEnhance
 		action="/api/auth"
+		on:success={async e => {
+			await client.auth.setSession(e.detail.data.session.refresh_token)
+			goto('/dashboard')
+		}}
 		fields={[
 			{
 				label: 'E-mailadres',

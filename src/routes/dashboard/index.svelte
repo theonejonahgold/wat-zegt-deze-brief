@@ -1,32 +1,22 @@
 <script context="module">
 	export const load: Load = async () => {
-		const { data } = await client.from<definitions['letters']>('letters').select(`
-			id,
-			resolved,
-			sender,
-			createdAt,
-			volunteer:volunteer_id ( name ),
-			status,
-			messages (
-				sender:sender_id ( name ),
-				content,
-				type,
-				date
-			)
-		`)
-		const letters = (
-			await Promise.all(
-				data.map(letter =>
-					client.storage
-						.from('public')
-						.createSignedUrl(`${letter.id}.png`, 40)
-						.then(({ signedURL }) => ({
-							...letter,
-							image: signedURL,
-						}))
-				)
-			)
-		).sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+		const { data } = await listLetters()
+
+		const letters = data
+			? (
+					await Promise.all(
+						data?.map(letter =>
+							client.storage
+								.from('public')
+								.createSignedUrl(`${letter.id}/image.jpeg`, 40)
+								.then(({ signedURL }) => ({
+									...letter,
+									image: signedURL,
+								}))
+						)
+					)
+			  ).sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+			: []
 		return {
 			props: {
 				letters,
@@ -38,6 +28,7 @@
 <script>
 	import { Help, SpokenText } from '$atoms'
 	import { client } from '$config/supabase'
+	import { listLetters } from '$db/letter'
 	import { UserIcon } from '$icons'
 	import { ImageButton } from '$molecules'
 	import { LetterCard } from '$organisms'

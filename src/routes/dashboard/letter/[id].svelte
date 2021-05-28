@@ -5,36 +5,90 @@
 			letter_id: page.params.id,
 		})
 
+		const letterId = page.params.id
+
 		if (res.body.length ? !res.body[0] : !res.body)
 			return {
 				status: 303,
 				redirect: '/dashboard',
 			}
 
-		return {}
+		return {
+			props: {
+				letterId,
+			},
+		}
 	}
 </script>
 
 <script>
 	import type { Load } from '@sveltejs/kit'
 	import { client } from '$config/supabase'
-	import { Help, SpokenText, ImageInput, Button } from '$atoms'
+	import { Help, SpokenText, ImageInput, Back } from '$atoms'
 	import { Header } from '$templates'
-	import { goto } from '$app/navigation'
-	import { page } from '$app/stores'
+	import { Carousel, PageList } from '$organisms'
+	import { onMount } from 'svelte'
+	import { v4 as uuid } from 'uuid'
 
-	let letterId = $page.params.id
+	export let letterId: string
 
-	async function submitHandler(e: Event & { currentTarget: HTMLFormElement }) {
-		const data = new FormData(e.currentTarget)
-		const image = data.get('page') as File
+	let pages: string[] = []
+	let selectedPage = 0
 
-		await Promise.all([
-			client.storage.from('public').upload(`${letterId}/image.${image.type.split('/')[1]}`, image),
-			client.storage.from('pages').upload(`${letterId}/1.${image.type.split('/')[1]}`, image),
-		])
+	onMount(() => {
+		client.storage
+			.from('pages')
+			.list(`${letterId}`)
+			.then(({ data }) =>
+				Promise.all(
+					data.map(page => client.storage.from('pages').download(`${letterId}/${page.name}`))
+				)
+			)
+			.then(results =>
+				Promise.all(
+					results.map(
+						({ data }) =>
+							new Promise<string>(resolve => {
+								const reader = new FileReader()
+								reader.readAsDataURL(data)
+								reader.addEventListener('load', e => {
+									resolve(e.target.result as string)
+								})
+							})
+					)
+				)
+			)
+			.then(images => {
+				pages = images
+			})
+	})
 
-		goto('/dashboard')
+	function pageSelectedHandler(e: CustomEvent<number>) {
+		selectedPage = e.detail
+	}
+
+	async function changeHandler(e: Event & { currentTarget: HTMLInputElement }) {
+		const image = e.currentTarget.files[0]
+		if (!image) return
+
+		const id = uuid()
+		const mime = image.type.split('/')[1]
+		await client.storage.from('pages').upload(`${letterId}/${id}.${mime}`, image)
+
+		setTimeout(() => {
+			client.storage
+				.from('pages')
+				.download(`${letterId}/${id}.${mime}`)
+				.then(({ data }) => {
+					const reader = new FileReader()
+					reader.readAsDataURL(data)
+					reader.addEventListener('load', e => {
+						pages.unshift(e.target.result as string)
+						pages = pages
+						selectedPage = 0
+					})
+				})
+		}, 500)
 	}
 </script>
 
@@ -49,22 +103,32 @@
 			}
 		}
 	}
+
+	footer {
+		box-shadow: var(--bs-up);
+		padding-top: var(--space-m);
+		width: 100%;
+		overflow-x: scroll;
+	}
 </style>
 
 <!-- TODO: Make form progressively enhanced -->
 <Header>
+	<Back href="/dashboard" slot="left" />
 	<SpokenText --align="center" slot="middle" text="Upload pagina's" />
 	<Help slot="right" />
 </Header>
 <main>
-	<form
-		enctype="multipart/form-data"
-		on:submit|preventDefault={submitHandler}
-		action="/api/letter/page"
-		method="POST"
-	>
-		<ImageInput name="page" />
-		<input type="hidden" name="letter-id" value={letterId} />
-		<Button bottom>Foto opslaan</Button>
-	</form>
+	{#if pages.length}
+		<Carousel {pages} bind:selected={selectedPage} />
+	{:else}
+		<ImageInput on:change={changeHandler} name="page" />
+	{/if}
 </main>
+<footer>
+	<PageList bind:selected={selectedPage} on:page-select={pageSelectedHandler} {pages}>
+		{#if pages.length}
+			<ImageInput on:change={changeHandler} />
+		{/if}
+	</PageList>
+</footer>
