@@ -1,7 +1,6 @@
 <script context="module">
 	export const load: Load = async () => {
 		const { data } = await listLetters()
-		const role = await checkRole()
 
 		const letters = data
 			? (
@@ -21,7 +20,6 @@
 		return {
 			props: {
 				letters,
-				role,
 			},
 		}
 	}
@@ -33,7 +31,6 @@
 	import { listLetters } from '$db/letter'
 	import { UserDashboard, VolunteerDashboard } from '$templates'
 	import type { Letter } from '$types'
-	import { checkRole } from '$db/user'
 
 	export let letters: Letter[]
 	export let role: 'user' | 'volunteer'
