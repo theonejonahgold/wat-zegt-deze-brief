@@ -1,47 +1,50 @@
 <script context="module">
 	export const load: Load = async ({ page }) => {
-		const res = await client.rpc('is_in_letter', {
-			uid: client.auth.session().user.id,
-			letter_id: page.params.id,
+		const { data } = await client
+			.from<definitions['letters']>('letters')
+			.select()
+			.eq('id', page.params.id)
+			.limit(1)
+			.single()
+
+		const { body: isUserRole } = await client.rpc<boolean>('is_role', {
+			user_id: client.auth.session().user.id,
+			u_role: 'user',
 		})
-
-		const letterId = page.params.id
-
-		if (res.body.length ? !res.body[0] : !res.body)
-			return {
-				status: 303,
-				redirect: '/dashboard',
-			}
 
 		return {
 			props: {
-				letterId,
+				letter: data,
+				role: (isUserRole as unknown as boolean) ? 'user' : 'volunteer',
 			},
 		}
 	}
 </script>
 
-<script>
-	import type { Load } from '@sveltejs/kit'
+<script lang="typescript">
+	import { ImageInput } from '$atoms'
 	import { client } from '$config/supabase'
-	import { Help, SpokenText, ImageInput, Back } from '$atoms'
-	import { Header } from '$templates'
-	import { Carousel, PageList } from '$organisms'
+	import { CarouselPage } from '$templates'
+	import type { definitions, Letter } from '$types'
+	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
 	import { v4 as uuid } from 'uuid'
 
-	export let letterId: string
+	export let letter: Letter
+	export let role: 'user' | 'volunteer'
 
 	let pages: string[] = []
 	let selectedPage = 0
 
+	$: console.log(role)
+
 	onMount(() => {
 		client.storage
 			.from('pages')
-			.list(`${letterId}`)
+			.list(`${letter.id}`)
 			.then(({ data }) =>
 				Promise.all(
-					data.map(page => client.storage.from('pages').download(`${letterId}/${page.name}`))
+					data.map(page => client.storage.from('pages').download(`${letter.id}/${page.name}`))
 				)
 			)
 			.then(results =>
@@ -63,22 +66,18 @@
 			})
 	})
 
-	function pageSelectedHandler(e: CustomEvent<number>) {
-		selectedPage = e.detail
-	}
-
 	async function changeHandler(e: Event & { currentTarget: HTMLInputElement }) {
 		const image = e.currentTarget.files[0]
 		if (!image) return
 
 		const id = uuid()
 		const mime = image.type.split('/')[1]
-		await client.storage.from('pages').upload(`${letterId}/${id}.${mime}`, image)
+		await client.storage.from('pages').upload(`${letter.id}/${id}.${mime}`, image)
 
 		setTimeout(() => {
 			client.storage
 				.from('pages')
-				.download(`${letterId}/${id}.${mime}`)
+				.download(`${letter.id}/${id}.${mime}`)
 				.then(({ data }) => {
 					const reader = new FileReader()
 					reader.readAsDataURL(data)
@@ -92,43 +91,18 @@
 	}
 </script>
 
-<style lang="scss">
-	main {
-		:global {
-			label:nth-child(1) {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-			}
-		}
-	}
-
-	footer {
-		box-shadow: var(--bs-up);
-		padding-top: var(--space-m);
-		width: 100%;
-		overflow-x: scroll;
-	}
-</style>
-
 <!-- TODO: Make form progressively enhanced -->
-<Header>
-	<Back href="/dashboard" slot="left" />
-	<SpokenText --align="center" slot="middle" text="Upload pagina's" />
-	<Help href="/dashboard/letter?id={letterId}" slot="right" />
-</Header>
-<main>
-	{#if pages.length}
-		<Carousel {pages} bind:selected={selectedPage} />
-	{:else}
-		<ImageInput on:change={changeHandler} name="page" />
-	{/if}
-</main>
-<footer>
-	<PageList bind:selected={selectedPage} on:page-select={pageSelectedHandler} {pages}>
-		{#if pages.length}
-			<ImageInput on:change={changeHandler} />
-		{/if}
-	</PageList>
-</footer>
+{#if role === 'user'}
+	<CarouselPage bind:selectedPage bind:pages title="Upload pagina's" backLink="/dashboard">
+		<ImageInput slot="empty" on:change={changeHandler} name="page" />
+		<svelte:fragment slot="footer-item">
+			{#if pages.length}
+				<ImageInput on:change={changeHandler} name="page" />
+			{/if}
+		</svelte:fragment>
+	</CarouselPage>
+{:else}
+	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
+		<svelte:fragment slot="footer">Hier komt iets</svelte:fragment>
+	</CarouselPage>
+{/if}

@@ -15,9 +15,19 @@ export const post: RequestHandler<Locals, FormData> = async ({ body, headers }) 
 
 	try {
 		let session: Session
-		if (authType === 'register')
-			session = await register({ email, password, role, name, languages })
-		if (authType === 'login') session = (await login({ email, password })).session
+		switch (authType) {
+			case 'register':
+				session = await register({ email, password, role, name, languages })
+				break
+			case 'login':
+				session = await login({ email, password })
+				break
+			default:
+				return {
+					status: 400,
+					body: 'Auth type not supported (yet).',
+				}
+		}
 		if (headers.accept === 'application/json')
 			return {
 				status: 200,
@@ -25,6 +35,7 @@ export const post: RequestHandler<Locals, FormData> = async ({ body, headers }) 
 					session,
 				},
 			}
+
 		return {
 			status: 303,
 			headers: {

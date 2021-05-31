@@ -41,7 +41,7 @@
 			text: 'Volgende',
 		},
 		finish: letterId
-			? [{ path: `/dashboard/letter/${letterId}`, text: 'Begrepen!' }]
+			? [{ path: `/dashboard/letter/edit/${letterId}`, text: 'Begrepen!' }]
 			: [{ path: '/api/letter', text: 'Begrepen!' }],
 	}
 </script>
