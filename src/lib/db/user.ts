@@ -29,5 +29,6 @@ export async function register({
 }
 
 export async function login({ email, password }: { email: string; password: string }) {
-	return await client.auth.signIn({ email, password })
+	const { session } = await client.auth.signIn({ email, password })
+	return session
 }
