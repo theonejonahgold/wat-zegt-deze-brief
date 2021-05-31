@@ -1,6 +1,13 @@
 <script context="module">
 	export const load: Load = async () => {
 		const { data } = await listLetters()
+		const role = await checkRole()
+
+		if (!role)
+			return {
+				redirect: '/login',
+				status: 302,
+			}
 
 		const letters = data
 			? (
@@ -20,6 +27,7 @@
 		return {
 			props: {
 				letters,
+				role,
 			},
 		}
 	}
@@ -29,6 +37,7 @@
 	import type { Load } from '@sveltejs/kit'
 	import { client } from '$config/supabase'
 	import { listLetters } from '$db/letter'
+	import { checkRole } from '$db/user'
 	import { UserDashboard, VolunteerDashboard } from '$templates'
 	import type { Letter } from '$types'
 
