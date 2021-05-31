@@ -37,13 +37,17 @@
 </Header>
 <main>
 	{#if pages.length || !$$slots.empty}
-		<Carousel slot="main" {pages} bind:selected={selectedPage} />
+		<Carousel {pages} bind:selected={selectedPage} />
 	{:else}
 		<slot name="empty" />
 	{/if}
 </main>
 <footer>
-	<PageList bind:selected={selectedPage} {pages}>
-		<slot name="footer-item" />
-	</PageList>
+	{#if !$$slots.footer}
+		<PageList bind:selected={selectedPage} {pages}>
+			<slot name="footer-item" />
+		</PageList>
+	{:else}
+		<slot name="footer" />
+	{/if}
 </footer>

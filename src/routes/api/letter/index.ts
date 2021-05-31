@@ -8,12 +8,11 @@ export const get: RequestHandler<Locals> = async () => {
 		return {
 			status: 303,
 			headers: {
-				location: '/',
+				location: '/login',
 			},
 		}
 
 	const res = await client.from<definitions['letters']>('letters').insert({
-		id: uuid(),
 		user_id: client.auth.session().user.id,
 	})
 
