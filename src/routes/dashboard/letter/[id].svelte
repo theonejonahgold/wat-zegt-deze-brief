@@ -22,11 +22,10 @@
 </script>
 
 <script>
-	import type { Load } from '@sveltejs/kit'
+	import { ImageInput } from '$atoms'
 	import { client } from '$config/supabase'
-	import { Help, SpokenText, ImageInput, Back } from '$atoms'
-	import { Header } from '$templates'
-	import { Carousel, PageList } from '$organisms'
+	import { CarouselPage } from '$templates'
+	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
 	import { v4 as uuid } from 'uuid'
 
@@ -34,6 +33,8 @@
 
 	let pages: string[] = []
 	let selectedPage = 0
+
+	$: console.log(pages.length)
 
 	onMount(() => {
 		client.storage
@@ -63,10 +64,6 @@
 			})
 	})
 
-	function pageSelectedHandler(e: CustomEvent<number>) {
-		selectedPage = e.detail
-	}
-
 	async function changeHandler(e: Event & { currentTarget: HTMLInputElement }) {
 		const image = e.currentTarget.files[0]
 		if (!image) return
@@ -92,43 +89,12 @@
 	}
 </script>
 
-<style lang="scss">
-	main {
-		:global {
-			label:nth-child(1) {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-			}
-		}
-	}
-
-	footer {
-		box-shadow: var(--bs-up);
-		padding-top: var(--space-m);
-		width: 100%;
-		overflow-x: scroll;
-	}
-</style>
-
 <!-- TODO: Make form progressively enhanced -->
-<Header>
-	<Back href="/dashboard" slot="left" />
-	<SpokenText --align="center" slot="middle" text="Upload pagina's" />
-	<Help href="/dashboard/letter?id={letterId}" slot="right" />
-</Header>
-<main>
-	{#if pages.length}
-		<Carousel {pages} bind:selected={selectedPage} />
-	{:else}
-		<ImageInput on:change={changeHandler} name="page" />
-	{/if}
-</main>
-<footer>
-	<PageList bind:selected={selectedPage} on:page-select={pageSelectedHandler} {pages}>
+<CarouselPage bind:selectedPage bind:pages title="Upload pagina's" backLink="/dashboard">
+	<ImageInput slot="empty" on:change={changeHandler} name="page" />
+	<svelte:fragment slot="footer-item">
 		{#if pages.length}
-			<ImageInput on:change={changeHandler} />
+			<ImageInput on:change={changeHandler} name="page" />
 		{/if}
-	</PageList>
-</footer>
+	</svelte:fragment>
+</CarouselPage>
