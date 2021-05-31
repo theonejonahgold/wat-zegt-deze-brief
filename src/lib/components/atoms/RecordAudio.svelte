@@ -2,7 +2,7 @@
 	import { browser } from '$app/env'
 
 	let recorder: MediaRecorder
-	let src: any
+	let src: HTMLAudioElement
 	let chunks: any[] = []
 
 	if (browser) {
