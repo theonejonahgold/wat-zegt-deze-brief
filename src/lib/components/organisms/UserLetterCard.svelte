@@ -5,9 +5,9 @@
 
 	export let letter: Letter
 
-	const time = letter.messages.length ? letter.messages[0].date : letter.createdAt
+	const time = letter.messages?.length ? letter.messages[0].date : letter.createdAt
 
-	const chatMessage = letter.messages[0]
+	const chatMessage = letter.messages?.[0]
 </script>
 
 <style lang="scss">
