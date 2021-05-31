@@ -3,6 +3,7 @@ import type { Locals } from '$types'
 import type { GetSession, Handle } from '@sveltejs/kit'
 import cookie from 'cookie'
 import busboy from 'busboy'
+import type { ServerRequest } from '@sveltejs/kit/types/hooks'
 
 export const handle: Handle = async ({ request, render }) => {
 	// Gigantic thank you from vonadz and his comment at https://github.com/sveltejs/kit/issues/70#issuecomment-830799681
@@ -13,40 +14,7 @@ export const handle: Handle = async ({ request, render }) => {
 				body: 'Not allowed',
 				headers: {},
 			}
-		const files = {}
-		await new Promise((resolve, reject) => {
-			const bb = new busboy({
-				headers: { 'content-type': request.headers['content-type'] },
-			})
-			bb.on('file', (fieldname, file, filename, encoding, mimetype) => {
-				const buffers = []
-				files[fieldname] = {
-					filename,
-					encoding,
-					mimetype,
-				}
-				file
-					.on('data', fileData => {
-						buffers.push(fileData) //this adds files as buffers, which can be hard on memory. You can also write to a file using streams here.
-					})
-					.on('end', () => {
-						const buffer = Buffer.concat(buffers)
-						files[fieldname]['file'] = buffer
-					})
-			})
-				.on('field', (fieldname, val) => {
-					request.body[fieldname] = val
-				})
-				.on('finish', () => {
-					request.body['files'] = files
-					resolve(request.body)
-				})
-				.on('error', err => {
-					reject(err)
-				})
-
-			bb.end(request.rawBody)
-		})
+		request = await parseFileBody(request)
 	}
 
 	const cookies = cookie.parse(request.headers.cookie || '')
@@ -76,7 +44,45 @@ export const handle: Handle = async ({ request, render }) => {
 	return response
 }
 
-export const getSession: GetSession<Locals, AppSession> = async request => ({
+export const getSession: GetSession<Locals> = async request => ({
 	session: request.locals.session,
 	cookies: request.locals.cookies,
 })
+
+const parseFileBody = async (request: ServerRequest) => {
+	const files = {}
+	await new Promise((resolve, reject) => {
+		const bb = new busboy({
+			headers: { 'content-type': request.headers['content-type'] },
+		})
+		bb.on('file', (fieldname, file, filename, encoding, mimetype) => {
+			const buffers = []
+			files[fieldname] = {
+				filename,
+				encoding,
+				mimetype,
+			}
+			file
+				.on('data', fileData => {
+					buffers.push(fileData) //this adds files as buffers, which can be hard on memory. You can also write to a file using streams here.
+				})
+				.on('end', () => {
+					const buffer = Buffer.concat(buffers)
+					files[fieldname]['file'] = buffer
+				})
+		})
+			.on('field', (fieldname, val) => {
+				request.body[fieldname] = val
+			})
+			.on('finish', () => {
+				request.body['files'] = files
+				resolve(request.body)
+			})
+			.on('error', err => {
+				reject(err)
+			})
+
+		bb.end(request.rawBody)
+	})
+	return request
+}
