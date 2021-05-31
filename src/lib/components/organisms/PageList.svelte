@@ -1,18 +1,12 @@
 <script>
 	import { Image } from '$atoms'
-	import { createEventDispatcher } from 'svelte'
 
 	export let pages: string[]
 	export let selected: number
 
-	const dispatch =
-		createEventDispatcher<{
-			'page-select': number
-		}>()
-
 	function clickHandler(page: number) {
 		return () => {
-			dispatch('page-select', page)
+			selected = page
 		}
 	}
 </script>
