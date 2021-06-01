@@ -1,6 +1,7 @@
 <script>
 	import { Button } from '$atoms'
 	import { page, session } from '$app/stores'
+	import { browser } from '$app/env'
 	import { onMount } from 'svelte'
 
 	const langCookies = $session.cookies.langs
@@ -55,6 +56,24 @@
 		}
 		chosenLanguages = chosenLanguages.add(code)
 	}
+
+	const setDefaultLang = () => {
+		if (!browser) return
+		const lang = navigator.language?.slice(0, 2)
+		if (!lang || chosenLanguages.has(lang)) return
+		chosenLanguages = chosenLanguages.add(lang)
+		fetch('/api/languages', {
+			method: 'POST',
+			body: new URLSearchParams({
+				code: lang,
+			}),
+			headers: {
+				Accept: 'application/json',
+			},
+		})
+	}
+
+	setDefaultLang()
 </script>
 
 <style lang="scss">
