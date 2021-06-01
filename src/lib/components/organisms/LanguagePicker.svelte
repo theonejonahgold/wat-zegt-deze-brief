@@ -69,6 +69,13 @@
 		align-items: center;
 	}
 
+	section {
+		overflow-y: auto;
+		margin-top: 1em;
+		padding-right: 1em;
+		height: calc(100vh - 17em);
+	}
+
 	input {
 		&[type='search'] {
 			width: 100%;
@@ -90,7 +97,7 @@
 <div>
 	<form on:submit|preventDefault>
 		<label>
-			Selecteer de talen die je spreekt:
+			Zoek hier naar talen
 			<input name="query" bind:value={filterValue} type="search" />
 		</label>
 		{#if !js}
