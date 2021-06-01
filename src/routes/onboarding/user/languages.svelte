@@ -2,6 +2,7 @@
 	import { Button, SpokenText, Back, Help } from '$atoms'
 	import { LanguagePicker } from '$organisms'
 	import { Flex, Header } from '$templates'
+	import languages from './_languages'
 </script>
 
 <Header>
@@ -10,6 +11,6 @@
 	<Help slot="right" />
 </Header>
 <Flex>
-	<LanguagePicker />
+	<LanguagePicker {languages} />
 	<Button bottom href="/onboarding/user/register">Verder</Button>
 </Flex>

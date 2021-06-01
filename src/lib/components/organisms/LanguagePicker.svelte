@@ -1,40 +1,22 @@
 <script>
 	import { Button } from '$atoms'
 	import { page, session } from '$app/stores'
+	import { browser } from '$app/env'
 	import { onMount } from 'svelte'
 
 	const langCookies = $session.cookies.langs
 	let js = false
 	onMount(() => (js = true))
 
-	interface Language {
-		code: string
-		name: string
-	}
-
-	const languages: Language[] = [
-		{ code: 'af', name: 'Afrikaans (Afrikaans)' },
-		{ code: 'sq', name: 'Albanees (Shqip)' },
-		{ code: 'ar', name: 'Arabisch (العربية)' },
-		{ code: 'hy', name: 'Armeens (Հայերեն)' },
-		{ code: 'as', name: 'Assamees (অসমীয়া)' },
-		{ code: 'de', name: 'Duits (Deutsch)' },
-		{ code: 'en', name: 'Engels (English)' },
-		{ code: 'fr', name: 'Frans (français)' },
-		{ code: 'nl', name: 'Nederlands (Nederlands)' },
-		{ code: 'es', name: 'Spaans (español)' },
-		{ code: 'tr', name: 'Turks (Türkçe)' },
-	]
+	export let languages
 
 	let filterValue = $page.query.get('query')
-	$: filteredLanguages =
-		filterValue?.length > 1
-			? languages.filter(
-					lang =>
-						lang.name.toLowerCase().includes(filterValue) ||
-						chosenLanguagesArray.includes(lang.code)
-			  )
-			: languages.filter(lang => chosenLanguagesArray.includes(lang.code))
+	$: filteredLanguages = filterValue
+		? languages.filter(
+				lang =>
+					lang.name.toLowerCase().includes(filterValue) || chosenLanguagesArray.includes(lang.code)
+		  )
+		: languages
 	let chosenLanguages = new Set<string>(!!langCookies ? langCookies.split(',') : [])
 	$: chosenLanguagesArray = [...chosenLanguages]
 
@@ -55,6 +37,24 @@
 		}
 		chosenLanguages = chosenLanguages.add(code)
 	}
+
+	const setDefaultLang = () => {
+		if (!browser) return
+		const lang = navigator.language?.slice(0, 2)
+		if (!lang || chosenLanguages.has(lang)) return
+		chosenLanguages = chosenLanguages.add(lang)
+		fetch('/api/languages', {
+			method: 'POST',
+			body: new URLSearchParams({
+				code: lang,
+			}),
+			headers: {
+				Accept: 'application/json',
+			},
+		})
+	}
+
+	setDefaultLang()
 </script>
 
 <style lang="scss">
@@ -67,6 +67,13 @@
 		text-align: left;
 		display: flex;
 		align-items: center;
+	}
+
+	section {
+		overflow-y: auto;
+		margin-top: 1em;
+		padding-right: 1em;
+		height: calc(100vh - 17em);
 	}
 
 	input {
@@ -90,7 +97,7 @@
 <div>
 	<form on:submit|preventDefault>
 		<label>
-			Selecteer de talen die je spreekt:
+			Zoek hier naar talen
 			<input name="query" bind:value={filterValue} type="search" />
 		</label>
 		{#if !js}
