@@ -528,6 +528,25 @@ export interface paths {
       };
     };
   };
+  "/rpc/get_user_role": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            user_id: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
   "/rpc/handle_new_user": {
     post: {
       parameters: {
