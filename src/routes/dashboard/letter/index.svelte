@@ -3,6 +3,7 @@
 
 	export const load: Load = async ({ page, fetch }) => {
 		const step = +page.query.get('step') || 1
+		const id = page.query.get('id')
 		const res = await fetch(`${page.path}/${step}.json`)
 		const data: { content: InstructionsContent; amount: number } = await res.json()
 
@@ -10,6 +11,7 @@
 			props: {
 				...data,
 				step,
+				id,
 				path: page.path,
 			},
 		}
@@ -24,15 +26,18 @@
 	export let content: InstructionsContent
 	export let amount: number
 	export let path: string
+	export let id: string
 
 	let hrefs: InstructionsHrefs
 	$: hrefs = {
-		previous: step === 1 ? '/dashboard' : `${path}?step=${+step - 1}`,
+		previous: step === 1 ? '/dashboard' : `${path}?step=${+step - 1}${id ? `&id=${id}` : ''}`,
 		next: {
-			path: `${path}?step=${+step + 1}`,
+			path: `${path}?step=${+step + 1}${id ? `&id=${id}` : ''}`,
 			text: 'Volgende',
 		},
-		finish: [{ path: '/api/letter', text: 'Begrepen!' }],
+		finish: id
+			? [{ path: `/dashboard/letter/${id}/upload`, text: 'Terug naar brief' }]
+			: [{ path: '/api/letter', text: 'Begrepen!' }],
 	}
 </script>
 
