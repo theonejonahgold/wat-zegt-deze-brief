@@ -9,6 +9,23 @@ export const textToSpeech = (text: string, handleStop: () => void) => {
 	utterance.addEventListener('pause', handleStop)
 	utterance.addEventListener('end', handleStop)
 
-	utterance.lang = 'nl-NL'
-	speechSynthesis.speak(utterance)
+	const getVoices = () =>
+		new Promise(resolve => {
+			const voices = setInterval(() => {
+				if (speechSynthesis.getVoices().length) {
+					resolve(speechSynthesis.getVoices())
+					clearInterval(voices)
+				}
+			}, 10)
+		})
+
+	getVoices().then((voices: SpeechSynthesisVoice[]) => {
+		const xander = voices.filter(voice => voice.name === 'Xander')
+		utterance.lang = 'nl-NL'
+		if (xander.length) {
+			utterance.voice = xander[0]
+			utterance.rate = 0.7
+		}
+		speechSynthesis.speak(utterance)
+	})
 }
