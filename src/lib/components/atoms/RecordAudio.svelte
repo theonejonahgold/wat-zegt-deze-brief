@@ -1,8 +1,9 @@
 <script>
 	import { createEventDispatcher } from 'svelte'
+	import IconButton from './IconButton.svelte'
+	import { RecordIcon } from '$icons'
 
 	export let recorder: MediaRecorder
-	let src: string
 	let chunks: any[] = []
 	let clicked = false
 
@@ -26,14 +27,16 @@
 		recorder.onstop = () => {
 			let blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus' })
 			chunks = []
+			console.log(blob)
+			const file = new File([blob], 'message.ogg', { type: 'audio/ogg; codecs=opus' })
 
-			dispatch('message', blob)
+			dispatch('message', file)
 		}
 	}
 </script>
 
 {#if clicked}
-	<button on:click={stopMedia} {src}>Stop</button>
+	<IconButton on:click={stopMedia}><RecordIcon /></IconButton>
 {:else}
-	<button on:click={recordMedia} {src}>Record</button>
+	<IconButton on:click={recordMedia}><RecordIcon /></IconButton>
 {/if}
