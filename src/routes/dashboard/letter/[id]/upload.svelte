@@ -22,7 +22,8 @@
 </script>
 
 <script lang="typescript">
-	import { ImageInput } from '$atoms'
+	import { ImageInput, Button } from '$atoms'
+	import { PageList } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage } from '$templates'
 	import type { definitions, Letter } from '$types'
@@ -35,8 +36,6 @@
 
 	let pages: string[] = []
 	let selectedPage = 0
-
-	$: console.log(role)
 
 	onMount(() => {
 		client.storage
@@ -91,18 +90,21 @@
 	}
 </script>
 
-<!-- TODO: Make form progressively enhanced -->
 {#if role === 'user'}
-	<CarouselPage bind:selectedPage bind:pages title="Upload pagina's" backLink="/dashboard">
+	<CarouselPage
+		bind:selectedPage
+		bind:pages
+		title="Upload pagina's"
+		backLink="/dashboard/letter?step=4&id={letter.id}"
+	>
 		<ImageInput slot="empty" on:change={changeHandler} name="page" />
-		<svelte:fragment slot="footer-item">
-			{#if pages.length}
-				<ImageInput on:change={changeHandler} name="page" />
-			{/if}
+		<svelte:fragment slot="footer">
+			<PageList bind:selected={selectedPage} {pages}>
+				{#if pages.length}
+					<ImageInput on:change={changeHandler} name="page" />
+				{/if}
+			</PageList>
+			<Button href="/dashboard/letter/{letter.id}">Verder</Button>
 		</svelte:fragment>
-	</CarouselPage>
-{:else}
-	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
-		<svelte:fragment slot="footer">Hier komt iets</svelte:fragment>
 	</CarouselPage>
 {/if}

@@ -5,9 +5,9 @@
 <style lang="scss">
 	label {
 		border-radius: 50%;
-		width: var(--space-xxxl);
-		height: var(--space-xxxl);
-		background: var(--dark);
+		width: var(--space-xl);
+		height: var(--space-xl);
+		background: var(--gradient-to-right);
 		display: grid;
 		place-content: center;
 		place-items: center;

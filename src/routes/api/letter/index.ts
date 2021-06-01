@@ -25,7 +25,7 @@ export const get: RequestHandler<Locals> = async () => {
 	return {
 		status: 303,
 		headers: {
-			location: `/dashboard/letter/${res.body[0].id}`,
+			location: `/dashboard/letter/${res.body[0].id}/upload`,
 		},
 	}
 }
