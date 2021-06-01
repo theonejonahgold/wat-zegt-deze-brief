@@ -1,16 +1,12 @@
 <script>
-	import { browser } from '$app/env'
+	import { createEventDispatcher } from 'svelte'
 
-	let recorder: MediaRecorder
+	export let recorder: MediaRecorder
 	let src: string
 	let chunks: any[] = []
 	let clicked = false
 
-	if (browser) {
-		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-			recorder = new MediaRecorder(stream)
-		})
-	}
+	const dispatch = createEventDispatcher()
 
 	function recordMedia() {
 		clicked = !clicked
@@ -30,12 +26,8 @@
 		recorder.onstop = () => {
 			let blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus' })
 			chunks = []
-			console.log(blob)
 
-			if (window) {
-				const audioURL = window.URL.createObjectURL(blob)
-				src = audioURL
-			}
+			dispatch('message', blob)
 		}
 	}
 </script>
@@ -45,7 +37,3 @@
 {:else}
 	<button on:click={recordMedia} {src}>Record</button>
 {/if}
-
-<article>
-	<audio controls {src} />
-</article>
