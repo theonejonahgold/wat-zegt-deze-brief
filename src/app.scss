@@ -5,16 +5,18 @@
 }
 
 :root {
+	--light-purple: #f8f9fd;
 	--purple: #978fff;
 	--blue: #80b6fe;
 	--white: #fff;
 	--black: #000;
-	--grey: #d8d8d8;
+	--grey: #686868;
 	--dark-grey: #989898;
 
 	--primary: var(--black);
 	--secondary: var(--white);
 	--dark: var(--purple);
+	--background: var(--light-purple);
 	--light: var(--blue);
 	--muted: var(--grey);
 	--subtext: var(--dark-grey);
@@ -27,24 +29,27 @@
 	--bs-key-ambient-light: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
 		0 3px 5px -1px rgba(0, 0, 0, 0.2);
 	--bs-up: 0 -1px 3px rgba(0, 0, 0, 0.16);
+	--bs-button: 0 3px 8px rgba(0, 0, 0, 0.16);
 
 	--border-radius: 0.75rem;
 
 	--font-family: 'Poppins', sans-serif;
 
-	--base: 1rem;
+	--font-xs: 0.75rem;
+	--font-s: 1rem;
+	--font-m: 1.25rem;
+	--font-l: 1.5rem;
+	--font-xl: 2rem;
+	--font-xxl: 2.5rem;
 
-	--font-xs: calc(var(--font-s) * 0.75);
-	--font-s: var(--base);
-	--font-m: calc(var(--font-s) * 1.5);
-	--font-l: calc(var(--font-s) * 2);
-	--font-xl: calc(var(--font-s) * 2.5);
-
-	--space-xs: calc(var(--space-m) / 4);
-	--space-s: calc(var(--space-m) / 2);
-	--space-m: var(--base);
-	--space-l: calc(var(--space-m) * 2);
-	--space-xl: calc(var(--space-m) * 4);
+	--space-xs: 0.5rem;
+	--space-s: 0.75rem;
+	--space-m: 1rem;
+	--space-l: 1.25rem;
+	--space-xl: 1.5rem;
+	--space-xxl: 2rem;
+	--space-xxxl: 2.5rem;
+	--space-xxxxl: 3.5rem;
 
 	color: var(--primary);
 	font-family: var(--font-family);
@@ -60,6 +65,7 @@ body,
 
 body {
 	margin: 0;
+	background: var(--background);
 }
 
 #svelte {
@@ -68,12 +74,6 @@ body {
 }
 
 #svelte > {
-	header,
-	main,
-	footer {
-		padding: var(--space-m);
-	}
-
 	header,
 	main:first-child {
 		grid-row-start: 1;
@@ -116,11 +116,11 @@ ol {
 h1,
 h2,
 h3 {
-	font-weight: bold;
+	font-weight: 600;
 }
 
 h1 {
-	font-size: var(--font-xl);
+	font-size: var(--font-xxl);
 }
 
 h2 {
