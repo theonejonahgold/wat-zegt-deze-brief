@@ -13,6 +13,6 @@
 	<Title>Hallo!</Title>
 	<SpokenText text="Dit is de app die helpt met het uitleggen van brieven" />
 	<Icon><IndexIcon /></Icon>
-	<Button href="/login">Naar loginpagina</Button>
-	<Button href="/onboarding">Start</Button>
+	<Button href="/login">Inloggen</Button>
+	<Button href="/onboarding">Aanmelden</Button>
 </Flex>
