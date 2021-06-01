@@ -7,16 +7,17 @@
 	button,
 	a {
 		display: block;
-		border-radius: var(--space-l);
+		border-radius: var(--space-xxl);
 		color: var(--secondary);
 		padding: var(--space-m) 0;
-		margin-top: var(--space-m);
+		margin-top: var(--space-l);
 		text-align: center;
 		font-size: var(--font-m);
 		text-decoration: none;
 		width: 100%;
 		border: none;
 		background: var(--gradient-to-right);
+		box-shadow: var(--bs-button);
 
 		&.bottom {
 			position: absolute;

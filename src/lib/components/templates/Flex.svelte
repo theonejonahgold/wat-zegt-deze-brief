@@ -1,3 +1,12 @@
+<script>
+	export let px = 'var(--space-m)'
+	export let py = 'var(--space-m)'
+	export let pt = '0'
+	export let pl = px
+	export let pr = px
+	export let pb = py
+</script>
+
 <style>
 	main {
 		display: flex;
@@ -5,11 +14,11 @@
 		align-items: center;
 		justify-content: space-between;
 		width: inherit;
-		padding: 0 var(--space-m) var(--space-m);
+		padding: var(--pt) var(--pr) var(--pb) var(--pl);
 		text-align: var(--textAlign, initial);
 
 		&:first-child {
-			padding-top: var(--space-m);
+			padding-top: var(--pt, var(--space-m));
 		}
 
 		:global(h1) {
@@ -18,6 +27,6 @@
 	}
 </style>
 
-<main>
+<main style="--pt: {pt}; --pr: {pr}; --pb: {pb}; --pl: {pl};">
 	<slot />
 </main>
