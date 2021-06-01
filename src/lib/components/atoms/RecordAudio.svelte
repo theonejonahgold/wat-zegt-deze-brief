@@ -2,8 +2,9 @@
 	import { browser } from '$app/env'
 
 	let recorder: MediaRecorder
-	let src: HTMLAudioElement
+	let src: string
 	let chunks: any[] = []
+	let clicked = false
 
 	if (browser) {
 		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
@@ -12,12 +13,19 @@
 	}
 
 	function recordMedia() {
+		clicked = !clicked
 		recorder.start()
 		console.log(recorder.state)
 
 		recorder.ondataavailable = (e: BlobEvent) => {
 			chunks.push(e.data)
 		}
+	}
+
+	function stopMedia() {
+		clicked = !clicked
+		recorder.stop()
+		console.log(recorder.state)
 
 		recorder.onstop = () => {
 			let blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus' })
@@ -30,15 +38,13 @@
 			}
 		}
 	}
-
-	function stopMedia() {
-		recorder.stop()
-		console.log(recorder.state)
-	}
 </script>
 
-<button on:click={recordMedia}>Record</button>
-<button on:click={stopMedia}>Stop</button>
+{#if clicked}
+	<button on:click={stopMedia} {src}>Stop</button>
+{:else}
+	<button on:click={recordMedia} {src}>Record</button>
+{/if}
 
 <article>
 	<audio controls {src} />
