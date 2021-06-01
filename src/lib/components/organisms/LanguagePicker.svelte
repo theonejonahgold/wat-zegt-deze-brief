@@ -11,14 +11,12 @@
 	export let languages
 
 	let filterValue = $page.query.get('query')
-	$: filteredLanguages =
-		filterValue?.length > 1
-			? languages.filter(
-					lang =>
-						lang.name.toLowerCase().includes(filterValue) ||
-						chosenLanguagesArray.includes(lang.code)
-			  )
-			: languages.filter(lang => chosenLanguagesArray.includes(lang.code))
+	$: filteredLanguages = filterValue
+		? languages.filter(
+				lang =>
+					lang.name.toLowerCase().includes(filterValue) || chosenLanguagesArray.includes(lang.code)
+		  )
+		: languages
 	let chosenLanguages = new Set<string>(!!langCookies ? langCookies.split(',') : [])
 	$: chosenLanguagesArray = [...chosenLanguages]
 
