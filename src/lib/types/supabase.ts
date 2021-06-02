@@ -25,10 +25,10 @@ export interface paths {
           createdAt?: parameters["rowFilter.letters.createdAt"];
           /** The volunteer explaining */
           volunteer_id?: parameters["rowFilter.letters.volunteer_id"];
-          messages?: parameters["rowFilter.letters.messages"];
           /** The user who received and uploaded the letter */
           user_id?: parameters["rowFilter.letters.user_id"];
           status?: parameters["rowFilter.letters.status"];
+          messages?: parameters["rowFilter.letters.messages"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -88,10 +88,10 @@ export interface paths {
           createdAt?: parameters["rowFilter.letters.createdAt"];
           /** The volunteer explaining */
           volunteer_id?: parameters["rowFilter.letters.volunteer_id"];
-          messages?: parameters["rowFilter.letters.messages"];
           /** The user who received and uploaded the letter */
           user_id?: parameters["rowFilter.letters.user_id"];
           status?: parameters["rowFilter.letters.status"];
+          messages?: parameters["rowFilter.letters.messages"];
         };
         header: {
           /** Preference */
@@ -115,10 +115,10 @@ export interface paths {
           createdAt?: parameters["rowFilter.letters.createdAt"];
           /** The volunteer explaining */
           volunteer_id?: parameters["rowFilter.letters.volunteer_id"];
-          messages?: parameters["rowFilter.letters.messages"];
           /** The user who received and uploaded the letter */
           user_id?: parameters["rowFilter.letters.user_id"];
           status?: parameters["rowFilter.letters.status"];
+          messages?: parameters["rowFilter.letters.messages"];
         };
         body: {
           /** letters */
@@ -234,8 +234,6 @@ export interface paths {
           /** The type of message sent */
           type?: parameters["rowFilter.messages.type"];
           date?: parameters["rowFilter.messages.date"];
-          /** The ID of the letter this message belongs to */
-          letter_id?: parameters["rowFilter.messages.letter_id"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -294,8 +292,6 @@ export interface paths {
           /** The type of message sent */
           type?: parameters["rowFilter.messages.type"];
           date?: parameters["rowFilter.messages.date"];
-          /** The ID of the letter this message belongs to */
-          letter_id?: parameters["rowFilter.messages.letter_id"];
         };
         header: {
           /** Preference */
@@ -318,8 +314,6 @@ export interface paths {
           /** The type of message sent */
           type?: parameters["rowFilter.messages.type"];
           date?: parameters["rowFilter.messages.date"];
-          /** The ID of the letter this message belongs to */
-          letter_id?: parameters["rowFilter.messages.letter_id"];
         };
         body: {
           /** messages */
@@ -534,6 +528,25 @@ export interface paths {
       };
     };
   };
+  "/rpc/get_user_role": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            user_id: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
   "/rpc/handle_new_user": {
     post: {
       parameters: {
@@ -602,7 +615,7 @@ export interface definitions {
      */
     id: string;
     /** Showing if a letter is resolved */
-    resolved?: boolean;
+    resolved: boolean;
     /** The sender of the letter, defined by the user */
     sender?: string;
     /** The time the letter was created at */
@@ -614,7 +627,6 @@ export interface definitions {
      * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
     volunteer_id?: string;
-    messages?: string;
     /**
      * The user who received and uploaded the letter
      *
@@ -623,6 +635,7 @@ export interface definitions {
      */
     user_id: string;
     status: string;
+    messages?: string;
   };
   /** The possible types of messages */
   "message-types": {
@@ -656,13 +669,6 @@ export interface definitions {
      */
     type: string;
     date: string;
-    /**
-     * The ID of the letter this message belongs to
-     *
-     * Note:
-     * This is a Foreign Key to `letters.id`.<fk table='letters' column='id'/>
-     */
-    letter_id: string;
   };
   /** All possible user roles */
   roles: {
@@ -728,10 +734,10 @@ export interface parameters {
   "rowFilter.letters.createdAt": string;
   /** The volunteer explaining */
   "rowFilter.letters.volunteer_id": string;
-  "rowFilter.letters.messages": string;
   /** The user who received and uploaded the letter */
   "rowFilter.letters.user_id": string;
   "rowFilter.letters.status": string;
+  "rowFilter.letters.messages": string;
   /** message-types */
   "body.message-types": definitions["message-types"];
   "rowFilter.message-types.id": string;
@@ -745,8 +751,6 @@ export interface parameters {
   /** The type of message sent */
   "rowFilter.messages.type": string;
   "rowFilter.messages.date": string;
-  /** The ID of the letter this message belongs to */
-  "rowFilter.messages.letter_id": string;
   /** roles */
   "body.roles": definitions["roles"];
   /** Slug for role */

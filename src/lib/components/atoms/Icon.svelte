@@ -1,5 +1,5 @@
 <script>
-	export let color: string
+	export let color: string = ''
 </script>
 
 <style lang="scss">

@@ -52,16 +52,17 @@
 
 		:global(img) {
 			width: 100%;
+			height: auto;
 		}
 	}
 </style>
 
 <section>
-	<button on:click={next} id="previous"><Icon><AnchorIcon /></Icon></button>
+	<button on:click={next} id="previous" type="button"><Icon><AnchorIcon /></Icon></button>
 	<div>
 		{#each [pages[selected]] as page (selected)}
 			<Image src={page} alt="Page preview" shadow={true} />
 		{/each}
 	</div>
-	<button on:click={next} id="next"><Icon><AnchorIcon /></Icon></button>
+	<button on:click={next} id="next" type="button"><Icon><AnchorIcon /></Icon></button>
 </section>

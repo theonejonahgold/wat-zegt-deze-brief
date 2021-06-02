@@ -1,7 +1,9 @@
 <script>
 	import { goto } from '$app/navigation'
+	import { Help, SpokenText } from '$atoms'
 	import { client } from '$config/supabase'
 	import { Form } from '$organisms'
+	import Header from './Header.svelte'
 
 	export let role: 'user' | 'volunteer'
 </script>
@@ -12,8 +14,11 @@
 	}
 </style>
 
+<Header>
+	<SpokenText --align="center" slot="middle" text="Registreren" />
+	<Help slot="right" />
+</Header>
 <main>
-	<h2>Registreren</h2>
 	<Form
 		action="/api/auth"
 		on:success={async e => {
