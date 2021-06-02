@@ -1,6 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte'
-	import IconButton from './IconButton.svelte'
+	import { IconButton } from '$atoms'
 	import { RecordIcon } from '$icons'
 
 	export let recorder: MediaRecorder
