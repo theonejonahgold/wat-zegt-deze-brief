@@ -21,9 +21,9 @@
 	}
 </script>
 
-<script lang="typescript">
-	import { Help, SpokenText, Back } from '$atoms'
-	import { Carousel } from '$organisms'
+<script>
+	import { Help, SpokenText, Back, Button } from '$atoms'
+	import { Carousel, Form } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
@@ -71,15 +71,28 @@
 		<SpokenText --align="center" slot="middle" text="Afronden" />
 		<Help slot="right" />
 	</Header>
-	<label>
-		Van welke instantie komt deze brief?
-		<input type="text" />
-	</label>
-	{#if pages.length}
-		<Carousel {pages} bind:selected={selectedPage} />
-	{:else}
-		<p>Upload afbeeldingen van je brief om ze hier te zien.</p>
-	{/if}
+	<main>
+		<Form
+			action="/api/letter/?"
+			fields={[
+				{
+					label: 'Waar komt deze brief vandaan?',
+					name: 'sender',
+					type: 'text',
+					autofocus: true,
+					required: true,
+				},
+			]}
+			method="POST"
+		>
+			<Button href="/dashboard/letter/{letter.id}/upload">Pagina's bewerken</Button>
+			{#if pages.length}
+				<Carousel {pages} bind:selected={selectedPage} />
+			{:else}
+				<p>Upload pagina's van je brief om ze hier te zien.</p>
+			{/if}
+		</Form>
+	</main>
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
 		<svelte:fragment slot="footer">Hier komt iets</svelte:fragment>
