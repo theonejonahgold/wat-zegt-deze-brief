@@ -22,21 +22,19 @@
 </script>
 
 <script lang="typescript">
-	import { ImageInput } from '$atoms'
+	import { Help, SpokenText, Back } from '$atoms'
+	import { Carousel } from '$organisms'
 	import { client } from '$config/supabase'
-	import { CarouselPage } from '$templates'
+	import { CarouselPage, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
-	import { v4 as uuid } from 'uuid'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
 
 	let pages: string[] = []
 	let selectedPage = 0
-
-	$: console.log(role)
 
 	onMount(() => {
 		client.storage
@@ -65,42 +63,23 @@
 				pages = images
 			})
 	})
-
-	async function changeHandler(e: Event & { currentTarget: HTMLInputElement }) {
-		const image = e.currentTarget.files[0]
-		if (!image) return
-
-		const id = uuid()
-		const mime = image.type.split('/')[1]
-		await client.storage.from('pages').upload(`${letter.id}/${id}.${mime}`, image)
-
-		setTimeout(() => {
-			client.storage
-				.from('pages')
-				.download(`${letter.id}/${id}.${mime}`)
-				.then(({ data }) => {
-					const reader = new FileReader()
-					reader.readAsDataURL(data)
-					reader.addEventListener('load', e => {
-						pages.unshift(e.target.result as string)
-						pages = pages
-						selectedPage = 0
-					})
-				})
-		}, 500)
-	}
 </script>
 
-<!-- TODO: Make form progressively enhanced -->
 {#if role === 'user'}
-	<CarouselPage bind:selectedPage bind:pages title="Upload pagina's" backLink="/dashboard">
-		<ImageInput slot="empty" on:change={changeHandler} name="page" />
-		<svelte:fragment slot="footer-item">
-			{#if pages.length}
-				<ImageInput on:change={changeHandler} name="page" />
-			{/if}
-		</svelte:fragment>
-	</CarouselPage>
+	<Header>
+		<Back slot="left" href="/dashboard/letter/{letter.id}/upload" />
+		<SpokenText --align="center" slot="middle" text="Afronden" />
+		<Help slot="right" />
+	</Header>
+	<label>
+		Van welke instantie komt deze brief?
+		<input type="text" />
+	</label>
+	{#if pages.length}
+		<Carousel {pages} bind:selected={selectedPage} />
+	{:else}
+		<p>Upload afbeeldingen van je brief om ze hier te zien.</p>
+	{/if}
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
 		<svelte:fragment slot="footer">Hier komt iets</svelte:fragment>

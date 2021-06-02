@@ -1,6 +1,6 @@
 <script>
 	import { Back, Help, SpokenText } from '$atoms'
-	import { Carousel, PageList } from '$organisms'
+	import { Carousel } from '$organisms'
 	import Header from './Header.svelte'
 
 	export let title: string
@@ -43,11 +43,5 @@
 	{/if}
 </main>
 <footer>
-	{#if !$$slots.footer}
-		<PageList bind:selected={selectedPage} {pages}>
-			<slot name="footer-item" />
-		</PageList>
-	{:else}
-		<slot name="footer" />
-	{/if}
+	<slot name="footer" />
 </footer>
