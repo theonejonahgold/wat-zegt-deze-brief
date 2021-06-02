@@ -1,10 +1,10 @@
 <script>
 	import Header from './Header.svelte'
+	import Flex from './Flex.svelte'
 	import { SpokenText, Help, Back } from '$atoms'
 	import { RecordAudio } from '$molecules'
 	import { browser } from '$app/env'
-	import { checkRole } from '$db/user'
-	import type { Load } from '@sveltejs/kit'
+	import { messageHandler } from '$actions'
 
 	let recorder: MediaRecorder
 
@@ -31,9 +31,11 @@
 </Header>
 <main />
 <footer>
-	<SpokenText
-		--align="center"
-		text="Klik op de microfoon en stel nog een vraag of bedank de vrijwilliger"
-	/>
-	<!-- <RecordAudio {recorder} /> -->
+	<Flex>
+		<SpokenText
+			--align="center"
+			text="Klik op de microfoon en stel nog een vraag of bedank de vrijwilliger"
+		/>
+		<RecordAudio {recorder} on:message={messageHandler} />
+	</Flex>
 </footer>

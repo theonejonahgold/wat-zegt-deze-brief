@@ -34,6 +34,7 @@
 	import { onMount } from 'svelte'
 	import type { definitions, Letter } from '$types'
 	import { checkRole } from '$db/user'
+	import { messageHandler } from '$actions'
 
 	let letter: Letter
 	let recorder: MediaRecorder
@@ -75,14 +76,6 @@
 				pages = images
 			})
 	})
-
-	async function messageHandler(e: any) {
-		const message: File = e.detail
-		if (!message) return
-
-		const id = uuid()
-		await client.storage.from('messages').upload(`${id}`, message)
-	}
 </script>
 
 <svelte:head>
