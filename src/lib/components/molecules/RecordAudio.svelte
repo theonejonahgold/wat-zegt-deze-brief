@@ -1,7 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte'
 	import { IconButton } from '$atoms'
-	import { RecordIcon } from '$icons'
+	import { RecordIcon, StopRecordingIcon } from '$icons'
 
 	export let recorder: MediaRecorder
 	let chunks: any[] = []
@@ -36,7 +36,7 @@
 </script>
 
 {#if clicked}
-	<IconButton on:click={stopMedia}><RecordIcon /></IconButton>
+	<IconButton on:click={stopMedia}><StopRecordingIcon /></IconButton>
 {:else}
 	<IconButton on:click={recordMedia}><RecordIcon /></IconButton>
 {/if}
