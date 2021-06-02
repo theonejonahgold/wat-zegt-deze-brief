@@ -4,15 +4,15 @@
 	export let href: string
 </script>
 
-<style>
+<style lang="scss">
 	a {
 		display: block;
-		width: var(--space-l);
-		height: var(--space-l);
+		width: var(--space-m);
+		height: var(--space-m);
 
 		:global {
 			svg,
-			image {
+			img {
 				height: 100%;
 				width: 100%;
 			}

@@ -61,7 +61,7 @@
 	section button {
 		background: none;
 		border: none;
-		padding: var(--space-m) 0;
+		padding: var(--space-s) 0;
 		border-bottom: 1px solid var(--muted);
 		width: 100%;
 		text-align: left;
@@ -83,13 +83,13 @@
 			font-size: var(--font-m);
 			border-radius: var(--border-radius);
 			border: 1px solid var(--light);
-			padding: var(--space-s);
+			padding: var(--space-xs);
 		}
 
 		&[type='checkbox'] {
 			pointer-events: none;
 			display: inline-block;
-			margin-right: var(--space-s);
+			margin-right: var(--space-xxs);
 		}
 	}
 </style>

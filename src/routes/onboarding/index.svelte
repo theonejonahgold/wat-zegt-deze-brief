@@ -2,7 +2,7 @@
 	import { Back, Help, SpokenText } from '$atoms'
 	import { ImageButton } from '$molecules'
 	import { VolunteerIcon, UserIcon } from '$icons'
-	import { Header } from '$templates'
+	import { Flex, Header } from '$templates'
 </script>
 
 <svelte:head>
@@ -15,11 +15,11 @@
 	<Help slot="right" />
 </Header>
 
-<main>
+<Flex --justify="space-evenly">
 	<ImageButton alt="A user" text="Ik heb hulp nodig met een brief" href="/onboarding/user?step=1">
-		<VolunteerIcon />
-	</ImageButton>
-	<ImageButton alt="A volunteer" text="Hulp geven" href="/onboarding/volunteer">
 		<UserIcon />
 	</ImageButton>
-</main>
+	<ImageButton alt="A volunteer" text="Hulp geven" href="/onboarding/volunteer">
+		<VolunteerIcon />
+	</ImageButton>
+</Flex>

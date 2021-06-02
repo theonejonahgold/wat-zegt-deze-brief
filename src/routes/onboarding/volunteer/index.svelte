@@ -7,6 +7,17 @@
 	div {
 		width: 100%;
 	}
+	.image-container {
+		padding: var(--space-xxl);
+		background: var(--secondary);
+		border-radius: var(--border-radius);
+		display: flex;
+		justify-content: center;
+
+		:global(img) {
+			width: 100%;
+		}
+	}
 </style>
 
 <Header>
@@ -18,9 +29,11 @@
 	<SpokenText
 		text="Hier volgt een kleine uitleg van de app, zodat je gelijk aan de slag kunt gaan."
 	/>
-	<Image src="/images/onboarding-user-5.png" alt="Instructions" />
+	<div class="image-container">
+		<Image src="/images/onboarding-user-5.png" alt="Instructions" />
+	</div>
 	<div>
-		<Button href="/onboarding/volunteer/register">Overslaan</Button>
+		<Button invert href="/onboarding/volunteer/register">Overslaan</Button>
 		<Button href="/onboarding/volunteer?step=1">Volgende</Button>
 	</div>
 </Flex>
