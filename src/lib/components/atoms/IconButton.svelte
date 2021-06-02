@@ -1,5 +1,7 @@
 <script>
 	import Icon from './Icon.svelte'
+
+	export let color: string
 </script>
 
 <style>
@@ -13,7 +15,7 @@
 </style>
 
 <button on:click>
-	<Icon>
+	<Icon {color}>
 		<slot />
 	</Icon>
 </button>
