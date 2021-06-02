@@ -40,5 +40,5 @@ export async function checkRole() {
 	let { data, error } = await client.rpc('get_user_role', { user_id })
 
 	if (error) return console.error(error)
-	return data
+	return data as unknown as string
 }
