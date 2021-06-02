@@ -29,7 +29,7 @@
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
-	import { ChatIcon, UserIcon } from '$icons'
+	import { UserIcon } from '$icons'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
@@ -106,7 +106,7 @@
 			]}
 			method="POST"
 		>
-			<IconButton href="/dashboard/letter/{letter.id}/upload">
+			<IconButton href="/dashboard/letter/{letter.id}/upload" buttonColor="var(--dark)">
 				<!-- TODO: Insert edit button here -->
 				<UserIcon />
 			</IconButton>

@@ -1,6 +1,7 @@
 <script>
 	import Icon from './Icon.svelte'
 	export let color = ''
+	export let buttonColor: string
 	export let href = ''
 </script>
 
@@ -9,7 +10,8 @@
 	a {
 		display: block;
 		text-decoration: none;
-		background: none;
+		border-radius: 50%;
+		background: var(--color, currentColor);
 		border: none;
 		width: 5rem;
 		height: 5rem;
@@ -18,13 +20,13 @@
 </style>
 
 {#if href}
-	<a {href}>
+	<a {href} style="--color: {buttonColor}">
 		<Icon {color}>
 			<slot />
 		</Icon>
 	</a>
 {:else}
-	<button on:click>
+	<button on:click style="--color: {buttonColor}">
 		<Icon {color}>
 			<slot />
 		</Icon>
