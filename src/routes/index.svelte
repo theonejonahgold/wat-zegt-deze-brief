@@ -6,12 +6,12 @@
 
 <style>
 	h1 {
-		margin-bottom: var(--space-m);
+		margin-bottom: var(--space-s);
 
 		+ :global(p) {
-			max-width: 75%;
+			max-width: 78%;
 			align-self: flex-start;
-			margin-bottom: var(--space-xl);
+			margin-bottom: var(--space-l);
 		}
 	}
 </style>
@@ -20,7 +20,7 @@
 	<title>Home</title>
 </svelte:head>
 
-<Flex pt="var(--space-xxxxl)" px="var(--space-xxl)" pb="var(--space-xxl)">
+<Flex pt="var(--space-xxxl)" px="var(--space-xl)" pb="var(--space-xl)">
 	<Oval />
 	<h1>Hallo!</h1>
 	<SpokenText text="Dit is de app die helpt met het uitleggen van brieven" />

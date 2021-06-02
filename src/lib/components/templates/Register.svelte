@@ -10,7 +10,7 @@
 
 <style lang="scss">
 	h2 {
-		margin-bottom: var(--space-m);
+		margin-bottom: var(--space-s);
 	}
 </style>
 

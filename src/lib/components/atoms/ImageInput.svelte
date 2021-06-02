@@ -5,8 +5,8 @@
 <style lang="scss">
 	label {
 		border-radius: 50%;
-		width: var(--space-xl);
-		height: var(--space-xl);
+		width: var(--space-xxxl);
+		height: var(--space-xxxl);
 		background: var(--dark);
 		display: grid;
 		place-content: center;
@@ -30,9 +30,9 @@
 			grid-column: 1;
 			font-size: var(--font-l);
 			color: var(--secondary);
-			width: var(--space-xl);
-			height: var(--space-xl);
-			line-height: var(--space-xl);
+			width: 100%;
+			height: 100%;
+			line-height: var(--space-xxxl);
 			font-weight: 400;
 			text-align: center;
 		}

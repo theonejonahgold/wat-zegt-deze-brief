@@ -5,11 +5,120 @@
 }
 
 :root {
+	/* @link https://utopia.fyi/type/calculator?c=320,16,1.125,512,16,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
+
+	--step--2: clamp(0.79rem, 1.04rem + -1.25vw, 0.64rem);
+	--step--1: clamp(0.89rem, 1.04rem + -0.74vw, 0.8rem);
+	--step-0: clamp(1rem, 1rem + 0vw, 1rem);
+	--step-1: clamp(1.13rem, 0.92rem + 1.04vw, 1.25rem);
+	--step-2: clamp(1.27rem, 0.77rem + 2.47vw, 1.56rem);
+	--step-3: clamp(1.42rem, 0.54rem + 4.41vw, 1.95rem);
+	--step-4: clamp(1.6rem, 0.2rem + 6.99vw, 2.44rem);
+	--step-5: clamp(1.8rem, -0.28rem + 10.42vw, 3.05rem);
+}
+
+/* @link https://utopia.fyi/space/calculator?c=320,12,1.125,512,16,1.25,5,2,&s=0.75|0.5,1.25|1.5|2|2.5|3.5, */
+
+:root {
+	--fluid-min-width: 320;
+	--fluid-max-width: 512;
+
+	--fluid-screen: 100vw;
+	--fluid-bp: calc(
+		(var(--fluid-screen) - var(--fluid-min-width) / 16 * 1rem) /
+			(var(--fluid-max-width) - var(--fluid-min-width))
+	);
+}
+
+@media screen and (min-width: 512px) {
+	:root {
+		--fluid-screen: calc(var(--fluid-max-width) * 1px);
+	}
+}
+
+:root {
+	--fc-2xs-min: (var(--fc-s-min) * 0.5);
+	--fc-2xs-max: (var(--fc-s-max) * 0.5);
+
+	--fc-xs-min: (var(--fc-s-min) * 0.75);
+	--fc-xs-max: (var(--fc-s-max) * 0.75);
+
+	--fc-s-min: (var(--f-0-min, 12));
+	--fc-s-max: (var(--f-0-max, 16));
+
+	--fc-m-min: (var(--fc-s-min) * 1.25);
+	--fc-m-max: (var(--fc-s-max) * 1.25);
+
+	--fc-l-min: (var(--fc-s-min) * 1.5);
+	--fc-l-max: (var(--fc-s-max) * 1.5);
+
+	--fc-xl-min: (var(--fc-s-min) * 2);
+	--fc-xl-max: (var(--fc-s-max) * 2);
+
+	--fc-2xl-min: (var(--fc-s-min) * 2.5);
+	--fc-2xl-max: (var(--fc-s-max) * 2.5);
+
+	--fc-3xl-min: (var(--fc-s-min) * 3.5);
+	--fc-3xl-max: (var(--fc-s-max) * 3.5);
+
+	/* T-shirt sizes */
+	--space-xxs: calc(
+		((var(--fc-2xs-min) / 16) * 1rem) + (var(--fc-2xs-max) - var(--fc-2xs-min)) * var(--fluid-bp)
+	);
+	--space-xs: calc(
+		((var(--fc-xs-min) / 16) * 1rem) + (var(--fc-xs-max) - var(--fc-xs-min)) * var(--fluid-bp)
+	);
+	--space-s: calc(
+		((var(--fc-s-min) / 16) * 1rem) + (var(--fc-s-max) - var(--fc-s-min)) * var(--fluid-bp)
+	);
+	--space-m: calc(
+		((var(--fc-m-min) / 16) * 1rem) + (var(--fc-m-max) - var(--fc-m-min)) * var(--fluid-bp)
+	);
+	--space-l: calc(
+		((var(--fc-l-min) / 16) * 1rem) + (var(--fc-l-max) - var(--fc-l-min)) * var(--fluid-bp)
+	);
+	--space-xl: calc(
+		((var(--fc-xl-min) / 16) * 1rem) + (var(--fc-xl-max) - var(--fc-xl-min)) * var(--fluid-bp)
+	);
+	--space-xxl: calc(
+		((var(--fc-2xl-min) / 16) * 1rem) + (var(--fc-2xl-max) - var(--fc-2xl-min)) * var(--fluid-bp)
+	);
+	--space-xxxl: calc(
+		((var(--fc-3xl-min) / 16) * 1rem) + (var(--fc-3xl-max) - var(--fc-3xl-min)) * var(--fluid-bp)
+	);
+
+	/* One-up pairs */
+	--space-2xs-xs: calc(
+		((var(--fc-2xs-min) / 16) * 1rem) + (var(--fc-xs-max) - var(--fc-2xs-min)) * var(--fluid-bp)
+	);
+	--space-xs-s: calc(
+		((var(--fc-xs-min) / 16) * 1rem) + (var(--fc-s-max) - var(--fc-xs-min)) * var(--fluid-bp)
+	);
+	--space-s-m: calc(
+		((var(--fc-s-min) / 16) * 1rem) + (var(--fc-m-max) - var(--fc-s-min)) * var(--fluid-bp)
+	);
+	--space-m-l: calc(
+		((var(--fc-m-min) / 16) * 1rem) + (var(--fc-l-max) - var(--fc-m-min)) * var(--fluid-bp)
+	);
+	--space-l-xl: calc(
+		((var(--fc-l-min) / 16) * 1rem) + (var(--fc-xl-max) - var(--fc-l-min)) * var(--fluid-bp)
+	);
+	--space-xl-2xl: calc(
+		((var(--fc-xl-min) / 16) * 1rem) + (var(--fc-2xl-max) - var(--fc-xl-min)) * var(--fluid-bp)
+	);
+	--space-2xl-3xl: calc(
+		((var(--fc-2xl-min) / 16) * 1rem) + (var(--fc-3xl-max) - var(--fc-2xl-min)) * var(--fluid-bp)
+	);
+
+	/* Custom pairs */
+}
+
+:root {
 	--light-purple: #f8f9fd;
 	--purple: #978fff;
 	--blue: #80b6fe;
 	--white: #fff;
-	--black: #000;
+	--black: #595959;
 	--grey: #686868;
 	--dark-grey: #989898;
 
@@ -30,26 +139,18 @@
 		0 3px 5px -1px rgba(0, 0, 0, 0.2);
 	--bs-up: 0 -1px 3px rgba(0, 0, 0, 0.16);
 	--bs-button: 0 3px 8px rgba(0, 0, 0, 0.16);
+	--bs-input: 0 3px 6px rgba(0, 0, 0, 0.16);
 
 	--border-radius: 0.75rem;
 
 	--font-family: 'Poppins', sans-serif;
 
-	--font-xs: 0.75rem;
-	--font-s: 1rem;
-	--font-m: 1.25rem;
-	--font-l: 1.5rem;
-	--font-xl: 2rem;
-	--font-xxl: 2.5rem;
-
-	--space-xs: 0.5rem;
-	--space-s: 0.75rem;
-	--space-m: 1rem;
-	--space-l: 1.25rem;
-	--space-xl: 1.5rem;
-	--space-xxl: 2rem;
-	--space-xxxl: 2.5rem;
-	--space-xxxxl: 3.5rem;
+	--font-xs: var(--step--1);
+	--font-s: var(--step-0);
+	--font-m: var(--step-1);
+	--font-l: var(--step-2);
+	--font-xl: var(--step-3);
+	--font-xxl: var(--step-4);
 
 	color: var(--primary);
 	font-family: var(--font-family);
@@ -90,6 +191,12 @@ body {
 	main:nth-last-child(2) {
 		grid-row-end: 4;
 	}
+}
+
+:where(#svelte > header),
+:where(#svelte > main),
+:where(#svelte > footer) {
+	padding: var(--space-l) var(--space-xl);
 }
 
 h1,

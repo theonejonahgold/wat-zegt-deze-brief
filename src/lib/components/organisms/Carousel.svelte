@@ -23,7 +23,7 @@
 		border: none;
 		background: none;
 		opacity: 0.8;
-		padding: var(--space-s);
+		padding: var(--space-xs);
 		width: 3rem;
 		height: 3rem;
 		cursor: pointer;
@@ -33,11 +33,11 @@
 
 	#next {
 		transform: rotate(180deg);
-		right: var(--space-s);
+		right: var(--space-xs);
 	}
 
 	#previous {
-		left: var(--space-s);
+		left: var(--space-xs);
 	}
 
 	button:hover {
@@ -47,7 +47,7 @@
 	div {
 		position: relative;
 		z-index: -1;
-		margin: var(--space-s);
+		margin: var(--space-xs);
 		width: 100%;
 
 		:global(img) {

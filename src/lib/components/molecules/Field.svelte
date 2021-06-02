@@ -11,10 +11,11 @@
 <style>
 	label {
 		display: block;
+		color: var(--muted);
 
 		:global(input) {
 			display: block;
-			margin-top: var(--space-xs);
+			margin-top: var(--space-xxs);
 			width: 100%;
 		}
 	}

@@ -17,14 +17,14 @@
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		column-gap: var(--space-m);
+		column-gap: var(--space-s);
 		width: max-content;
-		padding-right: var(--space-m);
+		padding-right: var(--space-s);
 	}
 
 	li {
-		width: var(--space-xl);
-		height: var(--space-xl);
+		width: var(--space-xxxl);
+		height: var(--space-xxxl);
 
 		&.selected {
 			outline: 2px solid var(--dark);

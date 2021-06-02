@@ -11,11 +11,11 @@
 		background: var(--secondary);
 		font-family: var(--font-family);
 		color: var(--dark);
-		width: var(--space-l);
-		height: var(--space-l);
+		width: var(--space-xl);
+		height: var(--space-xl);
 		line-height: 1em;
 		text-align: center;
-		font-size: var(--font-m);
+		font-size: var(--font-s);
 		padding: 0;
 		font-weight: 700;
 		border: 1px solid var(--dark);
