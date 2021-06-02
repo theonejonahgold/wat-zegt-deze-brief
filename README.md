@@ -19,6 +19,13 @@
 - [User scenarios](#user-scenarios)
 - [Sources](#sources)
 
+# Week[2]
+
+## Coaching session
+
+- Complete flow of user to be able to test it.
+- Get a test result.
+
 # Week[1]
 
 ## Coaching session

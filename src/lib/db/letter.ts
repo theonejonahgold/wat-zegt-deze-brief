@@ -21,13 +21,7 @@ export function listLetters() {
 			sender,
 			createdAt,
 			volunteer:volunteer_id ( name ),
-			status,
-			messages (
-				sender:sender_id ( name ),
-				content,
-				type,
-				date
-			)
+			status
 		`
 	)
 }
