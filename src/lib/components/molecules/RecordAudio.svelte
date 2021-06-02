@@ -12,7 +12,6 @@
 	function recordMedia() {
 		clicked = !clicked
 		recorder.start()
-		console.log(recorder.state)
 
 		recorder.ondataavailable = (e: BlobEvent) => {
 			chunks.push(e.data)
@@ -22,12 +21,10 @@
 	function stopMedia() {
 		clicked = !clicked
 		recorder.stop()
-		console.log(recorder.state)
 
 		recorder.onstop = () => {
 			let blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus' })
 			chunks = []
-			console.log(blob)
 			const file = new File([blob], 'message.ogg', { type: 'audio/ogg; codecs=opus' })
 
 			dispatch('message', file)

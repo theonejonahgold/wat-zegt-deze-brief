@@ -79,7 +79,6 @@
 	async function messageHandler(e: any) {
 		const message: File = e.detail
 		if (!message) return
-		console.log(message)
 
 		const id = uuid()
 		await client.storage.from('messages').upload(`${id}`, message)
