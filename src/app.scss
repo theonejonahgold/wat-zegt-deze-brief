@@ -168,10 +168,11 @@ body {
 	display: grid;
 	place-items: center;
 	margin: 0;
-	background: var(--background);
+	background: #f1f1f1;
 }
 
 #svelte {
+	z-index: 0;
 	position: relative;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -179,6 +180,7 @@ body {
 	max-height: 56rem;
 	display: grid;
 	grid-template-rows: min-content auto min-content;
+	background: var(--background);
 
 	@media (min-width: 26rem) {
 		box-shadow: var(--bs-button);
