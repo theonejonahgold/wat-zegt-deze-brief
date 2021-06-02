@@ -94,6 +94,7 @@
 	</Header>
 	<main>
 		<Form
+			noEnhance
 			action="/api/letter/{letter.id}"
 			fields={[
 				{

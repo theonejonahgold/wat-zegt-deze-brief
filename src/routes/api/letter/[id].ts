@@ -18,13 +18,17 @@ export const post: RequestHandler<Locals, FormData> = async ({ params, body }) =
 	const id = params.id
 	const sender = body.get('sender')
 
-	const { error: otherError } = await client
+	const { data, error } = await client
 		.from<definitions['letters']>('letters')
 		.update({ sender, status: 'published' })
 		.eq('id', id)
-	if ((<any>otherError)?.length) throw otherError
 
-	return {
-		status: 302,
+	if (data) {
+		return {
+			status: 302,
+			headers: {
+				location: '/dashboard',
+			},
+		}
 	}
 }
