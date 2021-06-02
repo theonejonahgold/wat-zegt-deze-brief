@@ -22,13 +22,14 @@
 </script>
 
 <script>
-	import { Help, SpokenText, Back, Button, Image } from '$atoms'
+	import { Help, SpokenText, Back, Image, IconButton } from '$atoms'
 	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
+	import { ChatIcon, UserIcon } from '$icons'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
@@ -93,7 +94,7 @@
 	</Header>
 	<main>
 		<Form
-			action="/api/letter/?"
+			action="/api/letter/{letter.id}"
 			fields={[
 				{
 					label: 'Waar komt deze brief vandaan?',
@@ -105,7 +106,10 @@
 			]}
 			method="POST"
 		>
-			<Button href="/dashboard/letter/{letter.id}/upload">Pagina's bewerken</Button>
+			<IconButton href="/dashboard/letter/{letter.id}/upload">
+				<!-- TODO: Insert edit button here -->
+				<UserIcon />
+			</IconButton>
 			{#if pages.length}
 				<ol>
 					{#each pages as page}
