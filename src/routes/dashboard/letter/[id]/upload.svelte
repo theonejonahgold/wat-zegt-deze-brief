@@ -7,21 +7,24 @@
 			.limit(1)
 			.single()
 
-		const { body: isUserRole } = await client.rpc<boolean>('is_role', {
-			user_id: client.auth.session().user.id,
-			u_role: 'user',
-		})
+		const role = await checkRole()
+
+		if (role !== 'user') {
+			return {
+				redirect: '/dashboard',
+				status: 302,
+			}
+		}
 
 		return {
 			props: {
 				letter: data,
-				role: (isUserRole as unknown as boolean) ? 'user' : 'volunteer',
 			},
 		}
 	}
 </script>
 
-<script lang="typescript">
+<script>
 	import { ImageInput, Button } from '$atoms'
 	import { PageList } from '$organisms'
 	import { client } from '$config/supabase'
@@ -30,9 +33,9 @@
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
 	import { v4 as uuid } from 'uuid'
+	import { checkRole } from '$db/user'
 
 	export let letter: Letter
-	export let role: 'user' | 'volunteer'
 
 	let pages: string[] = []
 	let selectedPage = 0
@@ -90,21 +93,19 @@
 	}
 </script>
 
-{#if role === 'user'}
-	<CarouselPage
-		bind:selectedPage
-		bind:pages
-		title="Upload pagina's"
-		backLink="/dashboard/letter?step=4&id={letter.id}"
-	>
-		<ImageInput slot="empty" on:change={changeHandler} name="page" />
-		<svelte:fragment slot="footer">
-			<PageList bind:selected={selectedPage} {pages}>
-				{#if pages.length}
-					<ImageInput on:change={changeHandler} name="page" />
-				{/if}
-			</PageList>
-			<Button href="/dashboard/letter/{letter.id}">Verder</Button>
-		</svelte:fragment>
-	</CarouselPage>
-{/if}
+<CarouselPage
+	bind:selectedPage
+	bind:pages
+	title="Upload pagina's"
+	backLink="/dashboard/letter?step=4&id={letter.id}"
+>
+	<ImageInput slot="empty" on:change={changeHandler} name="page" />
+	<svelte:fragment slot="footer">
+		<PageList bind:selected={selectedPage} {pages}>
+			{#if pages.length}
+				<ImageInput on:change={changeHandler} name="page" />
+			{/if}
+		</PageList>
+		<Button href="/dashboard/letter/{letter.id}">Verder</Button>
+	</svelte:fragment>
+</CarouselPage>
