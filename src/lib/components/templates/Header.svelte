@@ -1,9 +1,14 @@
 <style>
 	header {
 		display: grid;
-		grid-template-columns: var(--space-l) auto var(--space-l);
-		column-gap: var(--space-m);
+		grid-template-columns: var(--space-m) 1fr var(--space-m);
+		column-gap: var(--space-s);
 		align-items: center;
+		justify-content: center;
+
+		> :global(*) {
+			line-height: 1;
+		}
 	}
 </style>
 

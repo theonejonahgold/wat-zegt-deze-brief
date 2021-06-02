@@ -16,8 +16,8 @@
 		color: var(--primary);
 		display: grid;
 		grid-template-columns: 2fr 3fr;
-		padding: var(--space-m);
-		gap: var(--space-s);
+		padding: var(--space-s);
+		gap: var(--space-xs);
 		background-color: var(--secondary);
 		box-shadow: 0px 3px 4px var(--muted);
 		border-radius: 10px;
@@ -36,7 +36,7 @@
 			width: 100%;
 			display: grid;
 			grid-template-rows: min-content auto;
-			gap: var(--space-s);
+			gap: var(--space-xs);
 
 			> p {
 				align-self: center;

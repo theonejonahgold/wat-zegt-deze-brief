@@ -21,7 +21,7 @@
 <style lang="scss">
 	form :global {
 		label + label {
-			margin-top: var(--space-m);
+			margin-top: var(--space-s);
 		}
 	}
 </style>

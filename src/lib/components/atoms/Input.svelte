@@ -9,10 +9,10 @@
 <style>
 	input {
 		border: 0;
-		font-size: var(--font-m);
+		font-size: var(--font-s);
 		border-radius: var(--border-radius);
-		border: 1px solid var(--light);
-		padding: var(--space-s);
+		box-shadow: var(--bs-input);
+		padding: var(--space-m);
 	}
 </style>
 

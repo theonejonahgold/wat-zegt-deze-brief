@@ -13,12 +13,19 @@
 
 <style>
 	:global(img) {
-		width: auto;
-		height: 14em;
+		width: 100%;
+		max-height: 14em;
+		object-fit: contain;
 	}
 
 	div {
 		width: 100%;
+	}
+
+	.image-container {
+		background: var(--secondary);
+		border-radius: var(--border-radius);
+		padding: var(--space-xxl);
 	}
 </style>
 
@@ -29,13 +36,15 @@
 </Header>
 <Flex --textAlign="center">
 	<SpokenText --align="center" text={content.text} />
-	<Image src={content.image} alt={content.text} />
+	<div class="image-container">
+		<Image src={content.image} alt={content.text} />
+	</div>
 	{#if step < amount}
 		<Button href={hrefs.next.path}>{hrefs.next.text}</Button>
 	{:else if step === amount}
-		<div>
-			{#each hrefs.finish as href}
-				<Button href={href.path}>{href.text}</Button>
+		<div class="button-container">
+			{#each hrefs.finish as href, i}
+				<Button invert={hrefs.finish.length > 1 && i === 0} href={href.path}>{href.text}</Button>
 			{/each}
 		</div>
 	{/if}
