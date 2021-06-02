@@ -5,8 +5,8 @@
 <style lang="scss">
 	label {
 		border-radius: 50%;
-		width: var(--space-xl);
-		height: var(--space-xl);
+		width: var(--space-xxxl);
+		height: var(--space-xxxl);
 		background: var(--gradient-to-right);
 		display: grid;
 		place-content: center;
