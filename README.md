@@ -2,8 +2,13 @@
 
 # Index
 
+- [Week[2]](#week2)
+  - [Coaching session](#coaching-session)
+  - [Design feedback](#design-feedback)
 - [Week[1]](#week1)
   - [Coaching session](#coaching-session)
+  - [Feedback session](#feedback-session)
+  - [Retrospective](#retrospective)
 - [Week[0]](#week0)
   - [Coaching session](#coaching-session)
   - [Feedback session](#feedback-session)
