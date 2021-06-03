@@ -29,6 +29,8 @@ export interface paths {
           user_id?: parameters["rowFilter.letters.user_id"];
           status?: parameters["rowFilter.letters.status"];
           messages?: parameters["rowFilter.letters.messages"];
+          /** The name of the thumbnail file */
+          thumbnail?: parameters["rowFilter.letters.thumbnail"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -92,6 +94,8 @@ export interface paths {
           user_id?: parameters["rowFilter.letters.user_id"];
           status?: parameters["rowFilter.letters.status"];
           messages?: parameters["rowFilter.letters.messages"];
+          /** The name of the thumbnail file */
+          thumbnail?: parameters["rowFilter.letters.thumbnail"];
         };
         header: {
           /** Preference */
@@ -119,6 +123,8 @@ export interface paths {
           user_id?: parameters["rowFilter.letters.user_id"];
           status?: parameters["rowFilter.letters.status"];
           messages?: parameters["rowFilter.letters.messages"];
+          /** The name of the thumbnail file */
+          thumbnail?: parameters["rowFilter.letters.thumbnail"];
         };
         body: {
           /** letters */
@@ -636,6 +642,8 @@ export interface definitions {
     user_id: string;
     status: string;
     messages?: string;
+    /** The name of the thumbnail file */
+    thumbnail?: string;
   };
   /** The possible types of messages */
   "message-types": {
@@ -738,6 +746,8 @@ export interface parameters {
   "rowFilter.letters.user_id": string;
   "rowFilter.letters.status": string;
   "rowFilter.letters.messages": string;
+  /** The name of the thumbnail file */
+  "rowFilter.letters.thumbnail": string;
   /** message-types */
   "body.message-types": definitions["message-types"];
   "rowFilter.message-types.id": string;

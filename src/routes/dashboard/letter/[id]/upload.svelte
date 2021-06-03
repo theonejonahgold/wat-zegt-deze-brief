@@ -76,6 +76,13 @@
 		const mime = image.type.split('/')[1]
 		await client.storage.from('pages').upload(`${letter.id}/${id}.${mime}`, image)
 
+		if (!pages.length) {
+			await client
+				.from('letters')
+				.update({ thumbnail: `${id}.${mime}` })
+				.eq('id', letter.id)
+		}
+
 		setTimeout(() => {
 			client.storage
 				.from('pages')
