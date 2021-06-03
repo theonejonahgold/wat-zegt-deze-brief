@@ -1,3 +1,23 @@
+<script>
+	import { onMount } from 'svelte'
+	import { textToSpeech } from '$utils'
+
+	export let text = ''
+
+	let playing = false
+	let js = false
+
+	onMount(() => (js = true))
+
+	const handleClick = () => {
+		if (playing) return
+		playing = true
+		textToSpeech(text, () => {
+			playing = false
+		})
+	}
+</script>
+
 <style>
 	button {
 		text-decoration: none;
@@ -22,4 +42,8 @@
 	}
 </style>
 
-<button on:click aria-label="Leg dit scherm uit">?</button>
+{#if text && js}
+	<button on:click={handleClick} aria-label="Leg dit scherm uit">?</button>
+{:else}
+	<button on:click aria-label="Leg dit scherm uit">?</button>
+{/if}
