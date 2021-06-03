@@ -8,8 +8,4 @@ export { default as Image } from './Image.svelte'
 export { default as Input } from './Input.svelte'
 export { default as NavItem } from './NavItem.svelte'
 export { default as SpokenText } from './SpokenText.svelte'
-<<<<<<< HEAD
-export { default as Title } from './Title.svelte'
-export { default as AudioPlayer } from '../molecules/RecordAudio.svelte'
-=======
->>>>>>> b25be9b2c31b2516ca66a17d99ef6fa22750544b
+export { default as MessageCloud } from './MessageCloud.svelte'

@@ -1,11 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte'
 	import { IconButton } from '$atoms'
-<<<<<<< HEAD:src/lib/components/molecules/RecordAudio.svelte
-	import { RecordIcon } from '$icons'
-=======
 	import { RecordIcon, StopRecordingIcon } from '$icons'
->>>>>>> b25be9b2c31b2516ca66a17d99ef6fa22750544b:src/lib/components/molecules/RecordAudio.svelte
 
 	export let recorder: MediaRecorder
 	let chunks: any[] = []
