@@ -12,7 +12,10 @@
 <Header>
 	<Back slot="left" href="/" />
 	<SpokenText slot="middle" --align="center" text="Waar kom je voor?" />
-	<Help slot="right" />
+	<Help
+		slot="right"
+		text="In dit scherm is de vraag, heb je hulp nodig met een brief, of wil je hulp geven? Als je hulp nodig hebt met een brief, klik je op de mevrouw met een brief in haar hand. Als je hulp wilt geven klik je op de man met de telefoon."
+	/>
 </Header>
 
 <Flex --justify="space-evenly">
