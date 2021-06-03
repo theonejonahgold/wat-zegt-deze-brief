@@ -38,7 +38,7 @@
 			{/if}
 		{/each}
 		<slot />
-		<Button bottom><slot name="submit">Verzenden</slot></Button>
+		<Button bottom="absolute"><slot name="submit">Verzenden</slot></Button>
 	</form>
 {:else}
 	<form
@@ -60,6 +60,6 @@
 			{/if}
 		{/each}
 		<slot />
-		<Button bottom><slot name="submit">Verzenden</slot></Button>
+		<Button bottom="absolute"><slot name="submit">Verzenden</slot></Button>
 	</form>
 {/if}

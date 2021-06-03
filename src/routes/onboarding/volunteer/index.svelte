@@ -16,6 +16,8 @@
 
 		:global(img) {
 			width: 100%;
+			max-height: 14em;
+			object-fit: contain;
 		}
 	}
 </style>

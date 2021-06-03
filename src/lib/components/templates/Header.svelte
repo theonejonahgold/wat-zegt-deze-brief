@@ -1,3 +1,7 @@
+<script>
+	export let sticky = false
+</script>
+
 <style>
 	header {
 		display: grid;
@@ -5,14 +9,20 @@
 		column-gap: var(--space-s);
 		align-items: center;
 		justify-content: center;
+		background: var(--background);
 
 		> :global(*) {
 			line-height: 1;
 		}
+
+		&.sticky {
+			position: sticky;
+			top: 0;
+		}
 	}
 </style>
 
-<header>
+<header class:sticky>
 	<div>
 		<slot name="left" />
 	</div>
