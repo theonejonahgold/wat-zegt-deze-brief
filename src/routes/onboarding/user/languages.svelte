@@ -12,5 +12,5 @@
 </Header>
 <Flex>
 	<LanguagePicker {languages} />
-	<Button bottom href="/onboarding/user/register">Verder</Button>
+	<Button bottom href="/onboarding/user/register?from=languages">Verder</Button>
 </Flex>
