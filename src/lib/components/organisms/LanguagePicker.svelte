@@ -69,21 +69,21 @@
 		align-items: center;
 	}
 
-	section {
-		overflow-y: auto;
-		margin-top: 1em;
-		padding-right: 1em;
-		height: calc(100vh - 17em);
+	div > form {
+		position: sticky;
+		top: 5rem;
+		background: var(--background);
+		padding-bottom: var(--space-s);
 	}
 
 	input {
 		&[type='search'] {
 			width: 100%;
 			border: 0;
-			font-size: var(--font-m);
+			font-size: var(--font-s);
 			border-radius: var(--border-radius);
-			border: 1px solid var(--light);
-			padding: var(--space-xs);
+			box-shadow: var(--bs-input);
+			padding: var(--space-m);
 		}
 
 		&[type='checkbox'] {

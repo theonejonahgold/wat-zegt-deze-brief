@@ -1,3 +1,18 @@
+<script>
+	import { textToSpeech } from '$utils'
+
+	export let text = ''
+	let playing = false
+
+	const handleClick = () => {
+		if (playing) return
+		playing = true
+		textToSpeech(text, () => {
+			playing = false
+		})
+	}
+</script>
+
 <style>
 	button {
 		text-decoration: none;
@@ -22,4 +37,8 @@
 	}
 </style>
 
-<button on:click aria-label="Leg dit scherm uit">?</button>
+{#if text}
+	<button on:click={handleClick} aria-label="Leg dit scherm uit">?</button>
+{:else}
+	<button on:click aria-label="Leg dit scherm uit">?</button>
+{/if}
