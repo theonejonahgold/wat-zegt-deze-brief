@@ -22,8 +22,8 @@
 </script>
 
 <script>
-	import { Help, SpokenText, Back, Button } from '$atoms'
-	import { Carousel, Form } from '$organisms'
+	import { Help, SpokenText, Back, Image } from '$atoms'
+	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
@@ -65,6 +65,44 @@
 	})
 </script>
 
+<style lang="scss">
+	ol {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		list-style: none;
+		padding: 0;
+		gap: var(--space-m);
+		max-height: calc(100vh - 21em);
+		overflow-y: scroll;
+	}
+
+	li {
+		:global(img) {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	section {
+		margin-top: var(--space-xl);
+		header {
+			margin-top: var(--space-m);
+			display: flex;
+			justify-content: space-between;
+		}
+
+		a {
+			color: var(--blue);
+			text-decoration: none;
+		}
+	}
+
+	hr {
+		margin-bottom: var(--space-m);
+	}
+</style>
+
 {#if role === 'user'}
 	<Header>
 		<Back slot="left" href="/dashboard/letter/{letter.id}/upload" />
@@ -73,7 +111,8 @@
 	</Header>
 	<main>
 		<Form
-			action="/api/letter/?"
+			noEnhance
+			action="/api/letter/{letter.id}"
 			fields={[
 				{
 					label: 'Waar komt deze brief vandaan?',
@@ -85,12 +124,22 @@
 			]}
 			method="POST"
 		>
-			<Button href="/dashboard/letter/{letter.id}/upload">Pagina's bewerken</Button>
-			{#if pages.length}
-				<Carousel {pages} bind:selected={selectedPage} />
-			{:else}
-				<p>Upload pagina's van je brief om ze hier te zien.</p>
-			{/if}
+			<section>
+				<header>
+					<h3>Pagina's</h3>
+					<a href="/dashboard/letter/{letter.id}/upload">Bewerken</a>
+				</header>
+				<hr />
+				{#if pages.length}
+					<ol>
+						{#each pages as page}
+							<li><Image src={page} alt="Page preview" shadow={true} /></li>
+						{/each}
+					</ol>
+				{:else}
+					<p>Upload pagina's van je brief om ze hier te zien.</p>
+				{/if}
+			</section>
 		</Form>
 	</main>
 {:else}

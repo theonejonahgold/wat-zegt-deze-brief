@@ -1,12 +1,17 @@
 <script>
 	import Icon from './Icon.svelte'
-
-	export let color: string = ''
+	export let color = ''
+	export let buttonColor: string
+	export let href = ''
 </script>
 
 <style>
-	button {
-		background: none;
+	button,
+	a {
+		display: block;
+		text-decoration: none;
+		border-radius: 50%;
+		background: var(--color, currentColor);
 		border: none;
 		width: 5rem;
 		height: 5rem;
@@ -14,8 +19,16 @@
 	}
 </style>
 
-<button on:click>
-	<Icon {color}>
-		<slot />
-	</Icon>
-</button>
+{#if href}
+	<a {href} style="--color: {buttonColor}">
+		<Icon {color}>
+			<slot />
+		</Icon>
+	</a>
+{:else}
+	<button on:click style="--color: {buttonColor}">
+		<Icon {color}>
+			<slot />
+		</Icon>
+	</button>
+{/if}
