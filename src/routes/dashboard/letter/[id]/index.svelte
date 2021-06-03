@@ -29,12 +29,22 @@
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
+	import { RecordAudio } from '$molecules'
+	import { browser } from '$app/env'
+	import { messageHandler } from '$actions'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
 
 	let pages: string[] = []
 	let selectedPage = 0
+	let recorder: MediaRecorder
+
+	if (browser) {
+		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+			recorder = new MediaRecorder(stream)
+		})
+	}
 
 	onMount(() => {
 		client.storage
@@ -95,6 +105,6 @@
 	</main>
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
-		<svelte:fragment slot="footer">Hier komt iets</svelte:fragment>
+		<RecordAudio slot="footer" {recorder} on:message={messageHandler} />
 	</CarouselPage>
 {/if}
