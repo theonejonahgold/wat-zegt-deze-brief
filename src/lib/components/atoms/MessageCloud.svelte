@@ -9,9 +9,9 @@
 		border-radius: 4px;
 		box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
 		font-size: 1.1rem;
+		max-width: 12rem;
 		line-height: 1.4;
-		max-width: 200px;
-		padding: 8px;
+		padding: 1rem;
 		position: relative;
 
 		p {
