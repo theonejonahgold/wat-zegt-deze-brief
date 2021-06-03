@@ -2,8 +2,13 @@
 
 # Index
 
+- [Week[2]](#week2)
+  - [Coaching session](#coaching-session)
+  - [Design feedback](#design-feedback)
 - [Week[1]](#week1)
   - [Coaching session](#coaching-session)
+  - [Feedback session](#feedback-session)
+  - [Retrospective](#retrospective)
 - [Week[0]](#week0)
   - [Coaching session](#coaching-session)
   - [Feedback session](#feedback-session)
@@ -25,6 +30,19 @@
 
 - Complete flow of user to be able to test it.
 - Get a test result.
+
+## Design feedback
+
+- Onboarding process is very abrupt for "users". It isn't clear that the app is about to be explained to the user.
+- Change text of buttons on page where people are asked to tell their preferred languages.
+- Language or multiple languages? Revise text for languages select flow.
+  - Title.
+  - Search.
+  - Ask to put language page.
+- Titles on pages can be more descriptive.
+- Placeholder on language search input.
+- Buttons don't show where you're going in the app.
+- Back button on register page, which brings you back to the place you came from.
 
 # Week[1]
 
