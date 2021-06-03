@@ -1,13 +1,8 @@
 <script>
-	import { onMount } from 'svelte'
 	import { textToSpeech } from '$utils'
 
 	export let text = ''
-
 	let playing = false
-	let js = false
-
-	onMount(() => (js = true))
 
 	const handleClick = () => {
 		if (playing) return
@@ -42,7 +37,7 @@
 	}
 </style>
 
-{#if text && js}
+{#if text}
 	<button on:click={handleClick} aria-label="Leg dit scherm uit">?</button>
 {:else}
 	<button on:click aria-label="Leg dit scherm uit">?</button>
