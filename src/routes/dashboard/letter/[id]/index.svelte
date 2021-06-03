@@ -22,14 +22,13 @@
 </script>
 
 <script>
-	import { Help, SpokenText, Back, Image, IconButton } from '$atoms'
+	import { Help, SpokenText, Back, Image } from '$atoms'
 	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
-	import { UserIcon } from '$icons'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
@@ -73,7 +72,7 @@
 		list-style: none;
 		padding: 0;
 		gap: var(--space-m);
-		max-height: calc(100vh - 20em);
+		max-height: calc(100vh - 21em);
 		overflow-y: scroll;
 	}
 
@@ -83,6 +82,24 @@
 			height: 100%;
 			object-fit: cover;
 		}
+	}
+
+	section {
+		margin-top: var(--space-xl);
+		header {
+			margin-top: var(--space-m);
+			display: flex;
+			justify-content: space-between;
+		}
+
+		a {
+			color: var(--blue);
+			text-decoration: none;
+		}
+	}
+
+	hr {
+		margin-bottom: var(--space-m);
 	}
 </style>
 
@@ -107,19 +124,22 @@
 			]}
 			method="POST"
 		>
-			<IconButton href="/dashboard/letter/{letter.id}/upload" buttonColor="var(--dark)">
-				<!-- TODO: Insert edit button here -->
-				<UserIcon />
-			</IconButton>
-			{#if pages.length}
-				<ol>
-					{#each pages as page}
-						<li><Image src={page} alt="Page preview" shadow={true} /></li>
-					{/each}
-				</ol>
-			{:else}
-				<p>Upload pagina's van je brief om ze hier te zien.</p>
-			{/if}
+			<section>
+				<header>
+					<h3>Pagina's</h3>
+					<a href="/dashboard/letter/{letter.id}/upload">Bewerken</a>
+				</header>
+				<hr />
+				{#if pages.length}
+					<ol>
+						{#each pages as page}
+							<li><Image src={page} alt="Page preview" shadow={true} /></li>
+						{/each}
+					</ol>
+				{:else}
+					<p>Upload pagina's van je brief om ze hier te zien.</p>
+				{/if}
+			</section>
 		</Form>
 	</main>
 {:else}
