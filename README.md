@@ -26,6 +26,19 @@
 - Complete flow of user to be able to test it.
 - Get a test result.
 
+## Design feedback
+
+- Onboarding process is very abrupt for "users". It isn't clear that the app is about to be explained to the user.
+- Change text of buttons on page where people are asked to tell their preferred languages.
+- Language or multiple languages? Revise text for languages select flow.
+  - Title.
+  - Search.
+  - Ask to put language page.
+- Titles on pages can be more descriptive.
+- Placeholder on language search input.
+- Buttons don't show where you're going in the app.
+- Back button on register page, which brings you back to the place you came from.
+
 # Week[1]
 
 ## Coaching session
