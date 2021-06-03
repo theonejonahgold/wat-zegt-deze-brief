@@ -9,6 +9,7 @@
 	export let method: 'GET' | 'POST' = 'POST'
 	export let fields: FormField[] = []
 	export let noEnhance = false
+	export let buttonPosition: 'sticky' | 'absolute' | false = 'absolute'
 
 	const dispatch =
 		createEventDispatcher<{
@@ -38,7 +39,7 @@
 			{/if}
 		{/each}
 		<slot />
-		<Button bottom><slot name="submit">Verzenden</slot></Button>
+		<Button bottom={buttonPosition}><slot name="submit">Verzenden</slot></Button>
 	</form>
 {:else}
 	<form
@@ -60,6 +61,6 @@
 			{/if}
 		{/each}
 		<slot />
-		<Button bottom><slot name="submit">Verzenden</slot></Button>
+		<Button bottom={buttonPosition}><slot name="submit">Verzenden</slot></Button>
 	</form>
 {/if}

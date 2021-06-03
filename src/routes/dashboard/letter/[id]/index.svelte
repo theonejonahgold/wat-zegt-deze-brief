@@ -72,8 +72,6 @@
 		list-style: none;
 		padding: 0;
 		gap: var(--space-m);
-		max-height: calc(100vh - 21em);
-		overflow-y: scroll;
 	}
 
 	li {
@@ -104,13 +102,14 @@
 </style>
 
 {#if role === 'user'}
-	<Header>
+	<Header sticky>
 		<Back slot="left" href="/dashboard/letter/{letter.id}/upload" />
 		<SpokenText --align="center" slot="middle" text="Afronden" />
 		<Help slot="right" />
 	</Header>
 	<main>
 		<Form
+			buttonPosition="sticky"
 			noEnhance
 			action="/api/letter/{letter.id}"
 			fields={[
