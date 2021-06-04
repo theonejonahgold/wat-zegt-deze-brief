@@ -25,6 +25,6 @@
 	<h1>Hallo!</h1>
 	<SpokenText text="Dit is de app die helpt met het uitleggen van brieven" />
 	<Icon><IndexIcon /></Icon>
-	<Button href="/login">Inloggen</Button>
-	<Button href="/onboarding">Aanmelden</Button>
+	<Button invert href="/login">Ik heb al een account</Button>
+	<Button href="/onboarding">Ik ben nieuw hier</Button>
 </Flex>

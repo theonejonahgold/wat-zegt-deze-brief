@@ -21,7 +21,7 @@
 	/>
 	<ImageContainer alt="Instructions" src="/images/onboarding-user-5.png" />
 	<div>
-		<Button invert href="/onboarding/volunteer/register">Overslaan</Button>
-		<Button href="/onboarding/volunteer?step=1">Volgende</Button>
+		<Button invert href="/onboarding/volunteer/register">Overslaan, naar registreren</Button>
+		<Button href="/onboarding/volunteer?step=1">Naar de uitleg</Button>
 	</div>
 </Flex>

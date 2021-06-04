@@ -19,6 +19,6 @@
 	<SpokenText --align="center" text="We laten je eerst zien hoe deze app werkt" />
 	<ImageContainer alt="Instructions" src="/images/onboarding-user-5.png" />
 	<div>
-		<Button href="/onboarding/user?step=1">Volgende</Button>
+		<Button href="/onboarding/user?step=1">Naar de uitleg</Button>
 	</div>
 </Flex>

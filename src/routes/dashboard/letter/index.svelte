@@ -36,8 +36,8 @@
 			text: 'Volgende',
 		},
 		finish: id
-			? [{ path: `/dashboard/letter/${id}/upload`, text: 'Verder met brief' }]
-			: [{ path: '/api/letter', text: 'Begrepen!' }],
+			? [{ path: `/dashboard/letter/${id}/upload`, text: 'Verder met je brief' }]
+			: [{ path: '/api/letter', text: 'Begrepen, upload mijn brief' }],
 	}
 </script>
 

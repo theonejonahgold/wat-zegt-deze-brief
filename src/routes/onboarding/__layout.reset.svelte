@@ -34,8 +34,11 @@
 		next: { path: `${path}?step=${+step + 1}`, text: 'Volgende' },
 		finish: path?.endsWith('/user')
 			? [
-					{ path: `${path}/register?from=${encodeURIComponent('?step=5')}`, text: 'Nee' },
-					{ path: `${path}/languages`, text: 'Ja' },
+					{
+						path: `${path}/register?from=${encodeURIComponent('?step=5')}`,
+						text: 'Nee, naar registreren',
+					},
+					{ path: `${path}/languages`, text: 'Ja, kies talen' },
 			  ]
 			: [{ path: `${path}/register?from=${encodeURIComponent('?step=4')}`, text: 'Begrepen!' }],
 	}
