@@ -26,7 +26,11 @@
 	<SpokenText --align="center" text={content.text} />
 	<ImageContainer src={content.image} alt={content.text} />
 	{#if step < amount}
-		<Button href={hrefs.next.path}>{hrefs.next.text}</Button>
+		<div class="button-container">
+			{#each hrefs.next as href, i}
+				<Button invert={hrefs.next.length > 1 && i === 0} href={href.path}>{href.text}</Button>
+			{/each}
+		</div>
 	{:else if step === amount}
 		<div class="button-container">
 			{#each hrefs.finish as href, i}
