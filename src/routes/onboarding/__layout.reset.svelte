@@ -31,7 +31,7 @@
 	let hrefs: InstructionsHrefs
 	$: hrefs = {
 		previous: step === 1 ? '/onboarding' : `${path}?step=${+step - 1}`,
-		next: { path: `${path}?step=${+step + 1}`, text: 'Volgende' },
+		next: [{ path: `${path}?step=${+step + 1}`, text: 'Volgende' }],
 		finish: path?.endsWith('/user')
 			? [
 					{
