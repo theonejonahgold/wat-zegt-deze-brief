@@ -114,6 +114,7 @@
 			fields={[
 				{
 					label: 'Van welke organisatie komt deze brief?',
+					placeholder: 'Bijvoorbeeld Belastingdienst',
 					name: 'sender',
 					type: 'text',
 					autofocus: true,
