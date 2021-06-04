@@ -1,24 +1,11 @@
 <script>
-	import { SpokenText, Back, Button, Image } from '$atoms'
+	import { SpokenText, Back, Button, Image, ImageContainer } from '$atoms'
 	import { Header, Flex } from '$templates'
 </script>
 
 <style>
 	div {
 		width: 100%;
-	}
-	.image-container {
-		padding: var(--space-xxl);
-		background: var(--secondary);
-		border-radius: var(--border-radius);
-		display: flex;
-		justify-content: center;
-
-		:global(img) {
-			width: 100%;
-			max-height: 14em;
-			object-fit: contain;
-		}
 	}
 </style>
 
@@ -29,11 +16,10 @@
 
 <Flex>
 	<SpokenText
+		--align="center"
 		text="Hier volgt een kleine uitleg van de app, zodat je gelijk aan de slag kunt gaan."
 	/>
-	<div class="image-container">
-		<Image src="/images/onboarding-user-5.png" alt="Instructions" />
-	</div>
+	<ImageContainer alt="Instructions" src="/images/onboarding-user-5.png" />
 	<div>
 		<Button invert href="/onboarding/volunteer/register">Overslaan</Button>
 		<Button href="/onboarding/volunteer?step=1">Volgende</Button>
