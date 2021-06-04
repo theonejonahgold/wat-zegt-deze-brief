@@ -604,6 +604,26 @@ export interface paths {
       };
     };
   };
+  "/rpc/update_letter_messages": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            letter_id: string;
+            message_id: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
 }
 
 export interface definitions {

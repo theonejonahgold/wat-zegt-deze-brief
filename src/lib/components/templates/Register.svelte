@@ -47,6 +47,7 @@
 				label: 'Je voornaam (mag je leeg laten)',
 				name: 'name',
 				type: 'text',
+				placeholder: 'Jan Jansen',
 			},
 			{
 				name: 'role',
