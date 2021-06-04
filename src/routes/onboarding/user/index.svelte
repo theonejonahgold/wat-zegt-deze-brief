@@ -31,6 +31,6 @@
 		<Image src="/images/onboarding-user-5.png" alt="Instructions" />
 	</div>
 	<div>
-		<Button href="/onboarding/user?step=1">Volgende</Button>
+		<Button href="/onboarding/user?step=1">Naar de uitleg</Button>
 	</div>
 </Flex>

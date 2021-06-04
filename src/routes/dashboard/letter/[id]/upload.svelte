@@ -113,6 +113,6 @@
 				<ImageInput on:change={changeHandler} name="page" />
 			{/if}
 		</PageList>
-		<Button href="/dashboard/letter/{letter.id}">Verder</Button>
+		<Button href="/dashboard/letter/{letter.id}">Pagina's opslaan</Button>
 	</svelte:fragment>
 </CarouselPage>
