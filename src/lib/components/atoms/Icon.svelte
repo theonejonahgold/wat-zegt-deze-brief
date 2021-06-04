@@ -1,5 +1,5 @@
 <script>
-	export let color: string
+	export let color: string = ''
 </script>
 
 <style lang="scss">
@@ -7,7 +7,6 @@
 		display: contents;
 
 		:global(svg) {
-			fill: var(--color, currentColor);
 			width: 100%;
 			height: 100%;
 		}

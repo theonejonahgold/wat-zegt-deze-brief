@@ -3,15 +3,15 @@
 
 	export const load: Load = async ({ page, fetch }) => {
 		const step = +page.query.get('step') || 1
-		const letterId = page.query.get('id')
+		const id = page.query.get('id')
 		const res = await fetch(`${page.path}/${step}.json`)
 		const data: { content: InstructionsContent; amount: number } = await res.json()
 
 		return {
 			props: {
 				...data,
-				letterId,
 				step,
+				id,
 				path: page.path,
 			},
 		}
@@ -26,23 +26,32 @@
 	export let content: InstructionsContent
 	export let amount: number
 	export let path: string
-	export let letterId: string
+	export let id: string
 
 	let hrefs: InstructionsHrefs
 	$: hrefs = {
-		previous:
+		previous: step === 1 ? '/dashboard' : `${path}?step=${+step - 1}${id ? `&id=${id}` : ''}`,
+		next:
 			step === 1
-				? letterId
-					? `/dashboard/letter/${letterId}`
-					: '/dashboard'
-				: `${path}?step=${+step - 1}`,
-		next: {
-			path: `${path}?step=${+step + 1}${letterId ? `&id=${letterId}` : ''}`,
-			text: 'Volgende',
-		},
-		finish: letterId
-			? [{ path: `/dashboard/letter/${letterId}`, text: 'Begrepen!' }]
-			: [{ path: '/api/letter', text: 'Begrepen!' }],
+				? [
+						{
+							path: id ? `/dashboard/letter/${id}/upload` : '/api/letter',
+							text: 'Uitleg overslaan',
+						},
+						{
+							path: `${path}?step=${+step + 1}${id ? `&id=${id}` : ''}`,
+							text: 'Volgende',
+						},
+				  ]
+				: [
+						{
+							path: `${path}?step=${+step + 1}${id ? `&id=${id}` : ''}`,
+							text: 'Volgende',
+						},
+				  ],
+		finish: id
+			? [{ path: `/dashboard/letter/${id}/upload`, text: 'Verder met je brief' }]
+			: [{ path: '/api/letter', text: 'Begrepen, upload mijn brief' }],
 	}
 </script>
 

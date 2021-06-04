@@ -2,14 +2,17 @@
 	import { Button, SpokenText, Back, Help } from '$atoms'
 	import { LanguagePicker } from '$organisms'
 	import { Flex, Header } from '$templates'
+	import languages from './_languages'
 </script>
 
-<Header>
+<Header sticky>
 	<Back slot="left" href="/onboarding/user?step=5" />
-	<SpokenText --align="center" slot="middle" text="Talen" />
+	<SpokenText --align="center" slot="middle" text="Kies je talen" />
 	<Help slot="right" />
 </Header>
 <Flex>
-	<LanguagePicker />
-	<Button href="/onboarding/user/register">Verder</Button>
+	<LanguagePicker {languages} />
+	<Button bottom="sticky" href="/onboarding/user/register?from=languages"
+		>Opslaan, naar registreren</Button
+	>
 </Flex>

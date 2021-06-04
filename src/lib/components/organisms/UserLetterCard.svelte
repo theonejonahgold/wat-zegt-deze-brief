@@ -5,9 +5,8 @@
 
 	export let letter: Letter
 
-	const time = letter.messages.length ? letter.messages[0].date : letter.createdAt
-
-	const chatMessage = letter.messages[0]
+	const time = letter.messages?.length ? letter.messages[0].date : letter.createdAt
+	const chatMessage = letter.messages?.[0]
 </script>
 
 <style lang="scss">
@@ -17,10 +16,10 @@
 		&.unread:after {
 			content: '';
 			position: absolute;
-			top: calc(-0.6667 * var(--space-s));
-			right: calc(-0.6667 * var(--space-s));
-			width: var(--space-m);
-			height: var(--space-m);
+			top: calc(-0.6667 * var(--space-xs));
+			right: calc(-0.6667 * var(--space-xs));
+			width: var(--space-s);
+			height: var(--space-s);
 			background: var(--dark);
 			border-radius: 50%;
 		}
@@ -31,10 +30,10 @@
 		color: var(--primary);
 		display: grid;
 		grid-template-columns: 2fr 3fr;
-		padding: var(--space-m);
-		gap: var(--space-s);
+		padding: var(--space-s);
+		gap: var(--space-xs);
 		background-color: var(--secondary);
-		box-shadow: 0px 3px 4px var(--muted);
+		box-shadow: var(--bs-button);
 		border-radius: 10px;
 		height: 10rem;
 
@@ -51,13 +50,13 @@
 			width: 100%;
 			display: grid;
 			grid-template-rows: min-content auto;
-			gap: var(--space-s);
+			gap: var(--space-xs);
 
 			> header {
 				display: grid;
 				grid-template-rows: 1fr;
 				grid-template-columns: auto max-content;
-				column-gap: var(--space-s);
+				column-gap: var(--space-xs);
 			}
 
 			> p {

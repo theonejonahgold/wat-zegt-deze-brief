@@ -29,5 +29,26 @@ export async function register({
 }
 
 export async function login({ email, password }: { email: string; password: string }) {
-	return await client.auth.signIn({ email, password })
+	const { session } = await client.auth.signIn({ email, password })
+	return session
+}
+
+export async function checkRole() {
+	const user_id = client.auth.session().user.id
+	if (!user_id) return
+
+	let { data, error } = await client.rpc('get_user_role', { user_id })
+
+	if (error) return console.error(error)
+	return data as unknown as string
+}
+
+export async function getUserData() {
+	const user_id = client.auth.session().user.id
+	if (!user_id) return
+
+	let { data, error } = await client.rpc('get_current_user_data', { user_id })
+
+	if (error) return console.error(error)
+	return data
 }

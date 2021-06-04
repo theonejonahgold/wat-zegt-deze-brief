@@ -13,3 +13,22 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 		body: res.body[0],
 	}
 }
+
+export const post: RequestHandler<Locals, FormData> = async ({ params, body }) => {
+	const id = params.id
+	const sender = body.get('sender')
+
+	const { data, error } = await client
+		.from<definitions['letters']>('letters')
+		.update({ sender, status: 'published' })
+		.eq('id', id)
+
+	if (data) {
+		return {
+			status: 302,
+			headers: {
+				location: '/dashboard',
+			},
+		}
+	}
+}

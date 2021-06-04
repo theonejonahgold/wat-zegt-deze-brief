@@ -1,6 +1,6 @@
 <script>
 	import type { InstructionsContent, InstructionsHrefs } from '$types'
-	import { Button, Image, Back, Help, SpokenText } from '$atoms'
+	import { Button, Image, Back, Help, SpokenText, ImageContainer } from '$atoms'
 	import { Pagination } from '$molecules'
 	import Flex from './Flex.svelte'
 	import Header from './Header.svelte'
@@ -12,11 +12,6 @@
 </script>
 
 <style>
-	:global(img) {
-		width: auto;
-		height: 14em;
-	}
-
 	div {
 		width: 100%;
 	}
@@ -29,13 +24,17 @@
 </Header>
 <Flex --textAlign="center">
 	<SpokenText --align="center" text={content.text} />
-	<Image src={content.image} alt={content.text} />
+	<ImageContainer src={content.image} alt={content.text} />
 	{#if step < amount}
-		<Button href={hrefs.next.path}>{hrefs.next.text}</Button>
+		<div class="button-container">
+			{#each hrefs.next as href, i}
+				<Button invert={hrefs.next.length > 1 && i === 0} href={href.path}>{href.text}</Button>
+			{/each}
+		</div>
 	{:else if step === amount}
-		<div>
-			{#each hrefs.finish as href}
-				<Button href={href.path}>{href.text}</Button>
+		<div class="button-container">
+			{#each hrefs.finish as href, i}
+				<Button invert={hrefs.finish.length > 1 && i === 0} href={href.path}>{href.text}</Button>
 			{/each}
 		</div>
 	{/if}

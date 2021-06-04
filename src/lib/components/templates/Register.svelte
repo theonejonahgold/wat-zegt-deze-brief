@@ -1,19 +1,26 @@
 <script>
 	import { goto } from '$app/navigation'
+	import { Back, Help, SpokenText } from '$atoms'
 	import { client } from '$config/supabase'
 	import { Form } from '$organisms'
+	import Header from './Header.svelte'
 
 	export let role: 'user' | 'volunteer'
+	export let from
 </script>
 
 <style lang="scss">
 	h2 {
-		margin-bottom: var(--space-m);
+		margin-bottom: var(--space-s);
 	}
 </style>
 
+<Header>
+	<Back slot="left" href="/onboarding/{role}/{from ? from : ''}" />
+	<SpokenText --align="center" slot="middle" text="Registreren" />
+	<Help slot="right" />
+</Header>
 <main>
-	<h2>Registreren</h2>
 	<Form
 		action="/api/auth"
 		on:success={async e => {
@@ -40,6 +47,7 @@
 				label: 'Je voornaam (mag je leeg laten)',
 				name: 'name',
 				type: 'text',
+				placeholder: 'Jan Jansen',
 			},
 			{
 				name: 'role',
