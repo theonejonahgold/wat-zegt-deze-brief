@@ -24,7 +24,7 @@
 </style>
 
 <Header>
-	<SpokenText --align="center" slot="middle" text="Jouw brieven" />
+	<SpokenText --align="center" slot="middle" text="Home" />
 	<Help slot="right" />
 </Header>
 <main>
@@ -33,13 +33,20 @@
 	</ImageButton>
 	<hr />
 	<section>
-		<SpokenText text="Brieven" --align="center" />
-		<ul>
-			{#each letters as letter (letter.id)}
-				<li>
-					<UserLetterCard {letter} />
-				</li>
-			{/each}
-		</ul>
+		<SpokenText text="Jouw brieven" --align="center" />
+		{#if letters.length}
+			<ul>
+				{#each letters as letter (letter.id)}
+					<li>
+						<UserLetterCard {letter} />
+					</li>
+				{/each}
+			</ul>
+		{:else}
+			<SpokenText
+				text="Je hebt nog geen brieven ingestuurd, klik op de knop hierboven om je eerste brief in te sturen."
+				--align="center"
+			/>
+		{/if}
 	</section>
 </main>
