@@ -98,7 +98,7 @@
 	<form on:submit|preventDefault>
 		<label>
 			Zoek hier naar talen
-			<input name="query" bind:value={filterValue} type="search" />
+			<input name="query" placeholder="Nederlands" bind:value={filterValue} type="search" />
 		</label>
 		{#if !js}
 			<Button>Zoeken</Button>

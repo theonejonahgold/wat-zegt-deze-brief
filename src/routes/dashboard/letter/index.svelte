@@ -31,13 +31,27 @@
 	let hrefs: InstructionsHrefs
 	$: hrefs = {
 		previous: step === 1 ? '/dashboard' : `${path}?step=${+step - 1}${id ? `&id=${id}` : ''}`,
-		next: {
-			path: `${path}?step=${+step + 1}${id ? `&id=${id}` : ''}`,
-			text: 'Volgende',
-		},
+		next:
+			step === 1
+				? [
+						{
+							path: id ? `/dashboard/letter/${id}/upload` : '/api/letter',
+							text: 'Uitleg overslaan',
+						},
+						{
+							path: `${path}?step=${+step + 1}${id ? `&id=${id}` : ''}`,
+							text: 'Volgende',
+						},
+				  ]
+				: [
+						{
+							path: `${path}?step=${+step + 1}${id ? `&id=${id}` : ''}`,
+							text: 'Volgende',
+						},
+				  ],
 		finish: id
-			? [{ path: `/dashboard/letter/${id}/upload`, text: 'Verder met brief' }]
-			: [{ path: '/api/letter', text: 'Begrepen!' }],
+			? [{ path: `/dashboard/letter/${id}/upload`, text: 'Verder met je brief' }]
+			: [{ path: '/api/letter', text: 'Begrepen, upload mijn brief' }],
 	}
 </script>
 

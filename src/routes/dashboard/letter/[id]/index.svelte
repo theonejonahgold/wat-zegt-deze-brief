@@ -119,12 +119,12 @@
 	</Header>
 	<main>
 		<Form
-			buttonPosition="sticky"
 			noEnhance
 			action="/api/letter/{letter.id}"
 			fields={[
 				{
-					label: 'Waar komt deze brief vandaan?',
+					label: 'Van welke organisatie komt deze brief?',
+					placeholder: 'Bijvoorbeeld Belastingdienst',
 					name: 'sender',
 					type: 'text',
 					autofocus: true,
@@ -149,6 +149,7 @@
 					<p>Upload pagina's van je brief om ze hier te zien.</p>
 				{/if}
 			</section>
+			<svelte:fragment slot="submit">Brief versturen</svelte:fragment>
 		</Form>
 	</main>
 {:else}

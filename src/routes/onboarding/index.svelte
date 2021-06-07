@@ -19,7 +19,7 @@
 </Header>
 
 <Flex --justify="space-evenly">
-	<ImageButton alt="A user" text="Ik heb hulp nodig met een brief" href="/onboarding/user?step=1">
+	<ImageButton alt="A user" text="Ik heb hulp nodig met een brief" href="/onboarding/user">
 		<UserIcon />
 	</ImageButton>
 	<ImageButton alt="A volunteer" text="Hulp geven" href="/onboarding/volunteer">

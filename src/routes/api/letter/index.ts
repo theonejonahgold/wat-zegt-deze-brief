@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid'
 import { client } from '$config/supabase'
 import type { definitions, Locals } from '$types'
 import type { RequestHandler } from '@sveltejs/kit'

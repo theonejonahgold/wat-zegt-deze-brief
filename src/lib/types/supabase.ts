@@ -17,8 +17,6 @@ export interface paths {
       parameters: {
         query: {
           id?: parameters["rowFilter.letters.id"];
-          /** Showing if a letter is resolved */
-          resolved?: parameters["rowFilter.letters.resolved"];
           /** The sender of the letter, defined by the user */
           sender?: parameters["rowFilter.letters.sender"];
           /** The time the letter was created at */
@@ -82,8 +80,6 @@ export interface paths {
       parameters: {
         query: {
           id?: parameters["rowFilter.letters.id"];
-          /** Showing if a letter is resolved */
-          resolved?: parameters["rowFilter.letters.resolved"];
           /** The sender of the letter, defined by the user */
           sender?: parameters["rowFilter.letters.sender"];
           /** The time the letter was created at */
@@ -111,8 +107,6 @@ export interface paths {
       parameters: {
         query: {
           id?: parameters["rowFilter.letters.id"];
-          /** Showing if a letter is resolved */
-          resolved?: parameters["rowFilter.letters.resolved"];
           /** The sender of the letter, defined by the user */
           sender?: parameters["rowFilter.letters.sender"];
           /** The time the letter was created at */
@@ -610,6 +604,26 @@ export interface paths {
       };
     };
   };
+  "/rpc/update_letter_messages": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            letter_id: string;
+            message_id: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
 }
 
 export interface definitions {
@@ -620,8 +634,6 @@ export interface definitions {
      * This is a Primary Key.<pk/>
      */
     id: string;
-    /** Showing if a letter is resolved */
-    resolved: boolean;
     /** The sender of the letter, defined by the user */
     sender?: string;
     /** The time the letter was created at */
@@ -734,8 +746,6 @@ export interface parameters {
   /** letters */
   "body.letters": definitions["letters"];
   "rowFilter.letters.id": string;
-  /** Showing if a letter is resolved */
-  "rowFilter.letters.resolved": string;
   /** The sender of the letter, defined by the user */
   "rowFilter.letters.sender": string;
   /** The time the letter was created at */
