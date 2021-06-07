@@ -1,31 +1,28 @@
 import { browser } from '$app/env'
+import { textToSpeech as tts } from '$utils'
 
 export const textToSpeech = (node: HTMLElement, text?: string) => {
 	if (!browser) return
 	let textContent = text || node.textContent
 	const content = document.querySelector('template').content.cloneNode(true) as HTMLElement
 	const button = content.querySelector('button')
-	const image = content.querySelector('img')
-	image.src = ''
-	button.addEventListener('click', handlePlayback)
+	button.addEventListener('click', handlePlayback, false)
 	node.appendChild(content)
 
-	// TODO: Add events
-
-	const utterance = new SpeechSynthesisUtterance(textContent)
-	utterance.lang = 'nl-NL'
-
-	function handlePlayback() {
-		speechSynthesis.speak(utterance)
-		image.src = ''
+	function handlePlayback(e) {
+		e.preventDefault()
+		button.querySelector('#Group').classList.add('playing')
+		tts(textContent, () => {
+			button.querySelector('#Group').classList.remove('playing')
+		})
 	}
 
 	return {
 		destroy() {
-			button.removeEventListener('click', handlePlayback)
+			button.removeEventListener('click', handlePlayback, false)
 		},
-		update(text) {
-			utterance.text = text
+		update(text?: string) {
+			textContent = text || node.textContent
 		},
 	}
 }
