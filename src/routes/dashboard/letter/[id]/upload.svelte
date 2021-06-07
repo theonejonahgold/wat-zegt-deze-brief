@@ -116,6 +116,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Upload pagina's</title>
+</svelte:head>
+
 <CarouselPage
 	bind:selectedPage
 	bind:pages

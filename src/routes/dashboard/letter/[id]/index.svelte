@@ -101,6 +101,10 @@
 	}
 </style>
 
+<svelte:head>
+	<title>Afronden</title>
+</svelte:head>
+
 {#if role === 'user'}
 	<Header sticky>
 		<Back slot="left" href="/dashboard/letter/{letter.id}/upload" />
