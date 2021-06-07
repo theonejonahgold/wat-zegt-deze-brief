@@ -29,6 +29,8 @@ export interface paths {
           messages?: parameters["rowFilter.letters.messages"];
           /** The name of the thumbnail file */
           thumbnail?: parameters["rowFilter.letters.thumbnail"];
+          /** IDs for the pages in their respective order */
+          page_order?: parameters["rowFilter.letters.page_order"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -92,6 +94,8 @@ export interface paths {
           messages?: parameters["rowFilter.letters.messages"];
           /** The name of the thumbnail file */
           thumbnail?: parameters["rowFilter.letters.thumbnail"];
+          /** IDs for the pages in their respective order */
+          page_order?: parameters["rowFilter.letters.page_order"];
         };
         header: {
           /** Preference */
@@ -119,6 +123,8 @@ export interface paths {
           messages?: parameters["rowFilter.letters.messages"];
           /** The name of the thumbnail file */
           thumbnail?: parameters["rowFilter.letters.thumbnail"];
+          /** IDs for the pages in their respective order */
+          page_order?: parameters["rowFilter.letters.page_order"];
         };
         body: {
           /** letters */
@@ -584,6 +590,25 @@ export interface paths {
       };
     };
   };
+  "/rpc/get_current_user_data": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            user_id: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
   "/rpc/is_role": {
     post: {
       parameters: {
@@ -656,6 +681,8 @@ export interface definitions {
     messages?: string;
     /** The name of the thumbnail file */
     thumbnail?: string;
+    /** IDs for the pages in their respective order */
+    page_order?: string;
   };
   /** The possible types of messages */
   "message-types": {
@@ -758,6 +785,8 @@ export interface parameters {
   "rowFilter.letters.messages": string;
   /** The name of the thumbnail file */
   "rowFilter.letters.thumbnail": string;
+  /** IDs for the pages in their respective order */
+  "rowFilter.letters.page_order": string;
   /** message-types */
   "body.message-types": definitions["message-types"];
   "rowFilter.message-types.id": string;
