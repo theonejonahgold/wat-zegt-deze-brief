@@ -584,6 +584,25 @@ export interface paths {
       };
     };
   };
+  "/rpc/get_current_user_data": {
+    post: {
+      parameters: {
+        body: {
+          args: {
+            user_id: string;
+          };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
   "/rpc/is_role": {
     post: {
       parameters: {

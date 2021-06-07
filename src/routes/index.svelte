@@ -17,7 +17,7 @@
 </style>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Hallo!</title>
 </svelte:head>
 
 <Flex pt="var(--space-xxxl)" px="var(--space-xl)" pb="var(--space-xl)">
