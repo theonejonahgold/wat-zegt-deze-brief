@@ -1,5 +1,5 @@
 <script>
-	import { SpokenText, Back, Button, Image } from '$atoms'
+	import { SpokenText, Back, Button, Image, ImageContainer } from '$atoms'
 	import { Header, Flex } from '$templates'
 </script>
 
@@ -16,11 +16,12 @@
 
 <Flex>
 	<SpokenText
+		--align="center"
 		text="Hier volgt een kleine uitleg van de app, zodat je gelijk aan de slag kunt gaan."
 	/>
-	<Image src="/images/onboarding-user-5.png" alt="Instructions" />
+	<ImageContainer alt="Instructions" src="/images/onboarding-user-5.png" />
 	<div>
-		<Button href="/onboarding/volunteer/register">Overslaan</Button>
-		<Button href="/onboarding/volunteer?step=1">Volgende</Button>
+		<Button invert href="/onboarding/volunteer/register">Overslaan, naar registreren</Button>
+		<Button href="/onboarding/volunteer?step=1">Naar de uitleg</Button>
 	</div>
 </Flex>

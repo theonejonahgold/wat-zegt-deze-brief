@@ -21,7 +21,7 @@
 	}
 
 	li {
-		padding: var(--space-s) 0;
+		padding: var(--space-xs) 0;
 		text-align: center;
 	}
 </style>

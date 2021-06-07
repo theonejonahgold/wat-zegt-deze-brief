@@ -12,8 +12,8 @@
 		list-style: none;
 		padding: 0;
 		display: grid;
-		row-gap: var(--space-m);
-		margin-top: var(--space-xs);
+		row-gap: var(--space-s);
+		margin-top: var(--space-xxs);
 	}
 </style>
 

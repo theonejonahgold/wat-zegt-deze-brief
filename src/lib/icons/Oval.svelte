@@ -1,13 +1,18 @@
 <style>
 	svg {
-		position: fixed;
+		position: absolute;
 		top: -15rem;
 		right: -10rem;
 		z-index: -1;
 	}
 </style>
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 376.051 538.269">
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	width="376.051px"
+	height="538.269px"
+	viewBox="0 0 376.051 538.269"
+>
 	<ellipse
 		id="Oval_Copy"
 		data-name="Oval Copy"

@@ -5,12 +5,14 @@
 	import languages from './_languages'
 </script>
 
-<Header>
+<Header sticky>
 	<Back slot="left" href="/onboarding/user?step=5" />
-	<SpokenText --align="center" slot="middle" text="Talen" />
+	<SpokenText --align="center" slot="middle" text="Kies je talen" />
 	<Help slot="right" />
 </Header>
 <Flex>
 	<LanguagePicker {languages} />
-	<Button bottom href="/onboarding/user/register">Verder</Button>
+	<Button bottom="sticky" href="/onboarding/user/register?from=languages"
+		>Opslaan, naar registreren</Button
+	>
 </Flex>

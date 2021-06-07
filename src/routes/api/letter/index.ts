@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid'
 import { client } from '$config/supabase'
 import type { definitions, Locals } from '$types'
 import type { RequestHandler } from '@sveltejs/kit'
@@ -25,7 +24,7 @@ export const get: RequestHandler<Locals> = async () => {
 	return {
 		status: 303,
 		headers: {
-			location: `/dashboard/letter/${res.body[0].id}`,
+			location: `/dashboard/letter/${res.body[0].id}/upload`,
 		},
 	}
 }

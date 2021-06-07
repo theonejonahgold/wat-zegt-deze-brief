@@ -16,15 +16,17 @@
 			justify-content: center;
 			align-items: center;
 			background-color: var(--secondary);
-			box-shadow: 0px 3px 4px var(--muted);
+			box-shadow: var(--bs-button);
 			height: 10rem;
+			padding: var(--space-l);
 			width: 100%;
 			border-radius: 10px;
 
 			+ :global(p) {
-				color: var(--primary);
 				text-align: center;
-				margin-top: var(--space-s);
+				margin-top: var(--space-xs);
+				font-size: var(--font-s);
+				font-weight: normal;
 			}
 		}
 	}

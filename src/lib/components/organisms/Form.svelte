@@ -9,6 +9,7 @@
 	export let method: 'GET' | 'POST' = 'POST'
 	export let fields: FormField[] = []
 	export let noEnhance = false
+	export let buttonPosition: 'sticky' | 'absolute' | false = 'absolute'
 
 	const dispatch =
 		createEventDispatcher<{
@@ -21,7 +22,7 @@
 <style lang="scss">
 	form :global {
 		label + label {
-			margin-top: var(--space-m);
+			margin-top: var(--space-s);
 		}
 	}
 </style>
@@ -37,7 +38,8 @@
 				</Field>
 			{/if}
 		{/each}
-		<Button bottom><slot name="submit">Verzenden</slot></Button>
+		<slot />
+		<Button bottom={buttonPosition}><slot name="submit">Verzenden</slot></Button>
 	</form>
 {:else}
 	<form
@@ -58,6 +60,7 @@
 				</Field>
 			{/if}
 		{/each}
-		<Button bottom><slot name="submit">Verzenden</slot></Button>
+		<slot />
+		<Button bottom={buttonPosition}><slot name="submit">Verzenden</slot></Button>
 	</form>
 {/if}

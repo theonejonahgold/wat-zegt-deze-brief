@@ -2,8 +2,15 @@
 
 # Index
 
+- [Week[2]](#week2)
+  - [Coaching session](#coaching-session)
+  - [Design feedback](#design-feedback)
+  - [Feedback session](#feedback-session)
+  - [Retrospective](#retrospective)
 - [Week[1]](#week1)
   - [Coaching session](#coaching-session)
+  - [Feedback session](#feedback-session)
+  - [Retrospective](#retrospective)
 - [Week[0]](#week0)
   - [Coaching session](#coaching-session)
   - [Feedback session](#feedback-session)
@@ -25,6 +32,78 @@
 
 - Complete flow of user to be able to test it.
 - Get a test result.
+
+## Design feedback
+
+- Onboarding process is very abrupt for "users". It isn't clear that the app is about to be explained to the user.
+- Change text of buttons on page where people are asked to tell their preferred languages.
+- Language or multiple languages? Revise text for languages select flow.
+  - Title.
+  - Search.
+  - Ask to put language page.
+- Titles on pages can be more descriptive.
+- Placeholder on language search input.
+- Buttons don't show where you're going in the app.
+- Back button on register page, which brings you back to the place you came from.
+
+## Feedback session
+
+### Feedback from Tessa
+
+- Zero-state on the dashboard is non-existent.
+- Cannot reorder pages when uploading them.
+- Text near the record button on chat page is too big.
+- Separate page for summary and adding organisational bodies.
+  - Summary page links back to previous steps. Previous steps then link back to summary page
+  - Adding organisational bodies is separate page, has a list of suggestions.
+    - Needs to be skippable.
+- Add missing parts of the UI Stack.
+  - Loading
+  - Error
+  - Zero-state
+  - Empty state
+  - Feedback in general
+
+### Action points
+
+- Update UI stack with loaders, error handlers, empty states, zero-states and other types of useful feedback.
+- Reorganise flow of uploading a letter.
+  1. Upload pages.
+  2. Optionally choose/enter organisational body.
+  3. Summary with links to edit parts.
+- Resize text on chat page.
+- Add ability to reorder pages.
+- Update image for letter notification explanation
+
+## Retrospective
+
+### What went well
+
+- Productivity went very well.
+- Time management, taking breaks and stopping on time.
+- Testing, and what we got out of it.
+- We got more done in less time.
+- Taking enough breaks.
+- Solving issues more invdividually.
+- Having more attention to detail, solving small issues that you find while working on others.
+- Interfere less with other's work.
+- Keeping up with the workflow.
+
+### What could have gone better
+
+- Expectations.
+- Merging features after they are fully completed/implemented.
+- Holding your temper, even though it's hot as heck.
+- Prepare tests better.
+- Keeping all issues up to date.
+
+### What we take with us
+
+- Keep up with the healthier schedule.
+- Keep expectations realistic.
+- Complete features before merging them.
+- Create test document in preparation.
+- Enter issues for next week on time.
 
 # Week[1]
 

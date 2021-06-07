@@ -14,8 +14,8 @@
 					await Promise.all(
 						data?.map(letter =>
 							client.storage
-								.from('public')
-								.createSignedUrl(`${letter.id}/image.jpeg`, 40)
+								.from('pages')
+								.createSignedUrl(`${letter.id}/${letter.thumbnail}`, 40)
 								.then(({ signedURL }) => ({
 									...letter,
 									image: signedURL,
@@ -24,6 +24,7 @@
 					)
 			  ).sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
 			: []
+		console.log(letters)
 		return {
 			props: {
 				letters,

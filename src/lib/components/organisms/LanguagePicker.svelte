@@ -61,7 +61,7 @@
 	section button {
 		background: none;
 		border: none;
-		padding: var(--space-m) 0;
+		padding: var(--space-s) 0;
 		border-bottom: 1px solid var(--muted);
 		width: 100%;
 		text-align: left;
@@ -69,27 +69,27 @@
 		align-items: center;
 	}
 
-	section {
-		overflow-y: auto;
-		margin-top: 1em;
-		padding-right: 1em;
-		height: calc(100vh - 17em);
+	div > form {
+		position: sticky;
+		top: 5rem;
+		background: var(--background);
+		padding-bottom: var(--space-s);
 	}
 
 	input {
 		&[type='search'] {
 			width: 100%;
 			border: 0;
-			font-size: var(--font-m);
+			font-size: var(--font-s);
 			border-radius: var(--border-radius);
-			border: 1px solid var(--light);
-			padding: var(--space-s);
+			box-shadow: var(--bs-input);
+			padding: var(--space-m);
 		}
 
 		&[type='checkbox'] {
 			pointer-events: none;
 			display: inline-block;
-			margin-right: var(--space-s);
+			margin-right: var(--space-xxs);
 		}
 	}
 </style>
@@ -98,7 +98,7 @@
 	<form on:submit|preventDefault>
 		<label>
 			Zoek hier naar talen
-			<input name="query" bind:value={filterValue} type="search" />
+			<input name="query" placeholder="Nederlands" bind:value={filterValue} type="search" />
 		</label>
 		{#if !js}
 			<Button>Zoeken</Button>
