@@ -4,7 +4,7 @@
 	import { Flex } from '$templates'
 </script>
 
-<style>
+<style lang="scss">
 	h1 {
 		margin-bottom: var(--space-s);
 

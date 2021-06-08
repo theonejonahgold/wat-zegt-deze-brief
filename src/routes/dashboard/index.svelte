@@ -24,7 +24,6 @@
 					)
 			  ).sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
 			: []
-		console.log(letters)
 		return {
 			props: {
 				letters,
