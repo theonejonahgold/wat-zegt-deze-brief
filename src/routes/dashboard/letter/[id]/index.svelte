@@ -22,13 +22,14 @@
 </script>
 
 <script>
-	import { Help, SpokenText, Back, Image } from '$atoms'
+	import { Help, SpokenText, Back, Image, DataList } from '$atoms'
 	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
+	import organisations from './_organisations'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
@@ -123,10 +124,12 @@
 					type: 'text',
 					autofocus: true,
 					required: true,
+					list: 'sender',
 				},
 			]}
 			method="POST"
 		>
+			<DataList id="sender" options={organisations} />
 			<section>
 				<header>
 					<h3>Pagina's</h3>
