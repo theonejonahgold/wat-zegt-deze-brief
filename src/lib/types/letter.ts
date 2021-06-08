@@ -7,6 +7,7 @@ export interface Letter {
 		name: string
 	}
 	messages: ChatMessage[]
+	page_order: string[]
 }
 
 interface ChatMessage {

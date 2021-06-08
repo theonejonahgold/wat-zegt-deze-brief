@@ -2,18 +2,45 @@
 	import { Image } from '$atoms'
 	import { createEventDispatcher } from 'svelte'
 
+	type DragAndDropEvent = DragEvent & { currentTarget: HTMLImageElement }
+
 	export let pages: string[]
 	export let selected: number
 
 	const dispatch =
 		createEventDispatcher<{
 			remove: string
+			move: {
+				oldIndex: number
+				newIndex: number
+			}
 		}>()
 
 	function clickHandler(page: number) {
 		return () => {
 			selected = page
 		}
+	}
+
+	function dragStartHandler(e: DragAndDropEvent) {
+		e.dataTransfer.setData('text/plain', e.currentTarget.src)
+		e.dataTransfer.dropEffect = 'move'
+	}
+
+	function dragOverHandler(e: DragAndDropEvent) {
+		e.preventDefault()
+		e.dataTransfer.dropEffect = 'move'
+	}
+
+	function dropHandler(e: DragAndDropEvent) {
+		e.preventDefault()
+		const data = e.dataTransfer.getData('text/plain')
+		const oldIndex = pages.findIndex(page => page === data)
+		const newIndex = pages.findIndex(page => page === e.currentTarget.src)
+		dispatch('move', {
+			oldIndex,
+			newIndex,
+		})
 	}
 </script>
 
@@ -68,7 +95,13 @@
 					>&times;</button
 				>
 			{/if}
-			<Image src={page} />
+			<Image
+				drag
+				on:dragstart={dragStartHandler}
+				on:dragover={dragOverHandler}
+				on:drop={dropHandler}
+				src={page}
+			/>
 		</li>
 	{/each}
 </ul>
