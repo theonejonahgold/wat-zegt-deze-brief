@@ -29,6 +29,7 @@
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
+	import { volunteerLetter } from '$utils'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
@@ -148,6 +149,8 @@
 	</main>
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
-		<svelte:fragment slot="footer">Hier komt iets</svelte:fragment>
+		<svelte:fragment slot="footer"
+			><button on:click={volunteerLetter}>Volunteer</button></svelte:fragment
+		>
 	</CarouselPage>
 {/if}
