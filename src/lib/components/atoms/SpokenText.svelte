@@ -14,6 +14,7 @@
 	const handleClick = () => {
 		if (playing) return
 		playing = true
+
 		textToSpeech(text, () => {
 			playing = false
 		})

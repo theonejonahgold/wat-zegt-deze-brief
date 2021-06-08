@@ -4,9 +4,12 @@
 
 <style lang="scss">
 	div {
-		display: contents;
+		display: block;
+		width: 100%;
+		height: 100%;
 
 		:global(svg) {
+			display: block;
 			width: 100%;
 			height: 100%;
 		}
