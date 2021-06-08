@@ -3,8 +3,11 @@
 	import { VolunteerLetterCard } from '$organisms'
 	import Header from './Header.svelte'
 	import type { Letter } from '$types'
+	import { client } from '$config/supabase'
 
 	export let letters: Letter[]
+
+	let userId: any = client.auth.session().user.id
 </script>
 
 <style>
@@ -26,7 +29,7 @@
 		<ul>
 			{#each letters as letter (letter.id)}
 				<li>
-					<VolunteerLetterCard {letter} />
+					<VolunteerLetterCard {letter} {userId} />
 				</li>
 			{/each}
 		</ul>
