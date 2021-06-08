@@ -55,6 +55,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Uitleg</title>
+</svelte:head>
+
 {#if !content}
 	<slot />
 {:else}
