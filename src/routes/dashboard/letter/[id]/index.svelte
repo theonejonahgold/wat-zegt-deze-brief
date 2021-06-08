@@ -29,7 +29,7 @@
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
-	import { volunteerLetter } from '$utils'
+	import { volunteerLetter } from '$db/volunteerLetter'
 	import organisations from './_organisations'
 
 	export let letter: Letter
@@ -153,9 +153,7 @@
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
 		<svelte:fragment slot="footer">
-			<Button on:click|once={volunteerLetter} on:click={handleClick}
-				>Ik wil deze brief uitleggen</Button
-			>
+			<Button on:click|once={() => volunteerLetter(letter.id)}>Ik wil deze brief uitleggen</Button>
 		</svelte:fragment>
 	</CarouselPage>
 {/if}

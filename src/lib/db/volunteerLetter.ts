@@ -2,11 +2,9 @@ import { client } from '$config/supabase'
 import { browser } from '$app/env'
 import type { definitions } from '$types'
 
-export async function volunteerLetter() {
+export async function volunteerLetter(letterId: string) {
 	if (!browser) return
 
-	const splitPathname = window.location.pathname.split('/')
-	const letterId = splitPathname[splitPathname.length - 1]
 	const userId = client.auth.session().user.id
 	await client
 		.from<definitions['letters']>('letters')
