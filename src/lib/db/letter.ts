@@ -17,7 +17,6 @@ export function listLetters() {
 	return client.from<definitions['letters']>('letters').select(
 		`
 			id,
-			resolved,
 			sender,
 			createdAt,
 			volunteer:volunteer_id ( name ),
