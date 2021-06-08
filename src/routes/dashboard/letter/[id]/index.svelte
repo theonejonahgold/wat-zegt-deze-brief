@@ -29,6 +29,9 @@
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
+	import { RecordAudio } from '$molecules'
+	import { browser } from '$app/env'
+	import { messageHandler } from '$db/messageHandler'
 	import { volunteerLetter } from '$db/volunteerLetter'
 	import organisations from './_organisations'
 
@@ -37,6 +40,18 @@
 
 	let pages: string[] = []
 	let selectedPage = 0
+	let recorder: MediaRecorder
+	let clicked = false
+
+	function handleClick() {
+		clicked = !clicked
+	}
+
+	if (browser) {
+		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+			recorder = new MediaRecorder(stream)
+		})
+	}
 
 	onMount(() => {
 		client.storage
@@ -163,7 +178,13 @@
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
 		<svelte:fragment slot="footer">
-			<Button on:click|once={() => volunteerLetter(letter.id)}>Ik wil deze brief uitleggen</Button>
+			{#if clicked}
+				<RecordAudio {recorder} on:message={messageHandler} />
+			{:else}
+				<Button on:click|once={() => volunteerLetter(letter.id)} on:click={handleClick}
+					>Ik wil deze brief uitleggen</Button
+				>
+			{/if}
 		</svelte:fragment>
 	</CarouselPage>
 {/if}
