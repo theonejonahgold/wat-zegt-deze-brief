@@ -817,3 +817,5 @@ export interface parameters {
 }
 
 export interface operations {}
+
+export interface external {}

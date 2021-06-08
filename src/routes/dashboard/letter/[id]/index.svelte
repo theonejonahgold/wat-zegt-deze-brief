@@ -22,13 +22,16 @@
 </script>
 
 <script>
-	import { Back, Help, Image, SpokenText } from '$atoms'
+	import { Help, SpokenText, Back, Image, Button, DataList } from '$atoms'
+	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
 	import { Form } from '$organisms'
 	import { CarouselPage, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
+	import { volunteerLetter } from '$db/volunteerLetter'
+	import organisations from './_organisations'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
@@ -107,6 +110,10 @@
 	}
 </style>
 
+<svelte:head>
+	<title>Afronden</title>
+</svelte:head>
+
 {#if role === 'user'}
 	<Header sticky>
 		<Back slot="left" href="/dashboard/letter/{letter.id}/upload" />
@@ -125,10 +132,12 @@
 					type: 'text',
 					autofocus: true,
 					required: true,
+					list: 'sender',
 				},
 			]}
 			method="POST"
 		>
+			<DataList id="sender" options={organisations} />
 			<section>
 				<header>
 					<h3>Pagina's</h3>
@@ -150,6 +159,8 @@
 	</main>
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
-		<svelte:fragment slot="footer">Hier komt iets</svelte:fragment>
+		<svelte:fragment slot="footer">
+			<Button on:click|once={() => volunteerLetter(letter.id)}>Ik wil deze brief uitleggen</Button>
+		</svelte:fragment>
 	</CarouselPage>
 {/if}

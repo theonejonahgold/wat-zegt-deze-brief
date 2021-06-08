@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Role</title>
+	<title>Waar kom je voor?</title>
 </svelte:head>
 
 <Header>

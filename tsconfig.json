@@ -24,6 +24,7 @@
 			"$actions": ["src/lib/actions"],
 			"$utils": ["src/lib/utils"],
 			"$types": ["src/lib/types"],
+			"$stores": ["src/lib/stores"],
 			"$config/*": ["src/lib/config/*"],
 			"$db/*": ["src/lib/db/*"]
 		}

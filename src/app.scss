@@ -129,6 +129,9 @@
 	--light: var(--blue);
 	--muted: var(--grey);
 	--subtext: var(--dark-grey);
+	--success: #14b30b;
+	--error: #e12b0b;
+	--info: #2da8d8;
 
 	--gradient-to-right: linear-gradient(to right, var(--light), var(--dark));
 	--gradient-to-left: linear-gradient(to left, var(--light), var(--dark));
@@ -158,32 +161,41 @@
 }
 
 html,
-body,
-#svelte {
-	height: 100vh;
+body {
 	width: 100%;
+	height: 100vh;
 }
 
-body {
+html {
 	display: grid;
 	place-items: center;
-	margin: 0;
 	background: #f1f1f1;
 }
 
-#svelte {
-	z-index: 0;
-	position: relative;
-	overflow-y: auto;
-	overflow-x: hidden;
+body {
+	margin: 0;
 	max-width: 26rem;
 	max-height: 56rem;
-	display: grid;
-	grid-template-rows: min-content auto min-content;
+	z-index: 0;
 	background: var(--background);
+	overflow: hidden;
+	position: relative;
 
 	@media (min-width: 26rem) {
 		box-shadow: var(--bs-button);
+		border-radius: var(--border-radius);
+	}
+}
+
+#svelte {
+	display: grid;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	grid-template-rows: min-content auto min-content;
+	overflow: hidden scroll;
+
+	@media (min-width: 26rem) {
 		border-radius: var(--border-radius);
 	}
 }
@@ -250,4 +262,26 @@ h2 {
 
 h3 {
 	font-size: var(--font-m);
+}
+
+.tts-button {
+	line-height: 1;
+	border: none;
+	cursor: pointer;
+	background: none;
+	height: var(--space-m);
+	width: var(--space-m);
+	padding: 0.4em 0 0;
+
+	div {
+		display: block;
+		width: 100%;
+		height: 100%;
+
+		svg {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+	}
 }

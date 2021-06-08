@@ -9,6 +9,10 @@
 	}
 </style>
 
+<svelte:head>
+	<title>Uitleg</title>
+</svelte:head>
+
 <Header>
 	<Back slot="left" href="/onboarding" />
 	<SpokenText --align="center" slot="middle" text="Welkom" />

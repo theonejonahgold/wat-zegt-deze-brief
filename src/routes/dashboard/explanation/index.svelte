@@ -85,6 +85,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Uitleg over brief</title>
+</svelte:head>
+
 <CarouselPage {title} {backLink} {selectedPage} {pages}>
 	<RecordAudio {recorder} on:message={messageHandler} />
 </CarouselPage>
