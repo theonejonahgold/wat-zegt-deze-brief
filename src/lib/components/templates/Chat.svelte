@@ -4,7 +4,7 @@
 	import { SpokenText, Help, Back, MessageCloud } from '$atoms'
 	import { RecordAudio } from '$molecules'
 	import { browser } from '$app/env'
-	import { messageHandler } from '$utils'
+	import { messageHandler } from '$db/messageHandler'
 
 	let recorder: MediaRecorder
 
