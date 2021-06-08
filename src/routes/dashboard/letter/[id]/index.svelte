@@ -116,7 +116,7 @@
 {#if role === 'user'}
 	<Header sticky>
 		<Back slot="left" href="/dashboard/letter/{letter.id}/upload" />
-		<SpokenText --align="center" slot="middle" text="Afronden" />
+		<SpokenText --align="center" slot="middle" text="Organisatie" />
 		<Help slot="right" />
 	</Header>
 	<main>
@@ -130,14 +130,13 @@
 					name: 'sender',
 					type: 'text',
 					autofocus: true,
-					required: true,
 					list: 'sender',
 				},
 			]}
 			method="POST"
 		>
 			<DataList id="sender" options={organisations} />
-			<section>
+			<!-- <section>
 				<header>
 					<h3>Pagina's</h3>
 					<a href="/dashboard/letter/{letter.id}/upload">Bewerken</a>
@@ -152,7 +151,7 @@
 				{:else}
 					<p>Upload pagina's van je brief om ze hier te zien.</p>
 				{/if}
-			</section>
+			</section> -->
 			<svelte:fragment slot="submit">Brief versturen</svelte:fragment>
 		</Form>
 	</main>

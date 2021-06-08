@@ -7,7 +7,7 @@ export const addToast = ({
 	message,
 	type = 'info',
 	dismissible = true,
-	duration = 3000,
+	duration = 4000,
 }: ToastProps) => {
 	const id = Math.floor(Math.random() * 10000)
 

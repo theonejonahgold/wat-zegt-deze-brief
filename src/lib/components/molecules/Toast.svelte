@@ -23,6 +23,7 @@
 		column-gap: var(--space-s);
 		margin-bottom: var(--space-xs);
 		overflow: hidden;
+		box-shadow: var(--bs-button);
 
 		&::after {
 			content: '';
