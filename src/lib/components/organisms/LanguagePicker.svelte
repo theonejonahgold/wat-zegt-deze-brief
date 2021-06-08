@@ -1,24 +1,44 @@
 <script>
-	import { Button } from '$atoms'
+	import { Button, SpokenText } from '$atoms'
 	import { page, session } from '$app/stores'
 	import { browser } from '$app/env'
 	import { onMount } from 'svelte'
+	import { flip } from 'svelte/animate'
+	import { crossfade } from 'svelte/transition'
+	import { cubicInOut } from 'svelte/easing'
 
 	const langCookies = $session.cookies.langs
 	let js = false
 	onMount(() => (js = true))
 
-	export let languages
+	export let languages: Array<{
+		code: string
+		name: string
+	}>
 
 	let filterValue = $page.query.get('query')
 	$: filteredLanguages = filterValue
-		? languages.filter(
-				lang =>
-					lang.name.toLowerCase().includes(filterValue) || chosenLanguagesArray.includes(lang.code)
-		  )
+		? languages
+				.filter(lang => lang.name.toLowerCase().includes(filterValue))
+				.filter(lang => chosenLanguages.has(lang.name))
 		: languages
 	let chosenLanguages = new Set<string>(!!langCookies ? langCookies.split(',') : [])
-	$: chosenLanguagesArray = [...chosenLanguages]
+
+	const [send, receive] = crossfade({
+		fallback(node, params) {
+			const style = getComputedStyle(node)
+			const transform = style.transform === 'none' ? '' : style.transform
+
+			return {
+				duration: 400,
+				easing: cubicInOut,
+				css: t => `
+					transform: ${transform} scale(${t});
+					opacity: ${t}
+				`,
+			}
+		},
+	})
 
 	const submitHandler = async (e: Event & { currentTarget: HTMLFormElement }) => {
 		const res = await fetch(e.currentTarget.action, {
@@ -58,15 +78,20 @@
 </script>
 
 <style lang="scss">
-	section button {
-		background: none;
-		border: none;
-		padding: var(--space-s) 0;
-		border-bottom: 1px solid var(--muted);
-		width: 100%;
-		text-align: left;
-		display: flex;
-		align-items: center;
+	section {
+		+ section {
+			margin-top: var(--space-xl);
+		}
+		button {
+			background: none;
+			border: none;
+			padding: var(--space-s) 0;
+			border-bottom: 1px solid var(--muted);
+			width: 100%;
+			text-align: left;
+			display: flex;
+			align-items: center;
+		}
 	}
 
 	div > form {
@@ -105,21 +130,57 @@
 		{/if}
 	</form>
 
-	<section>
-		{#if filteredLanguages}
-			{#each filteredLanguages as lang}
+	{#if chosenLanguages}
+		<section>
+			<SpokenText text="Geselecteerd" />
+			{#each languages.filter(lang => chosenLanguages.has(lang.code)) as lang (lang.code)}
 				<form
 					method="POST"
 					on:submit|preventDefault={submitHandler}
 					action="/api/languages?query={$page.query.get('query')}"
+					in:receive={{ key: lang.code }}
+					out:send={{ key: lang.code }}
+					animate:flip={{
+						duration: 400,
+						easing: cubicInOut,
+					}}
 				>
 					<input type="hidden" name="code" value={lang.code} />
 					<button>
-						<input type="checkbox" checked={chosenLanguages.has(lang.code)} />
+						<input type="checkbox" checked />
 						{lang.name}
 					</button>
 				</form>
 			{/each}
-		{/if}
-	</section>
+		</section>
+	{/if}
+
+	{#if filteredLanguages}
+		<section>
+			<SpokenText text="Andere talen" />
+			{#each languages
+				.filter(lang => !chosenLanguages.has(lang.code))
+				.filter(lang => (!filterValue ? true : lang.name
+								.toLowerCase()
+								.includes(filterValue))) as lang (lang.code)}
+				<form
+					method="POST"
+					on:submit|preventDefault={submitHandler}
+					action="/api/languages?query={$page.query.get('query')}"
+					in:receive={{ key: lang.code }}
+					out:send={{ key: lang.code }}
+					animate:flip={{
+						duration: 400,
+						easing: cubicInOut,
+					}}
+				>
+					<input type="hidden" name="code" value={lang.code} />
+					<button>
+						<input type="checkbox" />
+						{lang.name}
+					</button>
+				</form>
+			{/each}
+		</section>
+	{/if}
 </div>
