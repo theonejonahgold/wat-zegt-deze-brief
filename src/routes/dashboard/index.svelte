@@ -47,7 +47,7 @@
 </script>
 
 <svelte:head>
-	<title>Dashboard</title>
+	<title>Home</title>
 </svelte:head>
 
 {#if role === 'user'}

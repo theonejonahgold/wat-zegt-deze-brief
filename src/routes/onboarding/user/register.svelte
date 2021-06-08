@@ -17,4 +17,8 @@
 	export let from
 </script>
 
+<svelte:head>
+	<title>Registreren</title>
+</svelte:head>
+
 <Register role="user" {from} />

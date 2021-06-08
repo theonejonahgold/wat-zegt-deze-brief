@@ -5,6 +5,10 @@
 	import languages from './_languages'
 </script>
 
+<svelte:head>
+	<title>Kies je talen</title>
+</svelte:head>
+
 <Header sticky>
 	<Back slot="left" href="/onboarding/user?step=5" />
 	<SpokenText --align="center" slot="middle" text="Kies je talen" />

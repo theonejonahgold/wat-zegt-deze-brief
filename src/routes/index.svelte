@@ -1,6 +1,7 @@
 <script>
 	import { Icon, Button, SpokenText } from '$atoms'
 	import { IndexIcon, Oval } from '$icons'
+	import { addToast } from '$stores'
 	import { Flex } from '$templates'
 </script>
 
@@ -17,7 +18,7 @@
 </style>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Hallo!</title>
 </svelte:head>
 
 <Flex pt="var(--space-xxxl)" px="var(--space-xl)" pb="var(--space-xl)">

@@ -7,6 +7,10 @@
 	import { Header } from '$templates'
 </script>
 
+<svelte:head>
+	<title>Inloggen</title>
+</svelte:head>
+
 <Header>
 	<Back href="/" slot="left" />
 	<SpokenText slot="middle" --align="center" text="Inloggen" />
