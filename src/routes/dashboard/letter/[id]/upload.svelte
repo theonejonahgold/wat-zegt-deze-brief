@@ -19,6 +19,7 @@
 		return {
 			props: {
 				letter: data,
+				editing: !!page.query.get('edit'),
 			},
 		}
 	}
@@ -36,6 +37,7 @@
 	import { checkRole } from '$db/user'
 
 	export let letter: Letter
+	export let editing: boolean
 
 	let pages: string[] = []
 	let pageIDs: string[] = letter.page_order || []
@@ -158,13 +160,17 @@
 </script>
 
 <svelte:head>
-	<title>Upload pagina's</title>
+	{#if editing}
+		<title>Pagina's bewerken</title>
+	{:else}
+		<title>Upload pagina's</title>
+	{/if}
 </svelte:head>
 
 <CarouselPage
 	bind:selectedPage
 	bind:pages
-	title="Upload pagina's"
+	title={editing ? "Pagina's bewerken" : "Upload pagina's"}
 	backLink="/dashboard/letter?step=4&id={letter.id}"
 >
 	<svelte:component
