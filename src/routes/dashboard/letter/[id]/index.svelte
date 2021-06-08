@@ -22,9 +22,10 @@
 </script>
 
 <script>
-	import { Help, SpokenText, Back, Image } from '$atoms'
+	import { Help, SpokenText, Back, Image, Button, DataList } from '$atoms'
 	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
+	import { Form } from '$organisms'
 	import { CarouselPage, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
@@ -32,6 +33,8 @@
 	import { RecordAudio } from '$molecules'
 	import { browser } from '$app/env'
 	import { messageHandler } from '$utils'
+	import { volunteerLetter } from '$db/volunteerLetter'
+	import organisations from './_organisations'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
@@ -52,7 +55,13 @@
 			.list(`${letter.id}`)
 			.then(({ data }) =>
 				Promise.all(
-					data.map(page => client.storage.from('pages').download(`${letter.id}/${page.name}`))
+					data
+						.sort(
+							(a, b) =>
+								letter.page_order.findIndex(page => page.includes(a.name)) -
+								letter.page_order.findIndex(page => page.includes(b.name))
+						)
+						.map(page => client.storage.from('pages').download(`${letter.id}/${page.name}`))
 				)
 			)
 			.then(results =>
@@ -133,10 +142,12 @@
 					type: 'text',
 					autofocus: true,
 					required: true,
+					list: 'sender',
 				},
 			]}
 			method="POST"
 		>
+			<DataList id="sender" options={organisations} />
 			<section>
 				<header>
 					<h3>Pagina's</h3>
@@ -159,5 +170,8 @@
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
 		<RecordAudio slot="footer" {recorder} on:message={messageHandler} />
+		<svelte:fragment slot="footer">
+			<Button on:click|once={() => volunteerLetter(letter.id)}>Ik wil deze brief uitleggen</Button>
+		</svelte:fragment>
 	</CarouselPage>
 {/if}

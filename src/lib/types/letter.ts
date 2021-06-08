@@ -2,12 +2,12 @@ export interface Letter {
 	id: string
 	image: string
 	sender?: string
-	resolved: boolean
 	createdAt: string
 	volunteer?: {
 		name: string
 	}
 	messages: ChatMessage[]
+	page_order: string[]
 }
 
 interface ChatMessage {
