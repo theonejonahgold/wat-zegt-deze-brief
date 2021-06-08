@@ -22,7 +22,7 @@
 </script>
 
 <script>
-	import { Help, SpokenText, Back, Image, Button, DataList } from '$atoms'
+	import { Help, SpokenText, Back, Image, Button } from '$atoms'
 	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage, Header } from '$templates'
@@ -31,13 +31,8 @@
 	import { onMount } from 'svelte'
 	import { RecordAudio } from '$molecules'
 	import { browser } from '$app/env'
-<<<<<<< HEAD
-	import { messageHandler } from '$db/messageHandler'
 	import { volunteerLetter } from '$db/volunteerLetter'
-	import organisations from './_organisations'
-=======
-	import { messageHandler } from '$actions'
->>>>>>> 8456b7a (feat: volunteer can send recording)
+	import { messageHandler } from '$utils'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
@@ -45,14 +40,11 @@
 	let pages: string[] = []
 	let selectedPage = 0
 	let recorder: MediaRecorder
-<<<<<<< HEAD
 	let clicked = false
 
 	function handleClick() {
 		clicked = !clicked
 	}
-=======
->>>>>>> 8456b7a (feat: volunteer can send recording)
 
 	if (browser) {
 		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
