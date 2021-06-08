@@ -38,7 +38,7 @@
 	export let letter: Letter
 
 	let pages: string[] = []
-	let pageIDs: string[] = []
+	let pageIDs: string[] = letter.page_order || []
 	let selectedPage = 0
 	let loading = false
 
@@ -48,7 +48,11 @@
 			.from('pages')
 			.list(`${letter.id}`)
 			.then(({ data }) => {
-				pageIDs = data.map(d => d.name)
+				data.sort(
+					(a, b) =>
+						pageIDs.findIndex(id => id.includes(a.name)) -
+						pageIDs.findIndex(id => id.includes(b.name))
+				)
 				Promise.all(
 					data.map(page => client.storage.from('pages').download(`${letter.id}/${page.name}`))
 				)
@@ -83,7 +87,7 @@
 		const id = uuid()
 		const mime = image.type.split('/')[1]
 		await client.storage.from('pages').upload(`${letter.id}/${id}.${mime}`, image)
-		pageIDs.unshift(`${id}.${mime}`)
+		pageIDs.push(`${id}.${mime}`)
 		pageIDs = pageIDs
 
 		if (!pages.length) {
@@ -93,6 +97,13 @@
 				.eq('id', letter.id)
 		}
 
+		await client
+			.from<definitions['letters']>('letters')
+			// @ts-expect-error: Types are wrong, page_order is an array
+			.update({ page_order: pageIDs })
+			.eq('id', letter.id)
+			.single()
+
 		setTimeout(() => {
 			client.storage
 				.from('pages')
@@ -101,10 +112,10 @@
 					const reader = new FileReader()
 					reader.readAsDataURL(data)
 					reader.addEventListener('load', e => {
-						pages.unshift(e.target.result as string)
+						pages.push(e.target.result as string)
 						pages = pages
-						selectedPage = 0
 						loading = false
+						selectedPage = pages.length - 1
 					})
 				})
 		}, 500)
@@ -119,6 +130,30 @@
 		pages.splice(index, 1)
 		pages = pages
 		selectedPage = selectedPage >= pages.length ? pages.length - 1 : selectedPage
+	}
+
+	async function moveHandler(
+		e: CustomEvent<{
+			oldIndex: number
+			newIndex: number
+		}>
+	) {
+		const { oldIndex, newIndex } = e.detail
+		const id = pageIDs[oldIndex]
+		pageIDs.splice(oldIndex, 1)
+		pageIDs.splice(newIndex, 0, id)
+		pageIDs = pageIDs
+		const data = pages[oldIndex]
+		pages.splice(oldIndex, 1)
+		pages.splice(newIndex, 0, data)
+		pages = pages
+
+		await client
+			.from<definitions['letters']>('letters')
+			// @ts-expect-error: Types are wrong, page_order is an array
+			.update({ page_order: pageIDs })
+			.eq('id', letter.id)
+			.single()
 	}
 </script>
 
@@ -139,7 +174,12 @@
 		on:change={changeHandler}
 	/>
 	<svelte:fragment slot="footer">
-		<PageList on:remove={removeHandler} bind:selected={selectedPage} {pages}>
+		<PageList
+			on:remove={removeHandler}
+			on:move={moveHandler}
+			bind:selected={selectedPage}
+			bind:pages
+		>
 			{#if pages.length}
 				{#if loading}
 					<Loader />
