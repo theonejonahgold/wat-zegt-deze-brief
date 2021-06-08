@@ -31,7 +31,7 @@
 	import { onMount } from 'svelte'
 	import { RecordAudio } from '$molecules'
 	import { browser } from '$app/env'
-	import { messageHandler } from '$actions'
+	import { messageHandler } from '$utils'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'

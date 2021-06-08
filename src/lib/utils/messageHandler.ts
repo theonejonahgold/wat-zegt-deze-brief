@@ -1,6 +1,6 @@
 import { client } from '$config/supabase'
 import { browser } from '$app/env'
-import { definitions } from '$types'
+import type { definitions } from '$types'
 
 export async function messageHandler({ detail: message }: CustomEvent<File>) {
 	if (!message || !browser) return
