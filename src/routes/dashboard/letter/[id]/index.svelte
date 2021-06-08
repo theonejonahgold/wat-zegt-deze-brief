@@ -140,7 +140,7 @@
 			<section>
 				<header>
 					<h3>Pagina's</h3>
-					<a href="/dashboard/letter/{letter.id}/upload">Bewerken</a>
+					<a href="/dashboard/letter/{letter.id}/upload?edit=true">Bewerken</a>
 				</header>
 				<hr />
 				{#if pages.length}
