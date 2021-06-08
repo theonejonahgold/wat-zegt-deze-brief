@@ -25,7 +25,6 @@
 	import { Help, SpokenText, Back, Image, Button, DataList } from '$atoms'
 	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
-	import { Form } from '$organisms'
 	import { CarouselPage, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
