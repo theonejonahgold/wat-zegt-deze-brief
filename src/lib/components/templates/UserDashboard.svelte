@@ -11,7 +11,7 @@
 
 <style>
 	hr {
-		margin: var(--space-s) 0;
+		margin: var(--space-xl) 0 var(--space-s);
 	}
 
 	ul {
@@ -20,6 +20,20 @@
 		display: grid;
 		row-gap: var(--space-s);
 		margin-top: var(--space-xxs);
+	}
+
+	section {
+		:global(div:first-child p) {
+			font-size: var(--font-m);
+			margin-bottom: var(--space-m);
+		}
+	}
+
+	.empty {
+		:global(div:last-child p) {
+			font-size: var(--font-m);
+			margin-top: var(--space-xl);
+		}
 	}
 </style>
 
@@ -32,7 +46,7 @@
 		<UserIcon />
 	</ImageButton>
 	<hr />
-	<section>
+	<section class:empty={!letters.length}>
 		<SpokenText text="Jouw brieven" --align="center" />
 		{#if letters.length}
 			<ul>
