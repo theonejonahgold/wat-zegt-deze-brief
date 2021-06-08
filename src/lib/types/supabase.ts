@@ -336,6 +336,111 @@ export interface paths {
       };
     };
   };
+  "/onboardings": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.onboardings.id"];
+          /** The user ID the state is connected to */
+          user_id?: parameters["rowFilter.onboardings.user_id"];
+          /** The basic onboarding of the app */
+          app_onboarding?: parameters["rowFilter.onboardings.app_onboarding"];
+          /** The onboarding for submitting a letter, only applicable to "user" roles */
+          letter_onboarding?: parameters["rowFilter.onboardings.letter_onboarding"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["onboardings"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** onboardings */
+          onboardings?: definitions["onboardings"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.onboardings.id"];
+          /** The user ID the state is connected to */
+          user_id?: parameters["rowFilter.onboardings.user_id"];
+          /** The basic onboarding of the app */
+          app_onboarding?: parameters["rowFilter.onboardings.app_onboarding"];
+          /** The onboarding for submitting a letter, only applicable to "user" roles */
+          letter_onboarding?: parameters["rowFilter.onboardings.letter_onboarding"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.onboardings.id"];
+          /** The user ID the state is connected to */
+          user_id?: parameters["rowFilter.onboardings.user_id"];
+          /** The basic onboarding of the app */
+          app_onboarding?: parameters["rowFilter.onboardings.app_onboarding"];
+          /** The onboarding for submitting a letter, only applicable to "user" roles */
+          letter_onboarding?: parameters["rowFilter.onboardings.letter_onboarding"];
+        };
+        body: {
+          /** onboardings */
+          onboardings?: definitions["onboardings"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/roles": {
     get: {
       parameters: {
@@ -442,6 +547,8 @@ export interface paths {
           /** Optional name of user */
           name?: parameters["rowFilter.users.name"];
           languages?: parameters["rowFilter.users.languages"];
+          /** Foreign key relation to "onboardings" table, holding onboarding state for user */
+          onboarding_id?: parameters["rowFilter.users.onboarding_id"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -498,6 +605,8 @@ export interface paths {
           /** Optional name of user */
           name?: parameters["rowFilter.users.name"];
           languages?: parameters["rowFilter.users.languages"];
+          /** Foreign key relation to "onboardings" table, holding onboarding state for user */
+          onboarding_id?: parameters["rowFilter.users.onboarding_id"];
         };
         header: {
           /** Preference */
@@ -518,6 +627,8 @@ export interface paths {
           /** Optional name of user */
           name?: parameters["rowFilter.users.name"];
           languages?: parameters["rowFilter.users.languages"];
+          /** Foreign key relation to "onboardings" table, holding onboarding state for user */
+          onboarding_id?: parameters["rowFilter.users.onboarding_id"];
         };
         body: {
           /** users */
@@ -717,6 +828,25 @@ export interface definitions {
     type: string;
     date: string;
   };
+  /** The table holding the onboarding state per user */
+  onboardings: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * The user ID the state is connected to
+     *
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    user_id: string;
+    /** The basic onboarding of the app */
+    app_onboarding: boolean;
+    /** The onboarding for submitting a letter, only applicable to "user" roles */
+    letter_onboarding: boolean;
+  };
   /** All possible user roles */
   roles: {
     /**
@@ -746,6 +876,13 @@ export interface definitions {
     /** Optional name of user */
     name?: string;
     languages?: string;
+    /**
+     * Foreign key relation to "onboardings" table, holding onboarding state for user
+     *
+     * Note:
+     * This is a Foreign Key to `onboardings.id`.<fk table='onboardings' column='id'/>
+     */
+    onboarding_id?: number;
   };
 }
 
@@ -800,6 +937,15 @@ export interface parameters {
   /** The type of message sent */
   "rowFilter.messages.type": string;
   "rowFilter.messages.date": string;
+  /** onboardings */
+  "body.onboardings": definitions["onboardings"];
+  "rowFilter.onboardings.id": string;
+  /** The user ID the state is connected to */
+  "rowFilter.onboardings.user_id": string;
+  /** The basic onboarding of the app */
+  "rowFilter.onboardings.app_onboarding": string;
+  /** The onboarding for submitting a letter, only applicable to "user" roles */
+  "rowFilter.onboardings.letter_onboarding": string;
   /** roles */
   "body.roles": definitions["roles"];
   /** Slug for role */
@@ -814,6 +960,8 @@ export interface parameters {
   /** Optional name of user */
   "rowFilter.users.name": string;
   "rowFilter.users.languages": string;
+  /** Foreign key relation to "onboardings" table, holding onboarding state for user */
+  "rowFilter.users.onboarding_id": string;
 }
 
 export interface operations {}
