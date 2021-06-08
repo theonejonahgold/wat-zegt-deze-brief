@@ -3,9 +3,9 @@ import type { Locals } from '$types'
 import type { GetSession, Handle } from '@sveltejs/kit'
 import cookie from 'cookie'
 import busboy from 'busboy'
-import type { ServerRequest } from '@sveltejs/kit/types/endpoint'
+import type { ServerRequest } from '@sveltejs/kit/types/hooks'
 
-export const handle: Handle = async ({ request, render }) => {
+export const handle: Handle = async ({ request, resolve }) => {
 	// Gigantic thank you from vonadz and his comment at https://github.com/sveltejs/kit/issues/70#issuecomment-830799681
 	if (request.path === '/api/letter/page') {
 		if (!client.auth.session())
@@ -19,7 +19,7 @@ export const handle: Handle = async ({ request, render }) => {
 
 	const cookies = cookie.parse(request.headers.cookie || '')
 	request.locals.cookies = cookies
-	const response = await render(request)
+	const response = await resolve(request)
 	const session = client.auth.session()
 
 	if (!cookies['sb:token'] && session)

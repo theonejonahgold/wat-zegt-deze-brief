@@ -15,6 +15,7 @@ interface NormalFormField extends BasicFormField {
 	placeholder?: string
 	disabled?: boolean
 	readonly?: boolean
+	list?: string
 }
 
 interface HiddenFormField extends BasicFormField {
