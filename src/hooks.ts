@@ -3,7 +3,7 @@ import type { Locals } from '$types'
 import type { GetSession, Handle } from '@sveltejs/kit'
 import cookie from 'cookie'
 import busboy from 'busboy'
-import type { ServerRequest } from '@sveltejs/kit/types/hooks'
+import type { ServerRequest } from '@sveltejs/kit/types/endpoint'
 
 export const handle: Handle = async ({ request, render }) => {
 	// Gigantic thank you from vonadz and his comment at https://github.com/sveltejs/kit/issues/70#issuecomment-830799681

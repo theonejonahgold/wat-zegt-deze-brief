@@ -129,6 +129,9 @@
 	--light: var(--blue);
 	--muted: var(--grey);
 	--subtext: var(--dark-grey);
+	--success: #14b30b;
+	--error: #e12b0b;
+	--info: #2da8d8;
 
 	--gradient-to-right: linear-gradient(to right, var(--light), var(--dark));
 	--gradient-to-left: linear-gradient(to left, var(--light), var(--dark));
@@ -174,7 +177,7 @@ body {
 #svelte {
 	z-index: 0;
 	position: relative;
-	overflow-y: auto;
+	overflow-y: scroll;
 	overflow-x: hidden;
 	max-width: 26rem;
 	max-height: 56rem;

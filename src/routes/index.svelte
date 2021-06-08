@@ -1,6 +1,7 @@
 <script>
 	import { Icon, Button, SpokenText } from '$atoms'
 	import { IndexIcon, Oval } from '$icons'
+	import { addToast } from '$stores'
 	import { Flex } from '$templates'
 </script>
 
