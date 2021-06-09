@@ -71,7 +71,7 @@
 
 	div > form {
 		position: sticky;
-		top: 5rem;
+		top: calc((var(--space-l) * 2) + var(--space-xl));
 		background: var(--background);
 		padding-bottom: var(--space-s);
 	}
