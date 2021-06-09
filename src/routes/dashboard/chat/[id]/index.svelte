@@ -29,9 +29,9 @@
 
 	let blobs = []
 
-	onMount(async () => {
-		messages.map(async message => {
-			return await client.storage
+	onMount(() => {
+		messages.map(message => {
+			client.storage
 				.from('messages')
 				.download(`${letterId}/${userId}/${message}`)
 				.then(result => {
