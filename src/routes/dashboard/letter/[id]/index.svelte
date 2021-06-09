@@ -126,7 +126,7 @@
 				<a href="/dashboard/letter/{letter.id}/organisation?edit=true">Bewerken</a>
 			</header>
 			<hr />
-			<p>{letter.sender}</p>
+			<p>{letter.sender || 'Geen organisatie ingevuld'}</p>
 		</section>
 		<section>
 			<header>
