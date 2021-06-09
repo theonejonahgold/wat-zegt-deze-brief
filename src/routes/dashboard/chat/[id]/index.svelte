@@ -18,7 +18,7 @@
 
 <script>
 	import { Chat } from '$templates'
-	import { listMessages, downloadMessages } from '$db/letter'
+	import { listMessages } from '$db/letter'
 	import type { Load } from '@sveltejs/kit'
 	import { client } from '$config/supabase'
 	import { onMount } from 'svelte'
@@ -35,7 +35,12 @@
 				.from('messages')
 				.download(`${letterId}/${userId}/${message}`)
 				.then(result => {
-					blobs.push(result.data)
+					const reader = new FileReader()
+					reader.readAsDataURL(result.data)
+					reader.onloadend = () => {
+						let base64 = reader.result
+						blobs.push(base64)
+					}
 					return blobs
 				})
 		})
