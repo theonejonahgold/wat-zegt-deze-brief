@@ -39,7 +39,7 @@
 					reader.readAsDataURL(result.data)
 					reader.onloadend = () => {
 						let base64 = reader.result
-						blobs.push(base64)
+						blobs.push({ src: base64 })
 					}
 					return blobs
 				})
