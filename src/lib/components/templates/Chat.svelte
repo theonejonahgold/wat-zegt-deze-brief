@@ -1,10 +1,12 @@
 <script>
 	import Header from './Header.svelte'
-	import Flex from './Flex.svelte'
 	import { SpokenText, Help, Back, MessageCloud } from '$atoms'
 	import { RecordAudio } from '$molecules'
 	import { browser } from '$app/env'
 	import { messageHandler } from '$db/messageHandler'
+
+	export let blobs: any
+	console.log(blobs)
 
 	let recorder: MediaRecorder
 
@@ -33,7 +35,7 @@
 	<Help slot="right" />
 </Header>
 <main>
-	<!-- TODO: MessageList component goes here -->
+	<audio controls src={blobs[0]} />
 </main>
 <footer>
 	<SpokenText
