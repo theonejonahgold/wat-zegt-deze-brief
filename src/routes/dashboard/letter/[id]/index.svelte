@@ -144,7 +144,19 @@
 				<p>Upload pagina's van je brief om ze hier te zien.</p>
 			{/if}
 		</section>
-		<Button>HIER AFRONDEN</Button>
+		<Form
+			action="/api/letter/{letter.id}?redirect=/dashboard/letter/success"
+			fields={[
+				{
+					type: 'hidden',
+					name: 'status',
+					initialValue: 'published',
+				},
+			]}
+			noEnhance
+		>
+			<svelte:fragment slot="submit">Opsturen</svelte:fragment>
+		</Form>
 	</main>
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
