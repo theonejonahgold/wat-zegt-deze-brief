@@ -27,7 +27,7 @@ export const post: RequestHandler<Locals, FormData> = async ({ params, body }) =
 		return {
 			status: 302,
 			headers: {
-				location: '/dashboard/letter/success',
+				location: `/dashboard/letter/${id}`,
 			},
 		}
 	}

@@ -194,6 +194,6 @@
 				{/if}
 			{/if}
 		</PageList>
-		<Button href="/dashboard/letter/{letter.id}">Pagina's opslaan</Button>
+		<Button href="/dashboard/letter/{letter.id}/organisation">Pagina's opslaan</Button>
 	</svelte:fragment>
 </CarouselPage>
