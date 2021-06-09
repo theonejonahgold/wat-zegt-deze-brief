@@ -22,46 +22,9 @@
 	import { Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
-	import { onMount } from 'svelte'
 	import organisations from './_organisations'
 
 	export let letter: Letter
-
-	let pages: string[] = []
-
-	onMount(() => {
-		client.storage
-			.from('pages')
-			.list(`${letter.id}`)
-			.then(({ data }) =>
-				Promise.all(
-					data
-						.sort(
-							(a, b) =>
-								letter.page_order.findIndex(page => page.includes(a.name)) -
-								letter.page_order.findIndex(page => page.includes(b.name))
-						)
-						.map(page => client.storage.from('pages').download(`${letter.id}/${page.name}`))
-				)
-			)
-			.then(results =>
-				Promise.all(
-					results.map(
-						({ data }) =>
-							new Promise<string>(resolve => {
-								const reader = new FileReader()
-								reader.readAsDataURL(data)
-								reader.addEventListener('load', e => {
-									resolve(e.target.result as string)
-								})
-							})
-					)
-				)
-			)
-			.then(images => {
-				pages = images
-			})
-	})
 </script>
 
 <svelte:head>
@@ -85,6 +48,7 @@
 				type: 'text',
 				autofocus: true,
 				list: 'sender',
+				initialValue: letter.sender,
 			},
 		]}
 		method="POST"
