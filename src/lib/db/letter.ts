@@ -25,3 +25,13 @@ export function listLetters() {
 		`
 	)
 }
+
+export function listMessages(id: string) {
+	const messages = client
+		.from<definitions['letters']>('letters')
+		.select('messages')
+		.eq('id', id)
+		.single()
+
+	return messages
+}
