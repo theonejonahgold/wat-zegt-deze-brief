@@ -19,7 +19,7 @@ const userContent: InstructionsContent[] = [
 		image: '/images/onboarding-user-4.png',
 	},
 	{
-		text: 'Wil je doorgeven wat jouw moedertaal is, zodat je hier misschien uitleg in kan krijgen?',
+		text: 'Wil je de talen die je spreek invullen?',
 		image: '/images/onboarding-user-5.png',
 	},
 ]
