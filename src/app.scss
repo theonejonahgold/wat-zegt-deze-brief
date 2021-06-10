@@ -195,13 +195,17 @@ body {
 #svelte {
 	display: grid;
 	width: 100%;
-	height: -webkit-fill-available;
+	height: 100%;
 	position: relative;
 	grid-template-rows: min-content auto min-content;
 	background: var(--background);
 	overflow-x: hidden;
 	overflow-y: auto;
 	z-index: 0;
+
+	@supports (-webkit-touch-callout: none) {
+		height: -webkit-fill-available;
+	}
 
 	@media (min-width: 26rem) {
 		border-radius: var(--border-radius);
