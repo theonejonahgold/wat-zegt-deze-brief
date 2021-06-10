@@ -115,44 +115,47 @@
 
 {#if role === 'user'}
 	<Header sticky>
-		<Back slot="left" href="/dashboard/letter/{letter.id}/upload" />
-		<SpokenText --align="center" slot="middle" text="Organisatie" />
+		<Back slot="left" href="/dashboard/letter/{letter.id}/organisation" />
+		<SpokenText --align="center" slot="middle" text="Afronden" />
 		<Help slot="right" />
 	</Header>
 	<main>
+		<section>
+			<header>
+				<h3>Organisatie</h3>
+				<a href="/dashboard/letter/{letter.id}/organisation?edit=true">Bewerken</a>
+			</header>
+			<hr />
+			<p>{letter.sender || 'Geen organisatie ingevuld'}</p>
+		</section>
+		<section>
+			<header>
+				<h3>Pagina's</h3>
+				<a href="/dashboard/letter/{letter.id}/upload?edit=true">Bewerken</a>
+			</header>
+			<hr />
+			{#if pages.length}
+				<ol>
+					{#each pages as page}
+						<li><Image src={page} alt="Page preview" shadow={true} /></li>
+					{/each}
+				</ol>
+			{:else}
+				<p>Upload pagina's van je brief om ze hier te zien.</p>
+			{/if}
+		</section>
 		<Form
-			noEnhance
-			action="/api/letter/{letter.id}"
+			action="/api/letter/{letter.id}?redirect=/dashboard/letter/success"
 			fields={[
 				{
-					label: 'Van welke organisatie komt deze brief?',
-					placeholder: 'Bijvoorbeeld Belastingdienst',
-					name: 'sender',
-					type: 'text',
-					autofocus: true,
-					list: 'sender',
+					type: 'hidden',
+					name: 'status',
+					initialValue: 'published',
 				},
 			]}
-			method="POST"
+			noEnhance
 		>
-			<DataList id="sender" options={organisations} />
-			<!-- <section>
-				<header>
-					<h3>Pagina's</h3>
-					<a href="/dashboard/letter/{letter.id}/upload?edit=true">Bewerken</a>
-				</header>
-				<hr />
-				{#if pages.length}
-					<ol>
-						{#each pages as page}
-							<li><Image src={page} alt="Page preview" shadow={true} /></li>
-						{/each}
-					</ol>
-				{:else}
-					<p>Upload pagina's van je brief om ze hier te zien.</p>
-				{/if}
-			</section> -->
-			<svelte:fragment slot="submit">Brief versturen</svelte:fragment>
+			<svelte:fragment slot="submit">Opsturen</svelte:fragment>
 		</Form>
 	</main>
 {:else}

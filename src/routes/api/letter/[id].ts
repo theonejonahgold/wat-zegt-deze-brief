@@ -14,20 +14,25 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 	}
 }
 
-export const post: RequestHandler<Locals, FormData> = async ({ params, body }) => {
+export const post: RequestHandler<Locals, FormData> = async ({ params, query, body }) => {
 	const id = params.id
 	const sender = body.get('sender')
+	const status = body.get('status')
 
-	const { data, error } = await client
+	let updateBody: Record<string, string> = {}
+	if (sender) updateBody.sender = sender
+	if (status) updateBody.status = status
+
+	const { data } = await client
 		.from<definitions['letters']>('letters')
-		.update({ sender, status: 'published' })
+		.update(updateBody)
 		.eq('id', id)
 
 	if (data) {
 		return {
 			status: 302,
 			headers: {
-				location: '/dashboard/letter/success',
+				location: query.get('redirect') || `/dashboard/letter/${id}`,
 			},
 		}
 	}

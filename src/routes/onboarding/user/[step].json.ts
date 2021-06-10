@@ -19,7 +19,7 @@ const userContent: InstructionsContent[] = [
 		image: '/images/onboarding-user-4.png',
 	},
 	{
-		text: 'Wil je de talen die je spreek invullen?',
+		text: 'Wil je de talen die je spreekt invullen?',
 		image: '/images/onboarding-user-5.png',
 	},
 ]
