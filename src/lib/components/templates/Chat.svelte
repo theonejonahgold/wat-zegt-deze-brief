@@ -4,9 +4,10 @@
 	import { RecordAudio } from '$molecules'
 	import { browser } from '$app/env'
 	import { messageHandler } from '$db/messageHandler'
+	import { onMount } from 'svelte'
 
-	export let blobs: any
-	console.log(blobs)
+	export let initialMessages: any
+	export let newMessages: any
 
 	let recorder: MediaRecorder
 
@@ -35,7 +36,9 @@
 	<Help slot="right" />
 </Header>
 <main>
-	<audio controls src={blobs[0]} />
+	{#each newMessages as { src }, i}
+		<audio controls {src} type="audio/ogg" />
+	{/each}
 </main>
 <footer>
 	<SpokenText
