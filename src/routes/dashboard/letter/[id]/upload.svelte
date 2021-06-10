@@ -19,29 +19,33 @@
 		return {
 			props: {
 				letter: data,
+				editing: !!page.query.get('edit'),
 			},
 		}
 	}
 </script>
 
 <script>
-	import { ImageInput, Button } from '$atoms'
+	import { ImageInput, Button, Loader } from '$atoms'
 	import { PageList } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
-	import { onMount } from 'svelte'
+	import { onMount, tick } from 'svelte'
 	import { v4 as uuid } from 'uuid'
 	import { checkRole } from '$db/user'
 
 	export let letter: Letter
+	export let editing: boolean
 
 	let pages: string[] = []
 	let pageIDs: string[] = letter.page_order || []
 	let selectedPage = 0
+	let loading = false
 
 	onMount(() => {
+		loading = true
 		client.storage
 			.from('pages')
 			.list(`${letter.id}`)
@@ -69,6 +73,7 @@
 						)
 					)
 					.then(images => {
+						loading = false
 						pages = images
 					})
 			})
@@ -77,6 +82,9 @@
 	async function changeHandler(e: Event & { currentTarget: HTMLInputElement }) {
 		const image = e.currentTarget.files[0]
 		if (!image) return
+		loading = true
+
+		await tick()
 
 		const id = uuid()
 		const mime = image.type.split('/')[1]
@@ -108,6 +116,7 @@
 					reader.addEventListener('load', e => {
 						pages.push(e.target.result as string)
 						pages = pages
+						loading = false
 						selectedPage = pages.length - 1
 					})
 				})
@@ -151,16 +160,25 @@
 </script>
 
 <svelte:head>
-	<title>Upload pagina's</title>
+	{#if editing}
+		<title>Pagina's bewerken</title>
+	{:else}
+		<title>Upload pagina's</title>
+	{/if}
 </svelte:head>
 
 <CarouselPage
 	bind:selectedPage
 	bind:pages
-	title="Upload pagina's"
+	title={editing ? "Pagina's bewerken" : "Upload pagina's"}
 	backLink="/dashboard/letter?step=4&id={letter.id}"
 >
-	<ImageInput slot="empty" on:change={changeHandler} name="page" />
+	<svelte:component
+		this={loading ? Loader : ImageInput}
+		slot="empty"
+		name="page"
+		on:change={changeHandler}
+	/>
 	<svelte:fragment slot="footer">
 		<PageList
 			on:remove={removeHandler}
@@ -169,9 +187,13 @@
 			bind:pages
 		>
 			{#if pages.length}
-				<ImageInput on:change={changeHandler} name="page" />
+				{#if loading}
+					<Loader />
+				{:else}
+					<ImageInput on:change={changeHandler} name="page" />
+				{/if}
 			{/if}
 		</PageList>
-		<Button href="/dashboard/letter/{letter.id}">Pagina's opslaan</Button>
+		<Button href="/dashboard/letter/{letter.id}/organisation">Pagina's opslaan</Button>
 	</svelte:fragment>
 </CarouselPage>

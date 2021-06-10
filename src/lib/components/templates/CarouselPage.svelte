@@ -11,15 +11,9 @@
 </script>
 
 <style lang="scss">
-	main {
-		:global {
-			label:nth-child(1) {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-			}
-		}
+	main.empty {
+		display: grid;
+		place-items: center;
 	}
 
 	footer {
@@ -37,7 +31,7 @@
 	<SpokenText --align="center" slot="middle" text={title} />
 	<Help slot="right" />
 </Header>
-<main>
+<main class:empty={!pages.length}>
 	{#if pages.length || !$$slots.empty}
 		<Carousel {pages} bind:selected={selectedPage} />
 	{:else}

@@ -121,6 +121,8 @@
 	--black: #595959;
 	--grey: #686868;
 	--dark-grey: #989898;
+	--green: #5fb05a;
+	--red: #e05742;
 
 	--primary: var(--black);
 	--secondary: var(--white);
@@ -129,9 +131,9 @@
 	--light: var(--blue);
 	--muted: var(--grey);
 	--subtext: var(--dark-grey);
-	--success: #14b30b;
-	--error: #e12b0b;
-	--info: #2da8d8;
+	--success: var(--green);
+	--error: var(--red);
+	--info: var(--blue);
 
 	--gradient-to-right: linear-gradient(to right, var(--light), var(--dark));
 	--gradient-to-left: linear-gradient(to left, var(--light), var(--dark));
@@ -164,6 +166,10 @@ html,
 body {
 	width: 100%;
 	height: 100vh;
+
+	@supports (-webkit-touch-callout: none) {
+		height: -webkit-fill-available;
+	}
 }
 
 html {
@@ -176,9 +182,8 @@ body {
 	margin: 0;
 	max-width: 26rem;
 	max-height: 56rem;
-	z-index: 0;
 	background: var(--background);
-	overflow: hidden;
+	overflow: hidden scroll;
 	position: relative;
 
 	@media (min-width: 26rem) {
@@ -193,7 +198,14 @@ body {
 	height: 100%;
 	position: relative;
 	grid-template-rows: min-content auto min-content;
-	overflow: hidden scroll;
+	background: var(--background);
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: 0;
+
+	@supports (-webkit-touch-callout: none) {
+		height: -webkit-fill-available;
+	}
 
 	@media (min-width: 26rem) {
 		border-radius: var(--border-radius);

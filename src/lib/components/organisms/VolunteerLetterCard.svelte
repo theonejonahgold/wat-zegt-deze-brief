@@ -45,6 +45,7 @@
 			height: 100%;
 			grid-column: 1;
 			border-radius: 5px;
+			width: 100%;
 		}
 
 		div {
