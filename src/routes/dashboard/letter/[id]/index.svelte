@@ -92,6 +92,7 @@
 
 	section {
 		margin-top: var(--space-xl);
+
 		header {
 			margin-top: var(--space-m);
 			display: flex;
@@ -154,6 +155,7 @@
 				},
 			]}
 			noEnhance
+			buttonPosition="sticky"
 		>
 			<svelte:fragment slot="submit">Opsturen</svelte:fragment>
 		</Form>

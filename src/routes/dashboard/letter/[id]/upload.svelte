@@ -26,7 +26,7 @@
 </script>
 
 <script>
-	import { ImageInput, Button, Loader } from '$atoms'
+	import { FileInput, Button, Loader } from '$atoms'
 	import { PageList } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage } from '$templates'
@@ -167,6 +167,10 @@
 		column-gap: var(--space-s);
 		align-items: center;
 
+		:global(:nth-child(2)) {
+			justify-self: end;
+		}
+
 		:global(ul) {
 			grid-column: 1;
 		}
@@ -188,7 +192,7 @@
 	backLink="/dashboard/letter?step=4&id={letter.id}"
 >
 	<svelte:component
-		this={loading ? Loader : ImageInput}
+		this={loading ? Loader : FileInput}
 		slot="empty"
 		name="page"
 		on:change={changeHandler}
@@ -204,11 +208,14 @@
 				bind:pages
 			/>
 			{#if pages.length}
-				{#if loading}
-					<Loader />
-				{:else}
-					<ImageInput on:change={changeHandler} name="page">Pagina</ImageInput>
-				{/if}
+				<svelte:component
+					this={loading ? Loader : FileInput}
+					slot="empty"
+					name="page"
+					on:change={changeHandler}
+				>
+					Pagina
+				</svelte:component>
 			{/if}
 		</div>
 		<Button href="/dashboard/letter/{letter.id}/organisation">Pagina's opslaan</Button>
