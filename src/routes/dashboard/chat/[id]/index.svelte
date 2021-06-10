@@ -18,7 +18,7 @@
 
 <script>
 	import { Chat } from '$templates'
-	import { listMessages } from '$db/letter'
+	import { listMessages, downloadMessage } from '$db/messages'
 	import type { Load } from '@sveltejs/kit'
 	import { client } from '$config/supabase'
 	import { onMount } from 'svelte'
@@ -27,7 +27,8 @@
 	export let letterId: string
 	export let userId: string
 
-	let blobs = []
+	let initialMessages = []
+	let newMessages = []
 
 	onMount(() => {
 		messages.map(message => {
@@ -39,12 +40,30 @@
 					reader.readAsDataURL(result.data)
 					reader.onloadend = () => {
 						let base64 = reader.result
-						blobs.push({ src: base64 })
+						initialMessages.push({ src: base64 })
 					}
-					return blobs
+					return initialMessages
 				})
 		})
+
+		client
+			.from(`letters:id=eq.${letterId}`)
+			.on('UPDATE', async payload => {
+				const reader = new window.FileReader()
+				const { messages } = payload.new
+				const lastMessage = messages[messages.length - 1]
+				const downloadedMessage = await downloadMessage(letterId, userId, lastMessage)
+				reader.readAsDataURL(downloadedMessage.data)
+				reader.onloadend = () => {
+					let base64 = reader.result
+					newMessages.push({ src: base64 })
+					newMessages = newMessages
+				}
+				console.log(newMessages)
+				return newMessages
+			})
+			.subscribe()
 	})
 </script>
 
-<Chat {blobs} />
+<Chat {initialMessages} {newMessages} />
