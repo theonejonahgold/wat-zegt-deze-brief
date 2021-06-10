@@ -2,11 +2,19 @@
 	import { Button, SpokenText } from '$atoms'
 	import { page, session } from '$app/stores'
 	import { browser } from '$app/env'
+	import { addToast } from '$stores'
 	import { onMount } from 'svelte'
 
 	const langCookies = $session.cookies.langs
 	let js = false
-	onMount(() => (js = true))
+	onMount(() => {
+		js = true
+		if (langCookies) return
+		addToast({
+			message: 'Je telefoontaal is door ons al geselecteerd!',
+			type: 'info',
+		})
+	})
 
 	export let languages: Array<{
 		code: string
