@@ -1,16 +1,18 @@
 <script context="module">
 	export const load: Load = async ({ page }) => {
-		const { data } = await listMessages(page.params.id)
-		if (!data) return {}
+		const messages = await listMessages(page.params.id)
+		if (!messages) return {}
 
-		const { messages } = data
-		const userId = client.auth.session().user.id
+		const { body: isUserRole } = await client.rpc<boolean>('is_role', {
+			user_id: client.auth.session().user.id,
+			u_role: 'user',
+		})
 
 		return {
 			props: {
-				initialMessages: messages,
-				userId: userId,
+				messages,
 				letterId: page.params.id,
+				userRole: (isUserRole as unknown as boolean) ? 'user' : 'volunteer',
 			},
 		}
 	}
@@ -18,52 +20,47 @@
 
 <script>
 	import { Chat } from '$templates'
-	import { listMessages, downloadMessage } from '$db/messages'
+	import { listMessages, downloadAudioMessage, fetchMessage } from '$db/messages'
 	import type { Load } from '@sveltejs/kit'
+	import type { ChatMessage, definitions } from '$types'
 	import { client } from '$config/supabase'
 	import { onMount } from 'svelte'
 
-	export let initialMessages: any
+	export let userRole: string
+	export let messages: ChatMessage[]
 	export let letterId: string
-	export let userId: string
 
-	let messages = []
-
-	onMount(() => {
-		initialMessages.map(message => {
-			client.storage
-				.from('messages')
-				.download(`${letterId}/${userId}/${message}`)
-				.then(result => {
-					console.log(result)
-					const reader = new window.FileReader()
-					reader.readAsDataURL(result.data)
-					reader.onloadend = () => {
-						let base64 = reader.result
-						messages.push({ src: base64 })
-						messages = messages
-					}
-					return messages
-				})
-		})
+	onMount(async () => {
+		messages = (await Promise.all(
+			messages.map(message =>
+				message.type === 'audio'
+					? downloadAudioMessage(letterId, message.sender.id, message.content).then(file => ({
+							...message,
+							file,
+					  }))
+					: new Promise(resolve => resolve(message))
+			)
+		)) as ChatMessage[]
 
 		client
-			.from(`letters:id=eq.${letterId}`)
+			.from<definitions['letters']>(`letters:id=eq.${letterId}`)
 			.on('UPDATE', async payload => {
-				const newMessage = payload.new.messages
-				const lastMessage = newMessage[newMessage.length - 1]
-				const downloadedMessage = await downloadMessage(letterId, userId, lastMessage)
-				const reader = new window.FileReader()
-				reader.readAsDataURL(downloadedMessage.data)
-				reader.onloadend = () => {
-					let base64 = reader.result
-					messages.push({ src: base64 })
+				const messageID = payload.new.messages[payload.new.messages.length - 1]
+				const message = await fetchMessage(messageID)
+				if (message.type !== 'audio') {
+					messages.push(message)
 					messages = messages
+					return
 				}
-				return messages
+				const file = await downloadAudioMessage(letterId, message.sender.id, message.content)
+				messages.push({
+					...message,
+					file,
+				})
+				messages = messages
 			})
 			.subscribe()
 	})
 </script>
 
-<Chat {messages} />
+<Chat {messages} {userRole} />

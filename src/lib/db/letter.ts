@@ -20,6 +20,8 @@ export function listLetters() {
 			sender,
 			createdAt,
 			volunteer:volunteer_id,
+			messages,
+			user_id,
 			status,
 			thumbnail
 		`

@@ -15,12 +15,12 @@ export async function messageHandler({ detail: message }: CustomEvent<File>) {
 		.from<definitions['messages']>('messages')
 		.insert({
 			sender_id: userId,
-			content: `${id}/${userId}/${messageId}`,
+			content: messageId,
 			type: 'audio',
 		})
 		.single()
 	await client.rpc('update_letter_messages', {
 		letter_id: id,
-		message_id: messageId,
+		message_id: body.id,
 	})
 }
