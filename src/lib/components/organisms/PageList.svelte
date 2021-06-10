@@ -1,20 +1,21 @@
 <script>
 	import { Image } from '$atoms'
-	import { createEventDispatcher } from 'svelte'
+	import { afterUpdate, createEventDispatcher } from 'svelte'
 
 	type DragAndDropEvent = DragEvent & { currentTarget: HTMLImageElement }
 
 	export let pages: string[]
 	export let selected: number
 
-	const dispatch =
-		createEventDispatcher<{
-			remove: string
-			move: {
-				oldIndex: number
-				newIndex: number
-			}
-		}>()
+	let ul: HTMLUListElement
+
+	const dispatch = createEventDispatcher<{
+		remove: string
+		move: {
+			oldIndex: number
+			newIndex: number
+		}
+	}>()
 
 	function clickHandler(page: number) {
 		return () => {
@@ -42,17 +43,25 @@
 			newIndex,
 		})
 	}
+
+	afterUpdate(() => {
+		if (selected === pages.length - 1) ul.scrollLeft = ul.scrollWidth
+	})
 </script>
 
 <style>
 	ul {
-		display: flex;
+		display: grid;
+		grid-auto-columns: var(--space-xxxl);
+		grid-auto-flow: column;
 		list-style: none;
 		margin: 0;
 		padding: 0;
 		column-gap: var(--space-s);
-		width: max-content;
-		padding-right: var(--space-s);
+		width: 100%;
+		align-items: center;
+		overflow-x: auto;
+		padding: var(--space-xs) 2px;
 	}
 
 	li {
@@ -86,7 +95,7 @@
 	}
 </style>
 
-<ul>
+<ul bind:this={ul}>
 	<slot />
 	{#each pages as page, i}
 		<li class:selected={selected === i} on:click={clickHandler(i)}>

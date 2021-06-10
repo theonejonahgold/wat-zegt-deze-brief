@@ -4,15 +4,11 @@
 
 <style lang="scss">
 	label {
-		border-radius: 50%;
-		width: var(--space-xxxl);
-		height: var(--space-xxxl);
-		background: var(--gradient-to-right);
-		display: grid;
-		place-content: center;
-		place-items: center;
 		position: relative;
-		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
 
 		> :global(*) {
 			grid-column: 1;
@@ -20,25 +16,32 @@
 		}
 
 		input {
+			display: inline-block;
 			visibility: hidden;
-			width: 100%;
+			width: 1px;
+			height: 1px;
 		}
 
-		&:after {
+		&:before {
 			content: '+';
+			display: block;
 			grid-row: 1;
 			grid-column: 1;
 			font-size: var(--font-l);
+			border-radius: 50%;
+			background: var(--gradient-to-right);
 			color: var(--secondary);
-			width: 100%;
-			height: 100%;
-			line-height: var(--space-xxxl);
+			line-height: var(--space-xxl);
+			height: var(--space-xxl);
+			width: var(--space-xxl);
 			font-weight: 400;
 			text-align: center;
+			margin-bottom: 0.2em;
 		}
 	}
 </style>
 
 <label>
 	<input {name} accept="image/jpeg, image/png" on:change type="file" />
+	<slot />
 </label>

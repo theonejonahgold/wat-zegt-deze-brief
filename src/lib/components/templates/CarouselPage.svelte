@@ -19,8 +19,6 @@
 	footer {
 		box-shadow: var(--bs-up);
 		padding-top: var(--space-l);
-		width: 100%;
-		overflow-x: scroll;
 	}
 </style>
 

@@ -159,6 +159,20 @@
 	}
 </script>
 
+<style>
+	div {
+		display: grid;
+		width: 100%;
+		grid-template-columns: 1fr calc(1.5 * var(--space-xxxl));
+		column-gap: var(--space-s);
+		align-items: center;
+
+		:global(ul) {
+			grid-column: 1;
+		}
+	}
+</style>
+
 <svelte:head>
 	{#if editing}
 		<title>Pagina's bewerken</title>
@@ -178,22 +192,25 @@
 		slot="empty"
 		name="page"
 		on:change={changeHandler}
-	/>
+	>
+		Upload de eerste pagina
+	</svelte:component>
 	<svelte:fragment slot="footer">
-		<PageList
-			on:remove={removeHandler}
-			on:move={moveHandler}
-			bind:selected={selectedPage}
-			bind:pages
-		>
+		<div>
+			<PageList
+				on:remove={removeHandler}
+				on:move={moveHandler}
+				bind:selected={selectedPage}
+				bind:pages
+			/>
 			{#if pages.length}
 				{#if loading}
 					<Loader />
 				{:else}
-					<ImageInput on:change={changeHandler} name="page" />
+					<ImageInput on:change={changeHandler} name="page">Pagina</ImageInput>
 				{/if}
 			{/if}
-		</PageList>
+		</div>
 		<Button href="/dashboard/letter/{letter.id}/organisation">Pagina's opslaan</Button>
 	</svelte:fragment>
 </CarouselPage>
