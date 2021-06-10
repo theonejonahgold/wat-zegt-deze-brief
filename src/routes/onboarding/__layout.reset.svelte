@@ -21,6 +21,7 @@
 </script>
 
 <script>
+	import { Toasts } from '$organisms'
 	import { Instructions } from '$templates'
 	import type { InstructionsContent, InstructionsHrefs } from '$types'
 
@@ -44,6 +45,7 @@
 	}
 </script>
 
+<Toasts />
 {#if !content}
 	<slot />
 {:else}
