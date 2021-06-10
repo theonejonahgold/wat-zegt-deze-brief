@@ -1,7 +1,8 @@
 <script>
 	import { createEventDispatcher } from 'svelte'
-	import { fade } from 'svelte/transition'
+	import { scale } from 'svelte/transition'
 	import { SuccessIcon, ErrorIcon, InfoIcon, CloseIcon } from '$icons'
+	import { cubicInOut } from 'svelte/easing'
 
 	const dispatch = createEventDispatcher()
 
@@ -22,6 +23,7 @@
 		column-gap: var(--space-s);
 		margin-bottom: var(--space-xs);
 		overflow: hidden;
+		box-shadow: var(--bs-button);
 
 		&::after {
 			content: '';
@@ -69,7 +71,16 @@
 	}
 </style>
 
-<article class={type} style="--duration: {duration}ms" role="alert" transition:fade>
+<article
+	class={type}
+	style="--duration: {duration}ms"
+	role="alert"
+	transition:scale={{
+		opacity: 0,
+		duration: 400,
+		easing: cubicInOut,
+	}}
+>
 	{#if type === 'success'}
 		<SuccessIcon />
 	{:else if type === 'error'}

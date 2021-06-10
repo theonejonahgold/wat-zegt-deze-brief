@@ -1,5 +1,5 @@
 <script>
-	import { Button, SpokenText, Back, Help } from '$atoms'
+	import { Back, Button, Help, SpokenText } from '$atoms'
 	import { LanguagePicker } from '$organisms'
 	import { Flex, Header } from '$templates'
 	import languages from './_languages'

@@ -11,7 +11,7 @@
 
 <style>
 	hr {
-		margin: var(--space-s) 0;
+		margin: var(--space-xl) 0 var(--space-s);
 	}
 
 	ul {
@@ -21,10 +21,24 @@
 		row-gap: var(--space-s);
 		margin-top: var(--space-xxs);
 	}
+
+	section {
+		:global(div:first-child p) {
+			font-size: var(--font-m);
+			margin-bottom: var(--space-m);
+		}
+	}
+
+	.empty {
+		:global(div:last-child p) {
+			font-size: var(--font-m);
+			margin-top: var(--space-xl);
+		}
+	}
 </style>
 
 <Header>
-	<SpokenText --align="center" slot="middle" text="Jouw brieven" />
+	<SpokenText --align="center" slot="middle" text="Home" />
 	<Help slot="right" />
 </Header>
 <main>
@@ -32,14 +46,21 @@
 		<UserIcon />
 	</ImageButton>
 	<hr />
-	<section>
-		<SpokenText text="Brieven" --align="center" />
-		<ul>
-			{#each letters as letter (letter.id)}
-				<li>
-					<UserLetterCard {letter} />
-				</li>
-			{/each}
-		</ul>
+	<section class:empty={!letters.length}>
+		<SpokenText text="Jouw brieven" --align="center" />
+		{#if letters.length}
+			<ul>
+				{#each letters as letter (letter.id)}
+					<li>
+						<UserLetterCard {letter} />
+					</li>
+				{/each}
+			</ul>
+		{:else}
+			<SpokenText
+				text="Je hebt nog geen brieven ingestuurd, klik op de knop hierboven om je eerste brief in te sturen."
+				--align="center"
+			/>
+		{/if}
 	</section>
 </main>

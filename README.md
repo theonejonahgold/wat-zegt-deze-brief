@@ -519,3 +519,4 @@ Low-literate people want their formal letters explained, so they know if action 
 
 - [vonadz code for injecting `busboy` in the SvelteKit `handle` hook](https://github.com/sveltejs/kit/issues/70#issuecomment-830799681)
 - [joshnuss for showing how to send files to supabase via fetch](https://github.com/supabase/supabase/discussions/1002#discussioncomment-560098)
+- [Temani Afif css loaders article on DEV.TO](https://dev.to/afif/i-made-100-more-css-loaders-for-your-next-project-4ioa)

@@ -4,10 +4,13 @@
 	import { RecordIcon, StopRecordingIcon } from '$icons'
 
 	export let recorder: MediaRecorder
-	let chunks: any[] = []
+	let chunks: Blob[] = []
 	let clicked = false
 
-	const dispatch = createEventDispatcher()
+	const dispatch =
+		createEventDispatcher<{
+			message: File
+		}>()
 
 	function recordMedia() {
 		clicked = !clicked
@@ -23,10 +26,7 @@
 		recorder.stop()
 
 		recorder.onstop = () => {
-			let blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus' })
-			chunks = []
-			const file = new File([blob], 'message.ogg', { type: 'audio/ogg; codecs=opus' })
-
+			const file = new File(chunks, 'message.ogg', { type: 'audio/ogg; codecs=opus' })
 			dispatch('message', file)
 		}
 	}

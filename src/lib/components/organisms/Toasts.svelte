@@ -1,6 +1,7 @@
 <script>
 	import { Toast } from '$molecules'
 	import { dismissToast, toasts } from '$stores'
+	import Portal from 'svelte-portal/src/Portal.svelte'
 </script>
 
 <style>
@@ -19,9 +20,11 @@
 </style>
 
 {#if $toasts}
-	<section>
-		{#each $toasts as toast (toast.id)}
-			<Toast {...toast} on:dismiss={() => dismissToast(toast.id)}>{toast.message}</Toast>
-		{/each}
-	</section>
+	<Portal target="body">
+		<section>
+			{#each $toasts as toast (toast.id)}
+				<Toast {...toast} on:dismiss={() => dismissToast(toast.id)}>{toast.message}</Toast>
+			{/each}
+		</section>
+	</Portal>
 {/if}

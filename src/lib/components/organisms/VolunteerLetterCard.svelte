@@ -4,6 +4,21 @@
 	import type { Letter } from '$types'
 
 	export let letter: Letter
+	export let userId: any
+
+	let href: string = checkVolunteerAssigned()
+
+	function checkVolunteerAssigned() {
+		let route: string
+
+		if (letter.volunteer === userId) {
+			route = `/dashboard/chat/${letter.id}`
+		} else {
+			route = `/dashboard/letter/${letter.id}`
+		}
+
+		return route
+	}
 </script>
 
 <style lang="scss">
@@ -30,6 +45,7 @@
 			height: 100%;
 			grid-column: 1;
 			border-radius: 5px;
+			width: 100%;
 		}
 
 		div {
@@ -51,7 +67,7 @@
 </style>
 
 <article>
-	<a href="/dashboard/letter/{letter.id}">
+	<a {href}>
 		<Image src={letter.image} />
 		<div>
 			<p>Brief van {letter.sender ? letter.sender : 'onbekende instantie'}</p>

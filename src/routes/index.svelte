@@ -1,18 +1,28 @@
 <script>
 	import { Icon, Button, SpokenText } from '$atoms'
 	import { IndexIcon, Oval } from '$icons'
-	import { addToast } from '$stores'
 	import { Flex } from '$templates'
 </script>
 
-<style>
+<style lang="scss">
 	h1 {
 		margin-bottom: var(--space-s);
 
-		+ :global(p) {
-			max-width: 78%;
-			align-self: flex-start;
-			margin-bottom: var(--space-l);
+		+ :global {
+			p {
+				max-width: 78%;
+				align-self: flex-start;
+				margin-bottom: var(--space-l);
+
+				+ div {
+					max-height: 18rem;
+					margin-top: auto;
+
+					+ a {
+						margin-top: auto;
+					}
+				}
+			}
 		}
 	}
 </style>
