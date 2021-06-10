@@ -8,7 +8,7 @@
 
 		return {
 			props: {
-				messages: messages,
+				initialMessages: messages,
 				userId: userId,
 				letterId: page.params.id,
 			},
@@ -23,47 +23,47 @@
 	import { client } from '$config/supabase'
 	import { onMount } from 'svelte'
 
-	export let messages: any
+	export let initialMessages: any
 	export let letterId: string
 	export let userId: string
 
-	let initialMessages = []
-	let newMessages = []
+	let messages = []
 
 	onMount(() => {
-		messages.map(message => {
+		initialMessages.map(message => {
 			client.storage
 				.from('messages')
 				.download(`${letterId}/${userId}/${message}`)
 				.then(result => {
-					const reader = new FileReader()
+					console.log(result)
+					const reader = new window.FileReader()
 					reader.readAsDataURL(result.data)
 					reader.onloadend = () => {
 						let base64 = reader.result
-						initialMessages.push({ src: base64 })
+						messages.push({ src: base64 })
+						messages = messages
 					}
-					return initialMessages
+					return messages
 				})
 		})
 
 		client
 			.from(`letters:id=eq.${letterId}`)
 			.on('UPDATE', async payload => {
-				const reader = new window.FileReader()
-				const { messages } = payload.new
-				const lastMessage = messages[messages.length - 1]
+				const newMessage = payload.new.messages
+				const lastMessage = newMessage[newMessage.length - 1]
 				const downloadedMessage = await downloadMessage(letterId, userId, lastMessage)
+				const reader = new window.FileReader()
 				reader.readAsDataURL(downloadedMessage.data)
 				reader.onloadend = () => {
 					let base64 = reader.result
-					newMessages.push({ src: base64 })
-					newMessages = newMessages
+					messages.push({ src: base64 })
+					messages = messages
 				}
-				console.log(newMessages)
-				return newMessages
+				return messages
 			})
 			.subscribe()
 	})
 </script>
 
-<Chat {initialMessages} {newMessages} />
+<Chat {messages} />
