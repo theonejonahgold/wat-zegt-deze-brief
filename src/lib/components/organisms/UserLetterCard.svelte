@@ -5,8 +5,24 @@
 
 	export let letter: Letter
 
+	console.log(letter)
+
+	let href: string = checkVolunteerAssigned()
+
+	function checkVolunteerAssigned() {
+		let route: string
+
+		if (letter.volunteer !== null) {
+			route = `/dashboard/chat/${letter.id}`
+		} else {
+			route = `dashboard/letter/${letter.id}`
+		}
+
+		return route
+	}
+
 	const time = letter.messages?.length ? letter.messages[0].date : letter.createdAt
-	const chatMessage = letter.messages?.[0]
+	const chatMessage = letter.messages
 </script>
 
 <style lang="scss">
@@ -82,7 +98,7 @@
 </style>
 
 <article>
-	<a href="/dashboard/letter/{letter.id}">
+	<a {href}>
 		<Image src={letter.image} />
 		<div>
 			<header>
@@ -97,13 +113,10 @@
 					{formatTimestamp(time)}
 				</time>
 			</header>
-			{#if !chatMessage}
+			{#if !chatMessage.length}
 				<p>Je hebt nog geen uitleg ontvangen.</p>
 			{:else}
-				<p>
-					{chatMessage.sender.name ? `${chatMessage.sender.name}:` : ''}
-					{chatMessage.type === 'audio' ? 'Spraakbericht' : chatMessage.content}
-				</p>
+				<p>Je hebt uitleg ontvangen</p>
 			{/if}
 		</div>
 	</a>
