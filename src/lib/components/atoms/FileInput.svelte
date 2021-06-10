@@ -24,6 +24,7 @@
 
 		&:before {
 			content: '+';
+			display: block;
 			font-size: var(--font-l);
 			border-radius: 50%;
 			background: var(--gradient-to-right);
