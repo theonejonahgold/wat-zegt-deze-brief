@@ -10,7 +10,7 @@
 
 	let dragging = false
 	let offset = 0
-	let dragstart = -1
+	let moveStart = 0
 
 	const isTouchCapable =
 		browser &&
@@ -19,28 +19,65 @@
 			navigator.maxTouchPoints > 0 ||
 			window.navigator.msMaxTouchPoints > 0)
 
-	function mouseClickHandler(e: Event) {
-		dragging = e.type === 'mousedown' || e.type === 'touchstart'
-		if (!dragging && offset > window.innerWidth / 2) {
-			offset = 0
-			dragstart = -1
-			selected = (selected + 1) % pages.length
-		} else if (!dragging && offset > (-1 * window.innerWidth) / 2) {
-			offset = 0
-			dragstart = -1
-			selected = selected === 0 ? pages.length - 1 : selected - 1
+	function mouseClickHandler(e: MouseEvent) {
+		dragging = e.type === 'mousedown'
+
+		if (dragging) {
+			moveStart = e.clientX
+			return
 		}
+		if (offset < window.innerWidth / -8) selected = (selected + 1) % pages.length
+		if (offset > window.innerWidth / 8) selected = selected === 0 ? pages.length - 1 : selected - 1
+
+		offset = 0
+		moveStart = 0
+	}
+
+	function touchHandler(e: TouchEvent) {
+		dragging = e.type === 'touchstart'
+
+		if (dragging) {
+			moveStart = e.touches.item(0).clientX
+			return
+		}
+		if (offset < window.innerWidth / -8) selected = (selected + 1) % pages.length
+		if (offset > window.innerWidth / 8) selected = selected === 0 ? pages.length - 1 : selected - 1
+
+		offset = 0
+		moveStart = 0
 	}
 
 	function mouseMoveHandler(e: MouseEvent) {
 		if (!dragging) return
-		offset += e.movementX * window.devicePixelRatio
+		const { clientX } = e
+		if (selected === 0) {
+			offset = moveStart > clientX ? clientX - moveStart : 0
+			return
+		}
+		if (selected === pages.length - 1) {
+			offset = moveStart < clientX ? (moveStart - clientX) * -1 : 0
+			return
+		}
+		offset = moveStart < clientX ? (moveStart - clientX) * -1 : clientX - moveStart
 	}
 
 	function touchMoveHandler(e: TouchEvent) {
 		if (!dragging) return
-		if (dragstart === -1) dragstart = e.touches.item(0).clientX
-		if (e.touches.length) offset = e.touches.item(0).clientX - dragstart
+		if (!e.touches.length) return
+		const { clientX } = e.touches.item(0)
+		if (selected === 0) {
+			offset = moveStart > clientX ? clientX - moveStart : 0
+			return
+		}
+		if (selected === pages.length - 1) {
+			offset = moveStart < clientX ? (moveStart - clientX) * -1 : 0
+			return
+		}
+		offset = moveStart < clientX ? (moveStart - clientX) * -1 : clientX - moveStart
+	}
+
+	const previous = () => {
+		selected = selected === 0 ? 0 : selected - 1
 	}
 
 	const next = () => {
@@ -106,34 +143,38 @@
 
 {#if isTouchCapable}
 	<section>
-		<button on:click={next} id="previous" type="button"><Icon><AnchorIcon /></Icon></button>
+		{#if selected > 0}
+			<button on:click={previous} id="previous" type="button"><Icon><AnchorIcon /></Icon></button>
+		{/if}
 		<div
-			on:touchstart|capture={mouseClickHandler}
-			on:touchend|capture={mouseClickHandler}
+			on:touchstart|capture={touchHandler}
+			on:touchend|capture={touchHandler}
 			on:touchmove|capture={touchMoveHandler}
 		>
-			{#each [pages[selected === 0 ? pages.length - 1 : selected - 1], pages[selected], pages[(selected + 1) % pages.length]] as page, i (page + i)}
-				<Image --index={i - 1} --offset="{offset}px" src={page} alt="Page preview" />
+			{#each pages as page, i (page + i)}
+				<Image --index={i - selected} --offset="{offset}px" src={page} alt="Page preview" />
 			{/each}
 		</div>
-		<button on:click={next} id="next" type="button"><Icon><AnchorIcon /></Icon></button>
+		{#if selected < pages.length - 1}
+			<button on:click={next} id="next" type="button"><Icon><AnchorIcon /></Icon></button>
+		{/if}
 	</section>
 {:else}
 	<section>
-		<button on:click|stopPropagation={next} id="previous" type="button"
-			><Icon><AnchorIcon /></Icon></button
-		>
+		{#if selected > 0}
+			<button on:click={previous} id="previous" type="button"><Icon><AnchorIcon /></Icon></button>
+		{/if}
 		<div
 			on:mousedown|capture={mouseClickHandler}
 			on:mouseup|capture={mouseClickHandler}
 			on:mousemove|capture={mouseMoveHandler}
 		>
-			{#each [pages[selected === 0 ? pages.length - 1 : selected - 1], pages[selected], pages[(selected + 1) % pages.length]] as page, i (page + i)}
-				<Image --index={i - 1} --offset="{offset}px" src={page} alt="Page preview" />
+			{#each pages as page, i (page + i)}
+				<Image --index={i - selected} --offset="{offset}px" src={page} alt="Page preview" />
 			{/each}
 		</div>
-		<button on:click|stopPropagation={next} id="next" type="button"
-			><Icon><AnchorIcon /></Icon></button
-		>
+		{#if selected < pages.length - 1}
+			<button on:click={next} id="next" type="button"><Icon><AnchorIcon /></Icon></button>
+		{/if}
 	</section>
 {/if}
