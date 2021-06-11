@@ -26,7 +26,7 @@
 </script>
 
 <script>
-	import { ImageInput, Button, Loader } from '$atoms'
+	import { FileInput, Button, Loader } from '$atoms'
 	import { PageList } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage } from '$templates'
@@ -159,6 +159,24 @@
 	}
 </script>
 
+<style>
+	div {
+		display: grid;
+		width: 100%;
+		grid-template-columns: 1fr calc(1.5 * var(--space-xxxl));
+		column-gap: var(--space-s);
+		align-items: center;
+
+		:global(:nth-child(2)) {
+			justify-self: end;
+		}
+
+		:global(ul) {
+			grid-column: 1;
+		}
+	}
+</style>
+
 <svelte:head>
 	{#if editing}
 		<title>Pagina's bewerken</title>
@@ -174,26 +192,32 @@
 	backLink="/dashboard/letter?step=4&id={letter.id}"
 >
 	<svelte:component
-		this={loading ? Loader : ImageInput}
+		this={loading ? Loader : FileInput}
 		slot="empty"
 		name="page"
 		on:change={changeHandler}
-	/>
+	>
+		Upload de eerste pagina
+	</svelte:component>
 	<svelte:fragment slot="footer">
-		<PageList
-			on:remove={removeHandler}
-			on:move={moveHandler}
-			bind:selected={selectedPage}
-			bind:pages
-		>
+		<div>
+			<PageList
+				on:remove={removeHandler}
+				on:move={moveHandler}
+				bind:selected={selectedPage}
+				bind:pages
+			/>
 			{#if pages.length}
-				{#if loading}
-					<Loader />
-				{:else}
-					<ImageInput on:change={changeHandler} name="page" />
-				{/if}
+				<svelte:component
+					this={loading ? Loader : FileInput}
+					slot="empty"
+					name="page"
+					on:change={changeHandler}
+				>
+					Pagina
+				</svelte:component>
 			{/if}
-		</PageList>
+		</div>
 		<Button href="/dashboard/letter/{letter.id}/organisation">Pagina's opslaan</Button>
 	</svelte:fragment>
 </CarouselPage>

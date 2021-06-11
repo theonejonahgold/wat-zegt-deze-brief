@@ -22,7 +22,7 @@
 </script>
 
 <script>
-	import { Help, SpokenText, Back, Image, Button, DataList } from '$atoms'
+	import { Help, SpokenText, Back, Image, Button } from '$atoms'
 	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage, Header } from '$templates'
@@ -33,7 +33,6 @@
 	import { browser } from '$app/env'
 	import { messageHandler } from '$db/messageHandler'
 	import { volunteerLetter } from '$db/volunteerLetter'
-	import organisations from './_organisations'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
@@ -107,6 +106,7 @@
 
 	section {
 		margin-top: var(--space-xl);
+
 		header {
 			margin-top: var(--space-m);
 			display: flex;
@@ -169,6 +169,7 @@
 				},
 			]}
 			noEnhance
+			buttonPosition="sticky"
 		>
 			<svelte:fragment slot="submit">Opsturen</svelte:fragment>
 		</Form>

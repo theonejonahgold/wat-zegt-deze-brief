@@ -7,10 +7,9 @@
 	let chunks: Blob[] = []
 	let clicked = false
 
-	const dispatch =
-		createEventDispatcher<{
-			message: File
-		}>()
+	const dispatch = createEventDispatcher<{
+		message: File
+	}>()
 
 	function recordMedia() {
 		clicked = !clicked
