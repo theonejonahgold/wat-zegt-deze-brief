@@ -763,127 +763,127 @@ export interface paths {
 }
 
 export interface definitions {
-	/** Letters sent in by users with the "user" role */
-	letters: {
-		/**
-		 * Note:
-		 * This is a Primary Key.<pk/>
-		 */
-		id: string
-		/** The sender of the letter, defined by the user */
-		sender?: string
-		/** The time the letter was created at */
-		createdAt?: string
-		/**
-		 * The volunteer explaining
-		 *
-		 * Note:
-		 * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
-		 */
-		volunteer_id?: string
-		/**
-		 * The user who received and uploaded the letter
-		 *
-		 * Note:
-		 * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
-		 */
-		user_id: string
-		status: string
-		messages?: string
-		/** The name of the thumbnail file */
-		thumbnail?: string
-		/** IDs for the pages in their respective order */
-		page_order?: string
-	}
-	/** The possible types of messages */
-	'message-types': {
-		/**
-		 * Note:
-		 * This is a Primary Key.<pk/>
-		 */
-		id: string
-	}
-	/** Chat messages for letters */
-	messages: {
-		/**
-		 * Note:
-		 * This is a Primary Key.<pk/>
-		 */
-		id: string
-		/**
-		 * The sender of the message
-		 *
-		 * Note:
-		 * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
-		 */
-		sender_id: string
-		/** The content of the message */
-		content: string
-		/**
-		 * The type of message sent
-		 *
-		 * Note:
-		 * This is a Foreign Key to `message-types.id`.<fk table='message-types' column='id'/>
-		 */
-		type: string
-		date: string
-	}
-	/** The table holding the onboarding state per user */
-	onboardings: {
-		/**
-		 * Note:
-		 * This is a Primary Key.<pk/>
-		 */
-		id: number
-		/**
-		 * The user ID the state is connected to
-		 *
-		 * Note:
-		 * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
-		 */
-		user_id: string
-		/** The basic onboarding of the app */
-		app_onboarding: boolean
-		/** The onboarding for submitting a letter, only applicable to "user" roles */
-		letter_onboarding: boolean
-	}
-	/** All possible user roles */
-	roles: {
-		/**
-		 * Slug for role
-		 *
-		 * Note:
-		 * This is a Primary Key.<pk/>
-		 */
-		id: string
-		/** Name of the role */
-		name: string
-	}
-	/** Public users database */
-	users: {
-		/**
-		 * Note:
-		 * This is a Primary Key.<pk/>
-		 */
-		id: string
-		/**
-		 * Role of user
-		 *
-		 * Note:
-		 * This is a Foreign Key to `roles.id`.<fk table='roles' column='id'/>
-		 */
-		user_role: string
-		/** Optional name of user */
-		name?: string
-		languages?: string
-		/**
-		 * Foreign key relation to "onboardings" table, holding onboarding state for user
-		 *
-		 * Note:
-		 * This is a Foreign Key to `onboardings.id`.<fk table='onboardings' column='id'/>
-		 */
-		onboarding_id?: number
-	}
+  /** Letters sent in by users with the "user" role */
+  letters: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+    /** The sender of the letter, defined by the user */
+    sender?: string;
+    /** The time the letter was created at */
+    createdAt?: string;
+    /**
+     * The volunteer explaining
+     *
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    volunteer_id?: string;
+    /**
+     * The user who received and uploaded the letter
+     *
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    user_id: string;
+    status: string;
+    messages?: string;
+    /** The name of the thumbnail file */
+    thumbnail?: string;
+    /** IDs for the pages in their respective order */
+    page_order?: string;
+  };
+  /** The possible types of messages */
+  "message-types": {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+  };
+  /** Chat messages for letters */
+  messages: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+    /**
+     * The sender of the message
+     *
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    sender_id: string;
+    /** The content of the message */
+    content: string;
+    /**
+     * The type of message sent
+     *
+     * Note:
+     * This is a Foreign Key to `message-types.id`.<fk table='message-types' column='id'/>
+     */
+    type: string;
+    date: string;
+  };
+  /** The table holding the onboarding state per user */
+  onboardings: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * The user ID the state is connected to
+     *
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    user_id: string;
+    /** The basic onboarding of the app */
+    app_onboarding: boolean;
+    /** The onboarding for submitting a letter, only applicable to "user" roles */
+    letter_onboarding: boolean;
+  };
+  /** All possible user roles */
+  roles: {
+    /**
+     * Slug for role
+     *
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+    /** Name of the role */
+    name: string;
+  };
+  /** Public users database */
+  users: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: string;
+    /**
+     * Role of user
+     *
+     * Note:
+     * This is a Foreign Key to `roles.id`.<fk table='roles' column='id'/>
+     */
+    user_role: string;
+    /** Optional name of user */
+    name?: string;
+    languages?: string;
+    /**
+     * Foreign key relation to "onboardings" table, holding onboarding state for user
+     *
+     * Note:
+     * This is a Foreign Key to `onboardings.id`.<fk table='onboardings' column='id'/>
+     */
+    onboarding_id?: number;
+  };
 }
 
 export interface parameters {
