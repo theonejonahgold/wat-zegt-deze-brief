@@ -2,23 +2,14 @@
 	import { Image } from '$atoms'
 	import { formatTimestamp } from '$utils'
 	import type { Letter } from '$types'
+	import { client } from '$config/supabase'
 
 	export let letter: Letter
-	export let userId: any
 
-	let href: string = checkVolunteerAssigned()
-
-	function checkVolunteerAssigned() {
-		let route: string
-
-		if (letter.volunteer === userId) {
-			route = `/dashboard/chat/${letter.id}`
-		} else {
-			route = `/dashboard/letter/${letter.id}`
-		}
-
-		return route
-	}
+	const href: string =
+		letter.volunteer?.id === client.auth.session().user.id
+			? `/dashboard/chat/${letter.id}`
+			: `/dashboard/letter/${letter.id}`
 </script>
 
 <style lang="scss">

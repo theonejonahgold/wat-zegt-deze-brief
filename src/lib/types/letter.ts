@@ -4,7 +4,8 @@ export interface Letter {
 	sender?: string
 	createdAt: string
 	volunteer?: {
-		name: string
+		id: string
+		name?: string
 	}
 	messages: ChatMessage[]
 	page_order: string[]
