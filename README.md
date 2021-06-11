@@ -2,6 +2,9 @@
 
 # Index
 
+- [Week[3]](#week3)
+  - [Coaching session](#coaching-session)
+  - [Design feedback](#design-feedback)
 - [Week[2]](#week2)
   - [Coaching session](#coaching-session)
   - [Design feedback](#design-feedback)
@@ -25,6 +28,26 @@
   - [Deliverables](#deliverables)
 - [User scenarios](#user-scenarios)
 - [Sources](#sources)
+
+# Week[3]
+
+## Coaching session
+
+- Props to the way you work together.
+- Good job on testing, very useful insights.
+
+## Design feedback
+
+- TTS button is quite small.
+- Contrast with buttons needs to be checked.
+- Explain what the user needs to do when they need to do it, especially when uploading a letter.
+- Get help from volunteers who helped you before.
+- Buttons are pretty far up on the screen for mobile users.
+- Zero state needs a lot of improvement on the home page.
+- Are there too many audio buttons?
+- Add an "archive" where all resolved letters are put.
+- Add deadline to letter, so volunteers know the letters needs a response in X days.
+- Think about filter options.
 
 # Week[2]
 
