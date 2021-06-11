@@ -119,8 +119,9 @@
 	--blue: #80b6fe;
 	--white: #fff;
 	--black: #595959;
-	--grey: #686868;
-	--dark-grey: #989898;
+	--dark-grey: #686868;
+	--grey: #989898;
+	--light-grey: #d8d8d8;
 	--green: #5fb05a;
 	--red: #e05742;
 
@@ -129,8 +130,8 @@
 	--dark: var(--purple);
 	--background: var(--light-purple);
 	--light: var(--blue);
-	--muted: var(--grey);
-	--subtext: var(--dark-grey);
+	--muted: var(--dark-grey);
+	--subtext: var(--grey);
 	--success: var(--green);
 	--error: var(--red);
 	--info: var(--blue);
