@@ -19,6 +19,7 @@
 		width: 100%;
 		border-radius: 10px;
 		color: var(--primary);
+		text-decoration: none;
 
 		> :global(div) {
 			grid-row: 1 / span 1;
