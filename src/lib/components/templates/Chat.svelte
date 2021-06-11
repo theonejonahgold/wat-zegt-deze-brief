@@ -13,6 +13,7 @@
 	const userId = client.auth.session().user.id
 
 	let recorder: MediaRecorder
+	let medium: boolean = true
 
 	if (browser) {
 		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
@@ -66,6 +67,7 @@
 		<SpokenText
 			--align="center"
 			text="Klik op de microfoon en stel nog een vraag of bedank de vrijwilliger"
+			{medium}
 		/>
 	{/if}
 	<RecordAudio {recorder} on:message={messageHandler} />
