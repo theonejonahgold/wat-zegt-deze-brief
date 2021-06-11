@@ -5,24 +5,10 @@
 
 	export let letter: Letter
 
-	console.log(letter)
-
-	let href: string = checkVolunteerAssigned()
-
-	function checkVolunteerAssigned() {
-		let route: string
-
-		if (letter.volunteer !== null) {
-			route = `/dashboard/chat/${letter.id}`
-		} else {
-			route = `dashboard/letter/${letter.id}`
-		}
-
-		return route
-	}
+	const href =
+		letter.volunteer !== null ? `/dashboard/chat/${letter.id}` : `/dashboard/letter/${letter.id}`
 
 	const time = letter.messages?.length ? letter.messages[0].date : letter.createdAt
-	const chatMessage = letter.messages
 </script>
 
 <style lang="scss">
@@ -114,7 +100,7 @@
 					{formatTimestamp(time)}
 				</time>
 			</header>
-			{#if !chatMessage.length}
+			{#if !letter.messages.length}
 				<p>Je hebt nog geen uitleg ontvangen.</p>
 			{:else}
 				<p>Je hebt uitleg ontvangen</p>
