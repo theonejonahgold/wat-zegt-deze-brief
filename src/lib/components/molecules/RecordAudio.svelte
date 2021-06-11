@@ -10,7 +10,7 @@
 	const dispatch = createEventDispatcher<{
 		message: File
 	}>()
-
+  
 	function recordMedia() {
 		clicked = !clicked
 		recorder.start()
