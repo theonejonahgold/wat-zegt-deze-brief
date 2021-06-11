@@ -5,8 +5,10 @@
 
 	export let letter: Letter
 
+	const href =
+		letter.volunteer !== null ? `/dashboard/chat/${letter.id}` : `/dashboard/letter/${letter.id}`
+
 	const time = letter.messages?.length ? letter.messages[0].date : letter.createdAt
-	const chatMessage = letter.messages?.[0]
 </script>
 
 <style lang="scss">
@@ -44,6 +46,7 @@
 			height: 100%;
 			grid-column: 1;
 			border-radius: 5px;
+			width: 100%;
 		}
 
 		div {
@@ -82,7 +85,7 @@
 </style>
 
 <article>
-	<a href="/dashboard/letter/{letter.id}">
+	<a {href}>
 		<Image src={letter.image} />
 		<div>
 			<header>
@@ -97,13 +100,10 @@
 					{formatTimestamp(time)}
 				</time>
 			</header>
-			{#if !chatMessage}
+			{#if !letter.messages}
 				<p>Je hebt nog geen uitleg ontvangen.</p>
 			{:else}
-				<p>
-					{chatMessage.sender.name ? `${chatMessage.sender.name}:` : ''}
-					{chatMessage.type === 'audio' ? 'Spraakbericht' : chatMessage.content}
-				</p>
+				<p>Je hebt uitleg ontvangen</p>
 			{/if}
 		</div>
 	</a>

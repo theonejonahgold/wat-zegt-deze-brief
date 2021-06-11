@@ -4,20 +4,31 @@
 	import { Flex } from '$templates'
 </script>
 
-<style>
+<style lang="scss">
 	h1 {
 		margin-bottom: var(--space-s);
 
-		+ :global(p) {
-			max-width: 78%;
-			align-self: flex-start;
-			margin-bottom: var(--space-l);
+		+ :global {
+			p {
+				max-width: 78%;
+				align-self: flex-start;
+				margin-bottom: var(--space-l);
+
+				+ div {
+					max-height: 18rem;
+					margin-top: auto;
+
+					+ a {
+						margin-top: auto;
+					}
+				}
+			}
 		}
 	}
 </style>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Hallo!</title>
 </svelte:head>
 
 <Flex pt="var(--space-xxxl)" px="var(--space-xl)" pb="var(--space-xl)">

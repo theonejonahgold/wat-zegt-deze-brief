@@ -17,12 +17,16 @@ export function listLetters() {
 	return client.from<definitions['letters']>('letters').select(
 		`
 			id,
-			resolved,
 			sender,
 			createdAt,
-			volunteer:volunteer_id ( name ),
+			messages,
+			user_id,
 			status,
-			thumbnail
+			thumbnail,
+			volunteer:volunteer_id (
+				name,
+				id
+			)
 		`
 	)
 }

@@ -3,7 +3,6 @@ import node from '@sveltejs/adapter-node'
 import preprocess from 'svelte-preprocess'
 import autoprefixer from 'autoprefixer'
 import vhFix from 'postcss-100vh-fix'
-import cssnano from 'cssnano'
 import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
 const tsConfig = require('./tsconfig.json')
@@ -12,7 +11,7 @@ const tsConfig = require('./tsconfig.json')
 const config = {
 	preprocess: preprocess({
 		postcss: {
-			plugins: [vhFix(), autoprefixer(), cssnano()],
+			plugins: [vhFix(), autoprefixer()],
 		},
 		defaults: {
 			script: 'typescript',

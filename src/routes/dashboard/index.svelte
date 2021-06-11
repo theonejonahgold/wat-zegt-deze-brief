@@ -24,7 +24,6 @@
 					)
 			  ).sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
 			: []
-		console.log(letters)
 		return {
 			props: {
 				letters,
@@ -47,7 +46,7 @@
 </script>
 
 <svelte:head>
-	<title>Dashboard</title>
+	<title>Home</title>
 </svelte:head>
 
 {#if role === 'user'}

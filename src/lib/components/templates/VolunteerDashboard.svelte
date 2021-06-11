@@ -15,6 +15,13 @@
 		row-gap: var(--space-s);
 		margin-top: var(--space-xxs);
 	}
+
+	.empty {
+		:global(p) {
+			font-size: var(--font-m);
+			margin-top: var(--space-xl);
+		}
+	}
 </style>
 
 <Header>
@@ -22,13 +29,17 @@
 	<p slot="right">filter</p>
 </Header>
 <main>
-	<section>
-		<ul>
-			{#each letters as letter (letter.id)}
-				<li>
-					<VolunteerLetterCard {letter} />
-				</li>
-			{/each}
-		</ul>
+	<section class:empty={!letters.length}>
+		{#if letters.length}
+			<ul>
+				{#each letters as letter (letter.id)}
+					<li>
+						<VolunteerLetterCard {letter} />
+					</li>
+				{/each}
+			</ul>
+		{:else}
+			<SpokenText text="Er zijn geen mensen meer om te helpen, kom later terug!" --align="center" />
+		{/if}
 	</section>
 </main>

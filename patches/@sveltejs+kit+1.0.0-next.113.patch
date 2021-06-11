@@ -1,11 +1,11 @@
 diff --git a/node_modules/@sveltejs/kit/dist/ssr.js b/node_modules/@sveltejs/kit/dist/ssr.js
-index 3b1690f..ded0008 100644
+index 32b08df..858ad88 100644
 --- a/node_modules/@sveltejs/kit/dist/ssr.js
 +++ b/node_modules/@sveltejs/kit/dist/ssr.js
-@@ -1460,11 +1460,6 @@ function get_multipart(text, boundary) {
+@@ -1462,11 +1462,6 @@ function get_multipart(text, boundary) {
  			if (name === 'content-disposition') {
  				if (value !== 'form-data') nope();
-
+ 
 -				if (directives.filename) {
 -					// TODO we probably don't want to do this automatically
 -					throw new Error('File upload is not yet implemented');

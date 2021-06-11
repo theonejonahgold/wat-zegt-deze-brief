@@ -1,10 +1,9 @@
 ---
 name: Feature
 about: General feature template
-title: "[FEATURE]: "
-labels: enhancement
+title: '[FEATURE]: '
+labels: feature
 assignees: ''
-
 ---
 
 ## Job story
@@ -13,4 +12,4 @@ assignees: ''
 
 ## Tasks
 
--  [ ] First task
+- [ ] First task

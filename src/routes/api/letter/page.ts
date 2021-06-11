@@ -19,8 +19,6 @@ export const post: RequestHandler<
 		}
 	}
 > = async ({ body }) => {
-	console.log(body)
-
 	const filePath = `${uuid()}.${body.files.page.mimetype.split('/')[1]}`
 
 	// Thanks from joshnuss and his commet at https://github.com/supabase/supabase/discussions/1002#discussioncomment-560098 for this piece of code

@@ -2,8 +2,14 @@
 	import { Image } from '$atoms'
 	import { formatTimestamp } from '$utils'
 	import type { Letter } from '$types'
+	import { client } from '$config/supabase'
 
 	export let letter: Letter
+
+	const href: string =
+		letter.volunteer?.id === client.auth.session().user.id
+			? `/dashboard/chat/${letter.id}`
+			: `/dashboard/letter/${letter.id}`
 </script>
 
 <style lang="scss">
@@ -30,6 +36,7 @@
 			height: 100%;
 			grid-column: 1;
 			border-radius: 5px;
+			width: 100%;
 		}
 
 		div {
@@ -51,7 +58,7 @@
 </style>
 
 <article>
-	<a href="/dashboard/letter/{letter.id}">
+	<a {href}>
 		<Image src={letter.image} />
 		<div>
 			<p>Brief van {letter.sender ? letter.sender : 'onbekende instantie'}</p>

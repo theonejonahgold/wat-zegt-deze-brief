@@ -22,19 +22,26 @@
 </script>
 
 <script>
-	import { Help, SpokenText, Back, Image } from '$atoms'
+	import { Help, SpokenText, Back, Image, Button } from '$atoms'
 	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
 	import { CarouselPage, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
+	import { AudioRecorder } from '$organisms'
+	import { volunteerLetter } from '$db/volunteerLetter'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
 
 	let pages: string[] = []
 	let selectedPage = 0
+	let clicked = false
+
+	function handleClick() {
+		clicked = true
+	}
 
 	onMount(() => {
 		client.storage
@@ -42,7 +49,13 @@
 			.list(`${letter.id}`)
 			.then(({ data }) =>
 				Promise.all(
-					data.map(page => client.storage.from('pages').download(`${letter.id}/${page.name}`))
+					data
+						.sort(
+							(a, b) =>
+								letter.page_order.findIndex(page => page.includes(a.name)) -
+								letter.page_order.findIndex(page => page.includes(b.name))
+						)
+						.map(page => client.storage.from('pages').download(`${letter.id}/${page.name}`))
 				)
 			)
 			.then(results =>
@@ -84,6 +97,7 @@
 
 	section {
 		margin-top: var(--space-xl);
+
 		header {
 			margin-top: var(--space-m);
 			display: flex;
@@ -101,49 +115,66 @@
 	}
 </style>
 
+<svelte:head>
+	<title>Afronden</title>
+</svelte:head>
+
 {#if role === 'user'}
 	<Header sticky>
-		<Back slot="left" href="/dashboard/letter/{letter.id}/upload" />
+		<Back slot="left" href="/dashboard/letter/{letter.id}/organisation" />
 		<SpokenText --align="center" slot="middle" text="Afronden" />
 		<Help slot="right" />
 	</Header>
 	<main>
+		<section>
+			<header>
+				<h3>Organisatie</h3>
+				<a href="/dashboard/letter/{letter.id}/organisation?edit=true">Bewerken</a>
+			</header>
+			<hr />
+			<p>{letter.sender || 'Geen organisatie ingevuld'}</p>
+		</section>
+		<section>
+			<header>
+				<h3>Pagina's</h3>
+				<a href="/dashboard/letter/{letter.id}/upload?edit=true">Bewerken</a>
+			</header>
+			<hr />
+			{#if pages.length}
+				<ol>
+					{#each pages as page}
+						<li><Image src={page} alt="Page preview" shadow={true} /></li>
+					{/each}
+				</ol>
+			{:else}
+				<p>Upload pagina's van je brief om ze hier te zien.</p>
+			{/if}
+		</section>
 		<Form
-			noEnhance
-			action="/api/letter/{letter.id}"
+			action="/api/letter/{letter.id}?redirect=/dashboard/letter/success"
 			fields={[
 				{
-					label: 'Van welke organisatie komt deze brief?',
-					placeholder: 'Bijvoorbeeld Belastingdienst',
-					name: 'sender',
-					type: 'text',
-					autofocus: true,
-					required: true,
+					type: 'hidden',
+					name: 'status',
+					initialValue: 'published',
 				},
 			]}
-			method="POST"
+			noEnhance
+			buttonPosition="sticky"
 		>
-			<section>
-				<header>
-					<h3>Pagina's</h3>
-					<a href="/dashboard/letter/{letter.id}/upload">Bewerken</a>
-				</header>
-				<hr />
-				{#if pages.length}
-					<ol>
-						{#each pages as page}
-							<li><Image src={page} alt="Page preview" shadow={true} /></li>
-						{/each}
-					</ol>
-				{:else}
-					<p>Upload pagina's van je brief om ze hier te zien.</p>
-				{/if}
-			</section>
-			<svelte:fragment slot="submit">Brief versturen</svelte:fragment>
+			<svelte:fragment slot="submit">Opsturen</svelte:fragment>
 		</Form>
 	</main>
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
-		<svelte:fragment slot="footer">Hier komt iets</svelte:fragment>
+		<svelte:fragment slot="footer">
+			{#if clicked}
+				<AudioRecorder />
+			{:else}
+				<Button on:click|once={() => volunteerLetter(letter.id)} on:click={handleClick}
+					>Ik wil deze brief uitleggen</Button
+				>
+			{/if}
+		</svelte:fragment>
 	</CarouselPage>
 {/if}
