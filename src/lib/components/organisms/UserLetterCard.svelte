@@ -100,7 +100,7 @@
 					{formatTimestamp(time)}
 				</time>
 			</header>
-			{#if !letter.messages.length}
+			{#if !letter.messages}
 				<p>Je hebt nog geen uitleg ontvangen.</p>
 			{:else}
 				<p>Je hebt uitleg ontvangen</p>
