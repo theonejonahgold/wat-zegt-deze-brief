@@ -108,6 +108,12 @@
 			color: var(--blue);
 			text-decoration: none;
 		}
+
+		+ :global(form) {
+			position: sticky;
+			top: 100%;
+			bottom: var(--space-l);
+		}
 	}
 
 	hr {
@@ -160,7 +166,7 @@
 				},
 			]}
 			noEnhance
-			buttonPosition="sticky"
+			buttonPosition={false}
 		>
 			<svelte:fragment slot="submit">Opsturen</svelte:fragment>
 		</Form>
