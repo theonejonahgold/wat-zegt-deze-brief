@@ -96,10 +96,12 @@
 	}
 
 	section {
-		margin-top: var(--space-xl);
+		+ section {
+			margin-top: var(--space-xl);
+		}
 
 		header {
-			margin-top: var(--space-m);
+			margin: 0 0 var(--space-s);
 			display: flex;
 			justify-content: space-between;
 		}
@@ -108,10 +110,6 @@
 			color: var(--blue);
 			text-decoration: none;
 		}
-	}
-
-	hr {
-		margin-bottom: var(--space-m);
 	}
 </style>
 
@@ -131,7 +129,6 @@
 				<h3>Organisatie</h3>
 				<a href="/dashboard/letter/{letter.id}/organisation?edit=true">Bewerken</a>
 			</header>
-			<hr />
 			<p>{letter.sender || 'Geen organisatie ingevuld'}</p>
 		</section>
 		<section>
@@ -139,7 +136,6 @@
 				<h3>Pagina's</h3>
 				<a href="/dashboard/letter/{letter.id}/upload?edit=true">Bewerken</a>
 			</header>
-			<hr />
 			{#if pages.length}
 				<ol>
 					{#each pages as page}
