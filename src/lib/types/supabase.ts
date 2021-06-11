@@ -816,7 +816,7 @@ export interface definitions {
      * Note:
      * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
-    sender_id?: string;
+    sender_id: string;
     /** The content of the message */
     content: string;
     /**

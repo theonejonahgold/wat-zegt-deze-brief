@@ -24,14 +24,11 @@
 
 		&:before {
 			content: '+';
-			display: block;
-			grid-row: 1;
-			grid-column: 1;
 			font-size: var(--font-l);
 			border-radius: 50%;
 			background: var(--gradient-to-right);
 			color: var(--secondary);
-			line-height: var(--space-xxl);
+			line-height: calc(var(--space-xxl) + (var(--font-l) * 0.14));
 			height: var(--space-xxl);
 			width: var(--space-xxl);
 			font-weight: 400;
