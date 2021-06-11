@@ -16,6 +16,12 @@
 		place-items: center;
 	}
 
+	main {
+		padding: 0;
+		position: relative;
+		z-index: -1;
+	}
+
 	footer {
 		display: flex;
 		justify-content: center;
