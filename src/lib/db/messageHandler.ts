@@ -3,14 +3,14 @@ import { browser } from '$app/env'
 import type { definitions } from '$types'
 import { v4 as uuid } from 'uuid'
 
-export async function messageHandler({ detail: message }: CustomEvent<File>) {
-	if (!message || !browser) return
+export async function uploadMessage(file: File) {
+	if (!file || !browser) return
 
 	const splitPathname = window.location.pathname.split('/')
 	const id = splitPathname[splitPathname.length - 1]
 	const userId = client.auth.session().user.id
 	const messageId = uuid()
-	await client.storage.from('messages').upload(`${id}/${userId}/${messageId}`, message)
+	await client.storage.from('messages').upload(`${id}/${userId}/${messageId}`, file)
 	const { body } = await client
 		.from<definitions['messages']>('messages')
 		.insert({
