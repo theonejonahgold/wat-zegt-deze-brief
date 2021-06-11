@@ -114,7 +114,7 @@
 					{formatTimestamp(time)}
 				</time>
 			</header>
-			{#if !chatMessage.length}
+			{#if !chatMessage}
 				<p>Je hebt nog geen uitleg ontvangen.</p>
 			{:else}
 				<p>Je hebt uitleg ontvangen</p>
