@@ -1,25 +1,14 @@
 <script>
 	import Header from './Header.svelte'
 	import type { ChatMessage } from '$types'
-	import { SpokenText, Help, Back, MessageCloud } from '$atoms'
-	import { RecordAudio } from '$molecules'
-	import { browser } from '$app/env'
-	import { messageHandler } from '$db/messageHandler'
+	import { SpokenText, Help, Back } from '$atoms'
+	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
 
 	export let messages: ChatMessage[]
 	export let userRole: string
 
 	const userId = client.auth.session().user.id
-
-	let recorder: MediaRecorder
-	let medium: boolean = true
-
-	if (browser) {
-		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-			recorder = new MediaRecorder(stream)
-		})
-	}
 </script>
 
 <style>
@@ -70,5 +59,5 @@
 			{medium}
 		/>
 	{/if}
-	<RecordAudio {recorder} on:message={messageHandler} />
+	<AudioRecorder />
 </footer>
