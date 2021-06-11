@@ -30,7 +30,7 @@
 	}
 </style>
 
-<Header>
+<Header shadow>
 	<Back slot="left" href={backLink} />
 	<SpokenText --align="center" slot="middle" text={title} />
 	<Help slot="right" />

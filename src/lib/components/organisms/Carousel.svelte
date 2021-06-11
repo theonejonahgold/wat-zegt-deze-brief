@@ -123,7 +123,32 @@
 		left: var(--space-xs);
 	}
 
-	div {
+	.pagination {
+		position: absolute;
+		top: var(--space-m);
+		display: grid;
+		width: 100%;
+		justify-content: center;
+		justify-items: center;
+		grid-auto-flow: column;
+		grid-auto-columns: 1fr;
+		column-gap: var(--space-xxs);
+		padding: 0 var(--space-xl);
+
+		span {
+			display: block;
+			width: 100%;
+			height: 4px;
+			border-radius: 2px;
+			background: var(--grey);
+
+			&.selected {
+				background: var(--purple);
+			}
+		}
+	}
+
+	.image-container {
 		position: relative;
 		z-index: -1;
 		width: 100%;
@@ -143,10 +168,16 @@
 
 {#if isTouchCapable}
 	<section>
+		<div class="pagination">
+			{#each pages as _}
+				<span />
+			{/each}
+		</div>
 		{#if selected > 0}
 			<button on:click={previous} id="previous" type="button"><Icon><AnchorIcon /></Icon></button>
 		{/if}
 		<div
+			class="image-container"
 			on:touchstart|capture={touchHandler}
 			on:touchend|capture={touchHandler}
 			on:touchmove|capture={touchMoveHandler}
@@ -161,10 +192,16 @@
 	</section>
 {:else}
 	<section>
+		<div class="pagination">
+			{#each pages as _, i}
+				<span class:selected={i === selected} />
+			{/each}
+		</div>
 		{#if selected > 0}
 			<button on:click={previous} id="previous" type="button"><Icon><AnchorIcon /></Icon></button>
 		{/if}
 		<div
+			class="image-container"
 			on:mousedown|capture={mouseClickHandler}
 			on:mouseup|capture={mouseClickHandler}
 			on:mousemove|capture={mouseMoveHandler}
