@@ -1,6 +1,7 @@
 <script>
 	import Image from './Image.svelte'
 
+	export let background = false
 	export let src: string
 	export let alt = ''
 </script>
@@ -9,10 +10,13 @@
 	div {
 		width: 100%;
 		padding: var(--space-xxl);
-		background: var(--secondary);
 		border-radius: var(--border-radius);
 		display: flex;
 		justify-content: center;
+
+		&.background {
+			background: var(--secondary);
+		}
 
 		:global(img) {
 			width: 100%;
@@ -22,6 +26,6 @@
 	}
 </style>
 
-<div>
+<div class:background>
 	<Image {src} {alt} />
 </div>
