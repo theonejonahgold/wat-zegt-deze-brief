@@ -132,6 +132,13 @@
 		pages.splice(index, 1)
 		pages = pages
 		selectedPage = selectedPage >= pages.length ? pages.length - 1 : selectedPage
+
+		await client
+			.from<definitions['letters']>('letters')
+			// @ts-expect-error: Types are wrong, page_order is an array
+			.update({ page_order: pageIDs })
+			.eq('id', letter.id)
+			.single()
 	}
 
 	async function moveHandler(
