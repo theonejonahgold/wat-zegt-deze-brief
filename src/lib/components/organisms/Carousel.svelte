@@ -166,16 +166,16 @@
 	}
 </style>
 
-{#if isTouchCapable}
-	<section>
-		<div class="pagination">
-			{#each pages as _}
-				<span />
-			{/each}
-		</div>
-		{#if selected > 0}
-			<button on:click={previous} id="previous" type="button"><Icon><AnchorIcon /></Icon></button>
-		{/if}
+<section>
+	<div class="pagination">
+		{#each pages as _, i}
+			<span class:selected={i === selected} />
+		{/each}
+	</div>
+	{#if selected > 0}
+		<button on:click={previous} id="previous" type="button"><Icon><AnchorIcon /></Icon></button>
+	{/if}
+	{#if isTouchCapable}
 		<div
 			class="image-container"
 			on:touchstart|capture={touchHandler}
@@ -186,20 +186,7 @@
 				<Image --index={i - selected} --offset="{offset}px" src={page} alt="Page preview" />
 			{/each}
 		</div>
-		{#if selected < pages.length - 1}
-			<button on:click={next} id="next" type="button"><Icon><AnchorIcon /></Icon></button>
-		{/if}
-	</section>
-{:else}
-	<section>
-		<div class="pagination">
-			{#each pages as _, i}
-				<span class:selected={i === selected} />
-			{/each}
-		</div>
-		{#if selected > 0}
-			<button on:click={previous} id="previous" type="button"><Icon><AnchorIcon /></Icon></button>
-		{/if}
+	{:else}
 		<div
 			class="image-container"
 			on:mousedown|capture={mouseClickHandler}
@@ -210,8 +197,8 @@
 				<Image --index={i - selected} --offset="{offset}px" src={page} alt="Page preview" />
 			{/each}
 		</div>
-		{#if selected < pages.length - 1}
-			<button on:click={next} id="next" type="button"><Icon><AnchorIcon /></Icon></button>
-		{/if}
-	</section>
-{/if}
+	{/if}
+	{#if selected < pages.length - 1}
+		<button on:click={next} id="next" type="button"><Icon><AnchorIcon /></Icon></button>
+	{/if}
+</section>
