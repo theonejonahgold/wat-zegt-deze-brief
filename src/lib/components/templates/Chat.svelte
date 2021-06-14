@@ -69,6 +69,22 @@
 		display: flex;
 		justify-content: center;
 		border: none;
+		margin-bottom: 0.5rem;
+	}
+
+	fieldset label {
+		margin: 0 0.8rem 0 0.8rem;
+	}
+
+	form input[type='submit'] {
+		background-color: var(--dark);
+		border: none;
+		border-radius: 3px;
+		width: 5rem;
+		align-self: center;
+		color: var(--white);
+		padding: 0.5rem;
+		box-shadow: var(--bs-key-ambient-light);
 	}
 </style>
 
@@ -78,14 +94,14 @@
 	<Help slot="right" />
 </Header>
 <main>
-	{#if messages.length}
-		{#each messages as message (message.id)}
-			{#if message.sender.id === userId}
-				<audio controls src={message.file} type="audio/ogg" class="you" />
-			{:else}
-				<audio controls src={message.file} type="audio/ogg" />
-			{/if}
-		{/each}
+	{#each messages as message (message.id)}
+		{#if message.sender.id === userId}
+			<audio controls src={message.file} type="audio/ogg" class="you" />
+		{:else}
+			<audio controls src={message.file} type="audio/ogg" />
+		{/if}
+	{/each}
+	{#if userRole === 'user' && messages.length}
 		<form
 			bind:this={form}
 			on:submit|preventDefault={e => {
