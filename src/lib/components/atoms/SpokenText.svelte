@@ -27,7 +27,7 @@
 		background: none;
 		height: var(--space-l);
 		width: var(--space-l);
-		padding: 0.4rem 0 0;
+		padding: calc(var(--space-xxs) / 1.5) 0 0;
 	}
 
 	p {
