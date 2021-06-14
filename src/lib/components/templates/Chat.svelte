@@ -1,7 +1,7 @@
 <script>
 	import Header from './Header.svelte'
 	import type { ChatMessage } from '$types'
-	import { SpokenText, Help, Back } from '$atoms'
+	import { SpokenText, Help, Back, AudioPlayer } from '$atoms'
 	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
 
@@ -11,7 +11,7 @@
 	const userId = client.auth.session().user.id
 </script>
 
-<style>
+<style lang="scss">
 	footer {
 		display: flex;
 		flex-direction: column;
@@ -26,14 +26,15 @@
 		display: flex;
 		flex-direction: column;
 		overflow: auto;
-	}
 
-	audio {
-		margin: 1rem 0 1rem 0;
-	}
-
-	.you {
-		align-self: flex-end;
+		:global {
+			.container.container {
+				align-self: flex-start;
+				margin-top: var(--space-xs);
+				margin-bottom: var(--space-xs);
+				align-self: var(--align, flex-start);
+			}
+		}
 	}
 </style>
 
@@ -44,10 +45,12 @@
 </Header>
 <main>
 	{#each messages as message (message.id)}
-		{#if message.sender.id === userId}
-			<audio controls src={message.file} type="audio/ogg" class="you" />
-		{:else}
-			<audio controls src={message.file} type="audio/ogg" />
+		{#if message.file}
+			{#if message.sender.id === userId}
+				<AudioPlayer file={message.file} --align="flex-end" />
+			{:else}
+				<AudioPlayer file={message.file} />
+			{/if}
 		{/if}
 	{/each}
 </main>

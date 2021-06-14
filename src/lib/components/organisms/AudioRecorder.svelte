@@ -2,7 +2,7 @@
 	import { AudioPlayer, IconButton, Loader, RecordButton } from '$atoms'
 	import { uploadMessage } from '$db/messageHandler'
 	import { DeleteIcon, SendIcon } from '$icons'
-	import { tick } from 'svelte'
+	import { onMount, tick } from 'svelte'
 
 	let recording = false
 	let uploading = false
@@ -11,11 +11,28 @@
 	let chunks: Blob[] = []
 	let file: File
 
+	onMount(async () => {
+		if (window.MediaRecorder?.isTypeSupported('audio/ogg;codecs=opus')) return
+
+		const { default: OpusRecorder } = await import('opus-media-recorder')
+		window.MediaRecorder = OpusRecorder
+	})
+
 	async function buttonClickHandler() {
 		recording = !recording
 		if (recording) {
 			stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-			recorder = new MediaRecorder(stream)
+			recorder = new (<any>MediaRecorder)(
+				stream,
+				{},
+				{
+					encoderWorkerFactory: () => {
+						return new Worker('../../../node_modules/opus-media-recorder/encoderWorker.umd.js')
+					},
+					OggOpusEncoderWasmPath: '../../../node_modules/opus-media-recorder/OggOpusEncoder.wasm',
+					WebMOpusEncoderWasmPath: '../../../node_modules/opus-media-recorder/WebMOpusEncoder.wasm',
+				}
+			)
 			recorder.addEventListener('dataavailable', dataAvailableHandler)
 			return recorder.start()
 		}
