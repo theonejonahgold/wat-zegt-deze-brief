@@ -16,13 +16,19 @@
 		place-items: center;
 	}
 
+	main {
+		padding: 0;
+		position: relative;
+		z-index: -1;
+	}
+
 	footer {
 		box-shadow: var(--bs-up);
 		padding-top: var(--space-l);
 	}
 </style>
 
-<Header>
+<Header shadow>
 	<Back slot="left" href={backLink} />
 	<SpokenText --align="center" slot="middle" text={title} />
 	<Help slot="right" />
