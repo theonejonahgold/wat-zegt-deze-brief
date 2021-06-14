@@ -1,8 +1,8 @@
 <style>
 	/* Code with help from the article at https://dev.to/afif/i-made-100-more-css-loaders-for-your-next-project-4ioa */
 	div {
-		width: var(--space-xxxl);
-		height: var(--space-xxxl);
+		width: var(--size, var(--space-xxxl));
+		height: var(--size, var(--space-xxxl));
 		display: grid;
 		border-radius: 50%;
 		-webkit-mask: radial-gradient(farthest-side, #0000 40%, #000 41%);

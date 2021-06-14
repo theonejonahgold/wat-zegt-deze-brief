@@ -3,9 +3,10 @@
 	export let color = ''
 	export let buttonColor: string = ' transparent'
 	export let href = ''
+	export let small = false
 </script>
 
-<style>
+<style lang="scss">
 	button,
 	a {
 		display: block;
@@ -13,20 +14,26 @@
 		border-radius: 50%;
 		background: var(--color, currentColor);
 		border: none;
-		width: 5rem;
-		height: 5rem;
+		width: var(--space-xxxl);
+		height: var(--space-xxxl);
 		cursor: pointer;
+		padding: var(--space-xs);
+
+		&.small {
+			height: var(--space-xxl);
+			width: var(--space-xxl);
+		}
 	}
 </style>
 
 {#if href}
-	<a {href} on:click style="--color: {buttonColor}">
+	<a {href} class:small on:click style="--color: {buttonColor}">
 		<Icon {color}>
 			<slot />
 		</Icon>
 	</a>
 {:else}
-	<button on:click style="--color: {buttonColor}">
+	<button class:small on:click style="--color: {buttonColor}">
 		<Icon {color}>
 			<slot />
 		</Icon>
