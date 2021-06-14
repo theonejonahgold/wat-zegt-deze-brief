@@ -3,7 +3,7 @@
 	import decode from 'audio-decode'
 	import { bufferToWave } from '$utils'
 
-	export let file: File
+	export let file: Blob
 	let paused = true
 	let currentTime = 0
 	let duration = 0
@@ -11,17 +11,21 @@
 	let audio: HTMLAudioElement
 
 	onMount(async () => {
-		const buffer: AudioBuffer = await decode(file).catch(console.error)
-		const blob = bufferToWave(buffer, buffer.length)
-		const url = URL.createObjectURL(blob)
-		src = url
-		await tick()
-		audio.addEventListener('loadedmetadata', async () => {
-			if (duration !== Infinity) return
-			currentTime = 1e101
+		try {
+			const buffer: AudioBuffer = await decode(file)
+			const blob = bufferToWave(buffer, buffer.length)
+			const url = URL.createObjectURL(blob)
+			src = url
 			await tick()
-			currentTime = 0
-		})
+			audio.addEventListener('loadedmetadata', async () => {
+				if (duration !== Infinity) return
+				currentTime = 1e101
+				await tick()
+				currentTime = 0
+			})
+		} catch {
+			src = ''
+		}
 	})
 
 	function formatTime(time: number) {
@@ -39,6 +43,7 @@
 		display: flex;
 		border-radius: 4px;
 		margin: 0 var(--space-s);
+		width: max-content;
 	}
 
 	button {

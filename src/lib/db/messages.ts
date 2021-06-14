@@ -58,13 +58,5 @@ export function downloadAudioMessage(letterId: string, userId: string, messageId
 	return client.storage
 		.from('messages')
 		.download(`${letterId}/${userId}/${messageId}`)
-		.then(
-			({ data }) =>
-				new Promise<string>((resolve, reject) => {
-					const reader = new FileReader()
-					reader.readAsDataURL(data)
-					reader.addEventListener('loadend', e => resolve(e.target.result as string))
-					reader.addEventListener('error', reject)
-				})
-		)
+		.then(({ data }) => data)
 }
