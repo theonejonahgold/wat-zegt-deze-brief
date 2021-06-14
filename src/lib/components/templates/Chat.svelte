@@ -55,6 +55,15 @@
 		display: flex;
 		flex-direction: column;
 		margin: var(--space-s);
+
+		:global {
+			.container.container {
+				align-self: flex-start;
+				margin-top: var(--space-xs);
+				margin-bottom: var(--space-xs);
+				align-self: var(--align, flex-start);
+			}
+		}
 	}
 
 	div {
