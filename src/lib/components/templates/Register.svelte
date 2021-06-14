@@ -7,6 +7,8 @@
 
 	export let role: 'user' | 'volunteer'
 	export let from
+
+	const emailValidator: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 </script>
 
 <style lang="scss">
@@ -35,6 +37,10 @@
 				autofocus: true,
 				placeholder: 'voorbeeld@wat-zegt-deze-brief.nl',
 				required: true,
+				validator: value => {
+					if (!value.length) return
+					return !emailValidator.test(value) && 'Vul alsjeblieft een geldig e-mailadres in.'
+				},
 			},
 			{
 				label: 'Wachtwoord',
