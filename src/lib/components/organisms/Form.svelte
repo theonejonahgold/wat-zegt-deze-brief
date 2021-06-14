@@ -4,7 +4,7 @@
 	import { formEnhancer } from '$actions'
 	import { Button, Input } from '$atoms'
 	import { createEventDispatcher } from 'svelte'
-	import { addToast } from '$stores'
+	import { addToast, dismissToast } from '$stores'
 
 	export let action: string
 	export let method: 'GET' | 'POST' = 'POST'
@@ -24,6 +24,17 @@
 			message: validation,
 			type: 'error',
 		})
+	}
+
+	const handleError = (error: Error) => {
+		addToast({
+			message: error.message,
+			type: 'error',
+		})
+	}
+
+	const handleSuccess = () => {
+		dismissToast(null, true)
 	}
 </script>
 
@@ -52,9 +63,15 @@
 {:else}
 	<form
 		use:formEnhancer={{
-			success: (data, form) => dispatch('success', { data, form }),
+			success: (data, form) => {
+				dispatch('success', { data, form })
+				handleSuccess()
+			},
 			loading: (data, form) => dispatch('loading', { data, form }),
-			error: (error, form) => dispatch('error', { error, form }),
+			error: (error, form) => {
+				dispatch('error', { error, form })
+				handleError(error)
+			},
 		}}
 		{method}
 		{action}

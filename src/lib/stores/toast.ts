@@ -16,6 +16,7 @@ export const addToast = ({
 	duration && setTimeout(() => dismissToast(id), duration)
 }
 
-export const dismissToast = id => {
-	toasts.update(val => val.filter(toast => toast.id !== id))
+export const dismissToast = (id: number | null, all?: boolean) => {
+	if (!all) return toasts.update(val => val.filter(toast => toast.id !== id))
+	toasts.update(_ => [])
 }
