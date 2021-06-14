@@ -30,7 +30,6 @@ export async function postResolveStatusMessage(letterId: string, radioVal: strin
 		radioVal === 'Ja'
 			? 'Dankjewel, ik heb genoeg uitleg gekregen'
 			: 'Ik heb nog niet genoeg uitleg gekregen'
-
 	const userId = client.auth.session().user.id
 	const { body } = await client
 		.from<definitions['messages']>('messages')
