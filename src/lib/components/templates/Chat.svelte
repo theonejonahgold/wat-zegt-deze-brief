@@ -4,7 +4,7 @@
 	import { SpokenText, Help, Back, MessageCloud, AudioPlayer } from '$atoms'
 	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
-	import { onMount } from 'svelte'
+	import { onDestroy, onMount } from 'svelte'
 	import { resolveLetter } from '$db/letter'
 	import { postResolveStatusMessage } from '$db/messageHandler'
 
@@ -28,6 +28,11 @@
 				radioVal = val
 			})
 		})
+
+		onDestroy(() => {
+			resolveLetter(letterId, radioVal)
+			postResolveStatusMessage(letterId, radioVal)
+		})
 	}
 
 	function handleClick(e: Event) {
@@ -46,11 +51,18 @@
 	}
 
 	main {
+		position: relative;
 		display: flex;
 		flex-direction: column;
+		margin: var(--space-s);
 	}
 
-	main > audio {
+	div {
+		display: block;
+		overflow-y: scroll;
+	}
+
+	audio {
 		margin: var(--space-s);
 		display: block;
 	}
@@ -96,42 +108,42 @@
 	<SpokenText --align="center" slot="middle" text="Gesproken bericht" />
 	<Help slot="right" />
 </Header>
-<main>
-	{#each messages as message, index ((message.id, index))}
-		{#if message.sender.id === userId}
-			{#if message.type === 'audio'}
-				<audio controls="control" src={message.file} type="audio/ogg" class="you" />
+<div>
+	<main>
+		{#each messages as message, index ((message.id, index))}
+			{#if message.sender.id === userId}
+				{#if message.type === 'audio'}
+					<audio controls="control" src={message.file} type="audio/ogg" class="you" />
+				{:else}
+					<MessageCloud text={message.content} optionalClass="you" />
+				{/if}
+			{:else if message.type === 'audio'}
+				<audio controls="control" src={message.file} type="audio/ogg" />
 			{:else}
-				<MessageCloud text={message.content} optionalClass="you" />
+				<MessageCloud text={message.content} />
 			{/if}
-		{:else if message.type === 'audio'}
-			<audio controls="control" src={message.file} type="audio/ogg" />
-		{:else}
-			<MessageCloud text={message.content} />
+		{/each}
+		{#if isUser}
+			{#if messages.length}
+				<form
+					bind:this={form}
+					on:submit|preventDefault={() => {
+						form.remove()
+					}}
+				>
+					<label for="resolve">Ik heb genoeg uitleg gekregen</label>
+					<fieldset>
+						<input type="radio" name="resolve" id="yes" value="Ja" on:click={handleClick} />
+						<label for="yes">Ja</label>
+						<input type="radio" name="resolve" id="no" value="Nee" on:click={handleClick} />
+						<label for="no">Nee</label>
+					</fieldset>
+					<input type="submit" value="Verstuur" />
+				</form>
+			{/if}
 		{/if}
-	{/each}
-	{#if isUser}
-		{#if messages.length}
-			<form
-				bind:this={form}
-				on:submit|preventDefault={() => {
-					resolveLetter(letterId, radioVal)
-					postResolveStatusMessage(letterId, radioVal)
-					form.remove()
-				}}
-			>
-				<label for="resolve">Ik heb genoeg uitleg gekregen</label>
-				<fieldset>
-					<input type="radio" name="resolve" id="yes" value="Ja" on:click={handleClick} />
-					<label for="yes">Ja</label>
-					<input type="radio" name="resolve" id="no" value="Nee" on:click={handleClick} />
-					<label for="no">Nee</label>
-				</fieldset>
-				<input type="submit" value="Verstuur" />
-			</form>
-		{/if}
-	{/if}
-</main>
+	</main>
+</div>
 <footer>
 	{#if isUser}
 		<SpokenText
