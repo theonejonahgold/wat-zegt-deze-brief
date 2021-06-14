@@ -16,4 +16,4 @@
 	}
 </style>
 
-<input on:change {value} {name} {type} {...$$restProps} />
+<input on:change on:blur {value} {name} {type} {...$$restProps} />

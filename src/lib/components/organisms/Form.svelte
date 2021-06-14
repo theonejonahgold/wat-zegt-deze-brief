@@ -4,6 +4,7 @@
 	import { formEnhancer } from '$actions'
 	import { Button, Input } from '$atoms'
 	import { createEventDispatcher } from 'svelte'
+	import { addToast } from '$stores'
 
 	export let action: string
 	export let method: 'GET' | 'POST' = 'POST'
@@ -11,12 +12,19 @@
 	export let noEnhance = false
 	export let buttonPosition: 'sticky' | 'absolute' | false = 'absolute'
 
-	const dispatch =
-		createEventDispatcher<{
-			success: { data: any; form: HTMLFormElement }
-			loading: { data: FormData; form: HTMLFormElement }
-			error: { error: Error; form: HTMLFormElement }
-		}>()
+	const dispatch = createEventDispatcher<{
+		success: { data: any; form: HTMLFormElement }
+		loading: { data: FormData; form: HTMLFormElement }
+		error: { error: Error; form: HTMLFormElement }
+	}>()
+
+	const handleValidation = (validation: string | false) => {
+		if (!validation) return
+		addToast({
+			message: validation,
+			type: 'error',
+		})
+	}
 </script>
 
 <style lang="scss">
@@ -55,7 +63,11 @@
 			{#if field.type === 'hidden'}
 				<Input {...field} value={initialValue} />
 			{:else}
-				<Field {...field} {initialValue}>
+				<Field
+					on:blur={e => field.validator && handleValidation(field.validator(e.target.value))}
+					{...field}
+					{initialValue}
+				>
 					{field.label}
 				</Field>
 			{/if}
