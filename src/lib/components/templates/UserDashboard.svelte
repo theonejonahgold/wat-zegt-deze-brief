@@ -24,7 +24,7 @@
 
 	section {
 		:global(div:first-child p) {
-			font-size: var(--font-m);
+			margin-top: var(--space-l);
 			margin-bottom: var(--space-m);
 		}
 	}
