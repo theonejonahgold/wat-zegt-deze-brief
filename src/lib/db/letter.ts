@@ -47,7 +47,8 @@ export async function dashboardLetters() {
 			status,
 			user:user_id (
 				id,
-				name
+				name,
+				languages
 			),
 			volunteer:volunteer_id (
 				name,

@@ -6,6 +6,7 @@ export interface Letter {
 	user: {
 		id: string
 		name?: string
+		languages?: string[]
 	}
 	volunteer?: {
 		id: string

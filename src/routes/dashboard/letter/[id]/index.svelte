@@ -151,7 +151,7 @@
 			{#if pages.length}
 				<ol>
 					{#each pages as page}
-						<li><Image src={page} alt="Page preview" shadow={true} /></li>
+						<li><Image src={page} alt="Page preview" /></li>
 					{/each}
 				</ol>
 			{:else}

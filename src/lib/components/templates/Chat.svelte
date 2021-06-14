@@ -20,7 +20,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		box-shadow: var(--bs-up);
+		box-shadow: var(--bs-l-up);
 		padding-top: var(--space-m);
 		width: 100%;
 	}

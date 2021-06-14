@@ -37,7 +37,7 @@
 		padding: var(--space-s);
 		gap: var(--space-xs);
 		background-color: var(--secondary);
-		box-shadow: var(--bs-button);
+		box-shadow: var(--bs-l-down);
 		border-radius: 10px;
 		height: 10rem;
 

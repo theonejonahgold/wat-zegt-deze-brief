@@ -8,12 +8,14 @@ export const post: RequestHandler<{}, FormData> = ({ body, query, headers }) => 
 	const languages = new Set<string>(!!cookies.langs ? cookies.langs.split(',') : [])
 
 	if (languages.has(code)) languages.delete(code)
-	else languages.add(code)
+	else if (languages.size < 3) languages.add(code)
+
+	console.log(languages.has(code))
 
 	const langCookie = cookie.serialize('langs', [...languages].join(','), {
 		maxAge: 60 * 60,
 		sameSite: 'strict',
-		path: '/',
+		path: '/', 
 	})
 	if (headers.accept === 'application/json')
 		return {

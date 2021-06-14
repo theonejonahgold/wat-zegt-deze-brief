@@ -5,7 +5,7 @@ export async function listMessages(id: string): Promise<Array<definitions['messa
 	const {
 		data: { messages: messageIDs },
 	} = await client.from<definitions['letters']>('letters').select('messages').eq('id', id).single()
-	if (!messageIDs.length || (messageIDs.length === 1 && messageIDs[0] === null)) return []
+	if (!messageIDs?.length || (messageIDs?.length === 1 && messageIDs[0] === null)) return []
 
 	const { data: messages } = await client
 		.from<definitions['messages']>('messages')
