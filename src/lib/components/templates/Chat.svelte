@@ -6,6 +6,7 @@
 	import { client } from '$config/supabase'
 	import { onMount } from 'svelte'
 	import { resolveLetter } from '$db/letter'
+	import { postResolveStatusMessage } from '$db/messageHandler'
 
 	export let messages: ChatMessage[]
 	export let userRole: string
@@ -17,12 +18,14 @@
 
 	$: radioVal = ''
 
-	onMount(async () => {
-		form.addEventListener('input', (e: Event) => {
-			const val: string = handleClick(e)
-			radioVal = val
+	if (userRole === 'user') {
+		onMount(async () => {
+			form.addEventListener('input', (e: Event) => {
+				const val: string = handleClick(e)
+				radioVal = val
+			})
 		})
-	})
+	}
 
 	function handleClick(e: Event) {
 		return (e.target as HTMLInputElement).value
@@ -95,17 +98,23 @@
 </Header>
 <main>
 	{#each messages as message (message.id)}
-		{#if message.sender.id === userId}
-			<audio controls src={message.file} type="audio/ogg" class="you" />
+		{#if message.type === 'audio'}
+			{#if message.sender.id === userId}
+				<audio controls src={message.file} type="audio/ogg" class="you" />
+			{:else}
+				<audio controls src={message.file} type="audio/ogg" />
+			{/if}
 		{:else}
-			<audio controls src={message.file} type="audio/ogg" />
+			<MessageCloud text={message.content} />
 		{/if}
 	{/each}
+
 	{#if userRole === 'user' && messages.length}
 		<form
 			bind:this={form}
-			on:submit|preventDefault={e => {
+			on:submit|preventDefault={() => {
 				resolveLetter(letterId, radioVal)
+				postResolveStatusMessage(letterId, radioVal)
 				form.remove()
 			}}
 		>
