@@ -5,13 +5,15 @@
 	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
 	import { onMount } from 'svelte'
-	import type { definitions } from '$types'
+	import { resolveLetter } from '$db/letter'
 
 	export let messages: ChatMessage[]
 	export let userRole: string
 	export let letterId: string
 
 	let form: HTMLFormElement
+	const medium: boolean = true
+	const userId = client.auth.session().user.id
 
 	$: radioVal = ''
 
@@ -22,24 +24,8 @@
 		})
 	})
 
-	const medium: boolean = true
-	const userId = client.auth.session().user.id
-
 	function handleClick(e: Event) {
 		return (e.target as HTMLInputElement).value
-	}
-
-	async function submitHandler(val: string) {
-		let status = val === 'Ja' ? 'resolved' : 'published'
-
-		if (status === 'resolved') {
-			const { data } = await client
-				.from<definitions['letters']>('letters')
-				.update({ status: status })
-				.eq('id', letterId)
-				.single()
-		} else {
-		}
 	}
 </script>
 
@@ -55,6 +41,7 @@
 	}
 
 	main {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		overflow: auto;
@@ -68,12 +55,19 @@
 		align-self: flex-end;
 	}
 
-	.resolve {
+	form {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
 		position: absolute;
 		bottom: 0;
+		align-self: center;
+		margin-bottom: var(--space-s);
 	}
 
 	fieldset {
+		display: flex;
+		justify-content: center;
 		border: none;
 	}
 </style>
@@ -84,18 +78,18 @@
 	<Help slot="right" />
 </Header>
 <main>
-	{#each messages as message (message.id)}
-		{#if message.sender.id === userId}
-			<audio controls src={message.file} type="audio/ogg" class="you" />
-		{:else}
-			<audio controls src={message.file} type="audio/ogg" />
-		{/if}
-	{/each}
 	{#if messages.length}
+		{#each messages as message (message.id)}
+			{#if message.sender.id === userId}
+				<audio controls src={message.file} type="audio/ogg" class="you" />
+			{:else}
+				<audio controls src={message.file} type="audio/ogg" />
+			{/if}
+		{/each}
 		<form
 			bind:this={form}
-			on:submit|preventDefault={() => {
-				submitHandler(radioVal)
+			on:submit|preventDefault={e => {
+				resolveLetter(letterId, radioVal)
 				form.remove()
 			}}
 		>
@@ -105,8 +99,8 @@
 				<label for="yes">Ja</label>
 				<input type="radio" name="resolve" id="no" value="Nee" on:click={handleClick} />
 				<label for="no">Nee</label>
-				<input type="submit" value="Verstuur" />
 			</fieldset>
+			<input type="submit" value="Verstuur" />
 		</form>
 	{/if}
 </main>
