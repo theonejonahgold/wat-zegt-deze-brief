@@ -7,8 +7,6 @@ export async function listMessages(id: string): Promise<Array<definitions['messa
 	} = await client.from<definitions['letters']>('letters').select('messages').eq('id', id).single()
 	if (!messageIDs.length || (messageIDs.length === 1 && messageIDs[0] === null)) return []
 
-	console.log(messageIDs)
-
 	const { data: messages } = await client
 		.from<definitions['messages']>('messages')
 		.select(
@@ -24,8 +22,6 @@ export async function listMessages(id: string): Promise<Array<definitions['messa
 	`
 		)
 		.in('id', <string[]>(<unknown>messageIDs))
-
-	console.log(messageIDs)
 
 	return messages
 }
@@ -48,8 +44,6 @@ export async function fetchMessage(id: string): Promise<ChatMessage> {
 		)
 		.eq('id', id)
 		.single()
-
-	console.log(message)
 
 	return message as any
 }
