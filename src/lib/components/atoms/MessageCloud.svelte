@@ -1,9 +1,10 @@
 <script>
 	export let text: string
+	export let optionalClass: string = ''
 </script>
 
 <style>
-	.speech-bubble {
+	#container {
 		background: #eaeaea;
 		border: 1px solid #a7a7a7;
 		border-radius: 4px;
@@ -23,7 +24,7 @@
 		}
 	}
 
-	.speech-bubble-arrow {
+	div > div {
 		border-left: 21px solid transparent;
 		border-top: 20px solid rgba(0, 0, 0, 0.2);
 		bottom: -25px;
@@ -47,9 +48,13 @@
 			right: 6px;
 		}
 	}
+
+	.you {
+		align-self: flex-end;
+	}
 </style>
 
-<div class="speech-bubble">
+<div id="container" class={optionalClass}>
 	<p>{text}</p>
 	<div class="speech-bubble-arrow" />
 </div>

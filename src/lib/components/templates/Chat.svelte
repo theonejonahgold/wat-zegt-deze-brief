@@ -104,6 +104,8 @@
 			{:else}
 				<audio controls src={message.file} type="audio/ogg" />
 			{/if}
+		{:else if message.sender.id === userId}
+			<MessageCloud text={message.content} optionalClass="you" />
 		{:else}
 			<MessageCloud text={message.content} />
 		{/if}
