@@ -8,6 +8,7 @@
 	export let messages: ChatMessage[]
 	export let userRole: string
 
+	const medium: boolean = true
 	const userId = client.auth.session().user.id
 </script>
 
