@@ -1,5 +1,7 @@
 <script>
 	import { onMount, tick } from 'svelte'
+	import decode from 'audio-decode'
+	import { bufferToWave } from '$utils'
 
 	export let file: File
 	let paused = true
@@ -8,18 +10,17 @@
 	let src: string
 	let audio: HTMLAudioElement
 
-	onMount(() => {
-		const reader = new FileReader()
-		reader.readAsDataURL(file)
-		reader.addEventListener('loadend', async e => {
-			src = e.target.result as string
+	onMount(async () => {
+		const buffer: AudioBuffer = await decode(file).catch(console.error)
+		const blob = bufferToWave(buffer, buffer.length)
+		const url = URL.createObjectURL(blob)
+		src = url
+		await tick()
+		audio.addEventListener('loadedmetadata', async () => {
+			if (duration !== Infinity) return
+			currentTime = 1e101
 			await tick()
-			audio.addEventListener('loadedmetadata', async () => {
-				if (duration !== Infinity) return
-				currentTime = 1e101
-				await tick()
-				currentTime = 0
-			})
+			currentTime = 0
 		})
 	})
 
@@ -154,7 +155,7 @@
 			bind:duration
 			bind:currentTime
 		>
-			<source {src} type="audio/ogg" />
+			<source {src} type="audio/wav" />
 		</audio>
 		<button class:paused on:click={() => (paused = !paused)}
 			>{paused ? 'Afspelen' : 'Pauzeren'}</button

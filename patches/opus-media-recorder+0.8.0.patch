@@ -1,0 +1,65 @@
+diff --git a/node_modules/opus-media-recorder/OpusMediaRecorder.js b/node_modules/opus-media-recorder/OpusMediaRecorder.js
+index ebf4a57..7304176 100644
+--- a/node_modules/opus-media-recorder/OpusMediaRecorder.js
++++ b/node_modules/opus-media-recorder/OpusMediaRecorder.js
+@@ -2,7 +2,7 @@ const { EventTarget, defineEventAttribute } = require('event-target-shim');
+ const { detect } = require('detect-browser');
+ const browser = detect();
+ 
+-const AudioContext = global.AudioContext || global.webkitAudioContext;
++const AudioContext = window.AudioContext || window.webkitAudioContext;
+ const BUFFER_SIZE = 4096;
+ 
+ /**
+@@ -216,7 +216,7 @@ class OpusMediaRecorder extends EventTarget {
+         // Start streaming
+         this.source.connect(this.processor);
+         this.processor.connect(this.context.destination);
+-        let eventToPush = new global.Event('start');
++        let eventToPush = new window.Event('start');
+         this.dispatchEvent(eventToPush);
+         break;
+ 
+@@ -271,13 +271,13 @@ class OpusMediaRecorder extends EventTarget {
+       case 'encodedData':
+       case 'lastEncodedData':
+         let data = new Blob(buffers, {'type': this._mimeType});
+-        eventToPush = new global.Event('dataavailable');
++        eventToPush = new window.Event('dataavailable');
+         eventToPush.data = data;
+         this.dispatchEvent(eventToPush);
+ 
+         // Detect of stop() called before
+         if (command === 'lastEncodedData') {
+-          eventToPush = new global.Event('stop');
++          eventToPush = new window.Event('stop');
+           this.dispatchEvent(eventToPush);
+ 
+           this.workerState = 'closed';
+@@ -307,7 +307,7 @@ class OpusMediaRecorder extends EventTarget {
+       'LineNumber: ' + error.lineno,
+       'Message: ' + error.message
+     ].join(' - ');
+-    let errorToPush = new global.Event('error');
++    let errorToPush = new window.Event('error');
+     errorToPush.name = 'UnknownError';
+     errorToPush.message = message;
+     this.dispatchEvent(errorToPush);
+@@ -428,7 +428,7 @@ class OpusMediaRecorder extends EventTarget {
+     this.source.disconnect();
+     this.processor.disconnect();
+ 
+-    let event = new global.Event('pause');
++    let event = new window.Event('pause');
+     this.dispatchEvent(event);
+     this._state = 'paused';
+   }
+@@ -445,7 +445,7 @@ class OpusMediaRecorder extends EventTarget {
+     this.source.connect(this.processor);
+     this.processor.connect(this.context.destination);
+ 
+-    let event = new global.Event('resume');
++    let event = new window.Event('resume');
+     this.dispatchEvent(event);
+     this._state = 'recording';
+   }
