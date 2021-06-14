@@ -14,6 +14,7 @@
 		line-height: 1.4;
 		padding: 1rem;
 		position: relative;
+		margin: 1rem 0 1rem 0;
 
 		p {
 			margin-bottom: 2px;
