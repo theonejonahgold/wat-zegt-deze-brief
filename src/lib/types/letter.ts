@@ -24,7 +24,7 @@ interface Message {
 
 export interface AudioMessage extends Message {
 	type: 'audio'
-	file: File
+	file: Blob
 }
 
 export interface TextMessage extends Message {
