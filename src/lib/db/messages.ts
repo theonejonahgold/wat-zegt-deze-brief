@@ -7,10 +7,12 @@ export async function listMessages(id: string): Promise<Array<definitions['messa
 	} = await client.from<definitions['letters']>('letters').select('messages').eq('id', id).single()
 	if (!messageIDs?.length || (messageIDs?.length === 1 && messageIDs[0] === null)) return []
 
-	const { data: messages } = await client
-		.from<definitions['messages']>('messages')
-		.select(
-			`
+	const messages = await Promise.all(
+		(
+			await client
+				.from<definitions['messages']>('messages')
+				.select(
+					`
 		id,
 		type,
 		content,
@@ -20,8 +22,31 @@ export async function listMessages(id: string): Promise<Array<definitions['messa
 			name
 		)
 	`
+				)
+				.in('id', <string[]>(<unknown>messageIDs))
+		).data.map(message =>
+			client
+				.from('message-status')
+				.select('read')
+				.eq('message_id', message.id)
+				.then(({ data: read }) => ({
+					...message,
+					read: !!read[0],
+				}))
 		)
-		.in('id', <string[]>(<unknown>messageIDs))
+	)
+
+	await Promise.allSettled<any>(
+		messages
+			.filter(message => (<any>message).sender.id === client.auth.session().user.id || message.read)
+			.map(message =>
+				client
+					.from('message-status')
+					.update({ read: true })
+					.eq('message_id', message.id)
+					.eq('user_id', client.auth.session().user.id)
+			)
+	)
 
 	return messages
 }

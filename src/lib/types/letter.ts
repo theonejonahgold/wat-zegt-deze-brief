@@ -26,6 +26,7 @@ interface Message {
 	content: string
 	type: 'audio' | 'text'
 	date: string
+	read: boolean
 }
 
 export interface AudioMessage extends Message {

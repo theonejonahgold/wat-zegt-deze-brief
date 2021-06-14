@@ -5,6 +5,7 @@
 	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
 	import { formEnhancer } from '$actions'
+	import { afterUpdate } from 'svelte'
 
 	export let messages: ChatMessage[]
 	export let userRole: string
@@ -12,7 +13,20 @@
 
 	const userId = client.auth.session().user.id
 
-	$: isUser = userRole === 'user'
+	let el: HTMLElement
+	let scrolled = false
+
+	$: lastReadID =
+		[...messages].reverse().find(message => message.sender.id === userId && message.read)?.id || -1
+
+	const isUser = userRole === 'user'
+
+	afterUpdate(() => {
+		if (scrolled) return
+		setTimeout(() => {
+			el.scrollTop = el.scrollHeight
+		}, 1)
+	})
 </script>
 
 <style lang="scss">
@@ -23,20 +37,23 @@
 		box-shadow: var(--bs-l-up);
 		padding-top: var(--space-m);
 		width: 100%;
+		background: var(--white);
 	}
 
 	main {
-		position: relative;
-		display: flex;
-		flex-direction: column;
+		overflow-y: auto;
 		margin: var(--space-s);
-    overflow: auto;
+
+		small {
+			text-align: right;
+			display: block;
+			margin-top: calc(var(--space-xxs) * -1);
+		}
 
 		:global {
 			.container.container {
-				align-self: flex-start;
-				margin-top: var(--space-xs);
-				margin-bottom: var(--space-xs);
+				margin: var(--space-xs) 0;
+				margin-left: var(--margin);
 				align-self: var(--align, flex-start);
 			}
 
@@ -92,25 +109,26 @@
 	}
 </style>
 
-<Header>
+<Header sticky>
 	<Back slot="left" href="/dashboard" />
 	<SpokenText --align="center" slot="middle" text="Gesproken bericht" />
 	<Help slot="right" />
 </Header>
 <div>
-	<main>
+	<main
+		on:wheel|passive={e => (scrolled = el.scrollTop < el.scrollHeight - el.offsetHeight - 5)}
+		bind:this={el}
+	>
 		{#each messages as message, index ((message.id, index))}
 			{#if message.file}
-				<AudioPlayer
-					file={message.file}
-					--align={message.sender.id === userId ? 'flex-end' : 'flex-start'}
-				/>
+				<AudioPlayer file={message.file} --margin={message.sender.id === userId ? 'auto' : '0'} />
 			{:else}
 				<MessageCloud
 					text={message.content}
-					--align={message.sender.id === userId ? 'flex-end' : 'flex-start'}
+					--margin={message.sender.id === userId ? 'auto' : '0'}
 				/>
 			{/if}
+			{#if lastReadID === message.id}<small>{message.file ? 'Geluisterd' : 'Gelezen'}</small>{/if}
 		{/each}
 		{#if isUser}
 			{#if messages.length}
