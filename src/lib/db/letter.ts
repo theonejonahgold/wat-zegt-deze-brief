@@ -31,10 +31,13 @@ export function listLetters() {
 	)
 }
 
-export async function resolveLetter(id: string, val) {
-	return await client
-		.from<definitions['letters']>('letters')
-		.update({ status: val })
-		.eq('id', id)
-		.single()
+export async function resolveLetter(id: string, val: string) {
+	if (val === 'Ja') {
+		return await client
+			.from<definitions['letters']>('letters')
+			.update({ status: 'resolved' })
+			.eq('id', id)
+			.single()
+	} else {
+	}
 }
