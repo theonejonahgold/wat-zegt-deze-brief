@@ -30,3 +30,11 @@ export function listLetters() {
 		`
 	)
 }
+
+export function resolveLetter(id: string) {
+	return client
+		.from<definitions['letters']>('letters')
+		.update({ status: 'resolved' })
+		.eq('id', id)
+		.single()
+}
