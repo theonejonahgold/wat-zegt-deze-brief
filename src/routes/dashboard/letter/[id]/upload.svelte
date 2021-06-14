@@ -199,7 +199,7 @@
 	>
 		Upload de eerste pagina
 	</svelte:component>
-	<svelte:fragment slot="footer">
+	<svelte:fragment slot="footer-full">
 		<div>
 			<PageList
 				on:remove={removeHandler}
@@ -207,16 +207,14 @@
 				bind:selected={selectedPage}
 				bind:pages
 			/>
-			{#if pages.length}
-				<svelte:component
-					this={loading ? Loader : FileInput}
-					slot="empty"
-					name="page"
-					on:change={changeHandler}
-				>
-					Pagina
-				</svelte:component>
-			{/if}
+			<svelte:component
+				this={loading ? Loader : FileInput}
+				slot="empty"
+				name="page"
+				on:change={changeHandler}
+			>
+				Pagina
+			</svelte:component>
 		</div>
 		<Button href="/dashboard/letter/{letter.id}/organisation">Pagina's opslaan</Button>
 	</svelte:fragment>
