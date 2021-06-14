@@ -17,8 +17,6 @@
 	}
 
 	footer {
-		display: flex;
-		justify-content: center;
 		box-shadow: var(--bs-up);
 		padding-top: var(--space-l);
 	}
@@ -36,6 +34,16 @@
 		<slot name="empty" />
 	{/if}
 </main>
-<footer>
-	<slot name="footer" />
-</footer>
+{#if $$slots.footer}
+	<footer>
+		<slot name="footer" />
+	</footer>
+{:else if $$slots['footer-full'] && pages.length}
+	<footer>
+		<slot name="footer-full" />
+	</footer>
+{:else if $$slots['footer-empty'] && !pages.length}
+	<footer>
+		<slot name="footer-empty" />
+	</footer>
+{/if}
