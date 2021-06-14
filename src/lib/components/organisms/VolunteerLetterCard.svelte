@@ -10,11 +10,25 @@
 		letter.volunteer?.id === client.auth.session().user.id
 			? `/dashboard/chat/${letter.id}`
 			: `/dashboard/letter/${letter.id}`
+
+	const latestMessage = letter.messages?.[letter.messages.length - 1]
+	const time = latestMessage ? latestMessage.date : letter.createdAt
 </script>
 
 <style lang="scss">
 	article {
 		position: relative;
+
+		&.unread:after {
+			content: '';
+			position: absolute;
+			top: calc(-0.6667 * var(--space-xs));
+			right: calc(-0.6667 * var(--space-xs));
+			width: var(--space-s);
+			height: var(--space-s);
+			background: var(--dark);
+			border-radius: 50%;
+		}
 	}
 
 	a {
@@ -55,6 +69,10 @@
 			color: var(--light);
 		}
 	}
+
+	strong {
+		font-weight: 500;
+	}
 </style>
 
 <article>
@@ -65,7 +83,24 @@
 			<time datetime={new Date(letter.createdAt).toLocaleDateString('nl-NL')}>
 				{formatTimestamp(letter.createdAt)}
 			</time>
-			<p>Start met uitleggen</p>
+			{#if letter.volunteer}
+				<p>
+					<strong
+						>{#if latestMessage.sender.id === client.auth.session().user.id}
+							JIJ:
+						{:else if latestMessage.sender.name}
+							{latestMessage.sender.name}:
+						{:else}
+							Gebruiker:
+						{/if}
+					</strong>
+					{#if latestMessage.type === 'audio'}
+						Spraakbericht
+					{:else}
+						{latestMessage.content}
+					{/if}
+				</p>
+			{/if}
 		</div>
 	</a>
 </article>

@@ -1,5 +1,5 @@
 import { client } from '$config/supabase'
-import type { definitions } from '$types'
+import type { definitions, Letter } from '$types'
 import { v4 as uuid } from 'uuid'
 
 interface CreateLetterProps {
@@ -13,20 +13,53 @@ export function createLetter({ userId }: CreateLetterProps) {
 	})
 }
 
-export function listLetters() {
-	return client.from<definitions['letters']>('letters').select(
+export async function dashboardLetters() {
+	const { data: letters } = await client.from<definitions['letters']>('letters').select(
 		`
 			id,
 			sender,
 			createdAt,
 			messages,
-			user_id,
+			page_order,
 			status,
-			thumbnail,
+			user:user_id (
+				id,
+				name
+			),
 			volunteer:volunteer_id (
 				name,
 				id
 			)
 		`
+	)
+
+	if (!letters || !letters.length) return []
+
+	return await Promise.all<Letter>(
+		letters.map(letter =>
+			letter.messages
+				? client
+						.from<definitions['messages']>('messages')
+						.select(
+							`
+							type,
+							content,
+							date,
+							sender:sender_id (
+								id,
+								name
+							)
+						`
+						)
+						.in('id', letter.messages as unknown as string[])
+						.then(
+							({ data }) =>
+								({
+									...letter,
+									messages: data,
+								} as unknown as Letter)
+						)
+				: new Promise<Letter>(resolve => resolve(letter as unknown as Letter))
+		)
 	)
 }

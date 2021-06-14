@@ -2,13 +2,15 @@
 	import { Image } from '$atoms'
 	import { formatTimestamp } from '$utils'
 	import type { Letter } from '$types'
+	import { client } from '$config/supabase'
 
 	export let letter: Letter
 
 	const href =
 		letter.volunteer !== null ? `/dashboard/chat/${letter.id}` : `/dashboard/letter/${letter.id}`
 
-	const time = letter.messages?.length ? letter.messages[0].date : letter.createdAt
+	const latestMessage = letter.messages?.[letter.messages.length - 1]
+	const time = latestMessage ? latestMessage.date : letter.createdAt
 </script>
 
 <style lang="scss">
@@ -82,6 +84,10 @@
 			grid-column: 2;
 		}
 	}
+
+	strong {
+		font-weight: 500;
+	}
 </style>
 
 <article>
@@ -103,7 +109,22 @@
 			{#if !letter.messages}
 				<p>Je hebt nog geen uitleg ontvangen.</p>
 			{:else}
-				<p>Je hebt uitleg ontvangen</p>
+				<p>
+					<strong
+						>{#if latestMessage.sender.id === client.auth.session().user.id}
+							JIJ:
+						{:else if latestMessage.sender.name}
+							{latestMessage.sender.name}:
+						{:else}
+							Vrijwilliger:
+						{/if}
+					</strong>
+					{#if latestMessage.type === 'audio'}
+						Spraakbericht
+					{:else}
+						{latestMessage.content}
+					{/if}
+				</p>
 			{/if}
 		</div>
 	</a>
