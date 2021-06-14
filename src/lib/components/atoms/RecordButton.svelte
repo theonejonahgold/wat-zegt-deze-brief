@@ -5,7 +5,7 @@
 	export let recording = false
 </script>
 
-<IconButton on:click>
+<IconButton buttonColor="var(--dark)" on:click>
 	{#if recording}
 		<StopRecordingIcon />
 	{:else}
