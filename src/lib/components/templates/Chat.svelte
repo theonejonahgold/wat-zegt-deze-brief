@@ -1,7 +1,7 @@
 <script>
 	import Header from './Header.svelte'
 	import type { ChatMessage } from '$types'
-	import { SpokenText, Help, Back, MessageCloud } from '$atoms'
+	import { SpokenText, Help, Back, MessageCloud, AudioPlayer } from '$atoms'
 	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
 	import { onDestroy, onMount } from 'svelte'
@@ -112,13 +112,14 @@
 	<main>
 		{#each messages as message, index ((message.id, index))}
 			{#if message.sender.id === userId}
-				{#if message.type === 'audio'}
-					<audio controls="control" src={message.file} type="audio/ogg" class="you" />
+				{#if message.file}
+					<!-- <audio controls="control" src={message.file} type="audio/ogg" class="you" /> -->
+					<AudioPlayer file={message.file} --align="flex-end" />
 				{:else}
 					<MessageCloud text={message.content} optionalClass="you" />
 				{/if}
-			{:else if message.type === 'audio'}
-				<audio controls="control" src={message.file} type="audio/ogg" />
+			{:else if message.file}
+				<AudioPlayer file={message.file} />
 			{:else}
 				<MessageCloud text={message.content} />
 			{/if}
