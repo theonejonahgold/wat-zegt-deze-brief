@@ -1,7 +1,7 @@
 <script>
 	import Header from './Header.svelte'
 	import type { ChatMessage } from '$types'
-	import { SpokenText, Help, Back, MessageCloud } from '$atoms'
+	import { SpokenText, Help, Back, MessageCloud, AudioPlayer } from '$atoms'
 	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
 	import { onMount } from 'svelte'
@@ -12,11 +12,14 @@
 	export let userRole: string
 	export let letterId: string
 
+	console.log(messages)
+
 	let form: HTMLFormElement
 	const medium: boolean = true
 	const userId = client.auth.session().user.id
 
 	$: radioVal = ''
+	$: isUser = userRole === 'user' ? true : false
 
 	if (userRole === 'user') {
 		onMount(async () => {
@@ -40,18 +43,16 @@
 		box-shadow: var(--bs-up);
 		padding-top: var(--space-m);
 		width: 100%;
-		overflow-x: scroll;
 	}
 
 	main {
-		position: relative;
 		display: flex;
 		flex-direction: column;
-		overflow: auto;
 	}
 
-	audio {
-		margin: 1rem 0 1rem 0;
+	main > audio {
+		margin: var(--space-s);
+		display: block;
 	}
 
 	.you {
@@ -62,10 +63,9 @@
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
-		position: absolute;
-		bottom: 0;
+		width: inherit;
 		align-self: center;
-		margin-bottom: var(--space-s);
+		margin: var(--space-xs-s);
 	}
 
 	fieldset {
@@ -97,42 +97,43 @@
 	<Help slot="right" />
 </Header>
 <main>
-	{#each messages as message (message.id)}
-		{#if message.type === 'audio'}
-			{#if message.sender.id === userId}
-				<audio controls src={message.file} type="audio/ogg" class="you" />
+	{#each messages as message, index ((message.id, index))}
+		{#if message.sender.id === userId}
+			{#if message.type === 'audio'}
+				<audio controls="control" src={message.file} type="audio/ogg" class="you" />
 			{:else}
-				<audio controls src={message.file} type="audio/ogg" />
+				<MessageCloud text={message.content} optionalClass="you" />
 			{/if}
-		{:else if message.sender.id === userId}
-			<MessageCloud text={message.content} optionalClass="you" />
+		{:else if message.type === 'audio'}
+			<audio controls="control" src={message.file} type="audio/ogg" />
 		{:else}
 			<MessageCloud text={message.content} />
 		{/if}
 	{/each}
-
-	{#if userRole === 'user' && messages.length}
-		<form
-			bind:this={form}
-			on:submit|preventDefault={() => {
-				resolveLetter(letterId, radioVal)
-				postResolveStatusMessage(letterId, radioVal)
-				form.remove()
-			}}
-		>
-			<label for="resolve">Ik heb genoeg uitleg gekregen</label>
-			<fieldset>
-				<input type="radio" name="resolve" id="yes" value="Ja" on:click={handleClick} />
-				<label for="yes">Ja</label>
-				<input type="radio" name="resolve" id="no" value="Nee" on:click={handleClick} />
-				<label for="no">Nee</label>
-			</fieldset>
-			<input type="submit" value="Verstuur" />
-		</form>
+	{#if isUser}
+		{#if messages.length}
+			<form
+				bind:this={form}
+				on:submit|preventDefault={() => {
+					resolveLetter(letterId, radioVal)
+					postResolveStatusMessage(letterId, radioVal)
+					form.remove()
+				}}
+			>
+				<label for="resolve">Ik heb genoeg uitleg gekregen</label>
+				<fieldset>
+					<input type="radio" name="resolve" id="yes" value="Ja" on:click={handleClick} />
+					<label for="yes">Ja</label>
+					<input type="radio" name="resolve" id="no" value="Nee" on:click={handleClick} />
+					<label for="no">Nee</label>
+				</fieldset>
+				<input type="submit" value="Verstuur" />
+			</form>
+		{/if}
 	{/if}
 </main>
 <footer>
-	{#if userRole === 'user'}
+	{#if isUser}
 		<SpokenText
 			--align="center"
 			text="Klik op de microfoon en stel nog een vraag of bedank de vrijwilliger"
