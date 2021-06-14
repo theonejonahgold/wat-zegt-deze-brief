@@ -63,4 +63,4 @@
 	})
 </script>
 
-<Chat {messages} {userRole} />
+<Chat {messages} {userRole} {letterId} />
