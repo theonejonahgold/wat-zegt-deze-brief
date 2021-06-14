@@ -6,15 +6,15 @@
 <style>
 	#container {
 		background: #eaeaea;
-		border: 1px solid #a7a7a7;
+		border: 1px solid var(--light-grey);
 		border-radius: 4px;
 		box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
-		font-size: 1.1rem;
+		font-size: var(--font-s);
 		max-width: 12rem;
 		line-height: 1.4;
-		padding: 1rem;
+		padding: var(--space-s);
 		position: relative;
-		margin: 1rem 0 1rem 0;
+		margin: var(--space-s);
 
 		p {
 			margin-bottom: 2px;
@@ -34,7 +34,7 @@
 
 		&::before {
 			border-left: 23px solid transparent;
-			border-top: 23px solid #a7a7a7;
+			border-top: 23px solid var(--light-grey);
 			bottom: 2px;
 			content: '';
 			position: absolute;
@@ -57,5 +57,5 @@
 
 <div id="container" class={optionalClass}>
 	<p>{text}</p>
-	<div class="speech-bubble-arrow" />
+	<div />
 </div>
