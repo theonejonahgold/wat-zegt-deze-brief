@@ -17,8 +17,6 @@
 	}
 
 	footer {
-		display: flex;
-		justify-content: center;
 		box-shadow: var(--bs-up);
 		padding-top: var(--space-l);
 	}
