@@ -1,7 +1,7 @@
 <script>
 	import Header from './Header.svelte'
 	import type { ChatMessage } from '$types'
-	import { SpokenText, Help, Back, MessageCloud, AudioPlayer } from '$atoms'
+	import { SpokenText, Help, Back, MessageCloud } from '$atoms'
 	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
 	import { onDestroy, onMount } from 'svelte'
