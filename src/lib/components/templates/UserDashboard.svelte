@@ -47,7 +47,7 @@
 	<SpokenText --align="center" slot="middle" text="Home" />
 	<Help slot="right" />
 </Header>
-<main class:empty={letters.length}>
+<main class:empty={!letters.length}>
 	<ImageButton
 		href="/dashboard/letter"
 		text={letters.length ? 'Stuur hier je eerste brief op' : 'Nieuwe brief opsturen'}
@@ -58,7 +58,7 @@
 	<hr />
 	<section>
 		<SpokenText text="Jouw brieven" --align="center" />
-		{#if !letters.length}
+		{#if letters.length}
 			<ul>
 				{#each letters as letter (letter.id)}
 					<li>
