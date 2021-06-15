@@ -24,23 +24,3 @@ export async function uploadMessage(file: File) {
 		message_id: body.id,
 	})
 }
-
-export async function postResolveStatusMessage(letterId: string, radioVal: string) {
-	const message =
-		radioVal === 'Ja'
-			? 'Dankjewel, ik heb genoeg uitleg gekregen'
-			: 'Ik heb nog niet genoeg uitleg gekregen'
-	const userId = client.auth.session().user.id
-	const { body } = await client
-		.from<definitions['messages']>('messages')
-		.insert({
-			sender_id: userId,
-			content: message,
-			type: 'text',
-		})
-		.single()
-	await client.rpc('update_letter_messages', {
-		letter_id: letterId,
-		message_id: body.id,
-	})
-}

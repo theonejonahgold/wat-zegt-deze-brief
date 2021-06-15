@@ -1,23 +1,18 @@
 <script>
 	import Header from './Header.svelte'
-	import type { ChatMessage } from '$types'
+	import type { ChatMessage, Letter } from '$types'
 	import { SpokenText, Help, Back, MessageCloud, AudioPlayer } from '$atoms'
 	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
-	import { resolveLetter } from '$db/letter'
-	import { postResolveStatusMessage } from '$db/messageHandler'
+	import { formEnhancer } from '$actions'
 
 	export let messages: ChatMessage[]
 	export let userRole: string
-	export let letterId: string
-
-	let form: HTMLFormElement
-	let radioVal: string = ''
-	let submitted: boolean = false
+	export let letter: Letter
 
 	const userId = client.auth.session().user.id
 
-	$: isUser = userRole === 'user' ? true : false
+	$: isUser = userRole === 'user'
 </script>
 
 <style>
@@ -118,23 +113,17 @@
 		{/each}
 		{#if isUser}
 			{#if messages.length}
-				{#if !submitted}
+				{#if letter.status !== 'resolved'}
 					<form
-						bind:this={form}
-						on:submit|preventDefault={() => {
-							submitted = true
-							resolveLetter(letterId, radioVal)
-							postResolveStatusMessage(letterId, radioVal)
+						action="/api/letter/resolve/{letter.id}"
+						method="POST"
+						use:formEnhancer={{
+							success: (data, form) => console.log(data, form),
 						}}
 					>
-						<label for="resolve">Ik heb genoeg uitleg gekregen</label>
-						<fieldset>
-							<input type="radio" name="resolve" id="yes" value="Ja" bind:group={radioVal} />
-							<label for="yes">Ja</label>
-							<input type="radio" name="resolve" id="no" value="Nee" bind:group={radioVal} />
-							<label for="no">Nee</label>
-						</fieldset>
-						<input type="submit" value="Verstuur" />
+						<label>Ik heb genoeg uitleg gekregen</label>
+						<button type="submit" name="resolve" value="true">Ja</button>
+						<button type="submit" name="resolve" value="false">Nee</button>
 					</form>
 				{/if}
 			{/if}

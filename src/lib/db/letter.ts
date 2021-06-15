@@ -13,6 +13,30 @@ export function createLetter({ userId }: CreateLetterProps) {
 	})
 }
 
+export async function fetchSingleLetter(id: string) {
+	const { data: letter } = await client
+		.from<definitions['letters']>('letters')
+		.select(
+			`
+			id,
+			sender,
+			createdAt,
+			messages,
+			user_id,
+			status,
+			thumbnail,
+			volunteer:volunteer_id (
+				name,
+				id
+			)
+		`
+		)
+		.eq('id', id)
+		.single()
+
+	return letter
+}
+
 export function listLetters() {
 	return client.from<definitions['letters']>('letters').select(
 		`
@@ -29,15 +53,4 @@ export function listLetters() {
 			)
 		`
 	)
-}
-
-export async function resolveLetter(id: string, val: string) {
-	if (val === 'Ja') {
-		return await client
-			.from<definitions['letters']>('letters')
-			.update({ status: 'resolved' })
-			.eq('id', id)
-			.single()
-	} else {
-	}
 }

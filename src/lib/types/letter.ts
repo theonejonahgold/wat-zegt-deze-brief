@@ -3,6 +3,7 @@ export interface Letter {
 	image: string
 	sender?: string
 	createdAt: string
+	status: 'draft' | 'published' | 'resolved'
 	volunteer?: {
 		id: string
 		name?: string

@@ -1,6 +1,5 @@
 <script>
 	export let text: string
-	export let optionalClass: string = ''
 </script>
 
 <style>
