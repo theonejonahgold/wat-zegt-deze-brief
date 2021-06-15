@@ -15,7 +15,7 @@
 	$: isUser = userRole === 'user'
 </script>
 
-<style>
+<style lang="scss">
 	footer {
 		display: flex;
 		flex-direction: column;
@@ -30,6 +30,7 @@
 		display: flex;
 		flex-direction: column;
 		margin: var(--space-s);
+    overflow: auto;
 
 		:global {
 			.container.container {

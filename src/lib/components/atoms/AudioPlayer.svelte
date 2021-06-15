@@ -1,18 +1,21 @@
 <script>
 	import { onMount, tick } from 'svelte'
+	import decode from 'audio-decode'
+	import { bufferToWave } from '$utils'
 
-	export let file: File
+	export let file: Blob
 	let paused = true
 	let currentTime = 0
 	let duration = 0
 	let src: string
 	let audio: HTMLAudioElement
 
-	onMount(() => {
-		const reader = new FileReader()
-		reader.readAsDataURL(file)
-		reader.addEventListener('loadend', async e => {
-			src = e.target.result as string
+	onMount(async () => {
+		try {
+			const buffer: AudioBuffer = await decode(file)
+			const blob = bufferToWave(buffer, buffer.length)
+			const url = URL.createObjectURL(blob)
+			src = url
 			await tick()
 			audio.addEventListener('loadedmetadata', async () => {
 				if (duration !== Infinity) return
@@ -20,7 +23,9 @@
 				await tick()
 				currentTime = 0
 			})
-		})
+		} catch {
+			src = ''
+		}
 	})
 
 	function formatTime(time: number) {
@@ -38,6 +43,7 @@
 		display: flex;
 		border-radius: 4px;
 		margin: 0 var(--space-s);
+		width: max-content;
 	}
 
 	button {
@@ -154,7 +160,7 @@
 			bind:duration
 			bind:currentTime
 		>
-			<source {src} type="audio/ogg" />
+			<source {src} type="audio/wav" />
 		</audio>
 		<button class:paused on:click={() => (paused = !paused)}
 			>{paused ? 'Afspelen' : 'Pauzeren'}</button

@@ -1,5 +1,6 @@
 <script>
 	export let sticky = false
+	export let shadow = false
 </script>
 
 <style>
@@ -19,10 +20,13 @@
 			position: sticky;
 			top: 0;
 		}
+		&.shadow {
+			box-shadow: var(--bs-down);
+		}
 	}
 </style>
 
-<header class:sticky>
+<header class:shadow class:sticky>
 	<div>
 		<slot name="left" />
 	</div>

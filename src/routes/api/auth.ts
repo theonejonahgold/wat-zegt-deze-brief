@@ -28,13 +28,22 @@ export const post: RequestHandler<Locals, FormData> = async ({ body, headers }) 
 					body: 'Auth type not supported (yet).',
 				}
 		}
-		if (headers.accept === 'application/json')
+
+		if (headers.accept === 'application/json') {
+			if (!session) {
+				return {
+					status: 400,
+					body: 'Je e-mailadres of wachtwoord klopt niet.',
+				}
+			}
+
 			return {
 				status: 200,
 				body: {
 					session,
 				},
 			}
+		}
 
 		return {
 			status: 303,
@@ -43,6 +52,13 @@ export const post: RequestHandler<Locals, FormData> = async ({ body, headers }) 
 			},
 		}
 	} catch (err) {
+		if (err.message === 'A user with this email address has already been registered') {
+			return {
+				status: 400,
+				body: 'Dit e-mailadres is al in gebruik.',
+			}
+		}
+
 		return {
 			status: 400,
 			body: JSON.stringify(err),

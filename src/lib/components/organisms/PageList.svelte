@@ -45,7 +45,21 @@
 	}
 
 	afterUpdate(() => {
-		if (selected === pages.length - 1) ul.scrollLeft = ul.scrollWidth
+		if (!pages.length) return
+
+		const lItemOffsetLeft = ul.children[selected].offsetLeft
+
+		/* Also use offsetWidth of button, as it pokes outside of the list-item.
+		We take 33% as it only sticks out 33% of the way. */
+		const lItemOffsetWidth =
+			ul.children[selected].offsetWidth + ul.children[selected].children[0].offsetWidth / 3
+
+		if (
+			lItemOffsetLeft + lItemOffsetWidth > ul.scrollLeft + ul.offsetWidth ||
+			lItemOffsetLeft < ul.scrollLeft
+		)
+			// Minus 2px for outline
+			ul.scrollLeft = lItemOffsetLeft - 2
 	})
 </script>
 
@@ -62,6 +76,7 @@
 		align-items: center;
 		overflow-x: auto;
 		padding: var(--space-xs) 2px;
+		position: relative;
 	}
 
 	li {
@@ -81,6 +96,8 @@
 	}
 
 	button {
+		all: unset;
+		text-align: center;
 		appearance: none;
 		border: none;
 		background: var(--gradient-to-right);
@@ -90,8 +107,8 @@
 		height: var(--space-xl);
 		border-radius: 50%;
 		position: absolute;
-		top: calc(-0.5 * var(--space-l));
-		right: calc(-0.5 * var(--space-l));
+		top: calc(-0.33 * var(--space-xl));
+		right: calc(-0.33 * var(--space-xl));
 	}
 </style>
 

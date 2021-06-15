@@ -3,13 +3,17 @@ export interface Letter {
 	image: string
 	sender?: string
 	createdAt: string
-	status: 'draft' | 'published' | 'resolved'
+	user: {
+		id: string
+		name?: string
+	}
 	volunteer?: {
 		id: string
 		name?: string
 	}
 	messages: ChatMessage[]
 	page_order: string[]
+	status: 'draft' | 'published' | 'resolved'
 }
 
 interface Message {
