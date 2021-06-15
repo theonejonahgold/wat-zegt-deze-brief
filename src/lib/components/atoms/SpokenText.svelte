@@ -5,6 +5,7 @@
 	import { AudioIcon } from '$icons'
 
 	export let text = ''
+	export let small = false
 
 	let playing = false
 	let js = false
@@ -38,7 +39,7 @@
 </style>
 
 {#if !js}
-	<p class="size">{text}</p>
+	<p class:small>{text}</p>
 {:else}
 	<p>
 		{text}
