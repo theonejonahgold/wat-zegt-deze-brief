@@ -5,28 +5,28 @@
 	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
 	import { formEnhancer } from '$actions'
-	import { afterUpdate } from 'svelte'
+	import { useEffect } from '$utils'
 
 	export let messages: ChatMessage[]
 	export let userRole: string
 	export let letter: Letter
 
+	useEffect(
+		() => {
+			if (!el || !el.children.length) return
+			el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
+		},
+		() => [messages, el]
+	)
+
 	const userId = client.auth.session().user.id
 
 	let el: HTMLElement
-	let scrolled = false
 
 	$: lastReadID =
 		[...messages].reverse().find(message => message.sender.id === userId && message.read)?.id || -1
 
 	const isUser = userRole === 'user'
-
-	afterUpdate(() => {
-		if (scrolled) return
-		setTimeout(() => {
-			el.scrollTop = el.scrollHeight
-		}, 1)
-	})
 </script>
 
 <style lang="scss">
@@ -115,10 +115,7 @@
 	<Help slot="right" />
 </Header>
 <div>
-	<main
-		on:wheel|passive={e => (scrolled = el.scrollTop < el.scrollHeight - el.offsetHeight - 5)}
-		bind:this={el}
-	>
+	<main bind:this={el}>
 		{#each messages as message, index ((message.id, index))}
 			{#if message.file}
 				<AudioPlayer file={message.file} --margin={message.sender.id === userId ? 'auto' : '0'} />

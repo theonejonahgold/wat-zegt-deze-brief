@@ -26,8 +26,7 @@
 			top: 0;
 		}
 
-		&.shadow,
-		&.sticky {
+		&.shadow {
 			box-shadow: var(--bs-l-down);
 		}
 	}
