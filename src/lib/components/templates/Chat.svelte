@@ -115,6 +115,7 @@
 		padding: 0;
 		width: 100%;
 		display: flex;
+		border-bottom: 1px solid #d8d8d8;
 	}
 
 	#message-bar li {
@@ -123,6 +124,13 @@
 	}
 
 	#message-bar button {
+		box-shadow: var(--bs-m-up);
+		border: none;
+		padding: var(--space-xs);
+		background-color: var(--white);
+		color: #a5a5a5;
+		border-top-left-radius: 15px;
+		border-top-right-radius: 15px;
 		width: 100%;
 		height: 100%;
 	}
@@ -166,22 +174,22 @@
 			{/if}
 		{/if}
 	</main>
-	<aside>
-		<form
-			id="message-bar"
-			action="/api/letter/message/{letter.id}"
-			method="POST"
-			use:formEnhancer={{ success: (data, form) => console.log(data, form) }}
-		>
-			<ul>
-				<li><button type="submit" name="message" value="Dank u wel!">Dank u wel!</button></li>
-				<li><button type="submit" name="message" value="Bedankt!">Bedankt!</button></li>
-				<li><button type="submit" name="message" value="😁">😁</button></li>
-				<li><button type="submit" name="message" value="👌">👌</button></li>
-			</ul>
-		</form>
-	</aside>
 </div>
+<aside>
+	<form
+		id="message-bar"
+		action="/api/letter/message/{letter.id}"
+		method="POST"
+		use:formEnhancer={{ success: (data, form) => console.log(data, form) }}
+	>
+		<ul>
+			<li><button type="submit" name="message" value="Dank u wel!">Dank u wel!</button></li>
+			<li><button type="submit" name="message" value="Bedankt!">Bedankt!</button></li>
+			<li><button type="submit" name="message" value="😁">😁</button></li>
+			<li><button type="submit" name="message" value="👌">👌</button></li>
+		</ul>
+	</form>
+</aside>
 <footer>
 	{#if isUser}
 		<SpokenText
