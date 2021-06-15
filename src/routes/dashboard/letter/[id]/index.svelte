@@ -149,7 +149,11 @@
 				<h3>Deadline</h3>
 				<a href="/dashboard/letter/{letter.id}/deadline?edit=true">Bewerken</a>
 			</header>
-			<p>{format(new Date(letter.deadline), 'dd/MM/yyyy') || 'Geen deadline ingevuld'}</p>
+			<p>
+				{letter.deadline
+					? format(new Date(letter.deadline), 'dd/MM/yyyy')
+					: 'Geen deadline ingevuld'}
+			</p>
 		</section>
 		<section>
 			<header>
