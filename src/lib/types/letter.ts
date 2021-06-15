@@ -6,6 +6,7 @@ export interface Letter {
 	user: {
 		id: string
 		name?: string
+		languages?: string[]
 	}
 	volunteer?: {
 		id: string
@@ -25,6 +26,7 @@ interface Message {
 	content: string
 	type: 'audio' | 'text'
 	date: string
+	read: boolean
 }
 
 export interface AudioMessage extends Message {

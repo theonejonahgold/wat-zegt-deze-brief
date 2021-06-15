@@ -3,7 +3,7 @@
 </script>
 
 <style>
-	#container {
+	.container {
 		background: #eaeaea;
 		border: 1px solid var(--light-grey);
 		border-radius: 4px;
@@ -13,7 +13,7 @@
 		line-height: 1.4;
 		padding: var(--space-s);
 		position: relative;
-		margin: var(--space-s);
+		margin-bottom: var(--space-xl);
 
 		p {
 			margin-bottom: 2px;
@@ -50,7 +50,7 @@
 	}
 </style>
 
-<div id="container">
+<div class="container">
 	<p>{text}</p>
 	<div />
 </div>

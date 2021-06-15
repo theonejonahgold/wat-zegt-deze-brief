@@ -124,6 +124,7 @@
 	--light-grey: #d8d8d8;
 	--green: #5fb05a;
 	--red: #e05742;
+	--transparent-grey: rgba(193, 193, 193, 0.16);
 
 	--primary: var(--black);
 	--secondary: var(--white);
@@ -135,18 +136,19 @@
 	--success: var(--green);
 	--error: var(--red);
 	--info: var(--blue);
+	--bs-color: var(--transparent-grey);
 
 	--gradient-to-right: linear-gradient(to right, var(--light), var(--dark));
 	--gradient-to-left: linear-gradient(to left, var(--light), var(--dark));
 	--gradient-to-top: linear-gradient(to top, var(--light), var(--dark));
 	--gradient-to-bottom: linear-gradient(to bottom, var(--light), var(--dark));
 
-	--bs-key-ambient-light: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
-		0 3px 5px -1px rgba(0, 0, 0, 0.2);
-	--bs-down: 0 1px 3px rgba(0, 0, 0, 0.16);
-	--bs-up: 0 -1px 3px rgba(0, 0, 0, 0.16);
-	--bs-button: 0 3px 8px rgba(0, 0, 0, 0.16);
-	--bs-input: 0 3px 6px rgba(0, 0, 0, 0.16);
+	--bs-s-down: 0 1px 3px var(--bs-color);
+	--bs-s-up: 0 -1px 3px var(--bs-color);
+	--bs-m-down: 0 3px 6px var(--bs-color);
+	--bs-m-up: 0 -3px 6px var(--bs-color);
+	--bs-l-down: 0 3px 8px var(--bs-color);
+	--bs-l-up: 0 -3px 8px var(--bs-color);
 
 	--border-radius: 0.75rem;
 
@@ -190,7 +192,7 @@ body {
 	position: relative;
 
 	@media (min-width: 26rem) {
-		box-shadow: var(--bs-button);
+		box-shadow: var(--bs-l-down);
 		border-radius: var(--border-radius);
 	}
 }

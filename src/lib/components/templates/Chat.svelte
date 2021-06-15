@@ -5,14 +5,28 @@
 	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
 	import { formEnhancer } from '$actions'
+	import { useEffect } from '$utils'
 
 	export let messages: ChatMessage[]
 	export let userRole: string
 	export let letter: Letter
 
+	useEffect(
+		() => {
+			if (!el || !el.children.length) return
+			el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
+		},
+		() => [messages, el]
+	)
+
 	const userId = client.auth.session().user.id
 
-	$: isUser = userRole === 'user'
+	let el: HTMLElement
+
+	$: lastReadID =
+		[...messages].reverse().find(message => message.sender.id === userId && message.read)?.id || -1
+
+	const isUser = userRole === 'user'
 </script>
 
 <style lang="scss">
@@ -20,28 +34,27 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		box-shadow: var(--bs-up);
+		box-shadow: var(--bs-l-up);
 		padding-top: var(--space-m);
 		width: 100%;
+		background: var(--white);
 	}
 
 	main {
-		position: relative;
-		display: flex;
-		flex-direction: column;
+		overflow-y: auto;
 		margin: var(--space-s);
-    overflow: auto;
+
+		small {
+			text-align: right;
+			display: block;
+			margin-top: calc(var(--space-xxs) * -1);
+		}
 
 		:global {
 			.container.container {
-				align-self: flex-start;
-				margin-top: var(--space-xs);
-				margin-bottom: var(--space-xs);
-				align-self: var(--align, flex-start);
-			}
-
-			#container {
-				align-self: var(--align, flex-start);
+				margin-top: var(--space-s);
+				margin-right: 0;
+				margin-left: var(--margin);
 			}
 
 			.size {
@@ -92,24 +105,24 @@
 	}
 </style>
 
-<Header>
+<Header sticky>
 	<Back slot="left" href="/dashboard" />
 	<SpokenText --align="center" slot="middle" text="Gesproken bericht" />
 	<Help slot="right" />
 </Header>
 <div>
-	<main>
+	<main bind:this={el}>
 		{#each messages as message, index ((message.id, index))}
-			{#if message.file}
-				<AudioPlayer
-					file={message.file}
-					--align={message.sender.id === userId ? 'flex-end' : 'flex-start'}
-				/>
+			{#if message.type === 'audio'}
+				<AudioPlayer file={message.file} --margin={message.sender.id === userId ? 'auto' : '0'} />
 			{:else}
 				<MessageCloud
 					text={message.content}
-					--align={message.sender.id === userId ? 'flex-end' : 'flex-start'}
+					--margin={message.sender.id === userId ? 'auto' : '0'}
 				/>
+			{/if}
+			{#if lastReadID === message.id}
+				<small>{message.type === 'audio' ? 'Geluisterd' : 'Gelezen'} </small>
 			{/if}
 		{/each}
 		{#if isUser}

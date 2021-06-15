@@ -35,7 +35,7 @@
 	}
 </style>
 
-<Header>
+<Header sticky>
 	<SpokenText --align="center" slot="middle" text="Brieven" />
 	<p slot="right">filter</p>
 </Header>
