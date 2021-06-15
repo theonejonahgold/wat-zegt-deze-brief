@@ -52,13 +52,9 @@
 
 		:global {
 			.container.container {
-				margin: var(--space-xs) 0;
+				margin-top: var(--space-s);
+				margin-right: 0;
 				margin-left: var(--margin);
-				align-self: var(--align, flex-start);
-			}
-
-			#container {
-				align-self: var(--align, flex-start);
 			}
 
 			.size {
@@ -117,7 +113,7 @@
 <div>
 	<main bind:this={el}>
 		{#each messages as message, index ((message.id, index))}
-			{#if message.file}
+			{#if message.type === 'audio'}
 				<AudioPlayer file={message.file} --margin={message.sender.id === userId ? 'auto' : '0'} />
 			{:else}
 				<MessageCloud
@@ -125,7 +121,9 @@
 					--margin={message.sender.id === userId ? 'auto' : '0'}
 				/>
 			{/if}
-			{#if lastReadID === message.id}<small>{message.file ? 'Geluisterd' : 'Gelezen'}</small>{/if}
+			{#if lastReadID === message.id}
+				<small>{message.type === 'audio' ? 'Geluisterd' : 'Gelezen'} </small>
+			{/if}
 		{/each}
 		{#if isUser}
 			{#if messages.length}
