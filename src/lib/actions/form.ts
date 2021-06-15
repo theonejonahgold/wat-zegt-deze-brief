@@ -17,7 +17,7 @@ export function formEnhancer<ResBody extends Record<string, JSONValue>>(
 
 		const body = new FormData(form)
 
-		if ((<any>e).submitter.name) body.set((<any>e).submitter.name, (<any>e).submitter.value)
+		if ((<any>e).submitter?.name) body.set((<any>e).submitter.name, (<any>e).submitter.value)
 
 		loading?.(body, form)
 

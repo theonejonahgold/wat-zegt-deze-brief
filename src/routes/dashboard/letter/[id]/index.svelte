@@ -131,7 +131,7 @@
 </svelte:head>
 
 {#if role === 'user'}
-	<Header sticky>
+	<Header sticky shadow>
 		<Back slot="left" href="/dashboard/letter/{letter.id}/deadline" />
 		<SpokenText --align="center" slot="middle" text="Afronden" />
 		<Help slot="right" />
@@ -159,7 +159,7 @@
 			{#if pages.length}
 				<ol>
 					{#each pages as page}
-						<li><Image src={page} alt="Page preview" shadow={true} /></li>
+						<li><Image src={page} alt="Page preview" /></li>
 					{/each}
 				</ol>
 			{:else}

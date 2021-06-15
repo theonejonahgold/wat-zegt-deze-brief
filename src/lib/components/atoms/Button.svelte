@@ -19,7 +19,7 @@
 		width: 100%;
 		border: none;
 		background: var(--gradient-to-right);
-		box-shadow: var(--bs-button);
+		box-shadow: var(--bs-l-down);
 		line-height: 1.125;
 
 		&.sticky {

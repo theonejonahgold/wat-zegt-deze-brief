@@ -151,31 +151,31 @@
 	}
 </style>
 
-{#if src}
-	<div class="container">
+<div class="container">
+	{#if src}
 		<audio
 			bind:this={audio}
 			on:ended={() => (currentTime = 0)}
 			bind:paused
 			bind:duration
 			bind:currentTime
-		>
-			<source {src} type="audio/wav" />
-		</audio>
-		<button class:paused on:click={() => (paused = !paused)}
-			>{paused ? 'Afspelen' : 'Pauzeren'}</button
-		>
-		<div class="metadata">
-			<input
-				on:mousedown={() => (paused = true)}
-				type="range"
-				min="0"
-				step="0.0001"
-				max={duration}
-				bind:value={currentTime}
-			/>
-			<p>{formatTime(currentTime)}</p>
-			<p>{formatTime(duration)}</p>
-		</div>
+			{src}
+			type="audio/wav"
+		/>
+	{/if}
+	<button class:paused on:click={() => (paused = !paused)}
+		>{paused ? 'Afspelen' : 'Pauzeren'}</button
+	>
+	<div class="metadata">
+		<input
+			on:mousedown={() => (paused = true)}
+			type="range"
+			min="0"
+			step="0.0001"
+			max={duration}
+			bind:value={currentTime}
+		/>
+		<p>{formatTime(currentTime)}</p>
+		<p>{formatTime(duration)}</p>
 	</div>
-{/if}
+</div>
