@@ -1,9 +1,9 @@
 <script>
-	import { Help, SpokenText } from '$atoms'
+	import { Help, Icon, SpokenText } from '$atoms'
 	import { ImageButton } from '$molecules'
 	import { UserLetterCard } from '$organisms'
 	import Header from './Header.svelte'
-	import { UserIcon } from '$icons'
+	import { MailIcon, UserIcon } from '$icons'
 	import type { Letter } from '$types'
 
 	export let letters: Letter[]
@@ -35,20 +35,30 @@
 			margin-top: var(--space-xl);
 		}
 	}
+
+	div {
+		height: 10rem;
+		margin: var(--space-xl) 0;
+		opacity: 0.6;
+	}
 </style>
 
 <Header>
 	<SpokenText --align="center" slot="middle" text="Home" />
 	<Help slot="right" />
 </Header>
-<main>
-	<ImageButton href="/dashboard/letter" text="Nieuwe brief opsturen">
+<main class:empty={letters.length}>
+	<ImageButton
+		href="/dashboard/letter"
+		text={letters.length ? 'Stuur hier je eerste brief op' : 'Nieuwe brief opsturen'}
+	>
 		<UserIcon />
 	</ImageButton>
+
 	<hr />
-	<section class:empty={!letters.length}>
+	<section>
 		<SpokenText text="Jouw brieven" --align="center" />
-		{#if letters.length}
+		{#if !letters.length}
 			<ul>
 				{#each letters as letter (letter.id)}
 					<li>
@@ -57,10 +67,12 @@
 				{/each}
 			</ul>
 		{:else}
-			<SpokenText
-				text="Je hebt nog geen brieven ingestuurd, klik op de knop hierboven om je eerste brief in te sturen."
-				--align="center"
-			/>
+			<div>
+				<Icon>
+					<MailIcon />
+				</Icon>
+			</div>
+			<SpokenText text="Je hebt nog geen brieven opgestuurd." --align="center" />
 		{/if}
 	</section>
 </main>
