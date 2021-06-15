@@ -107,7 +107,6 @@
 	#message-bar {
 		margin: 0;
 		width: 100%;
-		align-self: flex-end;
 	}
 
 	#message-bar ul {
