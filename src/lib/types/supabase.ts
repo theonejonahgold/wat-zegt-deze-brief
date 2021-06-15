@@ -31,6 +31,7 @@ export interface paths {
           thumbnail?: parameters["rowFilter.letters.thumbnail"];
           /** IDs for the pages in their respective order */
           page_order?: parameters["rowFilter.letters.page_order"];
+          deadline?: parameters["rowFilter.letters.deadline"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -96,6 +97,7 @@ export interface paths {
           thumbnail?: parameters["rowFilter.letters.thumbnail"];
           /** IDs for the pages in their respective order */
           page_order?: parameters["rowFilter.letters.page_order"];
+          deadline?: parameters["rowFilter.letters.deadline"];
         };
         header: {
           /** Preference */
@@ -125,6 +127,7 @@ export interface paths {
           thumbnail?: parameters["rowFilter.letters.thumbnail"];
           /** IDs for the pages in their respective order */
           page_order?: parameters["rowFilter.letters.page_order"];
+          deadline?: parameters["rowFilter.letters.deadline"];
         };
         body: {
           /** letters */
@@ -916,6 +919,7 @@ export interface definitions {
     thumbnail?: string;
     /** IDs for the pages in their respective order */
     page_order?: string;
+    deadline?: string;
   };
   /** Table keeping track of which messages have been read */
   "message-status": {
@@ -1070,6 +1074,7 @@ export interface parameters {
   "rowFilter.letters.thumbnail": string;
   /** IDs for the pages in their respective order */
   "rowFilter.letters.page_order": string;
+  "rowFilter.letters.deadline": string;
   /** message-status */
   "body.message-status": definitions["message-status"];
   "rowFilter.message-status.id": string;
