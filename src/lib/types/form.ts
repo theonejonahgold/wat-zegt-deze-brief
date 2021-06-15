@@ -1,4 +1,4 @@
-type NormalFieldType = 'text' | 'password' | 'email' | 'number' | 'radio' | 'file'
+type NormalFieldType = 'text' | 'password' | 'email' | 'number' | 'radio' | 'file' | 'date'
 
 interface BasicFormField {
 	name: string

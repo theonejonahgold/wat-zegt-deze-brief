@@ -14,6 +14,7 @@ export interface Letter {
 	messages: ChatMessage[]
 	page_order: string[]
 	status: 'draft' | 'published' | 'resolved'
+	deadline?: string
 }
 
 interface Message {
