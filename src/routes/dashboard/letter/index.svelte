@@ -49,7 +49,9 @@
 			step === 1 && canSkip
 				? [
 						{
-							path: id ? `/dashboard/letter/${id}/upload` : '/api/onboarding/letter',
+							path: id
+								? `/dashboard/letter/${id}/upload?skipped=true`
+								: '/api/onboarding/letter?skipped=true',
 							text: 'Uitleg overslaan',
 						},
 						{
