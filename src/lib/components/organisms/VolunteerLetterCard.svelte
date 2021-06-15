@@ -13,7 +13,6 @@
 			: `/dashboard/letter/${letter.id}`
 
 	const latestMessage = letter.messages?.[letter.messages.length - 1]
-	const time = latestMessage ? latestMessage.date : letter.createdAt
 
 	const userLanguages =
 		letter.user.languages
@@ -125,7 +124,11 @@
 	}
 </style>
 
-<article>
+<article
+	class:unread={latestMessage &&
+		latestMessage.sender.id !== client.auth.session().user.id &&
+		!latestMessage.read}
+>
 	<a {href}>
 		<Image src={letter.image} />
 		<div>

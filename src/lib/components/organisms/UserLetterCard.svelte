@@ -90,7 +90,11 @@
 	}
 </style>
 
-<article>
+<article
+	class:unread={latestMessage &&
+		latestMessage.sender.id !== client.auth.session().user.id &&
+		!latestMessage.read}
+>
 	<a {href}>
 		<Image src={letter.image} />
 		<div>
