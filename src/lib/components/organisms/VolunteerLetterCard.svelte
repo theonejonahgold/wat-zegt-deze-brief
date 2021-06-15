@@ -83,7 +83,7 @@
 			<time datetime={new Date(letter.createdAt).toLocaleDateString('nl-NL')}>
 				{formatTimestamp(letter.createdAt)}
 			</time>
-			{#if letter.volunteer}
+			{#if latestMessage}
 				<p>
 					<strong
 						>{#if latestMessage.sender.id === client.auth.session().user.id}
