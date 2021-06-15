@@ -44,8 +44,6 @@
 			)
 		)) as ChatMessage[]
 
-		console.log('messages', messages)
-
 		client
 			.from<definitions['letters']>(`letters:id=eq.${letter.id}`)
 			.on('UPDATE', async ({ new: newLetter }) => {
@@ -57,7 +55,6 @@
 				const messageID = newLetter.messages[newLetter.messages.length - 1]
 				const message = await fetchMessage(messageID)
 				if (message.type !== 'audio') {
-					console.log('hoi', messages)
 					messages.push(message)
 					messages = messages
 					return
