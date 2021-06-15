@@ -107,7 +107,11 @@
 				</time>
 			</header>
 			{#if !letter.messages}
-				<p>Je hebt nog geen uitleg ontvangen.</p>
+				{#if letter.status === 'published'}
+					<p>Je hebt nog geen uitleg ontvangen.</p>
+				{:else}
+					<p>Je hebt de brief nog niet verzonden.</p>
+				{/if}
 			{:else}
 				<p>
 					<strong
