@@ -56,10 +56,6 @@
 				margin-right: 0;
 				margin-left: var(--margin);
 			}
-
-			.size {
-				font-size: var(--font-s);
-			}
 		}
 	}
 
@@ -75,33 +71,29 @@
 
 	form {
 		display: flex;
-		justify-content: center;
-		flex-direction: column;
-		width: inherit;
-		align-self: center;
-		margin: var(--space-xs-s);
+		width: 100%;
+		margin-top: var(--space-xs-s);
 	}
 
-	fieldset {
-		display: flex;
-		justify-content: center;
-		border: none;
-		margin-bottom: 0.5rem;
-	}
-
-	fieldset label {
-		margin: 0 0.8rem 0 0.8rem;
-	}
-
-	form input[type='submit'] {
+	form button {
 		background-color: var(--dark);
 		border: none;
 		border-radius: 3px;
-		width: 5rem;
+		width: 3rem;
 		align-self: center;
 		color: var(--white);
 		padding: 0.5rem;
 		box-shadow: var(--bs-key-ambient-light);
+	}
+
+	form button:nth-child(1) {
+		margin-right: 1rem;
+	}
+
+	#message-bar {
+		display: flex;
+		width: inherit;
+		margin-top: var(--space-xs-s);
 	}
 
 	#message-bar {
@@ -158,17 +150,18 @@
 		{#if isUser}
 			{#if messages.length}
 				{#if letter.status !== 'resolved'}
-					<form
-						action="/api/letter/resolve/{letter.id}"
-						method="POST"
-						use:formEnhancer={{
-							success: (data, form) => console.log(data, form),
-						}}
-					>
-						<label>Ik heb genoeg uitleg gekregen</label>
-						<button type="submit" name="resolve" value="true">Ja</button>
-						<button type="submit" name="resolve" value="false">Nee</button>
-					</form>
+					<MessageCloud text="Ik heb genoeg uitleg gekregen" --margin="auto">
+						<form
+							action="/api/letter/resolve/{letter.id}"
+							method="POST"
+							use:formEnhancer={{
+								success: (data, form) => console.log(data, form),
+							}}
+						>
+							<button type="submit" name="resolve" value="true">Ja</button>
+							<button type="submit" name="resolve" value="false">Nee</button>
+						</form>
+					</MessageCloud>
 				{/if}
 			{/if}
 		{/if}
