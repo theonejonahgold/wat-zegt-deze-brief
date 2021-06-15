@@ -39,8 +39,8 @@
 	<SpokenText --align="center" slot="middle" text="Brieven" />
 	<p slot="right">filter</p>
 </Header>
-<main class:empty={letters.length}>
-	{#if !letters.length}
+<main class:empty={!letters.length}>
+	{#if letters.length}
 		<ul>
 			{#each letters as letter (letter.id)}
 				<li>
