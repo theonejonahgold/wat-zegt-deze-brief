@@ -12,6 +12,12 @@
 			u_role: 'user',
 		})
 
+		if (isUserRole && data.status === 'published')
+			return {
+				redirect: '/dashboard/letter/waiting',
+				status: 303,
+			}
+
 		return {
 			props: {
 				letter: data,
