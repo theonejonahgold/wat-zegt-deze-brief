@@ -85,7 +85,8 @@
 
 	div > form {
 		position: sticky;
-		top: calc((var(--space-l) * 2) + var(--space-xl));
+		top: calc((var(--space-l) * 2) + var(--space-xl) - var(--space-l) * 0.3);
+		padding-top: calc(var(--space-l) * 0.3);
 		background: var(--background);
 		padding-bottom: var(--space-s);
 	}
