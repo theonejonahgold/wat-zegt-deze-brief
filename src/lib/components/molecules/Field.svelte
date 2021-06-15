@@ -24,5 +24,5 @@
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <label for={id}>
 	<slot />
-	<Input on:change value={initialValue} {name} {type} {...$$restProps} />
+	<Input on:change on:blur value={initialValue} {name} {type} {...$$restProps} />
 </label>
