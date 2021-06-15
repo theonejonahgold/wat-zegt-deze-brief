@@ -15,7 +15,6 @@
 	let radioVal: string = ''
 	let submitted: boolean = false
 
-	const medium: boolean = true
 	const userId = client.auth.session().user.id
 
 	$: isUser = userRole === 'user' ? true : false
@@ -44,6 +43,14 @@
 				margin-bottom: var(--space-xs);
 				align-self: var(--align, flex-start);
 			}
+
+			#container {
+				align-self: var(--align, flex-start);
+			}
+
+			.size {
+				font-size: var(--font-s);
+			}
 		}
 	}
 
@@ -55,10 +62,6 @@
 	audio {
 		margin: var(--space-s);
 		display: block;
-	}
-
-	.you {
-		align-self: flex-end;
 	}
 
 	form {
@@ -101,16 +104,16 @@
 <div>
 	<main>
 		{#each messages as message, index ((message.id, index))}
-			{#if message.sender.id === userId}
-				{#if message.file}
-					<AudioPlayer file={message.file} --align="flex-end" />
-				{:else}
-					<MessageCloud text={message.content} optionalClass="you" />
-				{/if}
-			{:else if message.file}
-				<AudioPlayer file={message.file} />
+			{#if message.file}
+				<AudioPlayer
+					file={message.file}
+					--align={message.sender.id === userId ? 'flex-end' : 'flex-start'}
+				/>
 			{:else}
-				<MessageCloud text={message.content} />
+				<MessageCloud
+					text={message.content}
+					--align={message.sender.id === userId ? 'flex-end' : 'flex-start'}
+				/>
 			{/if}
 		{/each}
 		{#if isUser}
@@ -143,7 +146,6 @@
 		<SpokenText
 			--align="center"
 			text="Klik op de microfoon en stel nog een vraag of bedank de vrijwilliger"
-			{medium}
 		/>
 	{/if}
 	<AudioRecorder />

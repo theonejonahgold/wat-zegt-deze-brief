@@ -49,13 +49,9 @@
 			right: 6px;
 		}
 	}
-
-	.you {
-		align-self: flex-end;
-	}
 </style>
 
-<div id="container" class={optionalClass}>
+<div id="container">
 	<p>{text}</p>
 	<div />
 </div>
