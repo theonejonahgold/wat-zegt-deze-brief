@@ -103,6 +103,29 @@
 		padding: 0.5rem;
 		box-shadow: var(--bs-key-ambient-light);
 	}
+
+	#message-bar {
+		margin: 0;
+		width: 100%;
+		align-self: flex-end;
+	}
+
+	#message-bar ul {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		display: flex;
+	}
+
+	#message-bar li {
+		list-style: none;
+		width: 25%;
+	}
+
+	#message-bar button {
+		width: 100%;
+		height: 100%;
+	}
 </style>
 
 <Header sticky>
@@ -143,6 +166,21 @@
 			{/if}
 		{/if}
 	</main>
+	<aside>
+		<form
+			id="message-bar"
+			action="/api/letter/message/{letter.id}"
+			method="POST"
+			use:formEnhancer={{ success: (data, form) => console.log(data, form) }}
+		>
+			<ul>
+				<li><button type="submit" name="message" value="Dank u wel!">Dank u wel!</button></li>
+				<li><button type="submit" name="message" value="Bedankt!">Bedankt!</button></li>
+				<li><button type="submit" name="message" value="😁">😁</button></li>
+				<li><button type="submit" name="message" value="👌">👌</button></li>
+			</ul>
+		</form>
+	</aside>
 </div>
 <footer>
 	{#if isUser}
