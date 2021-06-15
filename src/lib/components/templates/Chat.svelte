@@ -4,7 +4,6 @@
 	import { SpokenText, Help, Back, MessageCloud, AudioPlayer } from '$atoms'
 	import { AudioRecorder } from '$organisms'
 	import { client } from '$config/supabase'
-	import { onDestroy, onMount } from 'svelte'
 	import { resolveLetter } from '$db/letter'
 	import { postResolveStatusMessage } from '$db/messageHandler'
 
@@ -12,32 +11,14 @@
 	export let userRole: string
 	export let letterId: string
 
-	console.log(messages)
-
 	let form: HTMLFormElement
+	let radioVal: string = ''
+	let submitted: boolean = false
+
 	const medium: boolean = true
 	const userId = client.auth.session().user.id
 
-	$: radioVal = ''
 	$: isUser = userRole === 'user' ? true : false
-
-	if (userRole === 'user') {
-		onMount(async () => {
-			form.addEventListener('input', (e: Event) => {
-				const val: string = handleClick(e)
-				radioVal = val
-			})
-		})
-
-		onDestroy(() => {
-			resolveLetter(letterId, radioVal)
-			postResolveStatusMessage(letterId, radioVal)
-		})
-	}
-
-	function handleClick(e: Event) {
-		return (e.target as HTMLInputElement).value
-	}
 </script>
 
 <style>
@@ -122,7 +103,6 @@
 		{#each messages as message, index ((message.id, index))}
 			{#if message.sender.id === userId}
 				{#if message.file}
-					<!-- <audio controls="control" src={message.file} type="audio/ogg" class="you" /> -->
 					<AudioPlayer file={message.file} --align="flex-end" />
 				{:else}
 					<MessageCloud text={message.content} optionalClass="you" />
@@ -135,21 +115,25 @@
 		{/each}
 		{#if isUser}
 			{#if messages.length}
-				<form
-					bind:this={form}
-					on:submit|preventDefault={() => {
-						form.remove()
-					}}
-				>
-					<label for="resolve">Ik heb genoeg uitleg gekregen</label>
-					<fieldset>
-						<input type="radio" name="resolve" id="yes" value="Ja" on:click={handleClick} />
-						<label for="yes">Ja</label>
-						<input type="radio" name="resolve" id="no" value="Nee" on:click={handleClick} />
-						<label for="no">Nee</label>
-					</fieldset>
-					<input type="submit" value="Verstuur" />
-				</form>
+				{#if !submitted}
+					<form
+						bind:this={form}
+						on:submit|preventDefault={() => {
+							submitted = true
+							resolveLetter(letterId, radioVal)
+							postResolveStatusMessage(letterId, radioVal)
+						}}
+					>
+						<label for="resolve">Ik heb genoeg uitleg gekregen</label>
+						<fieldset>
+							<input type="radio" name="resolve" id="yes" value="Ja" bind:group={radioVal} />
+							<label for="yes">Ja</label>
+							<input type="radio" name="resolve" id="no" value="Nee" bind:group={radioVal} />
+							<label for="no">Nee</label>
+						</fieldset>
+						<input type="submit" value="Verstuur" />
+					</form>
+				{/if}
 			{/if}
 		{/if}
 	</main>
