@@ -18,10 +18,12 @@ export const post: RequestHandler<Locals, FormData> = async ({ params, query, bo
 	const id = params.id
 	const sender = body.get('sender')
 	const status = body.get('status')
+	const deadline = body.get('deadline')
 
 	let updateBody: Record<string, string> = {}
 	if (sender) updateBody.sender = sender
 	if (status) updateBody.status = status
+	if (deadline) updateBody.deadline = deadline
 
 	const { data } = await client
 		.from<definitions['letters']>('letters')
@@ -32,7 +34,10 @@ export const post: RequestHandler<Locals, FormData> = async ({ params, query, bo
 		return {
 			status: 302,
 			headers: {
-				location: query.get('redirect') || `/dashboard/letter/${id}`,
+				location:
+					query.get('redirect') || sender
+						? `/dashboard/letter/${id}/deadline`
+						: `/dashboard/letter/${id}`,
 			},
 		}
 	}

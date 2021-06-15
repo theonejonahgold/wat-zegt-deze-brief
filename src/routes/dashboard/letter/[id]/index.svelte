@@ -37,6 +37,7 @@
 	import { onMount } from 'svelte'
 	import { AudioRecorder } from '$organisms'
 	import { volunteerLetter } from '$db/volunteerLetter'
+	import { format } from 'date-fns'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
@@ -131,7 +132,7 @@
 
 {#if role === 'user'}
 	<Header sticky shadow>
-		<Back slot="left" href="/dashboard/letter/{letter.id}/organisation" />
+		<Back slot="left" href="/dashboard/letter/{letter.id}/deadline" />
 		<SpokenText --align="center" slot="middle" text="Afronden" />
 		<Help slot="right" />
 	</Header>
@@ -142,6 +143,13 @@
 				<a href="/dashboard/letter/{letter.id}/organisation?edit=true">Bewerken</a>
 			</header>
 			<p>{letter.sender || 'Geen organisatie ingevuld'}</p>
+		</section>
+		<section>
+			<header>
+				<h3>Deadline</h3>
+				<a href="/dashboard/letter/{letter.id}/deadline?edit=true">Bewerken</a>
+			</header>
+			<p>{format(new Date(letter.deadline), 'dd/MM/yyyy') || 'Geen deadline ingevuld'}</p>
 		</section>
 		<section>
 			<header>
