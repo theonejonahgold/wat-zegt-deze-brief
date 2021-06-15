@@ -10,6 +10,7 @@
 		return {
 			props: {
 				letter: data,
+				editing: !!page.query.get('edit'),
 			},
 		}
 	}
@@ -24,6 +25,7 @@
 	import type { Load } from '@sveltejs/kit'
 
 	export let letter: Letter
+	export let editing: boolean
 </script>
 
 <svelte:head>
@@ -31,7 +33,12 @@
 </svelte:head>
 
 <Header sticky>
-	<Back slot="left" href="/dashboard/letter/{letter.id}/upload" />
+	<Back
+		slot="left"
+		href={editing
+			? `/dashboard/letter/${letter.id}`
+			: `/dashboard/letter/${letter.id}/organisation`}
+	/>
 	<SpokenText --align="center" slot="middle" text="Deadline" />
 	<Help slot="right" />
 </Header>
@@ -50,6 +57,6 @@
 		]}
 		method="POST"
 	>
-		<svelte:fragment slot="submit">Volgende</svelte:fragment>
+		<svelte:fragment slot="submit">{editing ? 'Wijzigingen opslaan' : 'Volgende'}</svelte:fragment>
 	</Form>
 </main>

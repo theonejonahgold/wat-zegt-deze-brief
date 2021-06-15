@@ -20,6 +20,7 @@
 			props: {
 				letter: data,
 				editing: !!page.query.get('edit'),
+				skipped: !!page.query.get('skipped'),
 			},
 		}
 	}
@@ -38,6 +39,7 @@
 
 	export let letter: Letter
 	export let editing: boolean
+	export let skipped: boolean
 
 	let pages: string[] = []
 	let pageIDs: string[] = letter.page_order || []
@@ -196,7 +198,11 @@
 	bind:selectedPage
 	bind:pages
 	title={editing ? "Pagina's bewerken" : "Upload pagina's"}
-	backLink="/dashboard/letter?step=4&id={letter.id}"
+	backLink={editing
+		? `/dashboard/letter/${letter.id}`
+		: skipped
+		? `/dashboard/letter?step=1&id=${letter.id}`
+		: `/dashboard/letter?step=4&id=${letter.id}`}
 >
 	<svelte:component
 		this={loading ? Loader : FileInput}
@@ -223,6 +229,11 @@
 				Pagina
 			</svelte:component>
 		</div>
-		<Button href="/dashboard/letter/{letter.id}/organisation">Pagina's opslaan</Button>
+		<Button
+			href={editing
+				? `/dashboard/letter/${letter.id}`
+				: `/dashboard/letter/${letter.id}/organisation`}
+			>{editing ? 'Wijzigingen opslaan' : "Pagina's opslaan"}</Button
+		>
 	</svelte:fragment>
 </CarouselPage>
