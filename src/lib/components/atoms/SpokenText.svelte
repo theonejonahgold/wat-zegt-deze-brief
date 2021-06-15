@@ -38,7 +38,7 @@
 </style>
 
 {#if !js}
-	<p>{text}</p>
+	<p class="size">{text}</p>
 {:else}
 	<p>
 		{text}

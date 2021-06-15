@@ -17,6 +17,8 @@ export function formEnhancer<ResBody extends Record<string, JSONValue>>(
 
 		const body = new FormData(form)
 
+		if ((<any>e).submitter.name) body.set((<any>e).submitter.name, (<any>e).submitter.value)
+
 		loading?.(body, form)
 
 		fetch(form.action, {
@@ -32,7 +34,9 @@ export function formEnhancer<ResBody extends Record<string, JSONValue>>(
 					return res.text().then(err => {
 						throw new Error(err)
 					})
-				return res.json().then(data => success(data, form))
+				return res.status === 204
+					? success(null, form)
+					: res.json().then(data => success(data, form))
 			})
 			.catch(err => {
 				if (!error) throw err
