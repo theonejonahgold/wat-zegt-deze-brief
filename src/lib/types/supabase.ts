@@ -141,6 +141,111 @@ export interface paths {
       };
     };
   };
+  "/message-status": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.message-status.id"];
+          /** The message for which the state is being kept */
+          message_id?: parameters["rowFilter.message-status.message_id"];
+          /** The user who received the message */
+          user_id?: parameters["rowFilter.message-status.user_id"];
+          /** The status */
+          read?: parameters["rowFilter.message-status.read"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["message-status"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** message-status */
+          "message-status"?: definitions["message-status"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.message-status.id"];
+          /** The message for which the state is being kept */
+          message_id?: parameters["rowFilter.message-status.message_id"];
+          /** The user who received the message */
+          user_id?: parameters["rowFilter.message-status.user_id"];
+          /** The status */
+          read?: parameters["rowFilter.message-status.read"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.message-status.id"];
+          /** The message for which the state is being kept */
+          message_id?: parameters["rowFilter.message-status.message_id"];
+          /** The user who received the message */
+          user_id?: parameters["rowFilter.message-status.user_id"];
+          /** The status */
+          read?: parameters["rowFilter.message-status.read"];
+        };
+        body: {
+          /** message-status */
+          "message-status"?: definitions["message-status"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/message-types": {
     get: {
       parameters: {
@@ -681,6 +786,23 @@ export interface paths {
       };
     };
   };
+  "/rpc/handle_sent_message": {
+    post: {
+      parameters: {
+        body: {
+          args: { [key: string]: any };
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferParams"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: unknown;
+      };
+    };
+  };
   "/rpc/is_in_letter": {
     post: {
       parameters: {
@@ -794,6 +916,30 @@ export interface definitions {
     thumbnail?: string;
     /** IDs for the pages in their respective order */
     page_order?: string;
+  };
+  /** Table keeping track of which messages have been read */
+  "message-status": {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * The message for which the state is being kept
+     *
+     * Note:
+     * This is a Foreign Key to `messages.id`.<fk table='messages' column='id'/>
+     */
+    message_id?: string;
+    /**
+     * The user who received the message
+     *
+     * Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    user_id?: string;
+    /** The status */
+    read?: boolean;
   };
   /** The possible types of messages */
   "message-types": {
@@ -924,6 +1070,15 @@ export interface parameters {
   "rowFilter.letters.thumbnail": string;
   /** IDs for the pages in their respective order */
   "rowFilter.letters.page_order": string;
+  /** message-status */
+  "body.message-status": definitions["message-status"];
+  "rowFilter.message-status.id": string;
+  /** The message for which the state is being kept */
+  "rowFilter.message-status.message_id": string;
+  /** The user who received the message */
+  "rowFilter.message-status.user_id": string;
+  /** The status */
+  "rowFilter.message-status.read": string;
   /** message-types */
   "body.message-types": definitions["message-types"];
   "rowFilter.message-types.id": string;
