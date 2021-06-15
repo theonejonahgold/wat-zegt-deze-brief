@@ -5,7 +5,6 @@
 	import { AudioIcon } from '$icons'
 
 	export let text = ''
-	export let medium: boolean = false
 
 	let playing = false
 	let js = false
@@ -38,16 +37,12 @@
 		text-align: var(--align, initial);
 		color: var(--muted);
 	}
-
-	.medium {
-		font-size: var(--space-m);
-	}
 </style>
 
 {#if !js}
-	<p class={medium ? 'medium' : ''}>{text}</p>
+	<p class="size">{text}</p>
 {:else}
-	<p class={medium ? ' medium' : ''}>
+	<p>
 		{text}
 		<button type="button" on:click={handleClick}>
 			<Icon color="black">
