@@ -66,12 +66,12 @@
 <style>
 	ul {
 		display: grid;
-		grid-auto-columns: var(--space-xxxl);
-		grid-auto-flow: column;
 		list-style: none;
+		grid-template-columns: var(--space-xxxl);
+		grid-auto-flow: column;
+		column-gap: calc(var(--space-xxl) * 1);
 		margin: 0;
 		padding: 0;
-		column-gap: var(--space-s);
 		width: 100%;
 		align-items: center;
 		overflow-x: auto;
@@ -112,7 +112,7 @@
 	}
 </style>
 
-<ul bind:this={ul}>
+<ul bind:this={ul} style="--amount: {pages.length}">
 	<slot />
 	{#each pages as page, i}
 		<li class:selected={selected === i} on:click={clickHandler(i)}>

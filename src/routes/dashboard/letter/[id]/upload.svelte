@@ -170,7 +170,7 @@
 	div {
 		display: grid;
 		width: 100%;
-		grid-template-columns: 1fr calc(1.5 * var(--space-xxxl));
+		grid-template-columns: 3fr 1fr;
 		column-gap: var(--space-s);
 		align-items: center;
 
