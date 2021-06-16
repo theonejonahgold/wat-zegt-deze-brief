@@ -1,9 +1,9 @@
 <script>
-	import { Help, Icon, SpokenText } from '$atoms'
+	import { Help, SpokenText } from '$atoms'
 	import { ImageButton } from '$molecules'
 	import { UserLetterCard } from '$organisms'
 	import Header from './Header.svelte'
-	import { MailIcon, UserIcon } from '$icons'
+	import { UserIcon } from '$icons'
 	import type { Letter } from '$types'
 	import NavBar from './NavBar.svelte'
 
@@ -29,37 +29,23 @@
 			margin-bottom: var(--space-m);
 		}
 	}
-
-	.empty {
-		:global(div:last-child p) {
-			font-size: var(--font-m);
-			margin-top: var(--space-xl);
-		}
-	}
-
-	div {
-		height: 10rem;
-		margin: var(--space-xl) 0;
-		opacity: 0.6;
-	}
 </style>
 
 <Header>
 	<SpokenText --align="center" slot="middle" text="Home" />
 	<Help slot="right" />
 </Header>
-<main class:empty={!letters.length}>
+<main>
 	<ImageButton
 		href="/dashboard/letter"
-		text={letters.length ? 'Stuur hier je eerste brief op' : 'Nieuwe brief opsturen'}
+		text={letters.length ? 'Nieuwe brief opsturen' : 'Stuur hier je eerste brief op'}
 	>
 		<UserIcon />
 	</ImageButton>
-
-	<hr />
-	<section>
-		<SpokenText text="Jouw brieven" --align="center" />
-		{#if letters.length}
+	{#if letters.length}
+		<hr />
+		<section>
+			<SpokenText text="Jouw brieven" --align="center" />
 			<ul>
 				{#each letters as letter (letter.id)}
 					<li>
@@ -67,14 +53,7 @@
 					</li>
 				{/each}
 			</ul>
-		{:else}
-			<div>
-				<Icon>
-					<MailIcon />
-				</Icon>
-			</div>
-			<SpokenText text="Je hebt nog geen brieven opgestuurd" --align="center" />
-		{/if}
-	</section>
+		</section>
+	{/if}
 </main>
 <NavBar />
