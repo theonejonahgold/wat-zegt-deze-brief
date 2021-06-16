@@ -29,10 +29,13 @@ export async function listMessages(id: string): Promise<Array<definitions['messa
 				.from('message-status')
 				.select('read')
 				.eq('message_id', message.id)
-				.then(({ data: read }) => ({
-					...message,
-					read: !!read[0],
-				}))
+				.single()
+				.then(({ data: { read } }) => {
+					return {
+						...message,
+						read: !!read,
+					}
+				})
 		)
 	)
 
