@@ -30,7 +30,7 @@
 	<title>Hallo!</title>
 </svelte:head>
 
-<Flex pt="var(--space-xxxl)" px="var(--space-xl)" pb="var(--space-xl)">
+<Flex pt="var(--space-xxxl)" pb="var(--space-xxl)">
 	<Oval />
 	<h1>Hallo!</h1>
 	<SpokenText text="Dit is de app die helpt met het uitleggen van brieven" />

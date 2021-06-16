@@ -116,11 +116,11 @@
 
 	#next {
 		transform: rotate(180deg);
-		right: var(--space-xs);
+		right: var(--space-m);
 	}
 
 	#previous {
-		left: var(--space-xs);
+		left: var(--space-m);
 	}
 
 	.pagination {
