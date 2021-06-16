@@ -3,9 +3,6 @@
 	import { uploadMessage } from '$db/messageHandler'
 	import { DeleteIcon, SendIcon } from '$icons'
 	import { onMount, tick } from 'svelte'
-	import encoderWorker from 'web-worker:opus-media-recorder/encoderWorker.umd.js'
-	import OggOpusWasm from 'opus-media-recorder/OggOpusEncoder.wasm'
-	import WebMOpusWasm from 'opus-media-recorder/WebMOpusEncoder.wasm'
 
 	let recording = false
 	let uploading = false
@@ -30,10 +27,10 @@
 				{},
 				{
 					encoderWorkerFactory: () => {
-						return new encoderWorker()
+						return new Worker('../../../node_modules/opus-media-recorder/encoderWorker.umd.js')
 					},
-					OggOpusEncoderWasmPath: OggOpusWasm,
-					WebMOpusEncoderWasmPath: WebMOpusWasm,
+					OggOpusEncoderWasmPath: '../../../node_modules/opus-media-recorder/OggOpusEncoder.wasm',
+					WebMOpusEncoderWasmPath: '../../../node_modules/opus-media-recorder/WebMOpusEncoder.wasm',
 				}
 			)
 			recorder.addEventListener('dataavailable', dataAvailableHandler)
