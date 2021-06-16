@@ -9,7 +9,7 @@
 	nav {
 		background-color: var(--secondary);
 		box-shadow: 0px -1px 3px 0px rgba(50, 50, 50, 0.05);
-		width: 100vw;
+		width: 100%;
 	}
 
 	ul {
