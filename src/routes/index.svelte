@@ -15,7 +15,6 @@
 				margin-bottom: var(--space-l);
 
 				+ div {
-					max-height: 18rem;
 					margin-top: auto;
 
 					+ a {
