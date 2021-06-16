@@ -50,7 +50,7 @@ export async function listMessages(id: string): Promise<Array<definitions['messa
 }
 
 export async function fetchMessage(id: string): Promise<ChatMessage> {
-	const { data: message } = await client
+	const { data: message } = (await client
 		.from<definitions['messages']>('messages')
 		.select(
 			`
@@ -65,9 +65,17 @@ export async function fetchMessage(id: string): Promise<ChatMessage> {
 	`
 		)
 		.eq('id', id)
-		.single()
+		.single()) as unknown as { data: ChatMessage }
 
-	return message as any
+	try {
+		await client
+			.from('message-status')
+			.update({ read: true })
+			.eq('message_id', message.id)
+			.eq('user_id', client.auth.session().user.id)
+	} catch {}
+
+	return message
 }
 
 export function downloadAudioMessage(letterId: string, userId: string, messageId: string) {
