@@ -29,9 +29,8 @@
 
 <script>
 	import { Help, SpokenText, Back, Image, Button } from '$atoms'
-	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
-	import { CarouselPage, Header } from '$templates'
+	import { CarouselPage, Flex, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
@@ -103,6 +102,7 @@
 	}
 
 	section {
+		width: 100%;
 		+ section {
 			margin-top: var(--space-xl);
 		}
@@ -118,10 +118,11 @@
 			text-decoration: none;
 		}
 
-		+ :global(form) {
+		+ form {
+			margin-top: auto;
+			width: 100%;
 			position: sticky;
-			top: 100%;
-			bottom: var(--space-l);
+			bottom: var(--space-xl);
 		}
 	}
 </style>
@@ -136,55 +137,45 @@
 		<SpokenText --align="center" slot="middle" text="Afronden" />
 		<Help slot="right" />
 	</Header>
-	<main>
-		<Form
-			action="/api/letter/{letter.id}?redirect=/dashboard/letter/success"
-			fields={[
-				{
-					type: 'hidden',
-					name: 'status',
-					initialValue: 'published',
-				},
-			]}
-			noEnhance
-			buttonPosition="sticky"
-		>
-			<section>
-				<header>
-					<h3>Organisatie</h3>
-					<a href="/dashboard/letter/{letter.id}/organisation?edit=true">Bewerken</a>
-				</header>
-				<p>{letter.sender || 'Geen organisatie ingevuld'}</p>
-			</section>
-			<section>
-				<header>
-					<h3>Deadline</h3>
-					<a href="/dashboard/letter/{letter.id}/deadline?edit=true">Bewerken</a>
-				</header>
-				<p>
-					{letter.deadline
-						? format(new Date(letter.deadline), 'dd/MM/yyyy')
-						: 'Geen deadline ingevuld'}
-				</p>
-			</section>
-			<section>
-				<header>
-					<h3>Pagina's</h3>
-					<a href="/dashboard/letter/{letter.id}/upload?edit=true">Bewerken</a>
-				</header>
-				{#if pages.length}
-					<ol>
-						{#each pages as page}
-							<li><Image src={page} alt="Page preview" /></li>
-						{/each}
-					</ol>
-				{:else}
-					<p>Upload pagina's van je brief om ze hier te zien.</p>
-				{/if}
-			</section>
-			<svelte:fragment slot="submit">Opsturen</svelte:fragment>
-		</Form>
-	</main>
+	<Flex --justify="stretch" pt="var(--space-l)">
+		<section>
+			<header>
+				<h3>Organisatie</h3>
+				<a href="/dashboard/letter/{letter.id}/organisation?edit=true">Bewerken</a>
+			</header>
+			<p>{letter.sender || 'Geen organisatie ingevuld'}</p>
+		</section>
+		<section>
+			<header>
+				<h3>Deadline</h3>
+				<a href="/dashboard/letter/{letter.id}/deadline?edit=true">Bewerken</a>
+			</header>
+			<p>
+				{letter.deadline
+					? format(new Date(letter.deadline), 'dd/MM/yyyy')
+					: 'Geen deadline ingevuld'}
+			</p>
+		</section>
+		<section>
+			<header>
+				<h3>Pagina's</h3>
+				<a href="/dashboard/letter/{letter.id}/upload?edit=true">Bewerken</a>
+			</header>
+			{#if pages.length}
+				<ol>
+					{#each pages as page}
+						<li><Image src={page} alt="Page preview" /></li>
+					{/each}
+				</ol>
+			{:else}
+				<p>Upload pagina's van je brief om ze hier te zien.</p>
+			{/if}
+		</section>
+		<form action="/api/letter/{letter.id}?redirect=/dashboard/letter/success" method="POST">
+			<input type="hidden" name="status" value="published" />
+			<Button>Opsturen</Button>
+		</form>
+	</Flex>
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
 		<svelte:fragment slot="footer">

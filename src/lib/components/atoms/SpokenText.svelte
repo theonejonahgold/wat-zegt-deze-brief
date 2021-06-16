@@ -35,7 +35,6 @@
 		font-size: var(--space-l);
 		text-align: var(--align, initial);
 		color: var(--muted);
-		margin-bottom: var(--space-s);
 	}
 
 	.small {
