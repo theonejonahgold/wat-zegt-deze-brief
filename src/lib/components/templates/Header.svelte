@@ -6,12 +6,14 @@
 <style>
 	header {
 		display: grid;
-		grid-template-columns: var(--space-m) 1fr var(--space-m);
+		grid-template-columns: var(--space-l) 1fr var(--space-l);
 		column-gap: var(--space-s);
 		align-items: start;
 		justify-content: center;
 		background: var(--background);
 		z-index: 10;
+		padding-top: var(--space-l);
+		padding-bottom: var(--space-l);
 
 		:global(p) {
 			margin-top: -0.3em;

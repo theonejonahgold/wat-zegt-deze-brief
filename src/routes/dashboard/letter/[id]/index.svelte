@@ -1,18 +1,14 @@
 <script context="module">
 	export const load: Load = async ({ page }) => {
-		const { data } = await client
-			.from<definitions['letters']>('letters')
-			.select()
-			.eq('id', page.params.id)
-			.limit(1)
+		const letter = await fetchSingleLetter(page.params.id)
+
+		const { body: role } = await client
+			.rpc<string>('get_user_role', {
+				user_id: client.auth.session().user.id,
+			})
 			.single()
 
-		const { body: isUserRole } = await client.rpc<boolean>('is_role', {
-			user_id: client.auth.session().user.id,
-			u_role: 'user',
-		})
-
-		if (isUserRole && data.status === 'published')
+		if (role === 'user' && letter.status === 'published')
 			return {
 				redirect: '/dashboard/letter/waiting',
 				status: 303,
@@ -20,35 +16,30 @@
 
 		return {
 			props: {
-				letter: data,
-				role: (isUserRole as unknown as boolean) ? 'user' : 'volunteer',
+				letter,
+				role,
 			},
 		}
 	}
 </script>
 
-<script>
+<script lang="typescript">
 	import { Help, SpokenText, Back, Image, Button } from '$atoms'
-	import { Form } from '$organisms'
 	import { client } from '$config/supabase'
-	import { CarouselPage, Header } from '$templates'
+	import { CarouselPage, Flex, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
-	import { AudioRecorder } from '$organisms'
-	import { volunteerLetter } from '$db/volunteerLetter'
+	import { AudioRecorder, Form } from '$organisms'
 	import { format } from 'date-fns'
+	import { fetchSingleLetter } from '$db/letter'
+	import { goto } from '$app/navigation'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
 
 	let pages: string[] = []
 	let selectedPage = 0
-	let clicked = false
-
-	function handleClick() {
-		clicked = true
-	}
 
 	onMount(() => {
 		client.storage
@@ -103,6 +94,7 @@
 	}
 
 	section {
+		width: 100%;
 		+ section {
 			margin-top: var(--space-xl);
 		}
@@ -118,25 +110,26 @@
 			text-decoration: none;
 		}
 
-		+ :global(form) {
+		+ form {
+			margin-top: auto;
+			width: 100%;
 			position: sticky;
-			top: 100%;
-			bottom: var(--space-l);
+			bottom: var(--space-xl);
 		}
 	}
 </style>
 
 <svelte:head>
-	<title>Afronden</title>
+	<title>{role === 'user' ? 'Afronden' : 'Brief'}</title>
 </svelte:head>
 
 {#if role === 'user'}
-	<Header sticky shadow>
+	<Header sticky>
 		<Back slot="left" href="/dashboard/letter/{letter.id}/deadline" />
 		<SpokenText --align="center" slot="middle" text="Afronden" />
 		<Help slot="right" />
 	</Header>
-	<main>
+	<Flex --justify="stretch" pt="var(--space-l)">
 		<section>
 			<header>
 				<h3>Organisatie</h3>
@@ -170,30 +163,33 @@
 				<p>Upload pagina's van je brief om ze hier te zien.</p>
 			{/if}
 		</section>
-		<Form
-			action="/api/letter/{letter.id}?redirect=/dashboard/letter/success"
-			fields={[
-				{
-					type: 'hidden',
-					name: 'status',
-					initialValue: 'published',
-				},
-			]}
-			noEnhance
-			buttonPosition={false}
-		>
-			<svelte:fragment slot="submit">Opsturen</svelte:fragment>
-		</Form>
-	</main>
+		<form action="/api/letter/{letter.id}?redirect=/dashboard/letter/success" method="POST">
+			<input type="hidden" name="status" value="published" />
+			<Button>Opsturen</Button>
+		</form>
+	</Flex>
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
 		<svelte:fragment slot="footer">
-			{#if clicked}
-				<AudioRecorder />
+			{#if letter.volunteer}
+				<AudioRecorder on:uploaded={() => goto(`/dashboard/chat/${letter.id}`)} />
 			{:else}
-				<Button on:click|once={() => volunteerLetter(letter.id)} on:click={handleClick}
-					>Ik wil deze brief uitleggen</Button
+				<Form
+					action="/api/letter/assign"
+					fields={[
+						{
+							type: 'hidden',
+							name: 'id',
+							initialValue: letter.id,
+						},
+					]}
+					on:success={e => {
+						letter = e.detail.data
+					}}
+					buttonPosition={false}
 				>
+					<svelte:fragment slot="submit">Ik wil deze brief uitleggen</svelte:fragment>
+				</Form>
 			{/if}
 		</svelte:fragment>
 	</CarouselPage>

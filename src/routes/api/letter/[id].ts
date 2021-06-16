@@ -17,17 +17,18 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 export const post: RequestHandler<Locals, FormData> = async ({ params, query, body }) => {
 	const id = params.id
 	const sender = body.get('sender')
-	const status = body.get('status')
 	const deadline = body.get('deadline')
+	const route = body.get('route')
+	const status = body.get('status')
 	const editing = !!query.get('editing')
 	const redirect = query.get('redirect')
 
 	let updateBody: Record<string, string> = {}
-	if (sender) updateBody.sender = sender
+	if (route === 'senderRoute') updateBody.sender = sender ? sender : null
+	if (route === 'deadlineRoute') updateBody.deadline = deadline ? deadline : null
 	if (status) updateBody.status = status
-	if (deadline) updateBody.deadline = deadline
 
-	const { data } = await client
+	const { data, error } = await client
 		.from<definitions['letters']>('letters')
 		.update(updateBody)
 		.eq('id', id)

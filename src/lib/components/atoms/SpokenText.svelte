@@ -32,10 +32,9 @@
 	}
 
 	p {
-		font-size: var(--space-l);
+		font-size: var(--font-l);
 		text-align: var(--align, initial);
 		color: var(--muted);
-		margin-bottom: var(--space-s);
 	}
 
 	.small {
