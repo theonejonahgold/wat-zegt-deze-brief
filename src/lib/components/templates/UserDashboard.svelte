@@ -5,6 +5,7 @@
 	import Header from './Header.svelte'
 	import { MailIcon, UserIcon } from '$icons'
 	import type { Letter } from '$types'
+	import NavBar from './NavBar.svelte'
 
 	export let letters: Letter[]
 </script>
@@ -76,3 +77,4 @@
 		{/if}
 	</section>
 </main>
+<NavBar />

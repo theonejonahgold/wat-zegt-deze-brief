@@ -6,16 +6,21 @@
 </script>
 
 <style>
+	footer {
+	}
+
 	nav {
 		background-color: var(--secondary);
-		box-shadow: 0px -1px 3px 0px rgba(50, 50, 50, 0.05);
+		box-shadow: var(--bs-m-up);
 		width: 100%;
 	}
 
 	ul {
+		height: var(--space-xxxl);
 		padding: 0;
-		display: flex;
+		display: grid;
 		justify-content: space-around;
+		grid-auto-flow: column;
 		align-items: center;
 		list-style-type: none;
 	}
@@ -26,10 +31,12 @@
 	}
 </style>
 
-<nav>
-	<ul>
-		<li><NavItem><ChatIcon {fill} /></NavItem></li>
-		<li><NavItem><LetterIcon {fill} /></NavItem></li>
-		<li><NavItem><ProfileIcon {fill} /></NavItem></li>
-	</ul>
-</nav>
+<footer>
+	<nav>
+		<ul>
+			<li><NavItem><ChatIcon {fill} /></NavItem></li>
+			<li><NavItem><LetterIcon {fill} /></NavItem></li>
+			<li><NavItem><ProfileIcon {fill} /></NavItem></li>
+		</ul>
+	</nav>
+</footer>

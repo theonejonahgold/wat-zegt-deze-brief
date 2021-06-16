@@ -1,6 +1,6 @@
 export { default as Form } from './Form.svelte'
 export { default as LanguagePicker } from './LanguagePicker.svelte'
-export { default as Carousel } f../templates/Nav.sveltesel.svelte'
+export { default as Carousel } from './Carousel.svelte'
 export { default as PageList } from './PageList.svelte'
 export { default as Toasts } from './Toasts.svelte'
 export { default as UserLetterCard } from './UserLetterCard.svelte'
