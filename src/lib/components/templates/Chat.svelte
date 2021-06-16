@@ -3,6 +3,7 @@
 	import type { ChatMessage, Letter } from '$types'
 	import { SpokenText, Help, Back, MessageCloud, AudioPlayer } from '$atoms'
 	import { AudioRecorder } from '$organisms'
+	import { MessageBar } from '$molecules'
 	import { client } from '$config/supabase'
 	import { formEnhancer } from '$actions'
 	import { useEffect } from '$utils'
@@ -89,42 +90,6 @@
 	form button:nth-child(1) {
 		margin-right: 1rem;
 	}
-
-	#message-bar {
-		display: flex;
-		width: inherit;
-		margin-top: var(--space-xs-s);
-	}
-
-	#message-bar {
-		margin: 0;
-		width: 100%;
-	}
-
-	#message-bar ul {
-		margin: 0;
-		padding: 0;
-		width: 100%;
-		display: flex;
-		border-bottom: 1px solid #d8d8d8;
-	}
-
-	#message-bar li {
-		list-style: none;
-		width: 25%;
-	}
-
-	#message-bar button {
-		box-shadow: var(--bs-m-up);
-		border: none;
-		padding: var(--space-xs);
-		background-color: var(--white);
-		color: #a5a5a5;
-		border-top-left-radius: 15px;
-		border-top-right-radius: 15px;
-		width: 100%;
-		height: 100%;
-	}
 </style>
 
 <Header sticky>
@@ -168,19 +133,7 @@
 	</main>
 </div>
 <aside>
-	<form
-		id="message-bar"
-		action="/api/letter/message/{letter.id}"
-		method="POST"
-		use:formEnhancer={{ success: (data, form) => console.log(data, form) }}
-	>
-		<ul>
-			<li><button type="submit" name="message" value="Dank u wel!">Dank u wel!</button></li>
-			<li><button type="submit" name="message" value="Bedankt!">Bedankt!</button></li>
-			<li><button type="submit" name="message" value="😁">😁</button></li>
-			<li><button type="submit" name="message" value="👌">👌</button></li>
-		</ul>
-	</form>
+	<MessageBar letterId={letter.id} />
 </aside>
 <footer>
 	{#if isUser}
