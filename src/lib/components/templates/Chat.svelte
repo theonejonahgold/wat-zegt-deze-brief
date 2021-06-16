@@ -39,6 +39,10 @@
 		padding-top: var(--space-m);
 		width: 100%;
 		background: var(--white);
+
+		:global(p) {
+			margin-bottom: var(--space-s);
+		}
 	}
 
 	main {
