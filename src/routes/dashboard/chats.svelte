@@ -2,13 +2,13 @@
 	export const load: Load = async () => {
 		const role = await checkRole()
 
-		if (!role || role === 'volunteer')
+		if (!role || role === 'user')
 			return {
 				redirect: '/dashboard',
 				status: 302,
 			}
 
-		const data = await dashboardLetters({ status: ['resolved'] })
+		const data = await dashboardLetters({ assigned: true })
 
 		const letters = (
 			await Promise.all<Letter>(
@@ -29,7 +29,6 @@
 				new Date(b.messages ? b.messages[b.messages.length - 1].date : b.createdAt).valueOf() -
 				new Date(a.messages ? a.messages[a.messages.length - 1].date : a.createdAt).valueOf()
 		)
-
 		return {
 			props: {
 				letters,
@@ -45,7 +44,7 @@
 	import { checkRole } from '$db/user'
 	import { client } from '$config/supabase'
 	import { Back, Help, Icon, SpokenText } from '$atoms'
-	import { UserLetterCard } from '$organisms'
+	import { VolunteerLetterCard } from '$organisms'
 	import { Header } from '$templates'
 	import { MailIcon } from '$icons'
 	import type { Letter } from '$types'
@@ -60,14 +59,12 @@
 		display: grid;
 		row-gap: var(--space-s);
 	}
-
 	.empty {
 		:global(div:last-child p) {
 			font-size: var(--font-m);
 			margin-top: var(--space-xl);
 		}
 	}
-
 	div {
 		height: 10rem;
 		opacity: 0.6;
@@ -76,7 +73,7 @@
 
 <Header>
 	<Back slot="left" href="/dashboard" />
-	<SpokenText --align="center" slot="middle" text="Uitgelegd" />
+	<SpokenText --align="center" slot="middle" text="Chats" />
 	<Help slot="right" />
 </Header>
 <main class:empty={!letters.length}>
@@ -85,7 +82,7 @@
 			<ul>
 				{#each letters as letter (letter.id)}
 					<li>
-						<UserLetterCard {letter} />
+						<VolunteerLetterCard {letter} />
 					</li>
 				{/each}
 			</ul>
@@ -95,7 +92,10 @@
 					<MailIcon />
 				</Icon>
 			</div>
-			<SpokenText text="Je hebt nog geen uitgelegde brieven" --align="center" />
+			<SpokenText
+				text="Je hebt nog geen chats, ga naar het overzicht van de brieven om aan de slag te gaan!"
+				--align="center"
+			/>
 		{/if}
 	</section>
 </main>

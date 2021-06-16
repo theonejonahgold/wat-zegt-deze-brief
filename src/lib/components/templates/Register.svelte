@@ -8,7 +8,7 @@
 	export let role: 'user' | 'volunteer'
 	export let from
 
-	const emailValidator: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+	const emailValidator: RegExp = /^\w+([\.\-+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/
 </script>
 
 <style lang="scss">

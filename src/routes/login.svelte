@@ -6,7 +6,7 @@
 	import { Form } from '$organisms'
 	import { Header } from '$templates'
 
-	const emailValidator: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+	const emailValidator: RegExp = /^\w+([\.\-+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/
 </script>
 
 <svelte:head>
