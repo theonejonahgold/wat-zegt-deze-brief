@@ -22,6 +22,7 @@
 	import { client } from '$config/supabase'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
+	import { goto } from '$app/navigation'
 
 	export let letter: Letter
 
@@ -63,8 +64,13 @@
 	})
 </script>
 
-<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard/chat/{letter.id}">
+<CarouselPage
+	bind:selectedPage
+	bind:pages
+	title="Brief"
+	backLink={letter.messages ? `/dashboard/chat/${letter.id}` : '/dashboard/chat'}
+>
 	<svelte:fragment slot="footer">
-		<AudioRecorder />
+		<AudioRecorder letterId={letter.id} on:uploaded={() => goto(`/dashboard/chat/${letter.id}`)} />
 	</svelte:fragment>
 </CarouselPage>

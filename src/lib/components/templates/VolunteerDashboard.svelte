@@ -3,7 +3,8 @@
 	import { VolunteerLetterCard } from '$organisms'
 	import Header from './Header.svelte'
 	import type { Letter } from '$types'
-	import { MailIcon } from '$icons'
+	import { ChatIcon, LetterIcon, MailIcon } from '$icons'
+	import NavBar from './NavBar.svelte'
 
 	export let letters: Letter[]
 </script>
@@ -63,3 +64,15 @@
 		/>
 	{/if}
 </main>
+<NavBar
+	links={[
+		{
+			href: '/dashboard/chat',
+			icon: ChatIcon,
+		},
+		{
+			href: '/dashboard',
+			icon: LetterIcon,
+		},
+	]}
+/>

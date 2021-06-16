@@ -1,7 +1,7 @@
 <script>
 	import Header from './Header.svelte'
 	import type { ChatMessage, Letter } from '$types'
-	import { SpokenText, Help, Back, MessageCloud, AudioPlayer } from '$atoms'
+	import { SpokenText, Help, Back, MessageCloud, AudioPlayer, ImageMessage } from '$atoms'
 	import { AudioRecorder } from '$organisms'
 	import { MessageBar } from '$molecules'
 	import { client } from '$config/supabase'
@@ -38,7 +38,7 @@
 		background: none;
 
 		div {
-			padding: var(--space-m) var(--space-xxl) var(--space-xxl);
+			padding: var(--space-m) var(--space-l) var(--space-xl);
 			background: var(--white);
 		}
 
@@ -91,27 +91,25 @@
 	form button:nth-child(1) {
 		margin-right: 1rem;
 	}
-
-	img {
-		width: 100%;
-		height: auto;
-	}
 </style>
 
 <Header sticky>
-	<Back slot="left" href="/dashboard" />
+	<Back slot="left" href="/dashboard/chat" />
 	<SpokenText --align="center" slot="middle" text="Chat" />
 	<Help slot="right" />
 </Header>
 <main bind:this={el}>
-  <MessageCloud --margin={userRole === 'user' ? 'auto' : ''}>
-    <a href="/dashboard/letter/{letter.id}/pages"><img src={page} alt="Page Image" /></a>
-  </MessageCloud>
+	<ImageMessage you={letter.user.id === userId} {letter} {page} {userRole} />
 	{#each messages as message, index ((message.id, index))}
 		{#if message.type === 'audio'}
 			<AudioPlayer file={message.file} --margin={message.sender.id === userId ? 'auto' : '0'} />
 		{:else}
-			<MessageCloud text={message.content} --margin={message.sender.id === userId ? 'auto' : '0'} />
+			<MessageCloud
+				you={message.sender.id === userId}
+				--margin={message.sender.id === userId ? 'auto' : '0'}
+			>
+				{message.content}
+			</MessageCloud>
 		{/if}
 		{#if lastReadID === message.id}
 			<small>{message.type === 'audio' ? 'Geluisterd' : 'Gelezen'} </small>
@@ -120,8 +118,10 @@
 	{#if isUser}
 		{#if messages.length}
 			{#if letter.status !== 'resolved'}
-				<MessageCloud text="Ik heb genoeg uitleg gekregen" --margin="auto">
+				<MessageCloud you --margin="auto">
+					Ik heb genoeg uitleg gekregen
 					<form
+						slot="misc"
 						action="/api/letter/resolve/{letter.id}"
 						method="POST"
 						use:formEnhancer={{
@@ -147,6 +147,6 @@
 				small={true}
 			/>
 		{/if}
-		<AudioRecorder />
+		<AudioRecorder letterId={letter.id} />
 	</div>
 </footer>

@@ -4,6 +4,8 @@
 	import { DeleteIcon, SendIcon } from '$icons'
 	import { createEventDispatcher, onMount, tick } from 'svelte'
 
+	export let letterId: string
+
 	let recording = false
 	let uploading = false
 	let stream: MediaStream
@@ -11,11 +13,19 @@
 	let chunks: Blob[] = []
 	let file: File
 
+	let encoderWorker: any
+	let OggOpusWasm: any
+	let WebMOpusWasm: any
+
 	const dispatch = createEventDispatcher<{
 		uploaded: undefined
 	}>()
 
 	onMount(async () => {
+		encoderWorker = (await import('web-worker:opus-media-recorder/encoderWorker.umd.js')).default
+		OggOpusWasm = (await import('opus-media-recorder/OggOpusEncoder.wasm')).default
+		WebMOpusWasm = (await import('opus-media-recorder/WebMOpusEncoder.wasm')).default
+
 		if (window.MediaRecorder?.isTypeSupported('audio/ogg;codecs=opus')) return
 
 		const { default: OpusRecorder } = await import('opus-media-recorder')
@@ -31,10 +41,10 @@
 				{},
 				{
 					encoderWorkerFactory: () => {
-						return new Worker('../../../node_modules/opus-media-recorder/encoderWorker.umd.js')
+						return new encoderWorker()
 					},
-					OggOpusEncoderWasmPath: '../../../node_modules/opus-media-recorder/OggOpusEncoder.wasm',
-					WebMOpusEncoderWasmPath: '../../../node_modules/opus-media-recorder/WebMOpusEncoder.wasm',
+					OggOpusEncoderWasmPath: OggOpusWasm,
+					WebMOpusEncoderWasmPath: WebMOpusWasm,
 				}
 			)
 			recorder.addEventListener('dataavailable', dataAvailableHandler)
@@ -57,7 +67,7 @@
 	async function uploadHandler() {
 		uploading = true
 		await tick()
-		await uploadMessage(file)
+		await uploadMessage(file, letterId)
 		file = undefined
 		uploading = false
 		dispatch('uploaded')

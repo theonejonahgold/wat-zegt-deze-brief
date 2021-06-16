@@ -172,7 +172,10 @@
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
 		<svelte:fragment slot="footer">
 			{#if letter.volunteer}
-				<AudioRecorder on:uploaded={() => goto(`/dashboard/chat/${letter.id}`)} />
+				<AudioRecorder
+					letterId={letter.id}
+					on:uploaded={() => goto(`/dashboard/chat/${letter.id}`)}
+				/>
 			{:else}
 				<Form
 					action="/api/letter/assign"
@@ -183,8 +186,8 @@
 							initialValue: letter.id,
 						},
 					]}
-					on:success={e => {
-						letter = e.detail.data
+					on:success={() => {
+						goto(`/dashboard/letter/${letter.id}/pages`)
 					}}
 					buttonPosition={false}
 				>
