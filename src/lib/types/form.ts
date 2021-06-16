@@ -17,6 +17,7 @@ interface NormalFormField extends BasicFormField {
 	readonly?: boolean
 	list?: string
 	validator?: (value: string) => string | false
+	min: string
 }
 
 interface HiddenFormField extends BasicFormField {

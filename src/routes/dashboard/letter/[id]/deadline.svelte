@@ -10,6 +10,7 @@
 		return {
 			props: {
 				letter: data,
+				editing: !!page.query.get('edit'),
 			},
 		}
 	}
@@ -22,8 +23,10 @@
 	import { Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
+	import { format } from 'date-fns'
 
 	export let letter: Letter
+	export let editing: boolean
 </script>
 
 <svelte:head>
@@ -46,10 +49,11 @@
 				type: 'date',
 				autofocus: true,
 				initialValue: letter.deadline?.slice(0, 10),
+				min: format(new Date(), 'yyyy-MM-dd'),
 			},
 		]}
 		method="POST"
 	>
-		<svelte:fragment slot="submit">Volgende</svelte:fragment>
+		<svelte:fragment slot="submit">{editing ? 'Wijzigingen opslaan' : 'Volgende'}</svelte:fragment>
 	</Form>
 </main>
