@@ -13,6 +13,7 @@
 			props: {
 				messages,
 				letter,
+
 				userRole: (isUserRole as unknown as boolean) ? 'user' : 'volunteer',
 			},
 		}
@@ -32,7 +33,37 @@
 	export let messages: ChatMessage[]
 	export let letter: Letter
 
+	let pages: string[] = []
+
 	onMount(async () => {
+		client.storage
+			.from('pages')
+			.list(`${letter.id}`)
+			.then(({ data }) =>
+				Promise.all(
+					data.map(async page => {
+						return await client.storage.from('pages').download(`${letter.id}/${page.name}`)
+					})
+				)
+			)
+			.then(results =>
+				Promise.all(
+					results.map(
+						({ data }) =>
+							new Promise<string>(resolve => {
+								const reader = new FileReader()
+								reader.readAsDataURL(data)
+								reader.addEventListener('load', e => {
+									resolve(e.target.result as string)
+								})
+							})
+					)
+				)
+			)
+			.then(images => {
+				pages = images
+			})
+
 		messages = (await Promise.all(
 			messages.map(message =>
 				message.type === 'audio'
