@@ -57,6 +57,11 @@
 				list: 'sender',
 				initialValue: letter.sender,
 			},
+			{
+				name: 'route',
+				type: 'hidden',
+				initialValue: 'senderRoute',
+			},
 		]}
 		method="POST"
 	>
