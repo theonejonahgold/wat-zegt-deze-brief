@@ -1,12 +1,15 @@
 <script context="module">
 	export const load: Load = async () => {
-		const data = await dashboardLetters()
 		const role = await checkRole()
-		if (!role)
+
+		if (!role || role === 'user')
 			return {
-				redirect: '/login',
+				redirect: '/dashboard',
 				status: 302,
 			}
+
+		const data = await dashboardLetters({ assigned: true })
+
 		const letters = (
 			await Promise.all<Letter>(
 				data.map(letter =>
@@ -36,11 +39,12 @@
 </script>
 
 <script>
+	import type { Load } from '@sveltejs/kit'
 	import { dashboardLetters } from '$db/letter'
 	import { checkRole } from '$db/user'
 	import { client } from '$config/supabase'
 	import { Back, Help, Icon, SpokenText } from '$atoms'
-	import { UserLetterCard } from '$organisms'
+	import { VolunteerLetterCard } from '$organisms'
 	import { Header } from '$templates'
 	import { MailIcon } from '$icons'
 	import type { Letter } from '$types'
@@ -78,7 +82,7 @@
 			<ul>
 				{#each letters as letter (letter.id)}
 					<li>
-						<UserLetterCard {letter} />
+						<VolunteerLetterCard {letter} />
 					</li>
 				{/each}
 			</ul>

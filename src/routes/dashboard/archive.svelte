@@ -1,13 +1,14 @@
 <script context="module">
 	export const load: Load = async () => {
-		const data = await dashboardLetters(true)
 		const role = await checkRole()
 
-		if (!role)
+		if (!role || role === 'volunteer')
 			return {
-				redirect: '/login',
+				redirect: '/dashboard',
 				status: 302,
 			}
+
+		const data = await dashboardLetters({ status: ['resolved'] })
 
 		const letters = (
 			await Promise.all<Letter>(

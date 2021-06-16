@@ -37,8 +37,13 @@ export async function fetchSingleLetter(id: string) {
 	return letter
 }
 
-export async function dashboardLetters(resolved: boolean) {
-	const { data: letters } = await client
+interface DashboardLettersProps {
+	status?: string[] | 'all'
+	assigned?: boolean
+}
+
+export async function dashboardLetters({ status = 'all', assigned }: DashboardLettersProps = {}) {
+	const promise = client
 		.from<definitions['letters']>('letters')
 		.select(
 			`
@@ -59,7 +64,12 @@ export async function dashboardLetters(resolved: boolean) {
 			)
 		`
 		)
-		.in('status', resolved ? ['resolved'] : ['published', 'draft'])
+		.in('status', status === 'all' ? ['resolved', 'published', 'draft'] : status)
+
+	if (assigned) promise.eq('volunteer_id', client.auth.session().user.id)
+	else if (typeof assigned === 'boolean') promise.is('volunteer_id', null)
+
+	const { data: letters } = await promise
 
 	if (!letters || !letters.length) return []
 

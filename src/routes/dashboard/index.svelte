@@ -1,6 +1,5 @@
 <script context="module">
 	export const load: Load = async () => {
-		const data = await dashboardLetters(false)
 		const role = await checkRole()
 
 		if (!role)
@@ -8,6 +7,11 @@
 				redirect: '/login',
 				status: 302,
 			}
+
+		const data = await dashboardLetters({
+			status: ['draft', 'published'],
+			assigned: role !== 'user' ? false : null,
+		})
 
 		const letters = (
 			await Promise.all<Letter>(
