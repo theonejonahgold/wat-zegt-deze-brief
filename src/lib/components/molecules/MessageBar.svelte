@@ -5,18 +5,18 @@
 </script>
 
 <style>
-	#message-bar {
+	form {
 		display: flex;
 		width: inherit;
 		margin-top: var(--space-xs-s);
 	}
 
-	#message-bar {
+	form {
 		margin: 0;
 		width: 100%;
 	}
 
-	#message-bar ul {
+	form ul {
 		margin: 0;
 		padding: 0;
 		width: 100%;
@@ -24,12 +24,12 @@
 		border-bottom: 1px solid var(--light-grey);
 	}
 
-	#message-bar li {
+	form li {
 		list-style: none;
 		width: 25%;
 	}
 
-	#message-bar button {
+	form button {
 		box-shadow: var(--bs-m-up);
 		border: none;
 		padding: var(--space-xs);
@@ -43,7 +43,6 @@
 </style>
 
 <form
-	id="message-bar"
 	action="/api/letter/message/{letterId}"
 	method="POST"
 	use:formEnhancer={{
