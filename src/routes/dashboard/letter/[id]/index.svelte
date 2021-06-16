@@ -137,39 +137,6 @@
 		<Help slot="right" />
 	</Header>
 	<main>
-		<section>
-			<header>
-				<h3>Organisatie</h3>
-				<a href="/dashboard/letter/{letter.id}/organisation?edit=true">Bewerken</a>
-			</header>
-			<p>{letter.sender || 'Geen organisatie ingevuld'}</p>
-		</section>
-		<section>
-			<header>
-				<h3>Deadline</h3>
-				<a href="/dashboard/letter/{letter.id}/deadline?edit=true">Bewerken</a>
-			</header>
-			<p>
-				{letter.deadline
-					? format(new Date(letter.deadline), 'dd/MM/yyyy')
-					: 'Geen deadline ingevuld'}
-			</p>
-		</section>
-		<section>
-			<header>
-				<h3>Pagina's</h3>
-				<a href="/dashboard/letter/{letter.id}/upload?edit=true">Bewerken</a>
-			</header>
-			{#if pages.length}
-				<ol>
-					{#each pages as page}
-						<li><Image src={page} alt="Page preview" /></li>
-					{/each}
-				</ol>
-			{:else}
-				<p>Upload pagina's van je brief om ze hier te zien.</p>
-			{/if}
-		</section>
 		<Form
 			action="/api/letter/{letter.id}?redirect=/dashboard/letter/success"
 			fields={[
@@ -180,8 +147,41 @@
 				},
 			]}
 			noEnhance
-			buttonPosition="fixed"
+			buttonPosition="sticky"
 		>
+			<section>
+				<header>
+					<h3>Organisatie</h3>
+					<a href="/dashboard/letter/{letter.id}/organisation?edit=true">Bewerken</a>
+				</header>
+				<p>{letter.sender || 'Geen organisatie ingevuld'}</p>
+			</section>
+			<section>
+				<header>
+					<h3>Deadline</h3>
+					<a href="/dashboard/letter/{letter.id}/deadline?edit=true">Bewerken</a>
+				</header>
+				<p>
+					{letter.deadline
+						? format(new Date(letter.deadline), 'dd/MM/yyyy')
+						: 'Geen deadline ingevuld'}
+				</p>
+			</section>
+			<section>
+				<header>
+					<h3>Pagina's</h3>
+					<a href="/dashboard/letter/{letter.id}/upload?edit=true">Bewerken</a>
+				</header>
+				{#if pages.length}
+					<ol>
+						{#each pages as page}
+							<li><Image src={page} alt="Page preview" /></li>
+						{/each}
+					</ol>
+				{:else}
+					<p>Upload pagina's van je brief om ze hier te zien.</p>
+				{/if}
+			</section>
 			<svelte:fragment slot="submit">Opsturen</svelte:fragment>
 		</Form>
 	</main>
