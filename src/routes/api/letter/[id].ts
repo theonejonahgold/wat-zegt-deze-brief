@@ -19,6 +19,8 @@ export const post: RequestHandler<Locals, FormData> = async ({ params, query, bo
 	const sender = body.get('sender')
 	const status = body.get('status')
 	const deadline = body.get('deadline')
+	const editing = !!query.get('editing')
+	const redirect = query.get('redirect')
 
 	let updateBody: Record<string, string> = {}
 	if (sender) updateBody.sender = sender
@@ -35,9 +37,12 @@ export const post: RequestHandler<Locals, FormData> = async ({ params, query, bo
 			status: 302,
 			headers: {
 				location:
-					query.get('redirect') || sender
+					redirect ||
+					(editing
+						? `/dashboard/letter/${id}`
+						: sender
 						? `/dashboard/letter/${id}/deadline`
-						: `/dashboard/letter/${id}`,
+						: `/dashboard/letter/${id}`),
 			},
 		}
 	}

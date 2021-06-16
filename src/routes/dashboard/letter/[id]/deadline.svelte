@@ -34,7 +34,12 @@
 </svelte:head>
 
 <Header sticky>
-	<Back slot="left" href="/dashboard/letter/{letter.id}/upload" />
+	<Back
+		slot="left"
+		href={editing
+			? `/dashboard/letter/${letter.id}`
+			: `/dashboard/letter/${letter.id}/organisation`}
+	/>
 	<SpokenText --align="center" slot="middle" text="Deadline" />
 	<Help slot="right" />
 </Header>

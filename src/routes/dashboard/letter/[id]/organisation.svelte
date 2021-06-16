@@ -10,6 +10,7 @@
 		return {
 			props: {
 				letter: data,
+				editing: !!page.query.get('edit'),
 			},
 		}
 	}
@@ -25,6 +26,7 @@
 	import organisations from './_organisations'
 
 	export let letter: Letter
+	export let editing: boolean
 </script>
 
 <svelte:head>
@@ -32,14 +34,19 @@
 </svelte:head>
 
 <Header sticky>
-	<Back slot="left" href="/dashboard/letter/{letter.id}/upload" />
+	<Back
+		slot="left"
+		href={editing ? `/dashboard/letter/${letter.id}` : `/dashboard/letter/${letter.id}/upload`}
+	/>
 	<SpokenText --align="center" slot="middle" text="Organisatie" />
 	<Help slot="right" />
 </Header>
 <main>
 	<Form
 		noEnhance
-		action="/api/letter/{letter.id}"
+		action="/api/letter/{letter.id}{editing
+			? '?editing=true'
+			: `?redirect=/dashboard/letter/${letter.id}/deadline`}"
 		fields={[
 			{
 				label: 'Van welke organisatie komt deze brief?',
@@ -54,6 +61,6 @@
 		method="POST"
 	>
 		<DataList id="sender" options={organisations} />
-		<svelte:fragment slot="submit">Volgende</svelte:fragment>
+		<svelte:fragment slot="submit">{editing ? 'Wijzigingen opslaan' : 'Volgende'}</svelte:fragment>
 	</Form>
 </main>
