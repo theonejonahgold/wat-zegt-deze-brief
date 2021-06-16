@@ -180,7 +180,7 @@
 				},
 			]}
 			noEnhance
-			buttonPosition={false}
+			buttonPosition="fixed"
 		>
 			<svelte:fragment slot="submit">Opsturen</svelte:fragment>
 		</Form>
