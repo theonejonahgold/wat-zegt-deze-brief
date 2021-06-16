@@ -15,7 +15,6 @@
 				margin-bottom: var(--space-l);
 
 				+ div {
-					max-height: 18rem;
 					margin-top: auto;
 
 					+ a {
@@ -31,10 +30,10 @@
 	<title>Hallo!</title>
 </svelte:head>
 
-<Flex pt="var(--space-xxxl)" px="var(--space-xl)" pb="var(--space-xl)">
+<Flex pt="var(--space-xxxl)" pb="var(--space-xxl)">
 	<Oval />
 	<h1>Hallo!</h1>
-	<SpokenText text="Dit is de app die helpt met het uitleggen van brieven" />
+	<SpokenText small text="Dit is de app die helpt met het uitleggen van brieven" />
 	<Icon><IndexIcon /></Icon>
 	<Button invert href="/login">Ik heb al een account</Button>
 	<Button href="/onboarding">Ik ben nieuw hier</Button>

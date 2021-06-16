@@ -56,6 +56,11 @@
 				initialValue: letter.deadline?.slice(0, 10),
 				min: format(new Date(), 'yyyy-MM-dd'),
 			},
+			{
+				name: 'route',
+				type: 'hidden',
+				initialValue: 'deadlineRoute',
+			},
 		]}
 		method="POST"
 	>

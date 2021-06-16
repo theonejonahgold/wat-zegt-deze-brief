@@ -13,7 +13,7 @@
 		list-style: none;
 		padding: 0;
 		display: grid;
-		row-gap: var(--space-s);
+		row-gap: var(--space-l);
 		margin-top: var(--space-xxs);
 	}
 
@@ -29,6 +29,10 @@
 		}
 	}
 
+	main {
+		padding-top: 0;
+	}
+
 	div {
 		height: 10rem;
 		opacity: 0.6;
@@ -37,7 +41,6 @@
 
 <Header sticky>
 	<SpokenText --align="center" slot="middle" text="Brieven" />
-	<p slot="right">filter</p>
 </Header>
 <main class:empty={!letters.length}>
 	{#if letters.length}
