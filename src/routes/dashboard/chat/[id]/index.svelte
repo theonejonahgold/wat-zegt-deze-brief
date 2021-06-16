@@ -13,7 +13,6 @@
 			props: {
 				messages,
 				letter,
-
 				userRole: (isUserRole as unknown as boolean) ? 'user' : 'volunteer',
 			},
 		}
@@ -33,36 +32,23 @@
 	export let messages: ChatMessage[]
 	export let letter: Letter
 
-	let pages: string[] = []
+	let page: string = ''
 
 	onMount(async () => {
-		client.storage
+		await client.storage
 			.from('pages')
-			.list(`${letter.id}`)
-			.then(({ data }) =>
-				Promise.all(
-					data.map(async page => {
-						return await client.storage.from('pages').download(`${letter.id}/${page.name}`)
+			.download(`${letter.id}/${letter.page_order[0]}`)
+			.then(
+				({ data }) =>
+					new Promise<string>(resolve => {
+						const reader = new FileReader()
+						reader.readAsDataURL(data)
+						reader.addEventListener('load', e => {
+							resolve((page = e.target.result as string))
+						})
 					})
-				)
 			)
-			.then(results =>
-				Promise.all(
-					results.map(
-						({ data }) =>
-							new Promise<string>(resolve => {
-								const reader = new FileReader()
-								reader.readAsDataURL(data)
-								reader.addEventListener('load', e => {
-									resolve(e.target.result as string)
-								})
-							})
-					)
-				)
-			)
-			.then(images => {
-				pages = images
-			})
+			.then(result => (page = result))
 
 		messages = (await Promise.all(
 			messages.map(message =>
@@ -102,4 +88,4 @@
 	})
 </script>
 
-<Chat {messages} {userRole} {letter} />
+<Chat {messages} {userRole} {letter} {page} />
