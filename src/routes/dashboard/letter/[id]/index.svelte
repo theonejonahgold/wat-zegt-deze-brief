@@ -132,7 +132,7 @@
 </svelte:head>
 
 {#if role === 'user'}
-	<Header sticky shadow>
+	<Header sticky>
 		<Back slot="left" href="/dashboard/letter/{letter.id}/deadline" />
 		<SpokenText --align="center" slot="middle" text="Afronden" />
 		<Help slot="right" />
