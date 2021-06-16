@@ -1,6 +1,6 @@
 <script context="module">
 	export const load: Load = async () => {
-		const data = await dashboardLetters(false)
+		const data = await dashboardLetters(true)
 		const role = await checkRole()
 
 		if (!role)
@@ -40,22 +40,61 @@
 
 <script>
 	import type { Load } from '@sveltejs/kit'
-	import { client } from '$config/supabase'
 	import { dashboardLetters } from '$db/letter'
 	import { checkRole } from '$db/user'
-	import { UserDashboard, VolunteerDashboard } from '$templates'
+	import { client } from '$config/supabase'
+	import { Back, Help, Icon, SpokenText } from '$atoms'
+	import { UserLetterCard } from '$organisms'
+	import { Header } from '$templates'
+	import { MailIcon } from '$icons'
 	import type { Letter } from '$types'
 
 	export let letters: Letter[]
-	export let role: 'user' | 'volunteer'
 </script>
 
-<svelte:head>
-	<title>Home</title>
-</svelte:head>
+<style>
+	ul {
+		list-style: none;
+		padding: 0;
+		display: grid;
+		row-gap: var(--space-s);
+	}
 
-{#if role === 'user'}
-	<UserDashboard {letters} />
-{:else if role === 'volunteer'}
-	<VolunteerDashboard {letters} />
-{/if}
+	.empty {
+		:global(div:last-child p) {
+			font-size: var(--font-m);
+			margin-top: var(--space-xl);
+		}
+	}
+
+	div {
+		height: 10rem;
+		opacity: 0.6;
+	}
+</style>
+
+<Header>
+	<Back slot="left" href="/dashboard" />
+	<SpokenText --align="center" slot="middle" text="Uitgelegd" />
+	<Help slot="right" />
+</Header>
+<main class:empty={!letters.length}>
+	<section>
+		{#if letters.length}
+			<ul>
+				{#each letters as letter (letter.id)}
+					<li>
+						<UserLetterCard {letter} />
+					</li>
+				{/each}
+			</ul>
+		{:else}
+			<div>
+				<Icon>
+					<MailIcon />
+				</Icon>
+			</div>
+			<SpokenText text="Je hebt nog geen uitgelegde brieven" --align="center" />
+		{/if}
+	</section>
+</main>

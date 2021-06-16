@@ -72,7 +72,7 @@
 					<MailIcon />
 				</Icon>
 			</div>
-			<SpokenText text="Je hebt nog geen brieven opgestuurd." --align="center" />
+			<SpokenText text="Je hebt nog geen brieven opgestuurd" --align="center" />
 		{/if}
 	</section>
 </main>
