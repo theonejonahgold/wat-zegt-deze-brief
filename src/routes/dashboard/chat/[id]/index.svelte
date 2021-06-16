@@ -32,7 +32,24 @@
 	export let messages: ChatMessage[]
 	export let letter: Letter
 
+	let page: string = ''
+
 	onMount(async () => {
+		await client.storage
+			.from('pages')
+			.download(`${letter.id}/${letter.page_order[0]}`)
+			.then(
+				({ data }) =>
+					new Promise<string>(resolve => {
+						const reader = new FileReader()
+						reader.readAsDataURL(data)
+						reader.addEventListener('load', e => {
+							resolve((page = e.target.result as string))
+						})
+					})
+			)
+			.then(result => (page = result))
+
 		messages = (await Promise.all(
 			messages.map(message =>
 				message.type === 'audio'
@@ -71,4 +88,4 @@
 	})
 </script>
 
-<Chat {messages} {userRole} {letter} />
+<Chat {messages} {userRole} {letter} {page} />

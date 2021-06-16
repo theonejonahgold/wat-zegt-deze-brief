@@ -24,6 +24,7 @@ export async function fetchSingleLetter(id: string) {
 			messages,
 			user_id,
 			status,
+			page_order,
 			thumbnail,
 			page_order,
 			volunteer:volunteer_id (

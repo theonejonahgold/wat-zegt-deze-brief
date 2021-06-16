@@ -11,6 +11,7 @@
 	export let messages: ChatMessage[]
 	export let userRole: string
 	export let letter: Letter
+	export let page: string
 
 	useEffect(
 		() => {
@@ -90,6 +91,11 @@
 	form button:nth-child(1) {
 		margin-right: 1rem;
 	}
+
+	img {
+		width: 100%;
+		height: auto;
+	}
 </style>
 
 <Header sticky>
@@ -98,6 +104,9 @@
 	<Help slot="right" />
 </Header>
 <main bind:this={el}>
+  <MessageCloud --margin={userRole === 'user' ? 'auto' : ''}>
+    <a href="/dashboard/letter/{letter.id}/pages"><img src={page} alt="Page Image" /></a>
+  </MessageCloud>
 	{#each messages as message, index ((message.id, index))}
 		{#if message.type === 'audio'}
 			<AudioPlayer file={message.file} --margin={message.sender.id === userId ? 'auto' : '0'} />
