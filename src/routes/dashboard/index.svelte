@@ -1,6 +1,6 @@
 <script context="module">
 	export const load: Load = async () => {
-		const data = await dashboardLetters()
+		const data = await dashboardLetters(false)
 		const role = await checkRole()
 
 		if (!role)

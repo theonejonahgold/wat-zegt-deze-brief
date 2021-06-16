@@ -1,6 +1,6 @@
 <script context="module">
 	export const load: Load = async () => {
-		const data = await dashboardLetters()
+		const data = await dashboardLetters(true)
 		const role = await checkRole()
 
 		if (!role)
@@ -39,15 +39,15 @@
 </script>
 
 <script>
+	import type { Load } from '@sveltejs/kit'
+	import { dashboardLetters } from '$db/letter'
+	import { checkRole } from '$db/user'
+	import { client } from '$config/supabase'
 	import { Back, Help, Icon, SpokenText } from '$atoms'
 	import { UserLetterCard } from '$organisms'
 	import { Header } from '$templates'
 	import { MailIcon } from '$icons'
 	import type { Letter } from '$types'
-
-	import { dashboardLetters } from '$db/letter'
-	import { checkRole } from '$db/user'
-	import { client } from '$config/supabase'
 
 	export let letters: Letter[]
 </script>
