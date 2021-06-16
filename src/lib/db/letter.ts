@@ -25,6 +25,7 @@ export async function fetchSingleLetter(id: string) {
 			user_id,
 			status,
 			thumbnail,
+			page_order,
 			volunteer:volunteer_id (
 				name,
 				id

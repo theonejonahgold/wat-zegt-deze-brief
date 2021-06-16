@@ -1,18 +1,14 @@
 <script context="module">
 	export const load: Load = async ({ page }) => {
-		const { data } = await client
-			.from<definitions['letters']>('letters')
-			.select()
-			.eq('id', page.params.id)
-			.limit(1)
+		const letter = await fetchSingleLetter(page.params.id)
+
+		const { body: role } = await client
+			.rpc<string>('get_user_role', {
+				user_id: client.auth.session().user.id,
+			})
 			.single()
 
-		const { body: isUserRole } = await client.rpc<boolean>('is_role', {
-			user_id: client.auth.session().user.id,
-			u_role: 'user',
-		})
-
-		if (isUserRole && data.status === 'published')
+		if (role === 'user' && letter.status === 'published')
 			return {
 				redirect: '/dashboard/letter/waiting',
 				status: 303,
@@ -20,34 +16,30 @@
 
 		return {
 			props: {
-				letter: data,
-				role: (isUserRole as unknown as boolean) ? 'user' : 'volunteer',
+				letter,
+				role,
 			},
 		}
 	}
 </script>
 
-<script>
+<script lang="typescript">
 	import { Help, SpokenText, Back, Image, Button } from '$atoms'
 	import { client } from '$config/supabase'
 	import { CarouselPage, Flex, Header } from '$templates'
 	import type { definitions, Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
-	import { AudioRecorder } from '$organisms'
-	import { volunteerLetter } from '$db/volunteerLetter'
+	import { AudioRecorder, Form } from '$organisms'
 	import { format } from 'date-fns'
+	import { fetchSingleLetter } from '$db/letter'
+	import { goto } from '$app/navigation'
 
 	export let letter: Letter
 	export let role: 'user' | 'volunteer'
 
 	let pages: string[] = []
 	let selectedPage = 0
-	let clicked = false
-
-	function handleClick() {
-		clicked = true
-	}
 
 	onMount(() => {
 		client.storage
@@ -128,7 +120,7 @@
 </style>
 
 <svelte:head>
-	<title>Afronden</title>
+	<title>{role === 'user' ? 'Afronden' : 'Brief'}</title>
 </svelte:head>
 
 {#if role === 'user'}
@@ -179,12 +171,24 @@
 {:else}
 	<CarouselPage bind:selectedPage bind:pages title="Brief" backLink="/dashboard">
 		<svelte:fragment slot="footer">
-			{#if clicked}
-				<AudioRecorder />
+			{#if letter.volunteer}
+				<AudioRecorder on:uploaded={() => goto(`/dashboard/chat/${letter.id}`)} />
 			{:else}
-				<Button on:click|once={() => volunteerLetter(letter.id)} on:click={handleClick}
-					>Ik wil deze brief uitleggen</Button
+				<Form
+					action="/api/letter/assign"
+					fields={[
+						{
+							type: 'hidden',
+							name: 'id',
+							initialValue: letter.id,
+						},
+					]}
+					on:success={e => {
+						letter = e.detail.data
+					}}
 				>
+					<svelte:fragment slot="submit">Ik wil deze brief uitleggen</svelte:fragment>
+				</Form>
 			{/if}
 		</svelte:fragment>
 	</CarouselPage>

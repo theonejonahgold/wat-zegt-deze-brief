@@ -52,7 +52,7 @@
 		small {
 			text-align: right;
 			display: block;
-			margin-top: calc(var(--space-xxs) * -1);
+			margin-top: var(--space-xxs);
 		}
 
 		:global {
