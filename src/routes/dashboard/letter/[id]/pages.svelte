@@ -7,21 +7,9 @@
 			.limit(1)
 			.single()
 
-		const { body: isUserRole } = await client.rpc<boolean>('is_role', {
-			user_id: client.auth.session().user.id,
-			u_role: 'user',
-		})
-
-		if (isUserRole && data.status === 'published')
-			return {
-				redirect: '/dashboard/letter/waiting',
-				status: 303,
-			}
-
 		return {
 			props: {
 				letter: data,
-				role: (isUserRole as unknown as boolean) ? 'user' : 'volunteer',
 			},
 		}
 	}
