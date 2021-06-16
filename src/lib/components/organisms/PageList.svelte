@@ -67,9 +67,9 @@
 	ul {
 		display: grid;
 		list-style: none;
-		grid-template-columns: var(--space-xxxl);
+		grid-auto-columns: var(--space-xxxl);
 		grid-auto-flow: column;
-		column-gap: calc(var(--space-xxl) * 1);
+		column-gap: calc(var(--space-xl) * 1.25);
 		margin: 0;
 		padding: 0;
 		width: 100%;
