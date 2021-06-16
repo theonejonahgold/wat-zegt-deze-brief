@@ -75,7 +75,7 @@
 
 <Header>
 	<Back slot="left" href="/dashboard" />
-	<SpokenText --align="center" slot="middle" text="Archief" />
+	<SpokenText --align="center" slot="middle" text="Uitgelegd" />
 	<Help slot="right" />
 </Header>
 <main class:empty={!letters.length}>
@@ -94,7 +94,7 @@
 					<MailIcon />
 				</Icon>
 			</div>
-			<SpokenText text="Er zitten nog geen brieven in jouw archief" --align="center" />
+			<SpokenText text="Je hebt nog geen uitgelegde brieven" --align="center" />
 		{/if}
 	</section>
 </main>
