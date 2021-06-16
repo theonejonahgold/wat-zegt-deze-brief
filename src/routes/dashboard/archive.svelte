@@ -46,8 +46,8 @@
 	import { client } from '$config/supabase'
 	import { Back, Help, Icon, SpokenText } from '$atoms'
 	import { UserLetterCard } from '$organisms'
-	import { Header } from '$templates'
-	import { MailIcon } from '$icons'
+	import { Header, NavBar } from '$templates'
+	import { ArchiveIcon, LetterIcon, MailIcon } from '$icons'
 	import type { Letter } from '$types'
 
 	export let letters: Letter[]
@@ -58,7 +58,8 @@
 		list-style: none;
 		padding: 0;
 		display: grid;
-		row-gap: var(--space-s);
+		row-gap: var(--space-l);
+		margin-top: var(--space-xxs);
 	}
 
 	.empty {
@@ -75,7 +76,6 @@
 </style>
 
 <Header>
-	<Back slot="left" href="/dashboard" />
 	<SpokenText --align="center" slot="middle" text="Uitgelegd" />
 	<Help slot="right" />
 </Header>
@@ -99,3 +99,15 @@
 		{/if}
 	</section>
 </main>
+<NavBar
+	links={[
+		{
+			href: '/dashboard/archive',
+			icon: ArchiveIcon,
+		},
+		{
+			href: '/dashboard',
+			icon: LetterIcon,
+		},
+	]}
+/>

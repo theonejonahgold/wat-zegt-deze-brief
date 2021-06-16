@@ -934,14 +934,14 @@ export interface definitions {
      * Note:
      * This is a Foreign Key to `messages.id`.<fk table='messages' column='id'/>
      */
-    message_id?: string;
+    message_id: string;
     /**
      * The user who received the message
      *
      * Note:
      * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
-    user_id?: string;
+    user_id: string;
     /** The status */
     read?: boolean;
   };

@@ -1,5 +1,5 @@
 <script>
-	export let text: string = ''
+	export let you = false
 </script>
 
 <style>
@@ -24,34 +24,55 @@
 		}
 	}
 
-	div > div {
-		border-left: 21px solid transparent;
+	.container div {
 		border-top: 20px solid rgba(0, 0, 0, 0.2);
 		bottom: -25px;
 		position: absolute;
-		right: 15px;
 
-		&::before {
-			border-left: 23px solid transparent;
+		&:before {
 			border-top: 23px solid var(--light-grey);
 			bottom: 2px;
 			content: '';
 			position: absolute;
-			right: 5px;
 		}
-		&::after {
-			border-left: 21px solid transparent;
+		&:after {
 			border-top: 21px solid #efefef;
 			bottom: 4px;
 			content: '';
 			position: absolute;
+		}
+	}
+
+	.container.you div {
+		border-left: 21px solid transparent;
+		right: 15px;
+		&:before {
+			border-left: 23px solid transparent;
+			right: 5px;
+		}
+		&:after {
+			border-left: 21px solid transparent;
 			right: 6px;
+		}
+	}
+	.container:not(.you) div {
+		border-right: 21px solid transparent;
+		left: 15px;
+		&:before {
+			border-right: 23px solid transparent;
+			left: -3px;
+		}
+		&:after {
+			border-right: 21px solid transparent;
+			left: -4px;
 		}
 	}
 </style>
 
-<div class="container">
-	<p>{text}</p>
-	<slot />
+<div class="container" class:you>
+	{#if $$slots.default}
+		<p><slot /></p>
+	{/if}
+	<slot name="misc" />
 	<div />
 </div>

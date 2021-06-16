@@ -24,7 +24,7 @@
 
 	footer {
 		box-shadow: var(--bs-l-up);
-		padding-top: var(--space-xxl);
+		padding: var(--space-xl) var(--space-l);
 	}
 </style>
 

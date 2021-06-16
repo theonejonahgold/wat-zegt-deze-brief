@@ -43,28 +43,36 @@
 	import { dashboardLetters } from '$db/letter'
 	import { checkRole } from '$db/user'
 	import { client } from '$config/supabase'
-	import { Back, Help, Icon, SpokenText } from '$atoms'
+	import { Icon, SpokenText } from '$atoms'
 	import { VolunteerLetterCard } from '$organisms'
 	import { Header } from '$templates'
-	import { MailIcon } from '$icons'
+	import { MailIcon, LetterIcon, ChatIcon } from '$icons'
+	import { NavBar } from '$templates'
 	import type { Letter } from '$types'
 
 	export let letters: Letter[]
 </script>
 
 <style>
+	main {
+		padding-top: 0;
+	}
+
 	ul {
 		list-style: none;
 		padding: 0;
 		display: grid;
-		row-gap: var(--space-s);
+		row-gap: var(--space-l);
+		margin-top: var(--space-xxs);
 	}
+
 	.empty {
 		:global(div:last-child p) {
 			font-size: var(--font-m);
 			margin-top: var(--space-xl);
 		}
 	}
+
 	div {
 		height: 10rem;
 		opacity: 0.6;
@@ -72,9 +80,7 @@
 </style>
 
 <Header>
-	<Back slot="left" href="/dashboard" />
 	<SpokenText --align="center" slot="middle" text="Chats" />
-	<Help slot="right" />
 </Header>
 <main class:empty={!letters.length}>
 	<section>
@@ -99,3 +105,15 @@
 		{/if}
 	</section>
 </main>
+<NavBar
+	links={[
+		{
+			href: '/dashboard/chat',
+			icon: ChatIcon,
+		},
+		{
+			href: '/dashboard',
+			icon: LetterIcon,
+		},
+	]}
+/>

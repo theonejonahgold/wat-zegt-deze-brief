@@ -3,11 +3,9 @@ import { browser } from '$app/env'
 import type { definitions } from '$types'
 import { v4 as uuid } from 'uuid'
 
-export async function uploadMessage(file: File) {
+export async function uploadMessage(file: File, id: string) {
 	if (!file || !browser) return
 
-	const splitPathname = window.location.pathname.split('/')
-	const id = splitPathname[splitPathname.length - 1]
 	const userId = client.auth.session().user.id
 	const messageId = uuid()
 	await client.storage.from('messages').upload(`${id}/${userId}/${messageId}`, file)

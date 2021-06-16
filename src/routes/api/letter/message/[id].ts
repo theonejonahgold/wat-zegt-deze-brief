@@ -2,7 +2,7 @@ import { client } from '$config/supabase'
 import type { definitions, Locals } from '$types'
 import type { RequestHandler } from '@sveltejs/kit'
 
-export const post: RequestHandler<Locals, FormData> = async ({ headers, params, query, body }) => {
+export const post: RequestHandler<Locals, FormData> = async ({ params, body }) => {
 	const id = params.id
 	const content = body.get('message')
 

@@ -1,12 +1,20 @@
 <script>
-	import { NavItem } from '$atoms'
-	import { ChatIcon, LetterIcon, ProfileIcon } from '$icons'
+	import { page } from '$app/stores'
 
-	export let fill: string = 'darkgrey'
+	import { Icon } from '$atoms'
+	import type { SvelteElement } from 'svelte/internal'
+
+	export let links: Array<{
+		href: string
+		icon: typeof SvelteElement
+	}> = []
 </script>
 
 <style>
 	footer {
+		padding: 0;
+		position: sticky;
+		bottom: 0;
 	}
 
 	nav {
@@ -16,27 +24,46 @@
 	}
 
 	ul {
-		height: var(--space-xxxl);
 		padding: 0;
 		display: grid;
 		justify-content: space-around;
 		grid-auto-flow: column;
+		grid-auto-columns: 1fr;
 		align-items: center;
 		list-style-type: none;
 	}
 
 	li {
+		display: block;
 		padding: var(--space-xs) 0;
 		text-align: center;
+		width: 100%;
+
+		:global(a) {
+			display: block;
+			text-decoration: none;
+			cursor: pointer;
+			height: var(--space-xxl);
+		}
+
+		:global(a svg) {
+			height: var(--space-xxl);
+		}
 	}
 </style>
 
 <footer>
 	<nav>
 		<ul>
-			<li><NavItem><ChatIcon {fill} /></NavItem></li>
-			<li><NavItem><LetterIcon {fill} /></NavItem></li>
-			<li><NavItem><ProfileIcon {fill} /></NavItem></li>
+			{#each links as link (link.href)}
+				<li>
+					<a href={link.href}
+						><Icon color={$page.path === link.href ? 'var(--dark)' : 'var(--grey)'}
+							><svelte:component this={link.icon} /></Icon
+						></a
+					>
+				</li>
+			{/each}
 		</ul>
 	</nav>
 </footer>

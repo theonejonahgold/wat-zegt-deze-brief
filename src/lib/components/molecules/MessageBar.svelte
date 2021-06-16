@@ -54,7 +54,7 @@
 	action="/api/letter/message/{letterId}"
 	method="POST"
 	use:formEnhancer={{
-		success: (data, form) => {},
+		success: () => {},
 	}}
 >
 	<ul>

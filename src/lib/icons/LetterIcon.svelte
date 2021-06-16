@@ -1,7 +1,3 @@
-<script>
-	export let fill: string
-</script>
-
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -25,7 +21,6 @@
 				height="21"
 				rx="6"
 				transform="translate(4.5 3.5)"
-				{fill}
 			/>
 		</g>
 		<path

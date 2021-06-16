@@ -1,16 +1,16 @@
 import { client } from '$config/supabase'
-import type { definitions, ChatMessage } from '$types'
+import type { definitions, ChatMessage, Letter } from '$types'
 
-export async function listMessages(id: string): Promise<Array<definitions['messages']>> {
+export async function listMessages(id: string): Promise<Array<ChatMessage>> {
 	const {
 		data: { messages: messageIDs },
 	} = await client.from<definitions['letters']>('letters').select('messages').eq('id', id).single()
 	if (!messageIDs?.length || (messageIDs?.length === 1 && messageIDs[0] === null)) return []
 
-	const messages = await Promise.all(
+	const messages = await Promise.all<ChatMessage>(
 		(
 			await client
-				.from<definitions['messages']>('messages')
+				.from<ChatMessage>('messages')
 				.select(
 					`
 		id,
@@ -24,23 +24,11 @@ export async function listMessages(id: string): Promise<Array<definitions['messa
 	`
 				)
 				.in('id', <string[]>(<unknown>messageIDs))
-		).data.map(message =>
-			client
-				.from('message-status')
-				.select('read')
-				.eq('message_id', message.id)
-				.single()
-				.then(({ data: { read } }) => {
-					return {
-						...message,
-						read: !!read,
-					}
-				})
-		)
+		).data
 	)
 
 	await client
-		.from('message-status')
+		.from<definitions['message-status']>('message-status')
 		.update({ read: true })
 		.eq('user_id', client.auth.session().user.id)
 		.eq('read', false)
@@ -49,7 +37,19 @@ export async function listMessages(id: string): Promise<Array<definitions['messa
 			messages.map(({ id }) => id)
 		)
 
-	return messages
+	return await Promise.all(
+		messages.map(message =>
+			client
+				.from('message-status')
+				.select('read')
+				.eq('message_id', message.id)
+				.single()
+				.then(({ data: { read } }) => ({
+					...message,
+					read: !!read,
+				}))
+		)
+	)
 }
 
 export async function fetchMessage(id: string): Promise<ChatMessage> {

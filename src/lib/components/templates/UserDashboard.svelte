@@ -1,10 +1,10 @@
 <script>
 	import { Help, SpokenText } from '$atoms'
+	import { ArchiveIcon, LetterIcon, UserIcon } from '$icons'
 	import { ImageButton } from '$molecules'
 	import { UserLetterCard } from '$organisms'
-	import Header from './Header.svelte'
-	import { UserIcon } from '$icons'
 	import type { Letter } from '$types'
+	import Header from './Header.svelte'
 	import NavBar from './NavBar.svelte'
 
 	export let letters: Letter[]
@@ -19,7 +19,7 @@
 		list-style: none;
 		padding: 0;
 		display: grid;
-		row-gap: var(--space-s);
+		row-gap: var(--space-l);
 		margin-top: var(--space-xxs);
 	}
 
@@ -56,4 +56,15 @@
 		</section>
 	{/if}
 </main>
-<NavBar />
+<NavBar
+	links={[
+		{
+			href: '/dashboard/archive',
+			icon: ArchiveIcon,
+		},
+		{
+			href: '/dashboard',
+			icon: LetterIcon,
+		},
+	]}
+/>

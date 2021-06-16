@@ -22,7 +22,10 @@ export async function fetchSingleLetter(id: string) {
 			sender,
 			createdAt,
 			messages,
-			user_id,
+			user:user_id (
+				name,
+				id
+			),
 			status,
 			page_order,
 			thumbnail,
@@ -82,6 +85,7 @@ export async function dashboardLetters({ status = 'all', assigned }: DashboardLe
 						.from<definitions['messages']>('messages')
 						.select(
 							`
+							id,
 							type,
 							content,
 							date,
@@ -92,12 +96,23 @@ export async function dashboardLetters({ status = 'all', assigned }: DashboardLe
 						`
 						)
 						.in('id', letter.messages as unknown as string[])
-						.then(
-							({ data }) =>
-								({
-									...letter,
-									messages: data,
-								} as unknown as Letter)
+						.then(({ data }) =>
+							Promise.all(
+								data.map(message =>
+									client
+										.from<definitions['message-status']>('message-status')
+										.select('read')
+										.eq('message_id', message.id)
+										.single()
+										.then(({ data }) => ({ ...message, read: data?.read }))
+								)
+							).then(
+								messages =>
+									({
+										...letter,
+										messages,
+									} as unknown as Letter)
+							)
 						)
 				: new Promise<Letter>(resolve => resolve(letter as unknown as Letter))
 		)
