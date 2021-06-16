@@ -8,7 +8,6 @@
 	form {
 		display: flex;
 		width: inherit;
-		margin-top: var(--space-xs-s);
 	}
 
 	form {
