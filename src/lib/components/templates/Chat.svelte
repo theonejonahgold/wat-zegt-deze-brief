@@ -187,6 +187,7 @@
 		<SpokenText
 			--align="center"
 			text="Klik op de microfoon en stel nog een vraag of bedank de vrijwilliger"
+			small={true}
 		/>
 	{/if}
 	<AudioRecorder />
