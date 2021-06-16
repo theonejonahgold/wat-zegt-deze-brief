@@ -52,5 +52,6 @@
 
 <div class="container">
 	<p>{text}</p>
+	<slot />
 	<div />
 </div>
