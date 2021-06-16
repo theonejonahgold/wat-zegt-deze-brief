@@ -170,8 +170,7 @@
 	div {
 		display: grid;
 		width: 100%;
-		grid-template-columns: 1fr calc(1.5 * var(--space-xxxl));
-		column-gap: var(--space-s);
+		grid-template-columns: 3fr 1fr;
 		align-items: center;
 
 		:global(:nth-child(2)) {
@@ -202,6 +201,7 @@
 		this={loading ? Loader : FileInput}
 		slot="empty"
 		name="page"
+		large
 		on:change={changeHandler}
 	>
 		Upload de eerste pagina
@@ -218,6 +218,7 @@
 				this={loading ? Loader : FileInput}
 				slot="empty"
 				name="page"
+				--size="var(--space-xxxl)"
 				on:change={changeHandler}
 			>
 				Pagina
