@@ -36,17 +36,15 @@ export async function listMessages(id: string): Promise<Array<definitions['messa
 		)
 	)
 
-	await Promise.allSettled<any>(
-		messages
-			.filter(message => (<any>message).sender.id === client.auth.session().user.id || message.read)
-			.map(message =>
-				client
-					.from('message-status')
-					.update({ read: true })
-					.eq('message_id', message.id)
-					.eq('user_id', client.auth.session().user.id)
-			)
-	)
+	await client
+		.from('message-status')
+		.update({ read: true })
+		.eq('user_id', client.auth.session().user.id)
+		.eq('read', false)
+		.in(
+			'message_id',
+			messages.map(({ id }) => id)
+		)
 
 	return messages
 }
