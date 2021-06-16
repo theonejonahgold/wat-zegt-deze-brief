@@ -10,7 +10,7 @@
 	export let method: 'GET' | 'POST' = 'POST'
 	export let fields: FormField[] = []
 	export let noEnhance = false
-	export let buttonPosition: 'sticky' | 'absolute' | 'fixed' | false = 'absolute'
+	export let buttonPosition: 'sticky' | 'absolute' | false = 'absolute'
 
 	const dispatch = createEventDispatcher<{
 		success: { data: any; form: HTMLFormElement }

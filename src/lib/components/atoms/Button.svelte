@@ -1,6 +1,6 @@
 <script>
 	export let href: string = ''
-	export let bottom: 'sticky' | 'absolute' | 'fixed' | false = false
+	export let bottom: 'sticky' | 'absolute' | false = false
 	export let invert = false
 </script>
 
@@ -29,12 +29,6 @@
 
 		&.absolute {
 			position: absolute;
-			bottom: var(--space-xl);
-			width: calc(100% - (var(--space-xl) * 2));
-		}
-
-		&.fixed {
-			position: fixed;
 			bottom: var(--space-xl);
 			width: calc(100% - (var(--space-xl) * 2));
 		}
