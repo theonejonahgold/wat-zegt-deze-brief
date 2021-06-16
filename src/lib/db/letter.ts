@@ -36,9 +36,12 @@ export async function fetchSingleLetter(id: string) {
 
 	return letter
 }
-export async function dashboardLetters() {
-	const { data: letters } = await client.from<definitions['letters']>('letters').select(
-		`
+
+export async function dashboardLetters(resolved: boolean) {
+	const { data: letters } = await client
+		.from<definitions['letters']>('letters')
+		.select(
+			`
 			id,
 			sender,
 			createdAt,
@@ -55,7 +58,8 @@ export async function dashboardLetters() {
 				id
 			)
 		`
-	)
+		)
+		.in('status', resolved ? ['resolved'] : ['published', 'draft'])
 
 	if (!letters || !letters.length) return []
 
