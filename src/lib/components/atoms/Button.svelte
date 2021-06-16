@@ -10,11 +10,11 @@
 		display: block;
 		border-radius: var(--space-xl);
 		color: var(--secondary);
-		padding: var(--space-xs) 0;
+		padding: var(--space-m) 0;
 		margin: 0;
-		margin-top: var(--space-m);
 		text-align: center;
 		font-size: var(--font-s);
+		font-weight: 500;
 		text-decoration: none;
 		width: 100%;
 		border: none;
@@ -22,14 +22,21 @@
 		box-shadow: var(--bs-l-down);
 		line-height: 1.125;
 
+		+ :global {
+			a,
+			button {
+				margin-top: var(--space-m);
+			}
+		}
+
 		&.sticky {
 			position: sticky;
-			bottom: var(--space-xl);
+			bottom: var(--space-xxl);
 		}
 
 		&.absolute {
 			position: absolute;
-			bottom: var(--space-xl);
+			bottom: var(--space-xxl);
 			width: calc(100% - (var(--space-xl) * 2));
 		}
 

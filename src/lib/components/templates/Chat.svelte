@@ -33,13 +33,14 @@
 
 <style lang="scss">
 	footer {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		box-shadow: var(--bs-l-up);
-		padding-top: var(--space-m);
+		padding: 0;
 		width: 100%;
-		background: var(--white);
+		background: none;
+
+		div {
+			padding: var(--space-m) var(--space-xxl) var(--space-xxl);
+			background: var(--white);
+		}
 
 		:global(p) {
 			margin-bottom: var(--space-s);
@@ -48,7 +49,7 @@
 
 	main {
 		overflow-y: auto;
-		margin: var(--space-s);
+		padding: 0 var(--space-s) var(--space-s);
 
 		small {
 			text-align: right;
@@ -58,16 +59,11 @@
 
 		:global {
 			.container.container {
-				margin-top: var(--space-s);
 				margin-right: 0;
 				margin-left: var(--margin);
+				margin-top: var(--space-s);
 			}
 		}
-	}
-
-	div {
-		display: block;
-		overflow-y: scroll;
 	}
 
 	audio {
@@ -104,57 +100,53 @@
 
 <Header sticky>
 	<Back slot="left" href="/dashboard" />
-	<SpokenText --align="center" slot="middle" text="Gesproken bericht" />
+	<SpokenText --align="center" slot="middle" text="Chat" />
 	<Help slot="right" />
 </Header>
-<div>
-	<main bind:this={el}>
-		<MessageCloud --margin={userRole === 'user' ? 'auto' : ''}>
-			<a href="/dashboard/letter/{letter.id}/pages"><img src={page} alt="Page Image" /></a>
-		</MessageCloud>
-		{#each messages as message, index ((message.id, index))}
-			{#if message.type === 'audio'}
-				<AudioPlayer file={message.file} --margin={message.sender.id === userId ? 'auto' : '0'} />
-			{:else}
-				<MessageCloud
-					text={message.content}
-					--margin={message.sender.id === userId ? 'auto' : '0'}
-				/>
-			{/if}
-			{#if lastReadID === message.id}
-				<small>{message.type === 'audio' ? 'Geluisterd' : 'Gelezen'} </small>
-			{/if}
-		{/each}
-		{#if isUser}
-			{#if messages.length}
-				{#if letter.status !== 'resolved'}
-					<MessageCloud text="Ik heb genoeg uitleg gekregen" --margin="auto">
-						<form
-							action="/api/letter/resolve/{letter.id}"
-							method="POST"
-							use:formEnhancer={{
-								success: (data, form) => console.log(data, form),
-							}}
-						>
-							<button type="submit" name="resolve" value="true">Ja</button>
-							<button type="submit" name="resolve" value="false">Nee</button>
-						</form>
-					</MessageCloud>
-				{/if}
+<main bind:this={el}>
+	<MessageCloud --margin={userRole === 'user' ? 'auto' : ''}>
+		<a href="/dashboard/letter/{letter.id}/pages"><img src={page} alt="Page Image" /></a>
+	</MessageCloud>
+	{#each messages as message, index ((message.id, index))}
+		{#if message.type === 'audio'}
+			<AudioPlayer file={message.file} --margin={message.sender.id === userId ? 'auto' : '0'} />
+		{:else}
+			<MessageCloud text={message.content} --margin={message.sender.id === userId ? 'auto' : '0'} />
+		{/if}
+		{#if lastReadID === message.id}
+			<small>{message.type === 'audio' ? 'Geluisterd' : 'Gelezen'} </small>
+		{/if}
+	{/each}
+	{#if isUser}
+		{#if messages.length}
+			{#if letter.status !== 'resolved'}
+				<MessageCloud text="Ik heb genoeg uitleg gekregen" --margin="auto">
+					<form
+						action="/api/letter/resolve/{letter.id}"
+						method="POST"
+						use:formEnhancer={{
+							success: (data, form) => console.log(data, form),
+						}}
+					>
+						<button type="submit" name="resolve" value="true">Ja</button>
+						<button type="submit" name="resolve" value="false">Nee</button>
+					</form>
+				</MessageCloud>
 			{/if}
 		{/if}
-	</main>
-</div>
-<aside>
-	<MessageBar letterId={letter.id} />
-</aside>
-<footer>
-	{#if isUser}
-		<SpokenText
-			--align="center"
-			text="Klik op de microfoon en stel nog een vraag of bedank de vrijwilliger"
-			small={true}
-		/>
 	{/if}
-	<AudioRecorder />
+</main>
+
+<footer>
+	<MessageBar letterId={letter.id} />
+	<div>
+		{#if isUser}
+			<SpokenText
+				--align="center"
+				text="Klik op de microfoon en stel nog een vraag of bedank de vrijwilliger"
+				small={true}
+			/>
+		{/if}
+		<AudioRecorder />
+	</div>
 </footer>

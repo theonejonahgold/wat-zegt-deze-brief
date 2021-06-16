@@ -66,6 +66,9 @@
 </script>
 
 <style lang="scss">
+	div {
+		position: relative;
+	}
 	section {
 		+ section {
 			margin-top: var(--space-xl);
@@ -86,9 +89,9 @@
 	div > form {
 		position: sticky;
 		top: calc((var(--space-l) * 2) + var(--space-xl));
-		padding-top: calc(var(--space-l) * 0.3);
 		background: var(--background);
 		padding-bottom: var(--space-s);
+		z-index: 1;
 
 		input {
 			margin-top: var(--space-xxs);

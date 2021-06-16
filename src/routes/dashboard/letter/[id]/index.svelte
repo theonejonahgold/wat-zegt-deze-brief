@@ -186,6 +186,7 @@
 					on:success={e => {
 						letter = e.detail.data
 					}}
+					buttonPosition={false}
 				>
 					<svelte:fragment slot="submit">Ik wil deze brief uitleggen</svelte:fragment>
 				</Form>

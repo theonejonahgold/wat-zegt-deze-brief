@@ -7,7 +7,7 @@
 <style lang="scss">
 	a {
 		display: block;
-		width: var(--space-m);
+		width: var(--space-l);
 		height: var(--space-m);
 
 		:global {

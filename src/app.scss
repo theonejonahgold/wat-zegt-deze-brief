@@ -185,8 +185,8 @@ html {
 
 body {
 	margin: 0;
-	max-width: 26rem;
-	max-height: 56rem;
+	max-width: 23rem;
+	max-height: 42rem;
 	background: var(--background);
 	overflow: hidden scroll;
 	position: relative;
@@ -239,7 +239,16 @@ body {
 :where(#svelte > header),
 :where(#svelte > main),
 :where(#svelte > footer) {
-	padding: var(--space-l) var(--space-xl);
+	padding: var(--space-xl);
+}
+
+:where(#svelte > main),
+:where(#svelte > footer) {
+	padding-bottom: var(--space-xxl);
+}
+
+:where(#svelte > footer) {
+	padding-top: var(--space-xxl);
 }
 
 h1,
