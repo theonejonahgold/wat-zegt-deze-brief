@@ -189,7 +189,7 @@ body {
 	overflow: hidden scroll;
 	position: relative;
 
-	@media (min-width: 32rem) and (cursor: fine) {
+	@media (min-width: 32rem) and (pointer: fine) {
 		max-width: 23rem;
 		max-height: 42rem;
 		box-shadow: var(--bs-l-down);
