@@ -10,7 +10,7 @@ export function formEnhancer<ResBody extends Record<string, JSONValue>>(
 	form: HTMLFormElement,
 	{ success, error, loading }: FormEnhancerParams<ResBody>
 ) {
-	form.addEventListener('click', submitHandler)
+	form.addEventListener('submit', submitHandler)
 	form
 		.querySelectorAll('button[type="submit"]')
 		.forEach(button => button.addEventListener('click', buttonClickHandler))
