@@ -1,0 +1,57 @@
+:root {
+	--light-purple: #f8f9fd;
+	--purple: #978fff;
+	--blue: #80b6fe;
+	--white: #fff;
+	--black: #595959;
+	--dark-grey: #686868;
+	--grey: #989898;
+	--light-grey: #d8d8d8;
+	--green: #5fb05a;
+	--red: #e05742;
+	--transparent-grey: rgba(193, 193, 193, 0.16);
+
+	--primary: var(--black);
+	--secondary: var(--white);
+	--dark: var(--purple);
+	--background: var(--light-purple);
+	--light: var(--blue);
+	--muted: var(--dark-grey);
+	--subtext: var(--grey);
+	--success: var(--green);
+	--error: var(--red);
+	--info: var(--blue);
+	--bs-color: var(--transparent-grey);
+
+	--gradient-to-right: linear-gradient(to right, var(--light), var(--dark));
+	--gradient-to-left: linear-gradient(to left, var(--light), var(--dark));
+	--gradient-to-top: linear-gradient(to top, var(--light), var(--dark));
+	--gradient-to-bottom: linear-gradient(to bottom, var(--light), var(--dark));
+
+	--bs-s-down: 0 1px 3px var(--bs-color);
+	--bs-s-up: 0 -1px 3px var(--bs-color);
+	--bs-m-down: 0 3px 6px var(--bs-color);
+	--bs-m-up: 0 -3px 6px var(--bs-color);
+	--bs-l-down: 0 3px 8px var(--bs-color);
+	--bs-l-up: 0 -3px 8px var(--bs-color);
+
+	--border-radius: 0.75rem;
+
+	--font-family: 'Poppins', sans-serif;
+
+	--font-xxs: var(--step--2);
+	--font-xs: var(--step--1);
+	--font-s: var(--step-0);
+	--font-m: var(--step-1);
+	--font-l: var(--step-2);
+	--font-xl: var(--step-3);
+	--font-xxl: var(--step-4);
+
+	color: var(--primary);
+	font-family: var(--font-family);
+	line-height: 1.5;
+}
+
+body {
+	background: var(--purple);
+}
