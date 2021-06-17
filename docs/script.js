@@ -2,6 +2,7 @@ window.addEventListener('load', main)
 
 function main() {
 	intersecter()
+	easterEgg()
 }
 
 function intersecter() {
@@ -32,4 +33,9 @@ function lookArticle(ratio) {
 		document.querySelector('article[data-look]').classList.remove('look')
 		lookArticleTimeout = null
 	}
+}
+
+function easterEgg() {
+	const article = document.querySelector('article:last-child')
+	article.querySelector('h1').addEventListener('click', () => article.classList.toggle('easter'))
 }

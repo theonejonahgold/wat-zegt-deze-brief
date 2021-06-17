@@ -269,8 +269,11 @@ article:last-child h1 {
 }
 
 ul {
-	display: flex;
-	justify-content: space-evenly;
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: 1fr;
+	column-gap: var(--space-xxl);
+	justify-items: center;
 	padding: 0;
 	list-style: none;
 	width: min(100em, 100vh);
@@ -287,4 +290,25 @@ a {
 
 a:not(:hover) {
 	text-decoration: none;
+}
+
+article:last-child p {
+	display: none;
+}
+
+article:last-child h1 {
+	cursor: help;
+}
+
+article:last-child div {
+	display: flex;
+	justify-content: space-between;
+}
+
+article:last-child a + a {
+	margin-left: auto;
+}
+
+article:last-child.easter p {
+	display: block;
 }
