@@ -1,5 +1,9 @@
 # Wat zegt deze brief
 
+How can we develop a mobile application where low-literate NT2 citizens get explanations for letters they don't understand?
+
+[Wiki](https://github.com/theonejonahgold/wat-zegt-deze-brief/wiki) • [Design Rationale](https://github.com/theonejonahgold/wat-zegt-deze-brief/wiki/design-rationale) • [Prototype](https://wzdb.herokuapp.com)
+
 # Index
 
 - [Week[3]](#week3)
