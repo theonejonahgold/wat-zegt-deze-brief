@@ -44,7 +44,7 @@
 	import { dashboardLetters } from '$db/letter'
 	import { checkRole } from '$db/user'
 	import { client } from '$config/supabase'
-	import { Back, Help, Icon, SpokenText } from '$atoms'
+	import { Help, Icon, SpokenText } from '$atoms'
 	import { UserLetterCard } from '$organisms'
 	import { Header, NavBar } from '$templates'
 	import { ArchiveIcon, LetterIcon, MailIcon } from '$icons'

@@ -64,6 +64,7 @@
 		client
 			.from<definitions['letters']>(`letters:id=eq.${letter.id}`)
 			.on('UPDATE', async ({ new: newLetter }) => {
+				console.log('hoi', letter, newLetter)
 				letter = {
 					...letter,
 					status: newLetter.status,

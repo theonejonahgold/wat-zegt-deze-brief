@@ -10,7 +10,7 @@
 
 		+ :global {
 			p {
-				max-width: 78%;
+				max-width: 75%;
 				align-self: flex-start;
 				margin-bottom: var(--space-l);
 

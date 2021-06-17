@@ -168,7 +168,7 @@
 
 <section>
 	<div class="pagination">
-		{#each pages as _, i}
+		{#each pages as _, i (i)}
 			<span class:selected={i === selected} />
 		{/each}
 	</div>

@@ -1,6 +1,5 @@
 <script>
 	import { page } from '$app/stores'
-
 	import { Icon } from '$atoms'
 	import type { SvelteElement } from 'svelte/internal'
 
@@ -8,6 +7,12 @@
 		href: string
 		icon: typeof SvelteElement
 	}> = []
+
+	let pagePath: string
+
+	page.subscribe(val => {
+		pagePath = val.path
+	})
 </script>
 
 <style>
@@ -58,7 +63,7 @@
 			{#each links as link (link.href)}
 				<li>
 					<a href={link.href}
-						><Icon color={$page.path === link.href ? 'var(--dark)' : 'var(--grey)'}
+						><Icon color={pagePath === link.href ? 'var(--dark)' : 'var(--grey)'}
 							><svelte:component this={link.icon} /></Icon
 						></a
 					>

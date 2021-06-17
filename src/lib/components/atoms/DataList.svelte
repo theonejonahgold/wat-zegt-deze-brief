@@ -4,7 +4,7 @@
 </script>
 
 <datalist {id}>
-	{#each options as option}
+	{#each options as option (option)}
 		<option value={option} />
 	{/each}
 </datalist>

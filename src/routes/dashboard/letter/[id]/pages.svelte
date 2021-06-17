@@ -18,7 +18,7 @@
 <script>
 	import { AudioRecorder } from '$organisms'
 	import { CarouselPage } from '$templates'
-	import type { Letter } from '$types'
+	import type { definitions, Letter } from '$types'
 	import { client } from '$config/supabase'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'

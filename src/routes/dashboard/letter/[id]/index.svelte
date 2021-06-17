@@ -155,7 +155,7 @@
 			</header>
 			{#if pages.length}
 				<ol>
-					{#each pages as page}
+					{#each pages as page (page)}
 						<li><Image src={page} alt="Page preview" /></li>
 					{/each}
 				</ol>

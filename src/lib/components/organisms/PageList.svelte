@@ -114,7 +114,7 @@
 
 <ul bind:this={ul} style="--amount: {pages.length}">
 	<slot />
-	{#each pages as page, i}
+	{#each pages as page, i (page)}
 		<li class:selected={selected === i} on:click={clickHandler(i)}>
 			{#if selected === i}
 				<button aria-label="Verwijderen" on:click|stopPropagation={() => dispatch('remove', page)}

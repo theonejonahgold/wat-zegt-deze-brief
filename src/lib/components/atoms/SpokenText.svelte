@@ -26,8 +26,8 @@
 	button {
 		border: none;
 		background: none;
-		height: var(--space-l);
-		width: var(--space-l);
+		height: var(--space-m);
+		width: var(--space-m);
 		padding: calc(var(--space-xxs) / 1.5) 0 0;
 	}
 

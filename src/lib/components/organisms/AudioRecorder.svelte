@@ -22,13 +22,10 @@
 	}>()
 
 	onMount(async () => {
+		const OpusRecorder = (await import('opus-media-recorder/OpusMediaRecorder.js')).default
 		encoderWorker = (await import('web-worker:opus-media-recorder/encoderWorker.umd.js')).default
 		OggOpusWasm = (await import('opus-media-recorder/OggOpusEncoder.wasm')).default
 		WebMOpusWasm = (await import('opus-media-recorder/WebMOpusEncoder.wasm')).default
-
-		if (window.MediaRecorder?.isTypeSupported('audio/ogg;codecs=opus')) return
-
-		const { default: OpusRecorder } = await import('opus-media-recorder')
 		window.MediaRecorder = OpusRecorder
 	})
 

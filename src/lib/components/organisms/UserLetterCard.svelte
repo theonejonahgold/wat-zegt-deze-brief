@@ -34,12 +34,12 @@
 		color: var(--primary);
 		display: grid;
 		grid-template-columns: 2fr 3fr;
-		padding: var(--space-s);
 		gap: var(--space-xs);
 		background-color: var(--secondary);
 		box-shadow: var(--bs-l-down);
 		border-radius: 10px;
 		height: 10rem;
+		overflow: hidden;
 
 		:global(img) {
 			object-fit: cover;
@@ -56,6 +56,8 @@
 			display: grid;
 			grid-template-rows: min-content auto;
 			gap: var(--space-xs);
+			padding: var(--space-xs);
+			padding-left: 0;
 
 			> header {
 				display: grid;
