@@ -38,7 +38,7 @@
 </style>
 
 {#if text}
-	<button on:click={handleClick} aria-label="Leg dit scherm uit">?</button>
+	<button id="help" on:click={handleClick} aria-label="Leg dit scherm uit">?</button>
 {:else}
-	<button on:click aria-label="Leg dit scherm uit">?</button>
+	<button id="help" on:click aria-label="Leg dit scherm uit">?</button>
 {/if}

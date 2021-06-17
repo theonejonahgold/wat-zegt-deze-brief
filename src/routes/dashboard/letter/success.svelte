@@ -4,7 +4,6 @@
 </script>
 
 <Header>
-	<Back slot="left" href="/dashboard" />
 	<SpokenText --align="center" slot="middle" text="Gelukt!" />
 	<Help slot="right" />
 </Header>

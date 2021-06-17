@@ -6,6 +6,8 @@ import vhFix from 'postcss-100vh-fix'
 import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
 const tsConfig = require('./tsconfig.json')
+import webWorkerLoader from 'rollup-plugin-web-worker-loader'
+import wasm from '@rollup/plugin-wasm'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -21,8 +23,8 @@ const config = {
 	kit: {
 		target: '#svelte',
 		adapter: node(),
-		vite: config => ({
-			...config,
+		vite: () => ({
+			plugins: [webWorkerLoader(), wasm()],
 			mode: process.env.NODE_ENV || 'development',
 			resolve: {
 				alias: Object.entries(tsConfig.compilerOptions.paths).reduce(

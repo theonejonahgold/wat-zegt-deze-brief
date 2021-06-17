@@ -11,11 +11,24 @@ export function formEnhancer<ResBody extends Record<string, JSONValue>>(
 	{ success, error, loading }: FormEnhancerParams<ResBody>
 ) {
 	form.addEventListener('submit', submitHandler)
+	form
+		.querySelectorAll('button[type="submit"]')
+		.forEach(button => button.addEventListener('click', buttonClickHandler))
+
+	let clickedSubmitButton: HTMLButtonElement
+
+	function buttonClickHandler(e: Event & { target: HTMLButtonElement }) {
+		clickedSubmitButton = e.target
+	}
 
 	function submitHandler(e: Event) {
 		e.preventDefault()
 
 		const body = new FormData(form)
+
+		if (clickedSubmitButton?.name) body.append(clickedSubmitButton.name, clickedSubmitButton.value)
+
+		if ((<any>e).submitter?.name) body.set((<any>e).submitter.name, (<any>e).submitter.value)
 
 		loading?.(body, form)
 
@@ -32,7 +45,9 @@ export function formEnhancer<ResBody extends Record<string, JSONValue>>(
 					return res.text().then(err => {
 						throw new Error(err)
 					})
-				return res.json().then(data => success(data, form))
+				return res.status === 204
+					? success(null, form)
+					: res.json().then(data => success(data, form))
 			})
 			.catch(err => {
 				if (!error) throw err

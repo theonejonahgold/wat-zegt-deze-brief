@@ -5,6 +5,7 @@
 	import { AudioIcon } from '$icons'
 
 	export let text = ''
+	export let small = false
 
 	let playing = false
 	let js = false
@@ -23,26 +24,28 @@
 
 <style>
 	button {
-		line-height: 1;
 		border: none;
-		cursor: pointer;
 		background: none;
 		height: var(--space-m);
 		width: var(--space-m);
-		padding: 0.4em 0 0;
+		padding: calc(var(--space-xxs) / 1.5) 0 0;
 	}
 
 	p {
-		font-size: var(--space-l);
+		font-size: var(--font-m);
 		text-align: var(--align, initial);
 		color: var(--muted);
+	}
+
+	.small {
+		font-size: var(--font-m);
 	}
 </style>
 
 {#if !js}
-	<p>{text}</p>
+	<p class:small>{text}</p>
 {:else}
-	<p>
+	<p class:small>
 		{text}
 		<button type="button" on:click={handleClick}>
 			<Icon color="black">

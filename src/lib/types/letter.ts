@@ -3,12 +3,19 @@ export interface Letter {
 	image: string
 	sender?: string
 	createdAt: string
+	user: {
+		id: string
+		name?: string
+		languages?: string[]
+	}
 	volunteer?: {
 		id: string
 		name?: string
 	}
 	messages: ChatMessage[]
 	page_order: string[]
+	status: 'draft' | 'published' | 'resolved'
+	deadline?: string
 }
 
 interface Message {
@@ -20,11 +27,12 @@ interface Message {
 	content: string
 	type: 'audio' | 'text'
 	date: string
+	read: boolean
 }
 
 export interface AudioMessage extends Message {
 	type: 'audio'
-	file: string
+	file: Blob
 }
 
 export interface TextMessage extends Message {

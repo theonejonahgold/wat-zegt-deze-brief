@@ -16,15 +16,19 @@
 		place-items: center;
 	}
 
+	main {
+		padding: 0;
+		position: relative;
+		z-index: -1;
+	}
+
 	footer {
-		display: flex;
-		justify-content: center;
-		box-shadow: var(--bs-up);
-		padding-top: var(--space-l);
+		box-shadow: var(--bs-l-up);
+		padding: var(--space-xl) var(--space-l);
 	}
 </style>
 
-<Header>
+<Header shadow>
 	<Back slot="left" href={backLink} />
 	<SpokenText --align="center" slot="middle" text={title} />
 	<Help slot="right" />
@@ -36,6 +40,16 @@
 		<slot name="empty" />
 	{/if}
 </main>
-<footer>
-	<slot name="footer" />
-</footer>
+{#if $$slots.footer}
+	<footer>
+		<slot name="footer" />
+	</footer>
+{:else if $$slots['footer-full'] && pages.length}
+	<footer>
+		<slot name="footer-full" />
+	</footer>
+{:else if $$slots['footer-empty'] && !pages.length}
+	<footer>
+		<slot name="footer-empty" />
+	</footer>
+{/if}

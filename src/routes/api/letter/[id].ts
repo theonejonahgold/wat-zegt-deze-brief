@@ -17,13 +17,21 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 export const post: RequestHandler<Locals, FormData> = async ({ params, query, body }) => {
 	const id = params.id
 	const sender = body.get('sender')
+	const deadline = body.get('deadline')
+	const route = body.get('route')
 	const status = body.get('status')
+	const editing = !!query.get('editing')
+	const redirect = query.get('redirect')
 
 	let updateBody: Record<string, string> = {}
-	if (sender) updateBody.sender = sender
+	if (route === 'senderRoute') updateBody.sender = sender ? sender : null
+	if (route === 'deadlineRoute')
+		updateBody.deadline = deadline ? new Date(deadline).toISOString() : null
 	if (status) updateBody.status = status
 
-	const { data } = await client
+	console.log(updateBody.deadline)
+
+	const { data, error } = await client
 		.from<definitions['letters']>('letters')
 		.update(updateBody)
 		.eq('id', id)
@@ -32,7 +40,13 @@ export const post: RequestHandler<Locals, FormData> = async ({ params, query, bo
 		return {
 			status: 302,
 			headers: {
-				location: query.get('redirect') || `/dashboard/letter/${id}`,
+				location:
+					redirect ||
+					(editing
+						? `/dashboard/letter/${id}`
+						: sender
+						? `/dashboard/letter/${id}/deadline`
+						: `/dashboard/letter/${id}`),
 			},
 		}
 	}

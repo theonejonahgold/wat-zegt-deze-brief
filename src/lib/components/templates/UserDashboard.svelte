@@ -1,10 +1,11 @@
 <script>
 	import { Help, SpokenText } from '$atoms'
+	import { ArchiveIcon, LetterIcon, UserIcon } from '$icons'
 	import { ImageButton } from '$molecules'
 	import { UserLetterCard } from '$organisms'
-	import Header from './Header.svelte'
-	import { UserIcon } from '$icons'
 	import type { Letter } from '$types'
+	import Header from './Header.svelte'
+	import NavBar from './NavBar.svelte'
 
 	export let letters: Letter[]
 </script>
@@ -18,21 +19,14 @@
 		list-style: none;
 		padding: 0;
 		display: grid;
-		row-gap: var(--space-s);
+		row-gap: var(--space-l);
 		margin-top: var(--space-xxs);
 	}
 
 	section {
 		:global(div:first-child p) {
-			font-size: var(--font-m);
+			margin-top: var(--space-l);
 			margin-bottom: var(--space-m);
-		}
-	}
-
-	.empty {
-		:global(div:last-child p) {
-			font-size: var(--font-m);
-			margin-top: var(--space-xl);
 		}
 	}
 </style>
@@ -42,13 +36,16 @@
 	<Help slot="right" />
 </Header>
 <main>
-	<ImageButton href="/dashboard/letter" text="Nieuwe brief opsturen">
+	<ImageButton
+		href="/dashboard/letter"
+		text={letters.length ? 'Nieuwe brief opsturen' : 'Stuur hier je eerste brief op'}
+	>
 		<UserIcon />
 	</ImageButton>
-	<hr />
-	<section class:empty={!letters.length}>
-		<SpokenText text="Jouw brieven" --align="center" />
-		{#if letters.length}
+	{#if letters.length}
+		<hr />
+		<section>
+			<SpokenText text="Jouw brieven" --align="center" />
 			<ul>
 				{#each letters as letter (letter.id)}
 					<li>
@@ -56,11 +53,18 @@
 					</li>
 				{/each}
 			</ul>
-		{:else}
-			<SpokenText
-				text="Je hebt nog geen brieven ingestuurd, klik op de knop hierboven om je eerste brief in te sturen."
-				--align="center"
-			/>
-		{/if}
-	</section>
+		</section>
+	{/if}
 </main>
+<NavBar
+	links={[
+		{
+			href: '/dashboard/archive',
+			icon: ArchiveIcon,
+		},
+		{
+			href: '/dashboard',
+			icon: LetterIcon,
+		},
+	]}
+/>

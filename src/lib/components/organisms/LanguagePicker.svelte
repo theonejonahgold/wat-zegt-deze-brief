@@ -1,53 +1,29 @@
 <script>
-	import { Button, SpokenText } from '$atoms'
+	import { Button, Loader, SpokenText } from '$atoms'
 	import { page, session } from '$app/stores'
-	import { browser } from '$app/env'
 	import { addToast } from '$stores'
 	import { onMount } from 'svelte'
-
-	const langCookies = $session.cookies.langs
-	let js = false
-	onMount(() => {
-		js = true
-		if (langCookies) return
-		addToast({
-			message: 'Je telefoontaal is door ons al geselecteerd!',
-			type: 'info',
-		})
-	})
 
 	export let languages: Array<{
 		code: string
 		name: string
 	}>
 
+	const langCookies = $session.cookies.langs
+	let js = false
 	let filterValue = $page.query.get('query')
 	let chosenLanguages = new Set<string>(!!langCookies ? langCookies.split(',') : [])
+	let loading = ''
 
-	const submitHandler = async (e: Event & { currentTarget: HTMLFormElement }) => {
-		const res = await fetch(e.currentTarget.action, {
-			method: 'POST',
-			body: new FormData(e.currentTarget),
-			headers: {
-				Accept: 'application/json',
-			},
-		})
-		if (!res.ok) return
-		const code = await res.text()
-		if (chosenLanguages.has(code)) {
-			chosenLanguages.delete(code)
-			chosenLanguages = chosenLanguages
-			return
-		}
-		chosenLanguages = chosenLanguages.add(code)
-	}
+	onMount(async () => {
+		js = true
+		if (langCookies) return
 
-	const setDefaultLang = () => {
-		if (!browser) return
 		const lang = navigator.language?.slice(0, 2)
 		if (!lang || chosenLanguages.has(lang)) return
 		chosenLanguages = chosenLanguages.add(lang)
-		fetch('/api/languages', {
+
+		await fetch('/api/languages', {
 			method: 'POST',
 			body: new URLSearchParams({
 				code: lang,
@@ -56,16 +32,48 @@
 				Accept: 'application/json',
 			},
 		})
-	}
 
-	setDefaultLang()
+		addToast({
+			message: 'Je telefoontaal is door ons al geselecteerd!',
+			type: 'info',
+		})
+	})
+
+	const submitHandler = async (e: Event & { currentTarget: HTMLFormElement }) => {
+		const formData = new FormData(e.currentTarget)
+		const code = formData.get('code') as string
+
+		if (chosenLanguages.size >= 3 && !chosenLanguages.has(code)) return
+
+		loading = code
+		const res = await fetch(e.currentTarget.action, {
+			method: 'POST',
+			body: formData,
+			headers: {
+				Accept: 'application/json',
+			},
+		})
+		if (!res.ok) return
+		if (chosenLanguages.has(code)) {
+			chosenLanguages.delete(code)
+			chosenLanguages = chosenLanguages
+			loading = ''
+			return
+		}
+		chosenLanguages = chosenLanguages.add(code)
+		loading = ''
+	}
 </script>
 
 <style lang="scss">
+	div {
+		position: relative;
+	}
 	section {
 		+ section {
 			margin-top: var(--space-xl);
 		}
+
 		button {
 			background: none;
 			border: none;
@@ -83,6 +91,16 @@
 		top: calc((var(--space-l) * 2) + var(--space-xl));
 		background: var(--background);
 		padding-bottom: var(--space-s);
+		z-index: 1;
+
+		input {
+			margin-top: var(--space-xxs);
+		}
+	}
+
+	form :global(div) {
+		margin-right: var(--space-xxs);
+		margin-bottom: 1px;
 	}
 
 	input {
@@ -91,14 +109,17 @@
 			border: 0;
 			font-size: var(--font-s);
 			border-radius: var(--border-radius);
-			box-shadow: var(--bs-input);
+			box-shadow: var(--bs-m-down);
 			padding: var(--space-m);
 		}
 
 		&[type='checkbox'] {
 			pointer-events: none;
+			cursor: pointer;
 			display: inline-block;
-			margin-right: var(--space-xxs);
+			margin: 0 var(--space-xxs) 0 0;
+			width: var(--space-xs);
+			height: var(--space-xs);
 		}
 	}
 </style>
@@ -130,7 +151,11 @@
 				>
 					<input type="hidden" name="code" value={lang.code} />
 					<button>
-						<input type="checkbox" checked />
+						{#if loading === lang.code}
+							<Loader --size="var(--space-xs)" />
+						{:else}
+							<input checked type="checkbox" />
+						{/if}
 						{lang.name}
 					</button>
 				</form>
@@ -153,8 +178,12 @@
 				action="/api/languages?query={$page.query.get('query')}"
 			>
 				<input type="hidden" name="code" value={lang.code} />
-				<button>
-					<input type="checkbox" />
+				<button disabled={chosenLanguages.size >= 3}>
+					{#if loading === lang.code}
+						<Loader --size="var(--space-xs)" />
+					{:else}
+						<input disabled={chosenLanguages.size >= 3} type="checkbox" />
+					{/if}
 					{lang.name}
 				</button>
 			</form>

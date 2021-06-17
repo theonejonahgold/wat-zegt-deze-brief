@@ -13,12 +13,13 @@
 		display: grid;
 		grid-template-rows: 8rem 2rem;
 		background-color: var(--secondary);
-		box-shadow: var(--bs-button);
+		box-shadow: var(--bs-l-down);
 		padding: var(--space-s);
 		gap: var(--space-s);
 		width: 100%;
 		border-radius: 10px;
 		color: var(--primary);
+		text-decoration: none;
 
 		> :global(div) {
 			grid-row: 1 / span 1;

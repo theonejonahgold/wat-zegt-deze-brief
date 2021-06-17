@@ -20,6 +20,7 @@
 			props: {
 				letter: data,
 				editing: !!page.query.get('edit'),
+				skipped: !!page.query.get('skipped'),
 			},
 		}
 	}
@@ -38,6 +39,7 @@
 
 	export let letter: Letter
 	export let editing: boolean
+	export let skipped: boolean
 
 	let pages: string[] = []
 	let pageIDs: string[] = letter.page_order || []
@@ -132,6 +134,13 @@
 		pages.splice(index, 1)
 		pages = pages
 		selectedPage = selectedPage >= pages.length ? pages.length - 1 : selectedPage
+
+		await client
+			.from<definitions['letters']>('letters')
+			// @ts-expect-error: Types are wrong, page_order is an array
+			.update({ page_order: pageIDs })
+			.eq('id', letter.id)
+			.single()
 	}
 
 	async function moveHandler(
@@ -163,9 +172,9 @@
 	div {
 		display: grid;
 		width: 100%;
-		grid-template-columns: 1fr calc(1.5 * var(--space-xxxl));
-		column-gap: var(--space-s);
+		grid-template-columns: 3fr 1fr;
 		align-items: center;
+		margin-bottom: var(--space-xs);
 
 		:global(:nth-child(2)) {
 			justify-self: end;
@@ -189,17 +198,22 @@
 	bind:selectedPage
 	bind:pages
 	title={editing ? "Pagina's bewerken" : "Upload pagina's"}
-	backLink="/dashboard/letter?step=4&id={letter.id}"
+	backLink={editing
+		? `/dashboard/letter/${letter.id}`
+		: skipped
+		? `/dashboard/letter?step=1&id=${letter.id}`
+		: `/dashboard/letter?step=4&id=${letter.id}`}
 >
 	<svelte:component
 		this={loading ? Loader : FileInput}
 		slot="empty"
 		name="page"
+		large
 		on:change={changeHandler}
 	>
 		Upload de eerste pagina
 	</svelte:component>
-	<svelte:fragment slot="footer">
+	<svelte:fragment slot="footer-full">
 		<div>
 			<PageList
 				on:remove={removeHandler}
@@ -207,17 +221,21 @@
 				bind:selected={selectedPage}
 				bind:pages
 			/>
-			{#if pages.length}
-				<svelte:component
-					this={loading ? Loader : FileInput}
-					slot="empty"
-					name="page"
-					on:change={changeHandler}
-				>
-					Pagina
-				</svelte:component>
-			{/if}
+			<svelte:component
+				this={loading ? Loader : FileInput}
+				slot="empty"
+				name="page"
+				--size="var(--space-xxxl)"
+				on:change={changeHandler}
+			>
+				Pagina
+			</svelte:component>
 		</div>
-		<Button href="/dashboard/letter/{letter.id}/organisation">Pagina's opslaan</Button>
+		<Button
+			href={editing
+				? `/dashboard/letter/${letter.id}`
+				: `/dashboard/letter/${letter.id}/organisation`}
+			>{editing ? 'Wijzigingen opslaan' : "Pagina's opslaan"}</Button
+		>
 	</svelte:fragment>
 </CarouselPage>

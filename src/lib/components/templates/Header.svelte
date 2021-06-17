@@ -1,28 +1,40 @@
 <script>
 	export let sticky = false
+	export let shadow = false
 </script>
 
 <style>
 	header {
 		display: grid;
-		grid-template-columns: var(--space-m) 1fr var(--space-m);
+		grid-template-columns: var(--space-l) 1fr var(--space-l);
 		column-gap: var(--space-s);
-		align-items: center;
+		align-items: start;
 		justify-content: center;
 		background: var(--background);
+		z-index: 10;
+		padding-top: var(--space-l);
+		padding-bottom: var(--space-l);
 
-		> :global(*) {
-			line-height: 1;
+		:global(p) {
+			margin-top: -0.3em;
+		}
+
+		:global(#help) {
+			margin-top: calc(var(--space-xl) / -16);
 		}
 
 		&.sticky {
 			position: sticky;
 			top: 0;
 		}
+
+		&.shadow {
+			box-shadow: var(--bs-l-down);
+		}
 	}
 </style>
 
-<header class:sticky>
+<header class:shadow class:sticky>
 	<div>
 		<slot name="left" />
 	</div>

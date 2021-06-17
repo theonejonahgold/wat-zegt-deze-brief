@@ -14,7 +14,7 @@
 		height: 1em;
 		border-radius: 2em;
 		display: flex;
-		background-color: var(--muted);
+		background-color: var(--light-grey);
 		position: relative;
 
 		&:after {
@@ -25,7 +25,7 @@
 			width: calc(100% - (100% / var(--steps)));
 			height: 100%;
 			border-radius: 0 inherit inherit 0;
-			background: linear-gradient(to right, var(--black) 0px 1px, transparent 1px);
+			background: linear-gradient(to right, var(--grey) 0px 1px, transparent 1px);
 			background-size: calc(100% / (var(--steps) - 1));
 		}
 

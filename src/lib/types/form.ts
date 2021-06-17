@@ -1,4 +1,4 @@
-type NormalFieldType = 'text' | 'password' | 'email' | 'number' | 'radio' | 'file'
+type NormalFieldType = 'text' | 'password' | 'email' | 'number' | 'radio' | 'file' | 'date'
 
 interface BasicFormField {
 	name: string
@@ -16,6 +16,8 @@ interface NormalFormField extends BasicFormField {
 	disabled?: boolean
 	readonly?: boolean
 	list?: string
+	validator?: (value: string) => string | false
+	min?: string
 }
 
 interface HiddenFormField extends BasicFormField {

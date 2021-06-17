@@ -1,10 +1,10 @@
 <script>
 	export let px = 'var(--space-xl)'
-	export let py = 'var(--space-l)'
+	export let py = ''
 	export let pt = '0'
 	export let pl = px
 	export let pr = px
-	export let pb = py
+	export let pb = py || 'var(--space-xxl)'
 </script>
 
 <style>

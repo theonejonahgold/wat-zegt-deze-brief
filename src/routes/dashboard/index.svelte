@@ -1,6 +1,5 @@
 <script context="module">
 	export const load: Load = async () => {
-		const { data } = await listLetters()
 		const role = await checkRole()
 
 		if (!role)
@@ -9,21 +8,31 @@
 				status: 302,
 			}
 
-		const letters = data
-			? (
-					await Promise.all(
-						data?.map(letter =>
-							client.storage
+		const data = await dashboardLetters({
+			status: ['draft', 'published'],
+			assigned: role !== 'user' ? false : null,
+		})
+
+		const letters = (
+			await Promise.all<Letter>(
+				data.map(letter =>
+					letter.page_order?.length
+						? client.storage
 								.from('pages')
-								.createSignedUrl(`${letter.id}/${letter.thumbnail}`, 40)
+								.createSignedUrl(`${letter.id}/${letter.page_order[0]}`, 40)
 								.then(({ signedURL }) => ({
 									...letter,
 									image: signedURL,
 								}))
-						)
-					)
-			  ).sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-			: []
+						: new Promise(resolve => resolve(letter))
+				)
+			)
+		).sort(
+			(a, b) =>
+				new Date(b.messages ? b.messages[b.messages.length - 1].date : b.createdAt).valueOf() -
+				new Date(a.messages ? a.messages[a.messages.length - 1].date : a.createdAt).valueOf()
+		)
+
 		return {
 			props: {
 				letters,
@@ -36,7 +45,7 @@
 <script>
 	import type { Load } from '@sveltejs/kit'
 	import { client } from '$config/supabase'
-	import { listLetters } from '$db/letter'
+	import { dashboardLetters } from '$db/letter'
 	import { checkRole } from '$db/user'
 	import { UserDashboard, VolunteerDashboard } from '$templates'
 	import type { Letter } from '$types'

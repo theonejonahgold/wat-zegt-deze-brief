@@ -5,6 +5,7 @@
 - [Week[3]](#week3)
   - [Coaching session](#coaching-session)
   - [Design feedback](#design-feedback)
+  - [Feedback session](#feedback-session)
 - [Week[2]](#week2)
   - [Coaching session](#coaching-session)
   - [Design feedback](#design-feedback)
@@ -48,6 +49,38 @@
 - Add an "archive" where all resolved letters are put.
 - Add deadline to letter, so volunteers know the letters needs a response in X days.
 - Think about filter options.
+
+## Feedback session
+
+### Feedback from Tessa
+
+- Underline on Image Buttons need to be removed.
+- Images have a weird white background in the onboarding.
+- The notification icon needs to be replaced still.
+- The footer on upload screen does not look right.
+- Amount of organisations to choose from is scarce.
+- Submit letter button is not in the right place.
+- Sections at the letter summary page can have a little more space, horizontal lines can be removed.
+- Arrows in carousel can be made smaller.
+- Add page button can be aligned better with the rest of the elements in the footer.
+- Audio doesn't work at all in Safari.
+- There is no feedback on register and login forms.
+- Languages are not shown with letters on the volunteer homescreen.
+
+### Action points
+
+- Remove underline on image button text.
+- Remove image background in onboarding.
+- Replace the notification icon.
+- Fix footer layout on upload pages screen.
+- Add more organisations to the list.
+- Fix location of the submit button on the letter summary page.
+- Fix the styling on the letter summary page according to Tessa's feedback.
+- Make arrows in carousel smaller.
+- Update alignment of add page button on upload pages screen.
+- Fix audio upload and playback in Safari.
+- Add feedback to register and login forms.
+- Add languages to letters on the volunteer homescreen.
 
 # Week[2]
 
@@ -543,3 +576,4 @@ Low-literate people want their formal letters explained, so they know if action 
 - [vonadz code for injecting `busboy` in the SvelteKit `handle` hook](https://github.com/sveltejs/kit/issues/70#issuecomment-830799681)
 - [joshnuss for showing how to send files to supabase via fetch](https://github.com/supabase/supabase/discussions/1002#discussioncomment-560098)
 - [Temani Afif css loaders article on DEV.TO](https://dev.to/afif/i-made-100-more-css-loaders-for-your-next-project-4ioa)
+- [Russel Good for creating a function that converts an AudioBuffer to a .wav file](https://www.russellgood.com/how-to-convert-audiobuffer-to-audio-file/)

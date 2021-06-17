@@ -6,12 +6,12 @@
 </script>
 
 <svelte:head>
-	<title>Kies je talen</title>
+	<title>Kies max. 3 talen</title>
 </svelte:head>
 
 <Header sticky>
 	<Back slot="left" href="/onboarding/user?step=5" />
-	<SpokenText --align="center" slot="middle" text="Kies je talen" />
+	<SpokenText --align="center" slot="middle" text="Kies max. 3 talen" />
 	<Help slot="right" />
 </Header>
 <Flex>

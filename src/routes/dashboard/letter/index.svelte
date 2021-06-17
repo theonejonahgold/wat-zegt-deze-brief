@@ -7,15 +7,13 @@
 		const res = await fetch(`${page.path}/${step}.json`)
 		const data: { content: InstructionsContent; amount: number } = await res.json()
 		const { body } = await client
-			.from<{ onboarding: { letter_onboarding: boolean }; id: string }>('users')
+			.from<definitions['onboardings']>('onboardings')
 			.select(
 				`
-			onboarding:onboarding_id (
 				letter_onboarding
-			)
 		`
 			)
-			.eq('id', client.auth.session().user.id)
+			.eq('user_id', client.auth.session().user.id)
 			.single()
 
 		return {
@@ -24,7 +22,7 @@
 				step,
 				id,
 				path: page.path,
-				canSkip: body.onboarding.letter_onboarding,
+				canSkip: body.letter_onboarding,
 			},
 		}
 	}
@@ -32,7 +30,7 @@
 
 <script>
 	import { Instructions } from '$templates'
-	import type { InstructionsContent, InstructionsHrefs } from '$types'
+	import type { definitions, InstructionsContent, InstructionsHrefs } from '$types'
 	import { client } from '$config/supabase'
 
 	export let step: number
@@ -49,7 +47,9 @@
 			step === 1 && canSkip
 				? [
 						{
-							path: id ? `/dashboard/letter/${id}/upload` : '/api/onboarding/letter',
+							path: id
+								? `/dashboard/letter/${id}/upload?skipped=true`
+								: '/api/onboarding/letter?skipped=true',
 							text: 'Uitleg overslaan',
 						},
 						{

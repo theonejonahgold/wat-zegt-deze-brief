@@ -1,62 +1,152 @@
 <script>
 	import Header from './Header.svelte'
-	import type { ChatMessage } from '$types'
-	import { SpokenText, Help, Back } from '$atoms'
+	import type { ChatMessage, Letter } from '$types'
+	import { SpokenText, Help, Back, MessageCloud, AudioPlayer, ImageMessage } from '$atoms'
 	import { AudioRecorder } from '$organisms'
+	import { MessageBar } from '$molecules'
 	import { client } from '$config/supabase'
+	import { formEnhancer } from '$actions'
+	import { useEffect } from '$utils'
 
 	export let messages: ChatMessage[]
 	export let userRole: string
+	export let letter: Letter
+	export let page: string
+
+	useEffect(
+		() => {
+			if (!el || !el.children.length) return
+			el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
+		},
+		() => [messages, el]
+	)
 
 	const userId = client.auth.session().user.id
+
+	let el: HTMLElement
+
+	$: lastReadID =
+		[...messages].reverse().find(message => message.sender.id === userId && message.read)?.id || -1
+
+	const isUser = userRole === 'user'
 </script>
 
-<style>
+<style lang="scss">
 	footer {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		box-shadow: var(--bs-up);
-		padding-top: var(--space-m);
+		padding: 0;
 		width: 100%;
-		overflow-x: scroll;
+		background: none;
+
+		div {
+			padding: var(--space-m) var(--space-l) var(--space-xl);
+			background: var(--white);
+		}
+
+		:global(p) {
+			margin-bottom: var(--space-s);
+		}
 	}
 
 	main {
-		display: flex;
-		flex-direction: column;
-		overflow: auto;
+		overflow-y: auto;
+		padding: 0 var(--space-s) var(--space-s);
+
+		small {
+			text-align: right;
+			display: block;
+			margin-top: var(--space-xxs);
+		}
+
+		:global {
+			.container.container {
+				margin-right: 0;
+				margin-left: var(--margin);
+				margin-top: var(--space-s);
+			}
+		}
 	}
 
 	audio {
-		margin: 1rem 0 1rem 0;
+		margin: var(--space-s);
+		display: block;
 	}
 
-	.you {
-		align-self: flex-end;
+	form {
+		display: flex;
+		width: 100%;
+		margin-top: var(--space-xs-s);
+	}
+
+	form button {
+		background-color: var(--dark);
+		border: none;
+		border-radius: 3px;
+		width: 3rem;
+		align-self: center;
+		color: var(--white);
+		padding: 0.5rem;
+		box-shadow: var(--bs-key-ambient-light);
+	}
+
+	form button:nth-child(1) {
+		margin-right: 1rem;
 	}
 </style>
 
-<Header>
-	<Back slot="left" href="/dashboard" />
-	<SpokenText --align="center" slot="middle" text="Gesproken bericht" />
+<Header sticky>
+	<Back slot="left" href="/dashboard/chat" />
+	<SpokenText --align="center" slot="middle" text="Chat" />
 	<Help slot="right" />
 </Header>
-<main>
-	{#each messages as message (message.id)}
-		{#if message.sender.id === userId}
-			<audio controls src={message.file} type="audio/ogg" class="you" />
+<main bind:this={el}>
+	<ImageMessage you={letter.user.id === userId} {letter} {page} {userRole} />
+	{#each messages as message, index ((message.id, index))}
+		{#if message.type === 'audio'}
+			<AudioPlayer file={message.file} --margin={message.sender.id === userId ? 'auto' : '0'} />
 		{:else}
-			<audio controls src={message.file} type="audio/ogg" />
+			<MessageCloud
+				you={message.sender.id === userId}
+				--margin={message.sender.id === userId ? 'auto' : '0'}
+			>
+				{message.content}
+			</MessageCloud>
+		{/if}
+		{#if lastReadID === message.id}
+			<small>{message.type === 'audio' ? 'Geluisterd' : 'Gelezen'} </small>
 		{/if}
 	{/each}
-</main>
-<footer>
-	{#if userRole === 'user'}
-		<SpokenText
-			--align="center"
-			text="Klik op de microfoon en stel nog een vraag of bedank de vrijwilliger"
-		/>
+	{#if isUser}
+		{#if messages.length}
+			{#if letter.status !== 'resolved'}
+				<MessageCloud you --margin="auto">
+					Ik heb genoeg uitleg gekregen
+					<form
+						slot="misc"
+						action="/api/letter/resolve/{letter.id}"
+						method="POST"
+						use:formEnhancer={{
+							success: (data, form) => console.log(data, form),
+						}}
+					>
+						<button type="submit" name="resolve" value="true">Ja</button>
+						<button type="submit" name="resolve" value="false">Nee</button>
+					</form>
+				</MessageCloud>
+			{/if}
+		{/if}
 	{/if}
-	<AudioRecorder />
+</main>
+
+<footer>
+	<MessageBar letterId={letter.id} />
+	<div>
+		{#if isUser}
+			<SpokenText
+				--align="center"
+				text="Klik op de microfoon en stel nog een vraag of bedank de vrijwilliger"
+				small={true}
+			/>
+		{/if}
+		<AudioRecorder letterId={letter.id} />
+	</div>
 </footer>

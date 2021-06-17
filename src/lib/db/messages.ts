@@ -1,18 +1,18 @@
 import { client } from '$config/supabase'
-import type { definitions, ChatMessage } from '$types'
+import type { definitions, ChatMessage, Letter } from '$types'
 
-export async function listMessages(id: string): Promise<Array<definitions['messages']>> {
+export async function listMessages(id: string): Promise<Array<ChatMessage>> {
 	const {
 		data: { messages: messageIDs },
 	} = await client.from<definitions['letters']>('letters').select('messages').eq('id', id).single()
-	if (!messageIDs.length || (messageIDs.length === 1 && messageIDs[0] === null)) return []
+	if (!messageIDs?.length || (messageIDs?.length === 1 && messageIDs[0] === null)) return []
 
-	console.log(messageIDs)
-
-	const { data: messages } = await client
-		.from<definitions['messages']>('messages')
-		.select(
-			`
+	const messages = await Promise.all<ChatMessage>(
+		(
+			await client
+				.from<ChatMessage>('messages')
+				.select(
+					`
 		id,
 		type,
 		content,
@@ -22,17 +22,38 @@ export async function listMessages(id: string): Promise<Array<definitions['messa
 			name
 		)
 	`
+				)
+				.in('id', <string[]>(<unknown>messageIDs))
+		).data
+	)
+
+	await client
+		.from<definitions['message-status']>('message-status')
+		.update({ read: true })
+		.eq('user_id', client.auth.session().user.id)
+		.eq('read', false)
+		.in(
+			'message_id',
+			messages.map(({ id }) => id)
 		)
-		.in('id', <string[]>(<unknown>messageIDs))
 
-	console.log(messageIDs)
-
-	return messages
+	return await Promise.all(
+		messages.map(message =>
+			client
+				.from('message-status')
+				.select('read')
+				.eq('message_id', message.id)
+				.single()
+				.then(({ data: { read } }) => ({
+					...message,
+					read: !!read,
+				}))
+		)
+	)
 }
 
 export async function fetchMessage(id: string): Promise<ChatMessage> {
-	console.log(id)
-	const { data: message } = await client
+	const { data: message } = (await client
 		.from<definitions['messages']>('messages')
 		.select(
 			`
@@ -47,24 +68,22 @@ export async function fetchMessage(id: string): Promise<ChatMessage> {
 	`
 		)
 		.eq('id', id)
-		.single()
+		.single()) as unknown as { data: ChatMessage }
 
-	console.log(message)
+	try {
+		await client
+			.from('message-status')
+			.update({ read: true })
+			.eq('message_id', message.id)
+			.eq('user_id', client.auth.session().user.id)
+	} catch {}
 
-	return message as any
+	return message
 }
 
 export function downloadAudioMessage(letterId: string, userId: string, messageId: string) {
 	return client.storage
 		.from('messages')
 		.download(`${letterId}/${userId}/${messageId}`)
-		.then(
-			({ data }) =>
-				new Promise<string>((resolve, reject) => {
-					const reader = new FileReader()
-					reader.readAsDataURL(data)
-					reader.addEventListener('loadend', e => resolve(e.target.result as string))
-					reader.addEventListener('error', reject)
-				})
-		)
+		.then(({ data }) => data)
 }

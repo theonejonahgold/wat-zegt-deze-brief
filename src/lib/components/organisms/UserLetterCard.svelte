@@ -2,13 +2,15 @@
 	import { Image } from '$atoms'
 	import { formatTimestamp } from '$utils'
 	import type { Letter } from '$types'
+	import { client } from '$config/supabase'
 
 	export let letter: Letter
 
 	const href =
 		letter.volunteer !== null ? `/dashboard/chat/${letter.id}` : `/dashboard/letter/${letter.id}`
 
-	const time = letter.messages?.length ? letter.messages[0].date : letter.createdAt
+	const latestMessage = letter.messages?.[letter.messages.length - 1]
+	const time = latestMessage ? latestMessage.date : letter.createdAt
 </script>
 
 <style lang="scss">
@@ -32,12 +34,12 @@
 		color: var(--primary);
 		display: grid;
 		grid-template-columns: 2fr 3fr;
-		padding: var(--space-s);
 		gap: var(--space-xs);
 		background-color: var(--secondary);
-		box-shadow: var(--bs-button);
+		box-shadow: var(--bs-l-down);
 		border-radius: 10px;
 		height: 10rem;
+		overflow: hidden;
 
 		:global(img) {
 			object-fit: cover;
@@ -54,6 +56,8 @@
 			display: grid;
 			grid-template-rows: min-content auto;
 			gap: var(--space-xs);
+			padding: var(--space-xs);
+			padding-left: 0;
 
 			> header {
 				display: grid;
@@ -82,9 +86,17 @@
 			grid-column: 2;
 		}
 	}
+
+	strong {
+		font-weight: 500;
+	}
 </style>
 
-<article>
+<article
+	class:unread={latestMessage &&
+		latestMessage.sender.id !== client.auth.session().user.id &&
+		!latestMessage.read}
+>
 	<a {href}>
 		<Image src={letter.image} />
 		<div>
@@ -101,9 +113,28 @@
 				</time>
 			</header>
 			{#if !letter.messages}
-				<p>Je hebt nog geen uitleg ontvangen.</p>
+				{#if letter.status === 'published'}
+					<p>Je hebt nog geen uitleg ontvangen.</p>
+				{:else}
+					<p>Je hebt de brief nog niet verzonden.</p>
+				{/if}
 			{:else}
-				<p>Je hebt uitleg ontvangen</p>
+				<p>
+					<strong
+						>{#if latestMessage.sender.id === client.auth.session().user.id}
+							JIJ:
+						{:else if latestMessage.sender.name}
+							{latestMessage.sender.name}:
+						{:else}
+							Vrijwilliger:
+						{/if}
+					</strong>
+					{#if latestMessage.type === 'audio'}
+						Spraakbericht
+					{:else}
+						{latestMessage.content}
+					{/if}
+				</p>
 			{/if}
 		</div>
 	</a>

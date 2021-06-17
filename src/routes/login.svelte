@@ -5,6 +5,8 @@
 	import { client } from '$config/supabase'
 	import { Form } from '$organisms'
 	import { Header } from '$templates'
+
+	const emailValidator: RegExp = /^\w+([\.\-+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/
 </script>
 
 <svelte:head>
@@ -31,6 +33,10 @@
 				type: 'email',
 				required: true,
 				placeholder: 'voorbeeld@wat-zegt-deze-brief.nl',
+				validator: value => {
+					if (!value.length) return
+					return !emailValidator.test(value) && 'Vul alsjeblieft een geldig e-mailadres in.'
+				},
 			},
 			{
 				name: 'password',
