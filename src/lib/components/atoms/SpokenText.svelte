@@ -32,7 +32,7 @@
 	}
 
 	p {
-		font-size: var(--font-l);
+		font-size: var(--font-m);
 		text-align: var(--align, initial);
 		color: var(--muted);
 	}
