@@ -147,6 +147,7 @@
 	--font-l: var(--step-2);
 	--font-xl: var(--step-3);
 	--font-xxl: var(--step-4);
+	--font-xxxl: var(--step-5);
 
 	color: var(--primary);
 	font-family: var(--font-family);
@@ -162,10 +163,10 @@
 body {
 	height: 100vh;
 	overflow-y: hidden;
-	background: var(--transparent-grey);
+	background: var(--background);
 }
 
-section {
+body > div {
 	overflow-y: scroll;
 	height: 100vh;
 	scroll-snap-type: y proximity;
@@ -175,13 +176,115 @@ article {
 	position: relative;
 	scroll-snap-align: start;
 	min-height: 100vh;
-	max-width: 100em;
+	font-size: var(--step-1);
+	max-width: 80ch;
+	width: 100%;
 	margin: 0 auto;
-	padding: 4em;
+	padding: var(--space-xxxl);
+	display: grid;
+	place-content: center;
+}
+
+p {
+	font-size: var(--step-1);
+}
+
+h1,
+h2,
+h3 {
+	color: var(--purple);
+	font-weight: 500;
+	width: max-content;
+	line-height: 1.1;
+}
+
+h1 {
+	font-size: var(--font-xxxl);
+	background: linear-gradient(var(--purple), var(--purple)) no-repeat bottom left/0% 2px;
+	transition: background-size 0.2s ease-in-out;
+	margin-bottom: var(--space-m);
 }
 
 h2 {
 	font-size: var(--font-xl);
-	color: var(--blue);
-	text-align: center;
+	margin-bottom: var(--space-s);
+}
+
+h3 {
+	font-size: var(--font-l);
+	margin-bottom: var(--space-xxs);
+}
+
+article.intersecting h1 {
+	background-size: 100% 2px;
+}
+
+article:nth-child(3):before {
+	position: fixed;
+	top: 0;
+	left: 0;
+	content: '';
+	width: 100%;
+	height: 100%;
+	background: url(./background.png) no-repeat top left/150%;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out;
+	animation: bg-crawl 60s linear infinite paused;
+}
+
+@keyframes bg-crawl {
+	from,
+	to {
+		background-position: 0% 0%;
+	}
+	25% {
+		background-position: 100% 100%;
+	}
+	50% {
+		background-position: 0% 100%;
+	}
+	75% {
+		background-position: 100% 0%;
+	}
+}
+
+article:nth-child(3).intersecting:before {
+	opacity: 0.3;
+	animation-play-state: running;
+}
+
+article:nth-child(3).look:before {
+	opacity: 1;
+}
+
+.look h1 {
+	opacity: 0.3;
+}
+
+article:nth-child(4) h1,
+article:last-child h1 {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+ul {
+	display: flex;
+	justify-content: space-evenly;
+	padding: 0;
+	list-style: none;
+	width: min(100em, 100vh);
+}
+
+li a:only-child {
+	font-size: var(--font-l);
+}
+
+a {
+	color: var(--primary);
+	font-weight: 500;
+}
+
+a:not(:hover) {
+	text-decoration: none;
 }
