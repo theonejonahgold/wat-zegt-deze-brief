@@ -10,12 +10,23 @@ export function formEnhancer<ResBody extends Record<string, JSONValue>>(
 	form: HTMLFormElement,
 	{ success, error, loading }: FormEnhancerParams<ResBody>
 ) {
-	form.addEventListener('submit', submitHandler)
+	form.addEventListener('click', submitHandler)
+	form
+		.querySelectorAll('button[type="submit"]')
+		.forEach(button => button.addEventListener('click', buttonClickHandler))
+
+	let clickedSubmitButton: HTMLButtonElement
+
+	function buttonClickHandler(e: Event & { target: HTMLButtonElement }) {
+		clickedSubmitButton = e.target
+	}
 
 	function submitHandler(e: Event) {
 		e.preventDefault()
 
 		const body = new FormData(form)
+
+		if (clickedSubmitButton) body.append(clickedSubmitButton.name, clickedSubmitButton.value)
 
 		if ((<any>e).submitter?.name) body.set((<any>e).submitter.name, (<any>e).submitter.value)
 

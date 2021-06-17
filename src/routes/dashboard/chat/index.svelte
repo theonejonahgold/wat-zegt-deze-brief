@@ -79,6 +79,10 @@
 	}
 </style>
 
+<svelte:head>
+	<title>Chats</title>
+</svelte:head>
+
 <Header>
 	<SpokenText --align="center" slot="middle" text="Chats" />
 </Header>

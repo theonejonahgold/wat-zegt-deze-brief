@@ -14,7 +14,7 @@
 </script>
 
 <script>
-	export let from
+	export let from: string
 </script>
 
 <svelte:head>

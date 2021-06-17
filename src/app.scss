@@ -185,13 +185,13 @@ html {
 
 body {
 	margin: 0;
-	max-width: 23rem;
-	max-height: 42rem;
 	background: var(--background);
 	overflow: hidden scroll;
 	position: relative;
 
-	@media (min-width: 26rem) {
+	@media (min-width: 32rem) and (cursor: fine) {
+		max-width: 23rem;
+		max-height: 42rem;
 		box-shadow: var(--bs-l-down);
 		border-radius: var(--border-radius);
 	}

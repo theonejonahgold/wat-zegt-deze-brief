@@ -25,8 +25,11 @@ export const post: RequestHandler<Locals, FormData> = async ({ params, query, bo
 
 	let updateBody: Record<string, string> = {}
 	if (route === 'senderRoute') updateBody.sender = sender ? sender : null
-	if (route === 'deadlineRoute') updateBody.deadline = deadline ? deadline : null
+	if (route === 'deadlineRoute')
+		updateBody.deadline = deadline ? new Date(deadline).toISOString() : null
 	if (status) updateBody.status = status
+
+	console.log(updateBody.deadline)
 
 	const { data, error } = await client
 		.from<definitions['letters']>('letters')

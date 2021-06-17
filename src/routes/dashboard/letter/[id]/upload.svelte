@@ -174,6 +174,7 @@
 		width: 100%;
 		grid-template-columns: 3fr 1fr;
 		align-items: center;
+		margin-bottom: var(--space-xs);
 
 		:global(:nth-child(2)) {
 			justify-self: end;

@@ -88,4 +88,8 @@
 	})
 </script>
 
+<svelte:head>
+	<title>Chat</title>
+</svelte:head>
+
 <Chat {messages} {userRole} {letter} {page} />

@@ -30,6 +30,7 @@ export async function fetchSingleLetter(id: string) {
 			page_order,
 			thumbnail,
 			page_order,
+			deadline,
 			volunteer:volunteer_id (
 				name,
 				id

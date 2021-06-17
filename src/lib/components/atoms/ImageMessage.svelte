@@ -36,7 +36,7 @@
 <MessageCloud {you} --margin={userRole === 'user' ? 'auto' : ''}>
 	<a slot="misc" href="/dashboard/letter/{letter.id}/pages">
 		<img src={page} alt="Klik op deze pagina om alle brieven te bekijken." />
-		<Icon>
+		<Icon color="#fff">
 			<ExpandIcon />
 		</Icon>
 	</a>

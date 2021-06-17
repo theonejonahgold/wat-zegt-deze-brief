@@ -10,7 +10,7 @@
 </style>
 
 <svelte:head>
-	<title>Uitleg</title>
+	<title>Welkom</title>
 </svelte:head>
 
 <Header>

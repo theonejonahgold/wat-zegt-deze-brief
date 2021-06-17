@@ -75,6 +75,10 @@
 	}
 </style>
 
+<svelte:head>
+	<title>Uitgelegd</title>
+</svelte:head>
+
 <Header>
 	<SpokenText --align="center" slot="middle" text="Uitgelegd" />
 	<Help slot="right" />

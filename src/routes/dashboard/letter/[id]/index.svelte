@@ -27,7 +27,7 @@
 	import { Help, SpokenText, Back, Image, Button } from '$atoms'
 	import { client } from '$config/supabase'
 	import { CarouselPage, Flex, Header } from '$templates'
-	import type { definitions, Letter } from '$types'
+	import type { Letter } from '$types'
 	import type { Load } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
 	import { AudioRecorder, Form } from '$organisms'
@@ -144,7 +144,7 @@
 			</header>
 			<p>
 				{letter.deadline
-					? format(new Date(letter.deadline), 'dd/MM/yyyy')
+					? format(new Date(letter.deadline), 'dd-MM-yyyy')
 					: 'Geen deadline ingevuld'}
 			</p>
 		</section>
